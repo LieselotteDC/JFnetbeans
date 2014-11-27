@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
  *
  * @author liedcost
  */
-public class ToevoegenReview extends javax.swing.JFrame {
-    private static final ToevoegenReview toevoegenReview = new ToevoegenReview();
+public class ReviewSchrijven extends javax.swing.JFrame {
+    private static final ReviewSchrijven schrijvenReview = new ReviewSchrijven();
     public static JFrame myCaller;
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
@@ -25,15 +25,15 @@ public class ToevoegenReview extends javax.swing.JFrame {
     /**
      * Creates new form ToevoegenReview
      */
-    public ToevoegenReview() {
+    public ReviewSchrijven() {
         initComponents();
-        comboboxProduct.setModel(c);
+        
     }
 
-    public static ToevoegenReview getInstance(Profielklant profielklant)
+    public static ReviewSchrijven getInstance(ReviewToevoegen toevoegenreview)
     {
-        myCaller = profielklant;
-        return toevoegenReview;
+        myCaller = toevoegenreview;
+        return schrijvenReview;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +46,6 @@ public class ToevoegenReview extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnToevoegenReview = new javax.swing.JButton();
-        comboboxProduct = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         comboboxScore = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -56,7 +54,7 @@ public class ToevoegenReview extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Toevoegen nieuwe review");
+        jLabel1.setText("Schrijven review");
 
         btnToevoegenReview.setText("Voeg review toe");
         btnToevoegenReview.addActionListener(new java.awt.event.ActionListener() {
@@ -64,8 +62,6 @@ public class ToevoegenReview extends javax.swing.JFrame {
                 btnToevoegenReviewActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Selecteer het product waarvan u een review wil toevoegen:");
 
         jLabel3.setText("Uw score:");
 
@@ -96,13 +92,10 @@ public class ToevoegenReview extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboboxScore, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboboxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
+                                .addComponent(comboboxScore, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)))
                         .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
@@ -110,11 +103,7 @@ public class ToevoegenReview extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(comboboxScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -122,7 +111,7 @@ public class ToevoegenReview extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 74, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 78, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,15 +124,12 @@ public class ToevoegenReview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnToevoegenReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenReviewActionPerformed
-        String product = comboboxProduct.getSelectedItem().toString();
+        
         String score = comboboxScore.getSelectedItem().toString();
         String reviewTekst = txtBeoordeling.getText();
-         if(product.isEmpty() || score.isEmpty() || reviewTekst.isEmpty()){
+         if( score.isEmpty() || reviewTekst.isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
-            if (product.isEmpty()){
-            comboboxProduct.requestFocus();
-            }
-            else if(score.isEmpty()){
+            if(score.isEmpty()){
             comboboxScore.requestFocus();
             }
             else if(reviewTekst.isEmpty()){
@@ -153,10 +139,6 @@ public class ToevoegenReview extends javax.swing.JFrame {
          else{
              Double score2 = Double.parseDouble(score);
              //CONSTRUCTOR NOG AANPASSEN: tussen login en tekst moet nog productID komen
-             //probleem: klant review laten invullen -> productID nodig. 
-             //wij laten klant productnaam invullen. 
-             //nood aan iets om obv productnaam 
-             //(en dat je weet dat klant dit product gekocht heeft) de productID op te halen. 
              Review nieuweReview = new Review(score2, actief.getLogin(), reviewTekst );
              d.invullenReview(actief, nieuweReview);
              JOptionPane.showMessageDialog(null, "Uw review werd succesvol toegevoegd.");
@@ -180,30 +162,29 @@ public class ToevoegenReview extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ToevoegenReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReviewSchrijven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ToevoegenReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReviewSchrijven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ToevoegenReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReviewSchrijven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ToevoegenReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReviewSchrijven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ToevoegenReview().setVisible(true);
+                new ReviewSchrijven().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnToevoegenReview;
-    private javax.swing.JComboBox comboboxProduct;
     private javax.swing.JComboBox comboboxScore;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

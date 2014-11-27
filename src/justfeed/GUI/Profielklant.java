@@ -167,7 +167,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
-        jMenuItem9.setText("Overzicht van uw reviews");
+        jMenuItem9.setText("Overzicht van uw geschreven reviews");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 naarOverzichtReviews(evt);
@@ -379,7 +379,7 @@ public class Profielklant extends javax.swing.JFrame {
     }//GEN-LAST:event_naarOverzichtReviews
 
     private void naarToevoegenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarToevoegenReview
-       ToevoegenReview toevoegenReview = ToevoegenReview.getInstance(profiel);
+       ReviewToevoegen toevoegenReview = ReviewToevoegen.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
        toevoegenReview.pack();
        profiel.hide();

@@ -17,7 +17,7 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
-    DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_review WHERE (login = '" + actief.getLogin() + "');");
+    DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_review WHERE (login = '" + actief.getLogin() + "') AND (status = FALSE);");
 
     public Overzichtreviewsklant() {
         initComponents();
@@ -49,7 +49,7 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Overzicht van uw geplaatste en mogelijks te plaatsen reviews:");
+        jLabel1.setText("Overzicht van uw geplaatste reviews:");
 
         tblOverzichtReviewsKlant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
