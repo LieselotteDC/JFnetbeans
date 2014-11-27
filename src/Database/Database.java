@@ -557,8 +557,27 @@ public class Database {
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
-            return null;
+            return false;
         }
+    }
+
+    public Boolean productProductnaamBestaat(String productnaam) {
+        try {
+            String sql = "SELECT * FROM tbl_product WHERE naam = '" + productnaam + "';";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                this.closeConnection();
+                return true;
+            } else {
+                this.closeConnection();
+                return false;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return false;
+        }
+
     }
 
     public Boolean productIDBestaat(int productID) {
@@ -1468,7 +1487,7 @@ public class Database {
             return null;
         }
     }
-
+    
     //METHODES IVM AWARDS
     // bestseller   
     public void addAwardBestseller(String maand, int jaar) {
