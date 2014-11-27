@@ -40,6 +40,11 @@ public class Overzichtawardsadministrator extends javax.swing.JFrame {
         myCaller = caller;
         return awards;   
     }
+    public static Overzichtawardsadministrator getInstance(AanmaakAward caller)
+    {
+        myCaller = caller;
+        return awards;   
+    }
     
     
     @SuppressWarnings("unchecked")

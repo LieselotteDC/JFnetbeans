@@ -161,6 +161,16 @@ public class AanmaakAward extends javax.swing.JFrame {
             d.addAwardBestseller(maand, jaar);
             d.addAwardHotItem(maand,jaar);
             d.addAwardUsersChoice(maand);  
+            comboboxMaand.setSelectedItem(null);
+            txtJaar.setText("");
+            JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
+            Overzichtawardsadministrator awardsoverzicht =  Overzichtawardsadministrator.getInstance(aanmaakAward);
+//     amdministrator.setSize(300,300);
+            awardsoverzicht.pack();
+            aanmaakAward.hide();
+            awardsoverzicht.show();
+            awardsoverzicht.setLocationRelativeTo(null);
+
         }
         
     }//GEN-LAST:event_btnAanmaakAwardActionPerformed
