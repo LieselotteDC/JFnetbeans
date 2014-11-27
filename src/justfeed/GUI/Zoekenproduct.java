@@ -133,7 +133,7 @@ public class Zoekenproduct extends javax.swing.JFrame {
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String productnaam = txtProductnaam.getText();
-        /*if(d.productnaamBestaat(productnaam))
+        if(d.productProductnaamBestaat(productnaam))
         {
             DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_product WHERE (naam = '" + productnaam + "');");
             tblZoekenProduct.setModel(t);
@@ -142,14 +142,7 @@ public class Zoekenproduct extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Sorry, Just-Feed biedt dit product momenteel niet aan. Probeer opnieuw.");
             txtProductnaam.setText("");
             txtProductnaam.requestFocus();
-        }*/
-        
-       ZoekresultatenProduct zoekresultatenProduct  = ZoekresultatenProduct.getInstance(zoekenProduct);
-//     zoekresultatenProduct.setSize(300,300);
-       zoekresultatenProduct.pack();
-       zoekenProduct.hide();
-       zoekresultatenProduct.show();
-       zoekresultatenProduct.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_btnZoekenActionPerformed
 
     /**

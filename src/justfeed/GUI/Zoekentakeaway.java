@@ -115,12 +115,7 @@ public class Zoekentakeaway extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void naarZoekresultaten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekresultaten
-       ZoekresultatenTakeaway zoekresultatenTakeaway = ZoekresultatenTakeaway.getInstance(zoekenTakeaway);
-//     anderegevensklant.setSize(300,300);
-       zoekresultatenTakeaway.pack();
-       zoekenTakeaway.hide();
-       zoekresultatenTakeaway.show();
-       zoekresultatenTakeaway.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_naarZoekresultaten
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed

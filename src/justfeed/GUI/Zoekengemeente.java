@@ -6,8 +6,10 @@
 
 package justfeed.GUI;
 
+import Database.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +20,8 @@ public class Zoekengemeente extends javax.swing.JFrame {
     /**
      * Creates new form Zoekengemeente
      */
+    public Database d = new Database();
+   
     public Zoekengemeente() {
         initComponents();
     }
@@ -46,6 +50,8 @@ public class Zoekengemeente extends javax.swing.JFrame {
         btnZoeken = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekenGemeente = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txtPostcode = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,27 +89,34 @@ public class Zoekengemeente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblZoekenGemeente);
 
+        jLabel3.setText("Postcode:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNaarZoekresultatenGemeente))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(34, 34, 34)
-                                .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnZoeken)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel3)
+                                .addGap(39, 39, 39)
+                                .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 236, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNaarZoekresultatenGemeente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnZoeken)
+                        .addGap(149, 149, 149)))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -111,14 +124,18 @@ public class Zoekengemeente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnZoeken))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnZoeken)
+                    .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(btnNaarZoekresultatenGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -127,26 +144,36 @@ public class Zoekengemeente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNaarZoekresultatenGemeenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNaarZoekresultatenGemeenteActionPerformed
-       ZoekresultatenGemeente zoekresultatenGemeente  = ZoekresultatenGemeente.getInstance(zoekenGemeente);
-//     zoekresultatenGemeente.setSize(300,300);
-       zoekresultatenGemeente.pack();
-       zoekenGemeente.hide();
-       zoekresultatenGemeente.show();
-       zoekresultatenGemeente.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_btnNaarZoekresultatenGemeenteActionPerformed
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String gemeente = txtGemeente.getText();
-        /*if(d.gemeenteBestaat){
-            DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_ WHERE (x = '" + takeAwaynaam + "');");
-            tblZoekenTakeaway.setModel(t);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "De gemeente die U heeft ingevoerd bestaat niet. Probeer opnieuw.");
-            txtGemeente.setText("");
+        if(txtPostcode.getText().isEmpty() ||
+               gemeente.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
+            if (txtPostcode.getText().isEmpty()){
+            txtPostcode.requestFocus();
+            }
+            else if(gemeente.isEmpty()){
             txtGemeente.requestFocus();
-        }*/
-            
+            }
+        }
+         else{
+            int postcode = Integer.parseInt(txtPostcode.getText());
+            if(d.getPlaatsnummer(gemeente, postcode) == 0){
+            JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente stemmen niet overeen. Probeer opnieuw.");
+            txtPostcode.setText("");
+            txtGemeente.setText("");
+            }
+            else{
+            int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
+            DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_vestigingen WHERE (plaatsnummer = '" + plaatsnummer + "');");
+            tblZoekenGemeente.setModel(t);
+            txtPostcode.setText("");
+            txtGemeente.setText("");
+            }
+        }
     }//GEN-LAST:event_btnZoekenActionPerformed
 
     /**
@@ -189,8 +216,10 @@ public class Zoekengemeente extends javax.swing.JFrame {
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblZoekenGemeente;
     private javax.swing.JTextField txtGemeente;
+    private javax.swing.JTextField txtPostcode;
     // End of variables declaration//GEN-END:variables
 }

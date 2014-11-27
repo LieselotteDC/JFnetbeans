@@ -27,9 +27,10 @@ public class Bestseller extends Award implements Comparable {
         this.aantalMenus = aantalMenus;
         this.takeawayNaam = takeawayNaam;
     }
-        @Override
+        
+    @Override
     public int compareTo(Object o) {
-        if (aantalMenus > ((SorteerKorting)o).getBedrag())
+        if (aantalMenus > ((Bestseller)o).getAantalMenus())
             return -1;
         else
             return 1;

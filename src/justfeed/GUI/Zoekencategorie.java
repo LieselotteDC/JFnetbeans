@@ -147,12 +147,7 @@ public class Zoekencategorie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void naarZoekresultaten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekresultaten
-       ZoekresultatenCategorie zoekresultatenCategorie = ZoekresultatenCategorie.getInstance(zoekenCategorie);
-//     anderegevensklant.setSize(300,300);
-       zoekresultatenCategorie.pack();
-       zoekenCategorie.hide();
-       zoekresultatenCategorie.show();
-       zoekresultatenCategorie.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_naarZoekresultaten
 
     private void comboboxCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxCategorieActionPerformed

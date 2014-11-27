@@ -38,26 +38,7 @@ public class Profielklant extends javax.swing.JFrame {
         myCaller = caller;
         return profiel;
     }
-    public static Profielklant getInstance(ZoekresultatenGemeente zoekresultatenGemeente)
-    {
-        myCaller = zoekresultatenGemeente;
-        return profiel;
-    }
-    public static Profielklant getInstance(ZoekresultatenTakeaway zoekresultatenTakeaway)
-    {
-        myCaller = zoekresultatenTakeaway;
-        return profiel;
-    }
-    public static Profielklant getInstance(ZoekresultatenCategorie zoekresultatenCategorie)
-    {
-        myCaller = zoekresultatenCategorie;
-        return profiel;
-    }
-    public static Profielklant getInstance(ZoekresultatenProduct zoekresultatenProduct)
-    {
-        myCaller = zoekresultatenProduct;
-        return profiel;
-    }
+    
     public static Profielklant getInstance(Overzichtkortingscodesklant codesklant)
     {
         myCaller = codesklant;

@@ -9,7 +9,6 @@ import Database.*;
 import Logica.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static justfeed.GUI.ZoekresultatenTakeaway.zoekresultatenTakeaway;
 
 /**
  *

@@ -62,7 +62,7 @@ public class AanmaakAward extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Jaar:");
 
-        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober ", "november", "december", " " }));
+        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december", "" }));
 
         txtJaar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,8 +146,7 @@ public class AanmaakAward extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
     private void btnAanmaakAwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAanmaakAwardActionPerformed
-        String maand = (String)comboboxMaand.getSelectedItem();
-        
+        String maand =  comboboxMaand.getSelectedItem().toString();
         if(maand.isEmpty() || txtJaar.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
             if (maand.isEmpty()){

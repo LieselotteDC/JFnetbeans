@@ -5,8 +5,10 @@
  */
 package justfeed.GUI;
 
+import Database.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author liedcost
@@ -16,8 +18,9 @@ public class ZoekenReview extends javax.swing.JFrame {
     /**
      * Creates new form ZoekenReview
      */
-    private static final ZoekenReview zoekenReview = new ZoekenReview();
     public static JFrame myCaller;
+    public Database d = new Database();
+    private static final ZoekenReview zoekenReview = new ZoekenReview();
     public ZoekenReview() {
         initComponents();
     }
@@ -109,16 +112,16 @@ public class ZoekenReview extends javax.swing.JFrame {
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String productNaam = txtProductNaam.getText(); 
-        /*if(d.productnaamBestaat(productnaam))
+        if(d.productProductnaamBestaat(productNaam))
         {
-            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,B.naam,P.type,R.login,R.score,R.beoordeling FROM tbl_review K,tbl_product P,tbl_biedtAan B WHERE (R.productID=P.productID) and (R.productID=B.productID) and (R.status=false)  and (P.naam='"+productNaam+"');");");
-            tblZoekenProduct.setModel(t);
+            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,B.naam,P.type,R.login,R.score,R.beoordeling FROM tbl_review R,tbl_product P,tbl_biedtAan B WHERE (R.productID=P.productID) and (R.productID=B.productID) and (R.status=false) and (P.naam='"+productNaam+"');");
+            tblReviews.setModel(t);
         }
         else{
             JOptionPane.showMessageDialog(null, "Sorry, Just-Feed biedt dit product momenteel niet aan. Probeer opnieuw.");
-            txtProductnaam.setText("");
-            txtProductnaam.requestFocus();
-        }*/
+            txtProductNaam.setText("");
+            txtProductNaam.requestFocus();
+        }
         
     }//GEN-LAST:event_btnZoekenActionPerformed
 

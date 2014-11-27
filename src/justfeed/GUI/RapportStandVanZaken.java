@@ -168,7 +168,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             comboboxTakeAway.setModel(b);
             String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
             //query om de vestigingen van de geselecteerde take-away op te halen
-            DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';", "vestigingsID");
+            DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE WHERE (naam = '" + gekozenTakeAway + "');", "vestigingsID");
             comboboxVestiging.setModel(f);
         }
     }//GEN-LAST:event_comboboxTakeAwayOFVestigingActionPerformed

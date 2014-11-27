@@ -132,10 +132,10 @@
             <StringItem index="6" value="juli"/>
             <StringItem index="7" value="augustus"/>
             <StringItem index="8" value="september"/>
-            <StringItem index="9" value="oktober "/>
+            <StringItem index="9" value="oktober"/>
             <StringItem index="10" value="november"/>
             <StringItem index="11" value="december"/>
-            <StringItem index="12" value=" "/>
+            <StringItem index="12" value=""/>
           </StringArray>
         </Property>
       </Properties>

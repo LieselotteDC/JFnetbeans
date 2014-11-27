@@ -59,7 +59,7 @@ public class AanmaakMaandelijkseKorting extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Aanmaak van een Just-feed boss en Take-away boss kortingscode: ");
 
-        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari ", "maart", "april", "mei ", "juni", "juli", "augustus", "september", "oktober", "november", "december" }));
+        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" }));
         comboboxMaand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboboxMaandActionPerformed(evt);
