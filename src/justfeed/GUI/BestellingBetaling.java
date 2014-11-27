@@ -42,7 +42,7 @@ public class BestellingBetaling extends javax.swing.JFrame {
         jLabel1.setText("Betaling");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Uw totale bedrag van het order bedraagt (incl. korting):");
+        jLabel2.setText("Het totale bedrag van uw order bedraagt (incl. korting):");
 
         btnGoedkeuren.setBackground(new java.awt.Color(0, 0, 0));
         btnGoedkeuren.setForeground(new java.awt.Color(255, 255, 255));

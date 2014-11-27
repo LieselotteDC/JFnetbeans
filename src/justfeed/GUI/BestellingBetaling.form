@@ -83,7 +83,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Uw totale bedrag van het order bedraagt (incl. korting):"/>
+        <Property name="text" type="java.lang.String" value="Het totale bedrag van uw order bedraagt (incl. korting):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnGoedkeuren">

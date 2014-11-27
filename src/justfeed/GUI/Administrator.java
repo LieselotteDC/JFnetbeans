@@ -140,6 +140,10 @@ public class Administrator extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
 
@@ -260,7 +264,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
-        jMenu5.setText("Kortingscodes");
+        jMenu5.setText("Kortingen");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 naarKortingscodesAdministrator(evt);
@@ -283,7 +287,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu5.add(PeriodiekeActieAanmaken);
 
-        MaandelijkseActieAanmaken.setText("Maandelijkse actie aanmaken");
+        MaandelijkseActieAanmaken.setText("Maandelijkse acties aanmaken");
         MaandelijkseActieAanmaken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MaandelijkseActieAanmakenActionPerformed(evt);
@@ -321,27 +325,51 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu2.setText("Order");
+
+        jMenuItem11.setText("Ontvangst leveringsbevestiging");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naarOntvangstLeveringsbevestiging(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu8.setText("Commissie");
+
+        jMenuItem12.setText("Commissieberekening");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naarCommissieBerekening(evt);
+            }
+        });
+        jMenu8.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu8);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(435, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addContainerGap(147, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(81, 81, 81)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -511,6 +539,22 @@ public class Administrator extends javax.swing.JFrame {
         rapportFlyer.show();
         rapportFlyer.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarRapportFlyer
+
+    private void naarOntvangstLeveringsbevestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOntvangstLeveringsbevestiging
+        OntvangstLeveringsbevestiging ontvangstleveringsbevestiging = OntvangstLeveringsbevestiging.getInstance(admini);
+        ontvangstleveringsbevestiging.pack();
+        admini.hide();
+        ontvangstleveringsbevestiging.show();
+        ontvangstleveringsbevestiging.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarOntvangstLeveringsbevestiging
+
+    private void naarCommissieBerekening(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarCommissieBerekening
+        Commissieberekening commissieberekening = Commissieberekening.getInstance(admini);
+        commissieberekening.pack();
+        admini.hide();
+        commissieberekening.show();
+        commissieberekening.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarCommissieBerekening
    
     /**
      * @param args the command line arguments
@@ -558,14 +602,18 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

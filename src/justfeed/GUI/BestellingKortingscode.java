@@ -145,7 +145,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
         String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
         if(uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()){
-            int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat U wil doorgaan zonder kortingscodes?", "Geen kortingscodes", JOptionPane.YES_NO_OPTION);
+            int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat U wil doorgaan zonder kortingscodes?", "Geen kortingscodes ingevoerd", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
               //naar afrekenen  
             }
