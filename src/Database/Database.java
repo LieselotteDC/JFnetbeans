@@ -1496,7 +1496,7 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("DELETE FROM tbl_awardBestseller;");
-            stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null," + bs.getMaand() + ",'" + bs.getAantalMenus() + "','" + bs.getTakeawayNaam() + "');");
+            stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null,'" + bs.getMaand() + "'," + bs.getAantalMenus() + ",'" + bs.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
