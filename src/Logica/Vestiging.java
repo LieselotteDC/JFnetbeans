@@ -89,6 +89,7 @@ public class Vestiging {
         this.leveringsgebied = leveringsgebied;
     }
 
+    @Override
     public String toString() {
         Database d = new Database();
         String result;
@@ -97,7 +98,7 @@ public class Vestiging {
         result += "Straat:\t" + this.getStraat() + "\n";
         result += "Huisnummer:\t" + this.getHuisnummer() + "\n";
         result += "Leveringskosten:\t" + this.getLeveringskosten() + " euro\n";
-        result = "Leveringsgebied:\t";
+        result += "Leveringsgebied:\t\n";
         for (Gemeente gem : this.getLeveringsgebied()) {
             result += "\t" + gem.toString();
             result += "\n";

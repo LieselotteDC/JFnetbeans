@@ -10,7 +10,7 @@ public class Just_Feeder extends Award {
         this.commissie = 0;
         this.takeawayNaam = null;
     }
-
+    
     public Just_Feeder(int AwardID, String maand, double commissie, String takeawayNaam) {
         super(AwardID, maand);
         this.commissie = commissie;

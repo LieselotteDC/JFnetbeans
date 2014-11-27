@@ -90,6 +90,7 @@ public class Take_Away {
         this.commissie = commissie;
     }
     
+    @Override
     public String toString ()
     {
         String result;

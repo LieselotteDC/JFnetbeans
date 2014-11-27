@@ -34,8 +34,8 @@ public class UniekeActiePeriode extends UniekeActie {
     @Override
     public String toString() {
         String result = super.toString();
-        result += "/tStartdatum:/t" +this.getStartdatum()+"/n";
-        result += "/tEinddatum:/t" +this.getStartdatum()+"/n/n";
+        result += "\tStartdatum:\t" +this.getStartdatum()+"\n";
+        result += "\tEinddatum:\t" +this.getStartdatum()+"\n\n";
         return result;
     }
 

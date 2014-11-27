@@ -37,7 +37,7 @@ public class UniekeActieEenmalig extends UniekeActie {
     @Override
     public String toString() {
         String result = super.toString();
-        result+="/n";
+        result+="\n";
         return result;
     }
 

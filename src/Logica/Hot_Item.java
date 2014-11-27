@@ -1,6 +1,6 @@
 package Logica;
 
-public class Hot_Item extends Award {
+public class Hot_Item extends Award implements Comparable{
 
     private int aantalBesteld;
     private int productID;
@@ -9,6 +9,12 @@ public class Hot_Item extends Award {
         super();
         this.aantalBesteld = 0;
         this.productID = 0;
+    }
+    
+     public Hot_Item(int aantalBesteld, int productID) {
+        super();
+        this.aantalBesteld = aantalBesteld;
+        this.productID = productID;
     }
 
     public Hot_Item(int AwardID, String maand, int aantalBesteld, int productID) {
@@ -37,6 +43,15 @@ public class Hot_Item extends Award {
 
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+    
+  
+    @Override
+    public int compareTo(Object o) {
+        if (aantalBesteld > ((Hot_Item)o).getAantalBesteld())
+            return -1;
+        else
+            return 1;
     }
 
 }

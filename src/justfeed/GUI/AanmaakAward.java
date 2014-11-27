@@ -160,7 +160,8 @@ public class AanmaakAward extends javax.swing.JFrame {
             int jaar = Integer.parseInt(txtJaar.getText());
             d.addAwardBestseller(maand, jaar);
             d.addAwardHotItem(maand,jaar);
-            d.addAwardUsersChoice(maand);  
+            d.addAwardUsersChoice(maand);
+            d.addAwardJustFeeder(maand);
             comboboxMaand.setSelectedItem(null);
             txtJaar.setText("");
             JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");

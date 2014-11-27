@@ -354,7 +354,7 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_takeaway SET commissie = '" + tw.getCommissie() + "' WHERE naam = '" + tw.getNaam() + "';");
+            stmt.executeUpdate("UPDATE tbl_takeaway SET commissie = " + tw.getCommissie() + " WHERE naam = '" + tw.getNaam() + "';");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -477,7 +477,7 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
 
-            stmt.executeUpdate("UPDATE tbl_vestigingen SET leveringskosten = '" + nieuw.getLeveringskosten() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
+            stmt.executeUpdate("UPDATE tbl_vestigingen SET leveringskosten = " + nieuw.getLeveringskosten() + " WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
             stmt.executeUpdate("UPDATE tbl_vestigingen SET straat = '" + nieuw.getStraat() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
             stmt.executeUpdate("UPDATE tbl_vestigingen SET huisnummer = '" + nieuw.getHuisnummer() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
             this.closeConnection();
@@ -621,7 +621,7 @@ public class Database {
             stmt.executeUpdate("INSERT INTO tbl_product VALUES (null,'dummyID','null',0);");
             int id = this.getProductID();
             stmt.executeUpdate("UPDATE tbl_product SET type = '" + prod.getProducttype() + "' WHERE productID = " + id + ";");
-            stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = '" + prod.getEenheidsprijs() + "' WHERE productID = " + id + ";");
+            stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = " + prod.getEenheidsprijs() + " WHERE productID = " + id + ";");
             stmt.executeUpdate("UPDATE tbl_product SET naam = '" + prod.getNaam() + "' WHERE productID = " + id + ";");
             stmt.executeUpdate("INSERT INTO tbl_biedtAan VALUES ('" + takeawayNaam + "'," + id + ");");
             this.closeConnection();
@@ -635,7 +635,7 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE from tbl_product WHERE productID = '" + prod.getProductID() + "';");
+            stmt.executeUpdate("DELETE from tbl_product WHERE productID = " + prod.getProductID() + ";");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -648,8 +648,8 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("UPDATE tbl_product SET type = '" + nieuw.getProducttype() + "' WHERE productID = " + oud.getProductID() + ";");
-            stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = '" + nieuw.getEenheidsprijs() + "' WHERE productID = " + oud.getProductID() + ";");
-            stmt.executeUpdate("UPDATE tbl_product SET naam = '" + nieuw.getNaam() + "' WHERE productID = '" + oud.getProductID() + "';");
+            stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = " + nieuw.getEenheidsprijs() + " WHERE productID = " + oud.getProductID() + ";");
+            stmt.executeUpdate("UPDATE tbl_product SET naam = '" + nieuw.getNaam() + "' WHERE productID = " + oud.getProductID() + ";");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1487,7 +1487,7 @@ public class Database {
             return null;
         }
     }
-    
+
     //METHODES IVM AWARDS
     // bestseller   
     public void addAwardBestseller(String maand, int jaar) {
@@ -1534,15 +1534,43 @@ public class Database {
     //hot item
     public void addAwardHotItem(String maand, int jaar) {
         try {
-
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("DELETE FROM tbl_awardHotitem;");
-            //  stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null," 0 ",maand,'" + h + "','" + hi.getProductID() + "');");
+            for (Hot_Item hi : this.findHotItems(maand, jaar)) {
+                stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null,'" + hi.getMaand() + "'," + hi.getAantalBesteld() + "," + hi.getProductID() + ");");
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
+        }
+    }
+
+    private ArrayList<Hot_Item> findHotItems(String maand, int jaar) {
+        ArrayList<Hot_Item> hotItemPerTakeaway = new ArrayList<>();
+        ArrayList<Hot_Item> gecumuleerdeHoeveelheidPerTakeaway = new ArrayList<>();
+        try {
+            for (Take_Away ta : this.getAlleTakeaways()) {
+                for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
+                    String sql = "SELECT SUM(hoeveelheid) AS gecumuleerd FROM tbl_behoortTot WHERE (productID = '" + p.getProductID() + "');";
+                    ResultSet srs = getData(sql);
+                    if (srs.next()) {
+                        int productID = p.getProductID();
+                        int gecumuleerd = srs.getInt("gecumuleerd");
+                        gecumuleerdeHoeveelheidPerTakeaway.add(new Hot_Item(gecumuleerd, productID));
+                        Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
+                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
+                    }
+                }
+
+            }
+            this.closeConnection();
+            return hotItemPerTakeaway;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
         }
     }
 
