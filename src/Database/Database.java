@@ -1258,7 +1258,7 @@ public class Database {
         }
     }
 
-    //periodieke unieke korting
+    // unieke korting
     public void addKortingEenmaligPeriode(UniekeActiePeriode periode) {
         try {
             dbConnection = getConnection();

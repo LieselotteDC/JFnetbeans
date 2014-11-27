@@ -7,7 +7,7 @@ public class DatumFinder {
     public static String getLaatsteDag(String maand, int jaar) {
         String datum = null;
         if (maand.equalsIgnoreCase("januari")) {
-            datum = "01,31," + jaar;
+            datum = "01-31-" + jaar;
 
         } else if (maand.equalsIgnoreCase("februari")) {
             datum = "02,29," + jaar;
