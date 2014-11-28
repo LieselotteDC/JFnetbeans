@@ -514,7 +514,7 @@ public class Database {
         try {
             ArrayList<Vestiging> alleVestigingen = new ArrayList<>();
             ArrayList<Gemeente> leveringsgebied = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_vestigingen WHERE and (naam = '" + takeawayNaam + "') ;";
+            String sql = "SELECT * FROM tbl_vestigingen WHERE (naam = '" + takeawayNaam + "') ;";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 double leveringskosten = srs.getDouble("leveringskosten");
