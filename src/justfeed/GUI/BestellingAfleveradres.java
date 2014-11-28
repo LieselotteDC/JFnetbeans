@@ -154,8 +154,8 @@ private static final BestellingAfleveradres adres = new BestellingAfleveradres()
        String straat = txtStraat.getText();
        String gemeente = txtGemeente.getText();
        
-       /*if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() ||
-            gemeente.isEmpty()){
+       if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() 
+               || gemeente.isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
             if (straat.isEmpty()){
             txtStraat.requestFocus();
@@ -187,16 +187,16 @@ private static final BestellingAfleveradres adres = new BestellingAfleveradres()
                 //ga naar afrekenscherm
                 //}
             }
-       }*/
+       }
        BestellingFactuur factuur = BestellingFactuur.getInstance(adres);
        factuur.pack();
        adres.hide();
        factuur.show();
        factuur.setLocationRelativeTo(null);
-        txtStraat.setText("");
-        txtGemeente.setText("");
-        txtHuisnummer.setText("");
-        txtPostcode.setText("");
+       txtStraat.setText("");
+       txtGemeente.setText("");
+       txtHuisnummer.setText("");
+       txtPostcode.setText("");
     }//GEN-LAST:event_btnAfrekenenActionPerformed
 
     private void btnKortingscodeToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKortingscodeToevoegenActionPerformed
