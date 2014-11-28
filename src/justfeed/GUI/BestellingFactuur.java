@@ -6,19 +6,33 @@
 
 package justfeed.GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author UGent
  */
-public class BestellingBetaling extends javax.swing.JFrame {
+public class BestellingFactuur extends javax.swing.JFrame {
 
     /**
      * Creates new form Betaling
      */
-    public BestellingBetaling() {
+    private static final BestellingFactuur factuur = new BestellingFactuur();
+    public static JFrame myCaller;
+    public BestellingFactuur() {
         initComponents();
     }
 
+    public static BestellingFactuur getInstance(BestellingKortingscode caller)
+    {
+        myCaller = caller;
+        return factuur;
+    }
+    public static BestellingFactuur getInstance(BestellingAfleveradres caller)
+    {
+        myCaller = caller;
+        return factuur;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +47,7 @@ public class BestellingBetaling extends javax.swing.JFrame {
         btnGoedkeuren = new javax.swing.JButton();
         btnAfkeuren = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblZoekenProduct = new javax.swing.JTable();
+        tblBetaling = new javax.swing.JTable();
         txtTotaalBedrag = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,12 +61,22 @@ public class BestellingBetaling extends javax.swing.JFrame {
         btnGoedkeuren.setBackground(new java.awt.Color(0, 0, 0));
         btnGoedkeuren.setForeground(new java.awt.Color(255, 255, 255));
         btnGoedkeuren.setText("Goedkeuren");
+        btnGoedkeuren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoedkeurenActionPerformed(evt);
+            }
+        });
 
         btnAfkeuren.setBackground(new java.awt.Color(0, 0, 0));
         btnAfkeuren.setForeground(new java.awt.Color(255, 255, 255));
         btnAfkeuren.setText("Afkeuren");
+        btnAfkeuren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAfkeurenActionPerformed(evt);
+            }
+        });
 
-        tblZoekenProduct.setModel(new javax.swing.table.DefaultTableModel(
+        tblBetaling.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -63,7 +87,7 @@ public class BestellingBetaling extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblZoekenProduct);
+        jScrollPane1.setViewportView(tblBetaling);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +132,26 @@ public class BestellingBetaling extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
+        txtTotaalBedrag.setText("");
+
+        BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
+        bevestiging.pack();
+        factuur.hide();
+        bevestiging.show();
+        bevestiging.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnGoedkeurenActionPerformed
+
+    private void btnAfkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfkeurenActionPerformed
+        txtTotaalBedrag.setText("");
+
+        Profielklant profiel = Profielklant.getInstance(factuur);
+        profiel.pack();
+        factuur.hide();
+        profiel.show();
+        profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAfkeurenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -125,21 +169,23 @@ public class BestellingBetaling extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BestellingBetaling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BestellingFactuur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BestellingBetaling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BestellingFactuur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BestellingBetaling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BestellingFactuur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BestellingBetaling.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BestellingFactuur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BestellingBetaling().setVisible(true);
+                new BestellingFactuur().setVisible(true);
             }
         });
     }
@@ -150,7 +196,7 @@ public class BestellingBetaling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblZoekenProduct;
+    private javax.swing.JTable tblBetaling;
     private javax.swing.JTextField txtTotaalBedrag;
     // End of variables declaration//GEN-END:variables
 }

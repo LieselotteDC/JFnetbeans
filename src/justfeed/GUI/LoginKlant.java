@@ -161,6 +161,7 @@ public class LoginKlant extends javax.swing.JFrame {
         profiel.pack();
         k = d.getKlant(loginnaam);
         login.setActief(k);
+        d.deleteReview(actief);
         login.hide();
         profiel.show();
         profiel.setLocationRelativeTo(null);

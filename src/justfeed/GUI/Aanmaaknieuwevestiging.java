@@ -71,6 +71,9 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtLeveringsgebied = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
         btnHomeknopAdministrator = new javax.swing.JMenu();
 
@@ -121,6 +124,10 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(255, 51, 51));
         jLabel19.setText("*");
 
+        jLabel9.setText("Leveringsgebied(en):");
+
+        jLabel10.setText("(vereiste syntax: categorie1;categorie2;categorie3;...;)");
+
         jMenuBar2.setBackground(new java.awt.Color(255, 153, 0));
 
         btnHomeknopAdministrator.setBackground(new java.awt.Color(255, 153, 0));
@@ -158,22 +165,28 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel9))
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLeveringskosten, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHuisnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtStraat, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtVestigingNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTakeAwayNaam)))
+                                    .addComponent(txtTakeAwayNaam)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtGemeente, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtLeveringskosten, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtPostcode, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtHuisnummer, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtStraat, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtVestigingNaam, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                            .addComponent(txtLeveringsgebied))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel10))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(37, 37, 37))
         );
@@ -212,7 +225,13 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                     .addComponent(txtLeveringskosten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtLeveringsgebied, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -227,10 +246,11 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
        String vestigingsID = txtVestigingNaam.getText();
        String straat = txtStraat.getText();
        String gemeente = txtGemeente.getText();
+       String stringlevgebied = txtLeveringsgebied.getText();
        
        if(takeAwayNaam.isEmpty() || vestigingsID.isEmpty() || straat.isEmpty() || 
                txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() ||
-               gemeente.isEmpty() || txtLeveringskosten.getText().isEmpty()){
+               gemeente.isEmpty() || txtLeveringskosten.getText().isEmpty() || stringlevgebied.isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
             if (takeAwayNaam.isEmpty()){
             txtTakeAwayNaam.requestFocus();
@@ -252,6 +272,9 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
             }
             else if(txtLeveringskosten.getText().isEmpty()){
             txtLeveringskosten.requestFocus();
+            }
+            else if(txtLeveringsgebied.getText().isEmpty()){
+            txtLeveringsgebied.requestFocus();
             }
         }
        else if(!d.take_AwayBestaat(takeAwayNaam)){
@@ -286,6 +309,16 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 double leveringskosten = Double.parseDouble(txtLeveringskosten.getText());
                 Vestiging ves = new Vestiging(straat,huisnummer,leveringskosten, plaatsnummer, takeAwayNaam, vestigingsID);
                 d.addVestiging(ves);
+                /*int i = 0;
+                while (i>=0 && i <(stringlevgebied.length()-1)) { 
+                String postcode = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+                double postcode2 = Double.parseDouble(postcode.getText());
+                stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
+                String gemeente = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+                int plaatsnummer = d.getPlaatsnummer(gemeente, postcode2);
+                d.addLeveringsgebiedToTake_Away(plaatsnummer, ves);
+                stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
+                }*/
                 JOptionPane.showMessageDialog(null,"De vestiging werd succesvol toegevoegd.");
                 vestiging.hide();
                 myCaller.show();
@@ -348,6 +381,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
     private javax.swing.JMenu btnHomeknopAdministrator;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -359,9 +393,11 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JTextField txtGemeente;
     private javax.swing.JTextField txtHuisnummer;
+    private javax.swing.JTextField txtLeveringsgebied;
     private javax.swing.JTextField txtLeveringskosten;
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtStraat;

@@ -1,5 +1,8 @@
 package justfeed.GUI;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,8 +18,15 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     /**
      * Creates new form Bevestiging
      */
+    private static final BestellingBevestiging bevestiging = new BestellingBevestiging();
+    public static JFrame myCaller;
     public BestellingBevestiging() {
         initComponents();
+    }
+    public static BestellingBevestiging getInstance(BestellingFactuur caller)
+    {
+        myCaller = caller;
+        return bevestiging;
     }
 
     /**
@@ -31,6 +41,7 @@ public class BestellingBevestiging extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnHerinneringReview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,6 +53,13 @@ public class BestellingBevestiging extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("Bedankt voor uw bestelling!");
+
+        btnHerinneringReview.setText("OK");
+        btnHerinneringReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHerinneringReviewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,7 +74,10 @@ public class BestellingBevestiging extends javax.swing.JFrame {
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(btnHerinneringReview, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -68,11 +89,22 @@ public class BestellingBevestiging extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(52, 52, 52)
                 .addComponent(jLabel3)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnHerinneringReview)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHerinneringReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHerinneringReviewActionPerformed
+        JOptionPane.showMessageDialog(null, "Vergeet niet dat u nu een review kan plaatsen over uw bestelde producten. \n Ga hiervoor naar uw profiel > reviews > voeg nieuwe review toe.");
+        Profielklant profiel = Profielklant.getInstance(bevestiging);
+        profiel.pack();
+        bevestiging.hide();
+        profiel.show();
+        profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHerinneringReviewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +143,7 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHerinneringReview;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

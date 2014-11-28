@@ -77,24 +77,32 @@
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="jLabel19" min="-2" pref="14" max="-2" attributes="0"/>
                               <EmptySpace pref="31" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtGemeente" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
-                                  <Component id="txtLeveringskosten" min="-2" pref="296" max="-2" attributes="0"/>
-                                  <Component id="txtPostcode" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
-                                  <Component id="txtHuisnummer" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
-                                  <Component id="txtStraat" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
-                                  <Component id="txtVestigingNaam" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
                                   <Component id="txtTakeAwayNaam" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtGemeente" alignment="0" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtLeveringskosten" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtPostcode" alignment="0" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtHuisnummer" alignment="0" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtStraat" alignment="0" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtVestigingNaam" alignment="0" pref="296" max="32767" attributes="0"/>
+                                          <Component id="txtLeveringsgebied" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -147,7 +155,14 @@
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtLeveringsgebied" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton1" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -273,6 +288,18 @@
         </Property>
         <Property name="text" type="java.lang.String" value="*"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Leveringsgebied(en):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel10">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(vereiste syntax: categorie1;categorie2;categorie3;...;)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtLeveringsgebied">
     </Component>
   </SubComponents>
 </Form>

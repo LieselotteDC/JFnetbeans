@@ -5,6 +5,9 @@
  */
 package justfeed.GUI;
 
+import Database.Database;
+import javax.swing.JFrame;
+
 /**
  *
  * @author liedcost
@@ -16,6 +19,14 @@ public class Bestelling extends javax.swing.JFrame {
      */
     public Bestelling() {
         initComponents();
+    }
+    private static final Bestelling bestelling = new Bestelling();
+    public static JFrame myCaller;
+    public Database d = new Database();
+    public static Bestelling getInstance(Profielklant caller)
+    {
+        myCaller = caller;
+        return bestelling;
     }
 
     /**
@@ -30,6 +41,7 @@ public class Bestelling extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBestelling = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnBestellingPlaatsen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +58,15 @@ public class Bestelling extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBestelling);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Bestelling plaatsen");
+
+        btnBestellingPlaatsen.setText("Bestelling plaatsen");
+        btnBestellingPlaatsen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBestellingPlaatsenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,22 +75,35 @@ public class Bestelling extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(301, 301, 301)
+                        .addComponent(btnBestellingPlaatsen)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(btnBestellingPlaatsen)
+                .addGap(49, 49, 49))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBestellingPlaatsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestellingPlaatsenActionPerformed
+        BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
+            bestellingOverzicht.pack();
+            bestelling.hide();
+            bestellingOverzicht.show();
+            bestellingOverzicht.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnBestellingPlaatsenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,6 +141,7 @@ public class Bestelling extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBestellingPlaatsen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBestelling;

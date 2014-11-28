@@ -27,9 +27,9 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         initComponents();
     }
     
-    public static BestellingKortingscode getInstance(BestellingOverzicht bestellingOverzicht)
+    public static BestellingKortingscode getInstance(BestellingAfleveradres bestellingAfleveradres)
     {
-        myCaller = bestellingOverzicht;
+        myCaller = bestellingAfleveradres;
         return bestellingKortingscode;
     }
     public static BestellingKortingscode getInstance(BestellingKortingscode bestellingKortingscode)
@@ -143,7 +143,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
-        String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
+        /*String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
         if(uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()){
             int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat U wil doorgaan zonder kortingscodes?", "Geen kortingscodes ingevoerd", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
@@ -250,10 +250,19 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                 //methode om korting op te halen
                 //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
             }
-        }  
+        }*/
+       BestellingFactuur factuur = BestellingFactuur.getInstance(bestellingKortingscode);
+       factuur.pack();
+       bestellingKortingscode.hide();
+       factuur.show();
+       factuur.setLocationRelativeTo(null);
+       txtKortingsCode.setText("");
+       comboboxType.setSelectedItem(null);
     }//GEN-LAST:event_btnAfrekenenActionPerformed
 
     private void btnNogCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNogCodeActionPerformed
+       txtKortingsCode.setText("");
+       comboboxType.setSelectedItem(null);
        BestellingKortingscode kortingscode = BestellingKortingscode.getInstance(bestellingKortingscode);
        kortingscode.pack();
        bestellingKortingscode.hide();

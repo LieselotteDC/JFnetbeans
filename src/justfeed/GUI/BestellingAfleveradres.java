@@ -14,12 +14,20 @@ import javax.swing.JOptionPane;
  * @author UGent
  */
 public class BestellingAfleveradres extends javax.swing.JFrame {
-public Database d = new Database();
+private static final BestellingAfleveradres adres = new BestellingAfleveradres();
+    public static JFrame myCaller;
+    
+    public Database d = new Database();
     /**
      * Creates new form Afleveradres
      */
     public BestellingAfleveradres() {
         initComponents();
+    }
+    public static BestellingAfleveradres getInstance(BestellingOverzicht bestellingOverzicht)
+    {
+        myCaller = bestellingOverzicht;
+        return adres;
     }
 
     /**
@@ -41,6 +49,7 @@ public Database d = new Database();
         txtPostcode = new javax.swing.JTextField();
         txtGemeente = new javax.swing.JTextField();
         btnAfrekenen = new javax.swing.JButton();
+        btnKortingscodeToevoegen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +78,16 @@ public Database d = new Database();
             }
         });
 
+        btnKortingscodeToevoegen.setBackground(new java.awt.Color(0, 0, 0));
+        btnKortingscodeToevoegen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnKortingscodeToevoegen.setForeground(new java.awt.Color(255, 255, 255));
+        btnKortingscodeToevoegen.setText("Kortingscode toevoegen");
+        btnKortingscodeToevoegen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKortingscodeToevoegenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +108,15 @@ public Database d = new Database();
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtGemeente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAfrekenen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtHuisnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtHuisnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnKortingscodeToevoegen)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,12 +136,14 @@ public Database d = new Database();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnKortingscodeToevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -130,7 +154,7 @@ public Database d = new Database();
        String straat = txtStraat.getText();
        String gemeente = txtGemeente.getText();
        
-       if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() ||
+       /*if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() ||
             gemeente.isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
             if (straat.isEmpty()){
@@ -163,8 +187,29 @@ public Database d = new Database();
                 //ga naar afrekenscherm
                 //}
             }
-       }
+       }*/
+       BestellingFactuur factuur = BestellingFactuur.getInstance(adres);
+       factuur.pack();
+       adres.hide();
+       factuur.show();
+       factuur.setLocationRelativeTo(null);
+        txtStraat.setText("");
+        txtGemeente.setText("");
+        txtHuisnummer.setText("");
+        txtPostcode.setText("");
     }//GEN-LAST:event_btnAfrekenenActionPerformed
+
+    private void btnKortingscodeToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKortingscodeToevoegenActionPerformed
+        txtStraat.setText("");
+        txtGemeente.setText("");
+        txtHuisnummer.setText("");
+        txtPostcode.setText("");
+        BestellingKortingscode kortingscode = BestellingKortingscode.getInstance(adres);
+        kortingscode.pack();
+        adres.hide();
+        kortingscode.show();
+        kortingscode.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnKortingscodeToevoegenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +249,7 @@ public Database d = new Database();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAfrekenen;
+    private javax.swing.JButton btnKortingscodeToevoegen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
