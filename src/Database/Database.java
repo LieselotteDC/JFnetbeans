@@ -487,7 +487,7 @@ public class Database {
         }
     }
     
-        public void addLeveringsgebiedFromVestiging(int postcode, String gemeente) {
+    /*    public void addLeveringsgebiedFromVestiging(int postcode, String gemeente) {
         try {
             this.getPlaatsnummer(gemeente, postcode)
             dbConnection = getConnection();
@@ -510,7 +510,7 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
         }
-    }
+    }*/
 
     public Vestiging getVestiging(String takeawayNaam, String vestigingsID) {
         try {
