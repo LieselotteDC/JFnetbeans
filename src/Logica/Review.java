@@ -31,16 +31,6 @@ public class Review {
         this.beoordeling = beoordeling;
         this.startdatum=startdatum;
     }
-    //MOET NOG WORDEN AANGEPAST met PRODUCTID TUSSEN LOGIN EN BEOORDELING
-        public Review(double score, String login, String beoordeling) {
-        this.reviewId = reviewId;
-        this.score = score;
-        this.login = login;
-        this.productId = productId;
-        this.status = status;
-        this.beoordeling = beoordeling;
-        this.startdatum=startdatum;
-    }
 
     public Review(String login, int productId) {
         this.reviewId = 0;
@@ -57,7 +47,7 @@ public class Review {
         this.score = score;
         this.login = null;
         this.productId = 0;
-        this.status = false;
+        this.status = true;
         this.beoordeling = beoordeling;
         this.startdatum=null;
     }
@@ -67,7 +57,7 @@ public class Review {
         this.score = score;
         this.login = null;
         this.productId = productId;
-        this.status = false;
+        this.status = true;
         this.beoordeling = beoordeling;
         this.startdatum=null;
     }

@@ -1418,7 +1418,7 @@ public class Database {
                 try {
                     String sql = "SELECT startdatum FROM tbl_review WHERE (reviewID = " + rev.getReviewId() + ");";
                     ResultSet srs = getData(sql);
-                    Date datum = srs.getDate("startdatum");
+                    java.sql.Date datum = srs.getDate("startdatum");
                     this.closeConnection();
                     dbConnection = getConnection();
                     Statement stmt = dbConnection.createStatement();
