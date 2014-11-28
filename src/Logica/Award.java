@@ -38,4 +38,11 @@ public class Award {
         this.maand = maand;
     }
 
+    public String toString ()
+    {
+        String result;
+        result = "AwardID:\t" + this.getAwardID() + "\n";
+        result += "Maand:\t" + this.getMaand() + "\n";
+        return result;
+    }
 }

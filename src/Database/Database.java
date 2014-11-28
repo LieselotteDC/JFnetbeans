@@ -679,6 +679,28 @@ public class Database {
             return null;
         }
     }
+    
+    public Take_Away getTakeawaynaamProduct(int productID) {
+        try {
+            String sql = "SELECT naam FROM tbl_product P, tbl_biedtAan B WHERE (P.productID = B.productID)and (P.productID = " + productID + ");";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String naam = srs.getString("naam");
+                String email = srs.getString("email");
+                double commissie = srs.getDouble("commissie");
+                Take_Away ta = new Take_Away(naam, email, commissie);
+                this.closeConnection();
+                return ta;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+    }
 
     public ArrayList<Product> getProductsOfTakeaway(String takeawayNaam) {
         try {
@@ -1567,6 +1589,31 @@ public class Database {
             }
             this.closeConnection();
             return hotItemPerTakeaway;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+    }
+    
+    public ArrayList <Hot_Item> getHotItems ()
+    {
+        try {
+            ArrayList<Hot_Item> alleHotItems = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_awardHotitem;";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int awardID = srs.getInt("awardID");
+                String maand = srs.getString("maand");
+                int aantalBesteld = srs.getInt("aantalBesteld");
+                int productID = srs.getInt("productID");
+               
+
+                Hot_Item hi = new Hot_Item(awardID, maand, aantalBesteld, productID);
+                alleHotItems.add(hi);
+            }
+            this.closeConnection();
+            return alleHotItems;
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();

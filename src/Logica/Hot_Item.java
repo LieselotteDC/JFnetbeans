@@ -1,5 +1,7 @@
 package Logica;
 
+import Database.Database;
+
 public class Hot_Item extends Award implements Comparable{
 
     private int aantalBesteld;
@@ -52,6 +54,19 @@ public class Hot_Item extends Award implements Comparable{
             return -1;
         else
             return 1;
+    }
+    
+    public String toString()
+    {
+        Database d = new Database();
+        String result;
+        result = "Hot Item Award\n"; 
+        result +=super.toString();
+        result += "Aantal keer besteld:\t" + this.getAantalBesteld() + "\n";
+        result += "Naam van het product:\t" + d.getProduct(this.getProductID()).getNaam() + "\n";
+        result += "Naam van de takeaway:\t" + d.getTakeawaynaamProduct(this.getProductID()).getNaam() + "\n";
+        return result;
+        
     }
 
 }
