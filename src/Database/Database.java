@@ -486,13 +486,12 @@ public class Database {
             this.closeConnection();
         }
     }
-    
-    /*    public void addLeveringsgebiedFromVestiging(int postcode, String gemeente) {
+
+    public void addLeveringsgebiedFromVestiging(int plaatsnummer, Vestiging ves) {
         try {
-            this.getPlaatsnummer(gemeente, postcode)
-            dbConnection = getConnection();
+              dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_soort VALUES ('" + cat + "', '" + tw.getNaam() + "');");
+            stmt.executeUpdate("INSERT INTO tbl_leveringsregio VALUES ('"+ves.getVestigingsID()+"','"+ves.getTakeawayNaam()+"',"+plaatsnummer+");");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -500,17 +499,17 @@ public class Database {
         }
     }
 
-    public void deleteLeveringsgebiedFromVestiging(int postcode, String gemeente) {
+    public void deleteLeveringsgebiedFromVestiging(int plaatsnummer, Vestiging ves) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE from tbl_soort WHERE (naam = '" + tw.getNaam() + "') and (categorie ='" + cat + "');");
+            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='"+ves.getVestigingsID()+"') and (naam='"+ves.getTakeawayNaam()+"') and(plaatsnummer="+plaatsnummer+");");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
         }
-    }*/
+    }
 
     public Vestiging getVestiging(String takeawayNaam, String vestigingsID) {
         try {
@@ -704,7 +703,7 @@ public class Database {
             return null;
         }
     }
-    
+
     public Take_Away getTakeawaynaamProduct(int productID) {
         try {
             String sql = "SELECT naam FROM tbl_product P, tbl_biedtAan B WHERE (P.productID = B.productID)and (P.productID = " + productID + ");";
@@ -1411,24 +1410,35 @@ public class Database {
         }
     }
 
+    /* public void deleteReview(Klant kl) {
+     ArrayList<Review> reviewsPerKlant = this.getReviews(kl);
+     for (Review rev : reviewsPerKlant) {
+     if (rev.isStatus()) {
+     try {
+     String sql = "SELECT startdatum FROM tbl_review WHERE (reviewID = " + rev.getReviewId() + ");";
+     ResultSet srs = getData(sql);
+     java.sql.Date datum = srs.getDate("startdatum");
+     this.closeConnection();
+     dbConnection = getConnection();
+     Statement stmt = dbConnection.createStatement();
+     stmt.executeUpdate("DELETE from tbl_review WHERE (reviewID = '" + rev.getReviewId() + "') and ((DATEDIFF(CURDATE(),'" + datum + "'))>7);");
+     this.closeConnection();
+     } catch (SQLException sqle) {
+     System.out.println("SQLException: " + sqle.getMessage());
+     this.closeConnection();
+     }
+     }
+     }
+     }*/
     public void deleteReview(Klant kl) {
-        ArrayList<Review> reviewsPerKlant = this.getReviews(kl);
-        for (Review rev : reviewsPerKlant) {
-            if (rev.isStatus()) {
-                try {
-                    String sql = "SELECT startdatum FROM tbl_review WHERE (reviewID = " + rev.getReviewId() + ");";
-                    ResultSet srs = getData(sql);
-                    java.sql.Date datum = srs.getDate("startdatum");
-                    this.closeConnection();
-                    dbConnection = getConnection();
-                    Statement stmt = dbConnection.createStatement();
-                    stmt.executeUpdate("DELETE from tbl_review WHERE (reviewID = '" + rev.getReviewId() + "') and ((DATEDIFF(CURDATE(),'" + datum + "'))>7);");
-                    this.closeConnection();
-                } catch (SQLException sqle) {
-                    System.out.println("SQLException: " + sqle.getMessage());
-                    this.closeConnection();
-                }
-            }
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("DELETE from tbl_review WHERE (login = '" + kl.getLogin() + "') and (status=TRUE) and ((DATEDIFF(CURDATE(),startdatum))>7);");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
         }
     }
 
@@ -1621,9 +1631,8 @@ public class Database {
             return null;
         }
     }
-    
-    public ArrayList <Hot_Item> getHotItems ()
-    {
+
+    public ArrayList<Hot_Item> getHotItems() {
         try {
             ArrayList<Hot_Item> alleHotItems = new ArrayList<>();
             String sql = "SELECT * FROM tbl_awardHotitem;";
@@ -1633,7 +1642,6 @@ public class Database {
                 String maand = srs.getString("maand");
                 int aantalBesteld = srs.getInt("aantalBesteld");
                 int productID = srs.getInt("productID");
-               
 
                 Hot_Item hi = new Hot_Item(awardID, maand, aantalBesteld, productID);
                 alleHotItems.add(hi);
