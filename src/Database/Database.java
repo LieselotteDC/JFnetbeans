@@ -486,6 +486,31 @@ public class Database {
             this.closeConnection();
         }
     }
+    
+        public void addLeveringsgebiedFromVestiging(int postcode, String gemeente) {
+        try {
+            this.getPlaatsnummer(gemeente, postcode)
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("INSERT INTO tbl_soort VALUES ('" + cat + "', '" + tw.getNaam() + "');");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
+
+    public void deleteLeveringsgebiedFromVestiging(int postcode, String gemeente) {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("DELETE from tbl_soort WHERE (naam = '" + tw.getNaam() + "') and (categorie ='" + cat + "');");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
 
     public Vestiging getVestiging(String takeawayNaam, String vestigingsID) {
         try {
@@ -1394,6 +1419,7 @@ public class Database {
                     String sql = "SELECT startdatum FROM tbl_review WHERE (reviewID = " + rev.getReviewId() + ");";
                     ResultSet srs = getData(sql);
                     Date datum = srs.getDate("startdatum");
+                    this.closeConnection();
                     dbConnection = getConnection();
                     Statement stmt = dbConnection.createStatement();
                     stmt.executeUpdate("DELETE from tbl_review WHERE (reviewID = '" + rev.getReviewId() + "') and ((DATEDIFF(CURDATE(),'" + datum + "'))>7);");
