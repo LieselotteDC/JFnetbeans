@@ -1610,7 +1610,7 @@ public class Database {
             return null;
         }
 
-    } // waar deze functie best oproepen? in add functie?
+    } // waar deze functie best oproepen? heb hem nu in add functie opgeroepen
 
     public void ChangeNameBestseller() {
         try {
