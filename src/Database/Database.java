@@ -1594,9 +1594,10 @@ public class Database {
             String sql = "SELECT * FROM tbl_awardBestseller A, tbl_takeaway T WHERE A.naam = T.naam;";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 int aantalMenus = srs.getInt("aantalMenus");
-                Bestseller bs = new Bestseller(aantalMenus, naam);
+                Bestseller bs = new Bestseller(maand,aantalMenus, naam);
                 this.closeConnection();
                 return bs;
             } else {
@@ -1609,7 +1610,7 @@ public class Database {
             return null;
         }
 
-    }
+    } // waar deze functie best oproepen? in add functie?
 
     public void ChangeNameBestseller() {
         try {
@@ -1735,9 +1736,10 @@ public class Database {
             String sql = "SELECT * FROM tbl_awardJustfeeder J, tbl_takeaway T WHERE J.naam = T.naam;";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 double commissie = srs.getInt("commissie");
-                Just_Feeder jf = new Just_Feeder(commissie, naam);
+                Just_Feeder jf = new Just_Feeder(maand,commissie, naam);
                 this.closeConnection();
                 return jf;
             } else {
@@ -1796,9 +1798,10 @@ public class Database {
             String sql = "SELECT * FROM tbl_awardUserschoice U, tbl_takeaway T WHERE U.naam = T.naam;";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 double beoordeling = srs.getInt("beoordeling");
-                Users_Choice uc = new Users_Choice(beoordeling, naam);
+                Users_Choice uc = new Users_Choice(maand,beoordeling, naam);
                 this.closeConnection();
                 return uc;
             } else {
@@ -1809,6 +1812,20 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
             return null;
+        }
+
+    }
+    
+     public void ChangeUsersChoice() { // idem deze functie moet nog opgeroepen worden
+        try {
+            Users_Choice uc = this.getUsersChoice();
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*UC*" + uc.getTakeawayNaam() + "' WHERE naam = '" + uc.getTakeawayNaam() + "'");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
         }
 
     }
