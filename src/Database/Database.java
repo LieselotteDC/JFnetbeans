@@ -1611,6 +1611,20 @@ public class Database {
 
     }
 
+    public void ChangeNameBestseller() {
+        try {
+            Bestseller bs = this.getBestseller();
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*B*" + bs.getTakeawayNaam() + "' WHERE naam = '" + bs.getTakeawayNaam() + "'");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+
+    }
+
     //hot item
     public void addAwardHotItem(String maand, int jaar) {
         try {

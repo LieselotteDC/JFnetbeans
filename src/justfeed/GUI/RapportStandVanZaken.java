@@ -164,7 +164,8 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             lblVestiging.setForeground(Color.DARK_GRAY);
             DefaultComboBoxModel b = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
             comboboxTakeAway.setModel(b);
-            String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
+            String gekozenTakeAway;
+            gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
             //query om de vestigingen van de geselecteerde take-away op te halen
             DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';", "vestigingsID");
             comboboxVestiging.setModel(f);
