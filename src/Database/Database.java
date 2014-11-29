@@ -1762,6 +1762,7 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("DELETE FROM tbl_awardUserschoice;");
             stmt.executeUpdate("INSERT INTO tbl_awardUserschoice VALUES (null,'" + uc.getMaand() + "','" + uc.getBeoordeling() + "','" + uc.getTakeawayNaam() + "');");
+            ChangeUsersChoice();
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
