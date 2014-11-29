@@ -1,29 +1,38 @@
 package Logica;
 
+import java.sql.Date;
+
 public class Order {
 
     private int orderID;
     private double totaalPrijs;
-    private String datum;
+    private Date datum;
     private String straat;
-    private String huisnummer;
-    private String gemeente;
-    private String postcode;
-    private String login;
+    private int huisnummer;
     private int plaatsnummer;
-    private Boolean status;
+    private String login;
+    private boolean status;
 
     public Order() {
-        this.orderID = orderID;
+        this.orderID = 0;
+        this.totaalPrijs = 0;
+        this.datum = null;
+        this.straat = null;
+        this.huisnummer = 0;
+        this.plaatsnummer = 0;
+        this.login = null;
+        this.status = false;
+    }
+
+    public Order(double totaalPrijs, Date datum, String straat, int huisnummer, int plaatsnummer, String login, boolean status) {
+        this.orderID = 0;
         this.totaalPrijs = totaalPrijs;
         this.datum = datum;
         this.straat = straat;
         this.huisnummer = huisnummer;
-        this.gemeente = gemeente;
-        this.postcode = postcode;
-        this.login = login;
         this.plaatsnummer = plaatsnummer;
-
+        this.login = login;
+        this.status = status;
     }
 
     public int getOrderID() {
@@ -42,11 +51,11 @@ public class Order {
         this.totaalPrijs = totaalPrijs;
     }
 
-    public String getDatum() {
+    public Date getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
 
@@ -58,28 +67,20 @@ public class Order {
         this.straat = straat;
     }
 
-    public String getHuisnummer() {
+    public int getHuisnummer() {
         return huisnummer;
     }
 
-    public void setHuisnummer(String huisnummer) {
+    public void setHuisnummer(int huisnummer) {
         this.huisnummer = huisnummer;
     }
 
-    public String getGemeente() {
-        return gemeente;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setGemeente(String gemeente) {
-        this.gemeente = gemeente;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getLogin() {

@@ -489,9 +489,9 @@ public class Database {
 
     public void addLeveringsgebiedFromVestiging(int plaatsnummer, Vestiging ves) {
         try {
-              dbConnection = getConnection();
+            dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_leveringsregio VALUES ('"+ves.getVestigingsID()+"','"+ves.getTakeawayNaam()+"',"+plaatsnummer+");");
+            stmt.executeUpdate("INSERT INTO tbl_leveringsregio VALUES ('" + ves.getVestigingsID() + "','" + ves.getTakeawayNaam() + "'," + plaatsnummer + ");");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -503,7 +503,7 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='"+ves.getVestigingsID()+"') and (naam='"+ves.getTakeawayNaam()+"') and(plaatsnummer="+plaatsnummer+");");
+            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='" + ves.getVestigingsID() + "') and (naam='" + ves.getTakeawayNaam() + "') and(plaatsnummer=" + plaatsnummer + ");");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1589,6 +1589,28 @@ public class Database {
 
     }
 
+    public Bestseller getBestseller() {
+        try {
+            String sql = "SELECT * FROM tbl_awardBestseller A, tbl_takeaway T WHERE A.naam = T.naam;";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String naam = srs.getString("naam");
+                int aantalMenus = srs.getInt("aantalMenus");
+                Bestseller bs = new Bestseller(aantalMenus, naam);
+                this.closeConnection();
+                return bs;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
+    }
+
     //hot item
     public void addAwardHotItem(String maand, int jaar) {
         try {
@@ -1694,6 +1716,28 @@ public class Database {
         }
     }
 
+    public Just_Feeder getJustfeeder() {
+        try {
+            String sql = "SELECT * FROM tbl_awardJustfeeder J, tbl_takeaway T WHERE J.naam = T.naam;";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String naam = srs.getString("naam");
+                double commissie = srs.getInt("commissie");
+                Just_Feeder jf = new Just_Feeder(commissie, naam);
+                this.closeConnection();
+                return jf;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
+    }
+
     // users choice
     public void addAwardUsersChoice(String maand) {
         try {
@@ -1731,6 +1775,28 @@ public class Database {
             this.closeConnection();
             return null;
         }
+    }
+
+    public Users_Choice getUsersChoice() {
+        try {
+            String sql = "SELECT * FROM tbl_awardUserschoice U, tbl_takeaway T WHERE U.naam = T.naam;";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String naam = srs.getString("naam");
+                double beoordeling = srs.getInt("beoordeling");
+                Users_Choice uc = new Users_Choice(beoordeling, naam);
+                this.closeConnection();
+                return uc;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
     }
 
     //METHODES IVM ORDERS

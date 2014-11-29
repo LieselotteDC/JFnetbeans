@@ -22,6 +22,11 @@ public class Just_Feeder extends Award {
         this.commissie = commissie;
         this.takeawayNaam = takeawayNaam;
     }
+    public Just_Feeder(double commissie, String takeawayNaam) {
+        super();
+        this.commissie = commissie;
+        this.takeawayNaam = takeawayNaam;
+    }
 
     public double getCommissie() {
         return commissie;

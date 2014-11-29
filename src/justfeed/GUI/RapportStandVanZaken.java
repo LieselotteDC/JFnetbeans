@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author liedcost
@@ -24,19 +23,19 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     private static final RapportStandVanZaken rapportSVZ = new RapportStandVanZaken();
     public Database d = new Database();
     public static JFrame myCaller;
-    
+
     /**
-     * Creates new form RapportStandVanZaken
-//     */
+     * Creates new form RapportStandVanZaken //
+     */
     public RapportStandVanZaken() {
         initComponents();
     }
 
-        public static RapportStandVanZaken getInstance(Administrator admini)
-    {
+    public static RapportStandVanZaken getInstance(Administrator admini) {
         myCaller = admini;
-        return rapportSVZ;   
+        return rapportSVZ;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,20 +154,19 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
 
     private void comboboxTakeAwayOFVestigingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxTakeAwayOFVestigingActionPerformed
         String selectedItem = comboboxTakeAwayOFVestiging.getSelectedItem().toString();
-        if(selectedItem.equals("Per take-away")){
+        if (selectedItem.equals("Per take-away")) {
             comboboxVestiging.setEnabled(false);
             lblVestiging.setForeground(Color.LIGHT_GRAY);
             DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
             comboboxTakeAway.setModel(c);
-        }
-        else{
+        } else {
             comboboxVestiging.setEnabled(true);
             lblVestiging.setForeground(Color.DARK_GRAY);
             DefaultComboBoxModel b = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
             comboboxTakeAway.setModel(b);
             String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
             //query om de vestigingen van de geselecteerde take-away op te halen
-            DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE (naam = '" + gekozenTakeAway + "');", "vestigingsID");
+            DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';", "vestigingsID");
             comboboxVestiging.setModel(f);
         }
     }//GEN-LAST:event_comboboxTakeAwayOFVestigingActionPerformed
