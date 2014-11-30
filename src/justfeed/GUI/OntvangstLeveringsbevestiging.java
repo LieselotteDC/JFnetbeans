@@ -66,13 +66,12 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnLeveringsbevestiging)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLeveringsbevestiging, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,9 +82,9 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
+                .addGap(34, 34, 34)
                 .addComponent(btnLeveringsbevestiging)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,9 +95,10 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
         /*if(d.orderIDBestaat(orderID))
         {
             //e-mail versturen naar klant met herinnering voor termijn van 7d voor review
+            //methode zet status order op geleverd
         }
         else{
-            JOptionPane.showMessageDialog(null, "Dit order bestaat niet. Probeer opnieuw.");
+            JOptionPane.showMessageDialog(null, "Er bestaat geen order met dit orderID. Probeer opnieuw.");
             txtOrderID.setText("");
             txtOrderID.requestFocus();
         }*/

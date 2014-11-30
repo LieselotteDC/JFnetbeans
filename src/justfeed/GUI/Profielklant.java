@@ -83,7 +83,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        naarCategorie = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -199,13 +199,13 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenu5.setText("Zoeken");
 
-        jMenuItem4.setText("Categorie");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        naarCategorie.setText("Categorie");
+        naarCategorie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naarZoekenCategorie(evt);
+                naarCategorieActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem4);
+        jMenu5.add(naarCategorie);
 
         jMenuItem5.setText("Product");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -337,15 +337,6 @@ public class Profielklant extends javax.swing.JFrame {
        
     }//GEN-LAST:event_naarOverzichtReviewsKlant
 
-    private void naarZoekenCategorie(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenCategorie
-    Zoekencategorie zoekenCategorie = Zoekencategorie.getInstance(profiel);
-        //     anderegevensklant.setSize(300,300);
-       zoekenCategorie.pack();
-       profiel.hide();
-       zoekenCategorie.show();
-       zoekenCategorie.setLocationRelativeTo(null);
-    }//GEN-LAST:event_naarZoekenCategorie
-
     private void naarZoekenGemeente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenGemeente
        Zoekengemeente zoekenGemeente = Zoekengemeente.getInstance(profiel);
         //     anderegevensklant.setSize(300,300);
@@ -434,6 +425,14 @@ public class Profielklant extends javax.swing.JFrame {
             login.setActief(null);
     }//GEN-LAST:event_naarBestelling
 
+    private void naarCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarCategorieActionPerformed
+        Zoekencategorie zoekencategorie = Zoekencategorie.getInstance(profiel);
+        zoekencategorie.pack();
+        profiel.hide();
+        zoekencategorie.show();
+        zoekencategorie.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarCategorieActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -488,12 +487,12 @@ public class Profielklant extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem naarCategorie;
     private javax.swing.JMenu naarContact;
     // End of variables declaration//GEN-END:variables
 }

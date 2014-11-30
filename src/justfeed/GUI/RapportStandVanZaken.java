@@ -23,12 +23,14 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     private static final RapportStandVanZaken rapportSVZ = new RapportStandVanZaken();
     public Database d = new Database();
     public static JFrame myCaller;
+    DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
 
     /**
      * Creates new form RapportStandVanZaken //
      */
     public RapportStandVanZaken() {
         initComponents();
+        comboboxTakeAway.setModel(c);
     }
 
     public static RapportStandVanZaken getInstance(Administrator admini) {
@@ -45,18 +47,20 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         comboboxInhoud = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        comboboxVestiging = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         comboboxTakeAway = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        comboboxTakeAwayOFVestiging = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        lblTakeAway = new javax.swing.JLabel();
         lblVestiging = new javax.swing.JLabel();
+        lblTakeAway = new javax.swing.JLabel();
         btnRapportMaken = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        rbtnTakeAway = new javax.swing.JRadioButton();
+        rbtnVestiging = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVestigingen = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,23 +71,47 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
 
         jLabel2.setText("Inhoud rapport");
 
-        jLabel4.setText("Doelgroep");
-
-        comboboxTakeAwayOFVestiging.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Per vestiging", "Per take-away" }));
-        comboboxTakeAwayOFVestiging.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboboxTakeAwayOFVestigingActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setText("Maak uw keuze:");
+        lblVestiging.setText("Selecteer de gewenste vestiging:");
 
         lblTakeAway.setText("Kies de betreffende take-away:");
 
-        lblVestiging.setText("Kies de betreffende vestiging:");
-
         btnRapportMaken.setText("Rapport maken");
+        btnRapportMaken.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRapportMakenActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Genereer rapport:");
+
+        buttonGroup1.add(rbtnTakeAway);
+        rbtnTakeAway.setText("per take-away");
+        rbtnTakeAway.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtnTakeAwayMouseClicked(evt);
+            }
+        });
+
+        buttonGroup1.add(rbtnVestiging);
+        rbtnVestiging.setText("per vestiging");
+        rbtnVestiging.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtnVestigingMouseClicked(evt);
+            }
+        });
+
+        tblVestigingen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblVestigingen);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,86 +119,106 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbtnTakeAway)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtnVestiging))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addComponent(lblVestiging)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(comboboxTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboboxVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)
-                                            .addComponent(lblTakeAway))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboboxTakeAwayOFVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboboxInhoud, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(111, 111, 111))
-                        .addComponent(btnRapportMaken, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addComponent(lblTakeAway))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboboxInhoud, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboboxTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRapportMaken, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(comboboxInhoud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxTakeAwayOFVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jLabel3)
+                .addComponent(lblTakeAway)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTakeAway))
+                    .addComponent(rbtnTakeAway)
+                    .addComponent(rbtnVestiging))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(comboboxInhoud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboboxTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboboxVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVestiging))
-                .addGap(46, 46, 46)
                 .addComponent(btnRapportMaken)
-                .addGap(25, 25, 25))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboboxTakeAwayOFVestigingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxTakeAwayOFVestigingActionPerformed
-        String selectedItem = comboboxTakeAwayOFVestiging.getSelectedItem().toString();
-        if (selectedItem.equals("Per take-away")) {
-            comboboxVestiging.setEnabled(false);
-            lblVestiging.setForeground(Color.LIGHT_GRAY);
-            DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
-            comboboxTakeAway.setModel(c);
-        } else {
-            comboboxVestiging.setEnabled(true);
-            lblVestiging.setForeground(Color.DARK_GRAY);
-            DefaultComboBoxModel b = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
-            comboboxTakeAway.setModel(b);
+    private void rbtnTakeAwayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTakeAwayMouseClicked
+            //comboboxVestiging.setEnabled(false);
+            //lblVestiging.setForeground(Color.LIGHT_GRAY);
+            DefaultTableModel model = (DefaultTableModel)tblVestigingen.getModel();
+            model.setRowCount(0);
+    }//GEN-LAST:event_rbtnTakeAwayMouseClicked
+
+    private void rbtnVestigingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnVestigingMouseClicked
+            //query om de vestigingen van de geselecteerde take-away op te halen
+            //DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen;", "vestigingsID");
             String gekozenTakeAway;
             gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
-            //query om de vestigingen van de geselecteerde take-away op te halen
-            DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';", "vestigingsID");
-            comboboxVestiging.setModel(f);
+            //System.out.println(gekozenTakeAway);
+            DefaultTableModel t = d.naarTabel("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';");
+            tblVestigingen.setModel(t);
+    }//GEN-LAST:event_rbtnVestigingMouseClicked
+
+    private void btnRapportMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRapportMakenActionPerformed
+        String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
+        if(rbtnVestiging.isSelected()){
+            int gekozenVestiging = tblVestigingen.getSelectedRow();
+            String vestigingsID = tblVestigingen.getValueAt(gekozenVestiging,0).toString();
+            Vestiging geselecteerdeVestiging = d.getVestiging(gekozenTakeAway,vestigingsID);
         }
-    }//GEN-LAST:event_comboboxTakeAwayOFVestigingActionPerformed
+        else if (rbtnTakeAway.isSelected()){
+            Take_Away geselecteerdeTakeAway = d.getTakeaway(gekozenTakeAway);
+        }
+                
+        else{}
+        String inhoud = comboboxInhoud.getSelectedItem().toString();
+        if(inhoud.equals("Verkopen")){
+            
+        }
+        else if(inhoud.equals("Lopende orders")){
+            
+        }
+        else{
+            
+        }
+    }//GEN-LAST:event_btnRapportMakenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,16 +257,18 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRapportMaken;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox comboboxInhoud;
     private javax.swing.JComboBox comboboxTakeAway;
-    private javax.swing.JComboBox comboboxTakeAwayOFVestiging;
-    private javax.swing.JComboBox comboboxVestiging;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTakeAway;
     private javax.swing.JLabel lblVestiging;
+    private javax.swing.JRadioButton rbtnTakeAway;
+    private javax.swing.JRadioButton rbtnVestiging;
+    private javax.swing.JTable tblVestigingen;
     // End of variables declaration//GEN-END:variables
 }

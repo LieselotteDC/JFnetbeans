@@ -24,11 +24,7 @@ public class Zoekencategorie extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
     DefaultComboBoxModel c = d.initialiseerCombobox("SELECT categorie FROM tbl_soort;", "categorie");
-    public static Zoekencategorie getInstance(Profielklant caller)
-    {
-        myCaller = caller;
-        return zoekenCategorie;
-    }
+
     /**
      * Creates new form Zoekencategorie
      */
@@ -36,7 +32,11 @@ public class Zoekencategorie extends javax.swing.JFrame {
         initComponents();
         comboboxCategorie.setModel(c);
     }
-    
+    public static Zoekencategorie getInstance(Profielklant caller)
+    {
+        myCaller = caller;
+        return zoekenCategorie;
+    }
    
 
     /**

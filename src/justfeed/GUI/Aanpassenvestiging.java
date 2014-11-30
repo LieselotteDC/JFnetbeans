@@ -220,7 +220,7 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
          String huidigID = txtHuidigID.getText();
          String nieuweStraat = txtStraat.getText();   
          String huidigeTakeAwayNaam = txtHuidigeNaam.getText();
-
+          String stringlevgebied = txtLeveringsgebied.getText();
              
         if(!d.bestaatVestiging(huidigID, huidigeTakeAwayNaam)){
          int reply = JOptionPane.showConfirmDialog(null, "Deze vestiging bestaat nog niet. Wil U deze toevoegen?", "Toevoegen vestiging",JOptionPane.YES_NO_OPTION);
@@ -250,7 +250,6 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
             txtGemeente.setText("");
             }
             else{
-            //int postcode = Integer.parseInt(txtPostcode.getText());
             double nieuweLeveringskosten = Double.parseDouble(txtLeveringskosten.getText());
             int nieuwHuisnummer = Integer.parseInt(txtHuisnummer.getText());
             int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
@@ -258,9 +257,18 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
             //ophalen welke vestiging er achter de ingevoerde naam + id zit 
             Vestiging aangepasteVestiging = new Vestiging(nieuweStraat, nieuwHuisnummer, nieuweLeveringskosten, plaatsnummer, huidigeTakeAwayNaam, huidigID);
             d.updateVestiging(huidigeVestiging, aangepasteVestiging);
-            //methode die alle leveringsgebieden van huidige vestiging verwijdert
-            //d.deleteLeveringsgebiedFromVestiging(plaatsnummerlevgebied, huidigeVestiging);
+            //methode die alle leveringsgebieden van aangepaste vestiging verwijdert
             //nieuwe ingevoerde leveringsgebieden erinsteken mbv loop die je bij aanmaakvestiging gebruikt
+            int i = 0;
+            while (i>=0 && i <(stringlevgebied.length()-1)) { 
+            String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+            String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
+            int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
+            String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));               
+            int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
+            d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, aangepasteVestiging);
+            stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
+            }
             aangepastevestiging.hide();
             myCaller.show();  
             }
