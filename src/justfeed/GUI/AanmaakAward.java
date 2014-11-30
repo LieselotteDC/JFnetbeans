@@ -10,24 +10,23 @@ import Logica.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author ladkerpe
  */
 public class AanmaakAward extends javax.swing.JFrame {
-    
+
     private static final AanmaakAward aanmaakAward = new AanmaakAward();
     public Database d = new Database();
     public static JFrame myCaller;
+
     public AanmaakAward() {
         initComponents();
     }
-    
-    public static AanmaakAward getInstance(Administrator admini)
-    {
+
+    public static AanmaakAward getInstance(Administrator admini) {
         myCaller = admini;
-        return aanmaakAward;   
+        return aanmaakAward;
     }
 
     /**
@@ -137,35 +136,38 @@ public class AanmaakAward extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJaarActionPerformed
 
     private void btnHomeknopAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorActionPerformed
-       Administrator administrator = Administrator.getInstance(aanmaakAward);
+        Administrator administrator = Administrator.getInstance(aanmaakAward);
 //     administrator.setSize(300,300);
-       administrator.pack();
-       aanmaakAward.hide();
-       administrator.show();
-       administrator.setLocationRelativeTo(null);
+        administrator.pack();
+        aanmaakAward.hide();
+        administrator.show();
+        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
     private void btnAanmaakAwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAanmaakAwardActionPerformed
-        String maand =  comboboxMaand.getSelectedItem().toString();
-        if(maand.isEmpty() || txtJaar.getText().isEmpty()){
+        String maand = comboboxMaand.getSelectedItem().toString();
+        if (maand.isEmpty() || txtJaar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
-            if (maand.isEmpty()){
-            comboboxMaand.requestFocus();
+            if (maand.isEmpty()) {
+                comboboxMaand.requestFocus();
+            } else if (txtJaar.getText().isEmpty()) {
+                txtJaar.requestFocus();
             }
-            else if(txtJaar.getText().isEmpty()){
-            txtJaar.requestFocus();
-            }
-        }
-        else{
+        } else {
+                //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
+            //visualisatie gebeurd dus pas na het toekennen van alle awards!
             int jaar = Integer.parseInt(txtJaar.getText());
+            d.undoVisualisationAwards();
+            d.deleteAllAwards();
             d.addAwardBestseller(maand, jaar);
-            d.addAwardHotItem(maand,jaar);
+            //d.addAwardHotItem(maand, jaar);
             d.addAwardUsersChoice(maand);
             d.addAwardJustFeeder(maand);
+            d.doVisualisationAwards();
             comboboxMaand.setSelectedItem(null);
             txtJaar.setText("");
             JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
-            Overzichtawardsadministrator awardsoverzicht =  Overzichtawardsadministrator.getInstance(aanmaakAward);
+            Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
 //     amdministrator.setSize(300,300);
             awardsoverzicht.pack();
             aanmaakAward.hide();
@@ -173,7 +175,7 @@ public class AanmaakAward extends javax.swing.JFrame {
             awardsoverzicht.setLocationRelativeTo(null);
 
         }
-        
+
     }//GEN-LAST:event_btnAanmaakAwardActionPerformed
 
     /**

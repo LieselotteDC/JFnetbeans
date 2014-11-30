@@ -110,6 +110,7 @@ public class Database {
         }
         return new DefaultTableModel(data, kolommen);
     }
+
     public DefaultTableModel naarTabel2(String sql) {
 
         Database db = new Database();
@@ -140,7 +141,7 @@ public class Database {
         return new DefaultTableModel(data, kolommen);
     }
 
-public String bestelFormulier(String sql, String kolomnaam) {
+    public String bestelFormulier(String sql, String kolomnaam) {
         try {
             ResultSet srs = getData(sql);
             if (srs.next()) {
@@ -150,13 +151,13 @@ public String bestelFormulier(String sql, String kolomnaam) {
                 this.closeConnection();
                 return null;
             }
-        
-        }catch(SQLException sqle) {
+
+        } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
             return null;
         }
-}
+    }
 
     //VERSCHILLENDE CATEGORIEËN OPHALEN (om zoekencategorie zijn JList te vullen)
     public DefaultComboBoxModel initialiseerCombobox(String sql, String kolomnaam) {
@@ -1457,26 +1458,6 @@ public String bestelFormulier(String sql, String kolomnaam) {
         }
     }
 
-    /* public void deleteReview(Klant kl) {
-     ArrayList<Review> reviewsPerKlant = this.getReviews(kl);
-     for (Review rev : reviewsPerKlant) {
-     if (rev.isStatus()) {
-     try {
-     String sql = "SELECT startdatum FROM tbl_review WHERE (reviewID = " + rev.getReviewId() + ");";
-     ResultSet srs = getData(sql);
-     java.sql.Date datum = srs.getDate("startdatum");
-     this.closeConnection();
-     dbConnection = getConnection();
-     Statement stmt = dbConnection.createStatement();
-     stmt.executeUpdate("DELETE from tbl_review WHERE (reviewID = '" + rev.getReviewId() + "') and ((DATEDIFF(CURDATE(),'" + datum + "'))>7);");
-     this.closeConnection();
-     } catch (SQLException sqle) {
-     System.out.println("SQLException: " + sqle.getMessage());
-     this.closeConnection();
-     }
-     }
-     }
-     }*/
     public void deleteReview(Klant kl) {
         try {
             dbConnection = getConnection();
@@ -1594,14 +1575,70 @@ public String bestelFormulier(String sql, String kolomnaam) {
     }
 
     //METHODES IVM AWARDS
-    // bestseller   
-    public void addAwardBestseller(String maand, int jaar) {
+    //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
+    //visualisatie gebeurd dus pas na het toekennen van alle awards!
+    public void undoVisualisationAwards() {
+        Bestseller oldBestseller = this.getBestseller();
+        Users_Choice oldUsersChoice = this.getUsersChoice();
+
         try {
-            Bestseller bs = this.findBestseller(maand, jaar);
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            if (!(oldBestseller == null)) { //om de eerste keer deze methode niet te laten draaien
+                String originalName1 = oldBestseller.getTakeawayNaam().substring(3);
+                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName1 + "' WHERE naam = '" + oldBestseller.getTakeawayNaam() + "';");
+            }
+            if (!(oldUsersChoice == null)) {
+                String originalName2 = oldUsersChoice.getTakeawayNaam().substring(4);
+                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName2 + "' WHERE naam = '" + oldUsersChoice.getTakeawayNaam() + "';");
+            }
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+
+    }
+
+    public void deleteAllAwards() {
+        try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("DELETE FROM tbl_awardBestseller;");
-            stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null,'" + bs.getMaand() + "'," + bs.getAantalMenus() + ",'" + bs.getTakeawayNaam() + "');");
+            stmt.executeUpdate("DELETE FROM tbl_awardHotitem;");
+            stmt.executeUpdate("DELETE FROM tbl_awardJustfeeder;");
+            stmt.executeUpdate("DELETE FROM tbl_awardUserschoice;");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
+
+    public void doVisualisationAwards() {
+        Bestseller newBestseller = this.getBestseller();
+        Users_Choice newUsersChoice = this.getUsersChoice();
+
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*B*" + newBestseller.getTakeawayNaam() + "' WHERE naam = '" + newBestseller.getTakeawayNaam() + "';");
+            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*UC*" + newUsersChoice.getTakeawayNaam() + "' WHERE naam = '" + newUsersChoice.getTakeawayNaam() + "'");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+
+    }
+
+    // bestseller   
+    public void addAwardBestseller(String maand, int jaar) {
+        try {
+            Bestseller newBs = this.findBestseller(maand, jaar); //berekenen van de nieuwe bestseller
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null,'" + newBs.getMaand() + "'," + newBs.getAantalMenus() + ",'" + newBs.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1638,13 +1675,14 @@ public String bestelFormulier(String sql, String kolomnaam) {
 
     public Bestseller getBestseller() {
         try {
-            String sql = "SELECT * FROM tbl_awardBestseller A, tbl_takeaway T WHERE A.naam = T.naam;";
+            String sql = "SELECT * FROM tbl_awardBestseller;";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                int awardID = srs.getInt("awardID");
                 String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 int aantalMenus = srs.getInt("aantalMenus");
-                Bestseller bs = new Bestseller(maand,aantalMenus, naam);
+                Bestseller bs = new Bestseller(awardID, maand, aantalMenus, naam);
                 this.closeConnection();
                 return bs;
             } else {
@@ -1657,20 +1695,6 @@ public String bestelFormulier(String sql, String kolomnaam) {
             return null;
         }
 
-    } // waar deze functie best oproepen? heb hem nu in add functie opgeroepen
-
-    public void ChangeNameBestseller() {
-        try {
-            Bestseller bs = this.getBestseller();
-            dbConnection = getConnection();
-            Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*B*" + bs.getTakeawayNaam() + "' WHERE naam = '" + bs.getTakeawayNaam() + "'");
-            this.closeConnection();
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
-        }
-
     }
 
     //hot item
@@ -1678,7 +1702,6 @@ public String bestelFormulier(String sql, String kolomnaam) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE FROM tbl_awardHotitem;");
             for (Hot_Item hi : this.findHotItems(maand, jaar)) {
                 stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null,'" + hi.getMaand() + "'," + hi.getAantalBesteld() + "," + hi.getProductID() + ");");
             }
@@ -1692,20 +1715,21 @@ public String bestelFormulier(String sql, String kolomnaam) {
     private ArrayList<Hot_Item> findHotItems(String maand, int jaar) {
         ArrayList<Hot_Item> hotItemPerTakeaway = new ArrayList<>();
         ArrayList<Hot_Item> gecumuleerdeHoeveelheidPerTakeaway = new ArrayList<>();
+        String start = DatumFinder.getEersteDag(maand, jaar);
+        String eind = DatumFinder.getLaatsteDag(maand, jaar);
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
                 for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
-                    String sql = "SELECT SUM(hoeveelheid) AS gecumuleerd FROM tbl_behoortTot WHERE (productID = '" + p.getProductID() + "');";
+                    String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B, tbl_order O WHERE (B.productID = " + p.getProductID() + ") and (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
                     ResultSet srs = getData(sql);
                     if (srs.next()) {
                         int productID = p.getProductID();
                         int gecumuleerd = srs.getInt("gecumuleerd");
                         gecumuleerdeHoeveelheidPerTakeaway.add(new Hot_Item(gecumuleerd, productID));
-                        Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
-                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
-                    }
+                    }          
                 }
-
+                Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
+                hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
             }
             this.closeConnection();
             return hotItemPerTakeaway;
@@ -1745,7 +1769,6 @@ public String bestelFormulier(String sql, String kolomnaam) {
             Just_Feeder jf = this.findJustfeeder(maand);
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE FROM tbl_awardJustfeeder;");
             stmt.executeUpdate("INSERT INTO tbl_awardJustfeeder VALUES (null,'" + jf.getMaand() + "'," + jf.getCommissie() + ",'" + jf.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
@@ -1780,13 +1803,14 @@ public String bestelFormulier(String sql, String kolomnaam) {
 
     public Just_Feeder getJustfeeder() {
         try {
-            String sql = "SELECT * FROM tbl_awardJustfeeder J, tbl_takeaway T WHERE J.naam = T.naam;";
+            String sql = "SELECT * FROM tbl_awardJustfeeder";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                int awardID = srs.getInt("awardID");
                 String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 double commissie = srs.getInt("commissie");
-                Just_Feeder jf = new Just_Feeder(maand,commissie, naam);
+                Just_Feeder jf = new Just_Feeder(awardID, maand, commissie, naam);
                 this.closeConnection();
                 return jf;
             } else {
@@ -1804,12 +1828,10 @@ public String bestelFormulier(String sql, String kolomnaam) {
     // users choice
     public void addAwardUsersChoice(String maand) {
         try {
-            Users_Choice uc = this.findUsersChoice(maand);
+            Users_Choice newUc = this.findUsersChoice(maand); //berekenen van de nieuwe users choice
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE FROM tbl_awardUserschoice;");
-            stmt.executeUpdate("INSERT INTO tbl_awardUserschoice VALUES (null,'" + uc.getMaand() + "','" + uc.getBeoordeling() + "','" + uc.getTakeawayNaam() + "');");
-            ChangeUsersChoice();
+            stmt.executeUpdate("INSERT INTO tbl_awardUserschoice VALUES (null,'" + newUc.getMaand() + "','" + newUc.getBeoordeling() + "','" + newUc.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1821,19 +1843,27 @@ public String bestelFormulier(String sql, String kolomnaam) {
         ArrayList<Users_Choice> scorePerTakeaway = new ArrayList<>();
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
-
                 String sql = "SELECT AVG(score) AS avgReview FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.naam='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.naam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
                 ResultSet srs = getData(sql);
                 if (srs.next()) {
                     String takeaway = ta.getNaam();
                     int avgReview = srs.getInt("avgReview");
                     scorePerTakeaway.add(new Users_Choice(avgReview, takeaway));
+
                 }
             }
             this.closeConnection();
             Collections.sort(scorePerTakeaway);
-            Users_Choice usersChoice = new Users_Choice(maand, scorePerTakeaway.get(0).getBeoordeling(), scorePerTakeaway.get(0).getTakeawayNaam());
-            return usersChoice;
+            //in het geval dat bestseller en users choice dezelfde take-away toewijzen
+            Bestseller actieveBestseller = this.getBestseller();
+            Users_Choice usersChoice1 = new Users_Choice(maand, scorePerTakeaway.get(0).getBeoordeling(), scorePerTakeaway.get(0).getTakeawayNaam());
+            Users_Choice usersChoice2 = new Users_Choice(maand, scorePerTakeaway.get(1).getBeoordeling(), scorePerTakeaway.get(1).getTakeawayNaam());
+            if (actieveBestseller.getTakeawayNaam().equalsIgnoreCase(usersChoice1.getTakeawayNaam())) {
+                return usersChoice2;
+            } else {
+                return usersChoice1;
+            }
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
@@ -1843,13 +1873,14 @@ public String bestelFormulier(String sql, String kolomnaam) {
 
     public Users_Choice getUsersChoice() {
         try {
-            String sql = "SELECT * FROM tbl_awardUserschoice U, tbl_takeaway T WHERE U.naam = T.naam;";
+            String sql = "SELECT * FROM tbl_awardUserschoice;";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                int awardID = srs.getInt("awardID");
                 String maand = srs.getString("maand");
                 String naam = srs.getString("naam");
                 double beoordeling = srs.getInt("beoordeling");
-                Users_Choice uc = new Users_Choice(maand,beoordeling, naam);
+                Users_Choice uc = new Users_Choice(awardID, maand, beoordeling, naam);
                 this.closeConnection();
                 return uc;
             } else {
@@ -1863,29 +1894,7 @@ public String bestelFormulier(String sql, String kolomnaam) {
         }
 
     }
-    
-     public void ChangeUsersChoice() { // idem deze functie moet nog opgeroepen worden
-        try {
-            Users_Choice uc = this.getUsersChoice();
-            dbConnection = getConnection();
-            Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*UC*" + uc.getTakeawayNaam() + "' WHERE naam = '" + uc.getTakeawayNaam() + "'");
-            this.closeConnection();
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
-        }
-
-    }
 
     //METHODES IVM ORDERS
     //METHODES IVM MENU'S
 }
-/*
- Zoeken product:
- methode nodig die zoekt of productnaam wel bestaat in hele database (dus niet zoals productbestaat nu dat checkt of takeaway bepaald product heeft)
-
- Zoeken product:
- klant geeft take-awaynaam in -> take-aways uit tbl biedtAan halen met deze naam -> de producttupels van de tbl product eruithalen die overeenkomen met deze naam
- getVestigingsID nodig die vestigingsID ophaalt van bepaalde vestiging
- kortingEenmaligUniekBestaat om na te gaan of ze al geen bestaande unieke actie kortingscode willen toevoegen*/

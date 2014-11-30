@@ -2,7 +2,7 @@ package Logica;
 
 import Database.Database;
 
-public class Hot_Item extends Award implements Comparable{
+public class Hot_Item extends Award implements Comparable {
 
     private int aantalBesteld;
     private int productID;
@@ -12,8 +12,8 @@ public class Hot_Item extends Award implements Comparable{
         this.aantalBesteld = 0;
         this.productID = 0;
     }
-    
-     public Hot_Item(int aantalBesteld, int productID) {
+
+    public Hot_Item(int aantalBesteld, int productID) {
         super();
         this.aantalBesteld = aantalBesteld;
         this.productID = productID;
@@ -46,27 +46,27 @@ public class Hot_Item extends Award implements Comparable{
     public void setProductID(int productID) {
         this.productID = productID;
     }
-    
-  
+
     @Override
     public int compareTo(Object o) {
-        if (aantalBesteld > ((Hot_Item)o).getAantalBesteld())
+        if (aantalBesteld > ((Hot_Item) o).getAantalBesteld()) {
             return -1;
-        else
+        } else {
             return 1;
+        }
     }
-    
-    public String toString()
-    {
+
+    @Override
+    public String toString() {
         Database d = new Database();
         String result;
-        result = "Hot Item Award\n"; 
-        result +=super.toString();
-        result += "Aantal keer besteld:\t" + this.getAantalBesteld() + "\n";
-        result += "Naam van het product:\t" + d.getProduct(this.getProductID()).getNaam() + "\n";
+        result = "Hot Item Award\n";
+        result += super.toString();           
         result += "Naam van de takeaway:\t" + d.getTakeawaynaamProduct(this.getProductID()).getNaam() + "\n";
+        result += "Naam van het product:\t" + d.getProduct(this.getProductID()).getNaam() + "\n";
+        result += "Aantal keer besteld:\t" + this.getAantalBesteld() + "\n\n";
         return result;
-        
+
     }
 
 }
