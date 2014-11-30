@@ -399,12 +399,12 @@ public class Profielklant extends javax.swing.JFrame {
     }//GEN-LAST:event_naarOverzichtReviews
 
     private void naarToevoegenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarToevoegenReview
-       ReviewToevoegen toevoegenReview = ReviewToevoegen.getInstance(profiel);
+       ReviewToevoegen reviewToevoegen = ReviewToevoegen.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       toevoegenReview.pack();
+       reviewToevoegen.pack();
        profiel.hide();
-       toevoegenReview.show();
-       toevoegenReview.setLocationRelativeTo(null);
+       reviewToevoegen.show();
+       reviewToevoegen.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarToevoegenReview
 
     private void naarZoekenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenReview

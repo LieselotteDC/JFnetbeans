@@ -6,6 +6,7 @@
 package justfeed.GUI;
 
 import Database.*;
+import Logica.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ public class ZoekenReview extends javax.swing.JFrame {
      */
     public static JFrame myCaller;
     public Database d = new Database();
+    public Klant actief = LoginKlant.getInstance().getActief();
     private static final ZoekenReview zoekenReview = new ZoekenReview();
     public ZoekenReview() {
         initComponents();
@@ -111,10 +113,10 @@ public class ZoekenReview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
-        String productNaam = txtProductNaam.getText(); 
-        if(d.productProductnaamBestaat(productNaam))
+        String productnaam = txtProductNaam.getText(); 
+        if(d.productProductnaamBestaat(productnaam))
         {
-            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,B.naam,P.type,R.login,R.score,R.beoordeling FROM tbl_review R,tbl_product P,tbl_biedtAan B WHERE (R.productID=P.productID) and (R.productID=B.productID) and (R.status=false) and (P.naam='"+productNaam+"');");
+            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=FALSE) and('" + productnaam + "'=P.naam);");
             tblReviews.setModel(t);
         }
         else{

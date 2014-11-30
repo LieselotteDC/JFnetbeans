@@ -110,6 +110,53 @@ public class Database {
         }
         return new DefaultTableModel(data, kolommen);
     }
+    public DefaultTableModel naarTabel2(String sql) {
+
+        Database db = new Database();
+        ResultSet rs = db.getData(sql);
+        Vector<Vector<Object>> data = new Vector<>();
+        Vector<String> kolommen = new Vector<>();
+
+        try {
+            ResultSetMetaData metaData = rs.getMetaData();
+            // kolomnamen
+            int columnCount = metaData.getColumnCount();
+            for (int column = 1; column <= columnCount; column++) {
+                kolommen.add(metaData.getColumnName(column));
+            }
+            kolommen.add("hoeveelheid");
+            // inhoud
+            while (rs.next()) {
+                Vector<Object> vector = new Vector<>();
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    vector.add(rs.getObject(columnIndex));
+                }
+                vector.add("");
+                data.add(vector);
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+        }
+        return new DefaultTableModel(data, kolommen);
+    }
+
+public String bestelFormulier(String sql, String kolomnaam) {
+        try {
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String add = srs.getString(kolomnaam);
+                return add;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        
+        }catch(SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+}
 
     //VERSCHILLENDE CATEGORIEËN OPHALEN (om zoekencategorie zijn JList te vullen)
     public DefaultComboBoxModel initialiseerCombobox(String sql, String kolomnaam) {

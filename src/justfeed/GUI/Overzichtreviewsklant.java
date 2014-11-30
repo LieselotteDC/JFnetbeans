@@ -17,7 +17,7 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
-    DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_review WHERE (login = '" + actief.getLogin() + "') AND (status = FALSE);");
+    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=FALSE) and('" + actief.getLogin() + "'=R.login);");
 
     public Overzichtreviewsklant() {
         initComponents();

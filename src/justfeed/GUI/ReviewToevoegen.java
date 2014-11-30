@@ -19,7 +19,7 @@ public class ReviewToevoegen extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
-    DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_review WHERE (login = '" + actief.getLogin() + "') AND (status = TRUE);");
+    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
         
     /**
      * Creates new form ReviewToevoegen
@@ -28,7 +28,7 @@ public class ReviewToevoegen extends javax.swing.JFrame {
         initComponents();
         tblProductenVoorReview.setModel(t);
     }
-    public static ReviewToevoegen getInstance(Profielklant profielklant)
+     public static ReviewToevoegen getInstance(Profielklant profielklant)
     {
         myCaller = profielklant;
         return toevoegenReview;
