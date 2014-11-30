@@ -296,7 +296,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="(vereiste syntax: categorie1;categorie2;categorie3;...;)"/>
+        <Property name="text" type="java.lang.String" value="(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLeveringsgebied">

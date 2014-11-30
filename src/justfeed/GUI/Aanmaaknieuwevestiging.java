@@ -126,7 +126,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
 
         jLabel9.setText("Leveringsgebied(en):");
 
-        jLabel10.setText("(vereiste syntax: categorie1;categorie2;categorie3;...;)");
+        jLabel10.setText("(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)");
 
         jMenuBar2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -300,7 +300,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
             int postcode = Integer.parseInt(txtPostcode.getText());
             int huisnummer = Integer.parseInt(txtHuisnummer.getText());
             if(d.getPlaatsnummer(gemeente, postcode) == 0){
-                JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente stemmen niet overeen. Probeer opnieuw.");
+                JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente van uw vestiging stemmen niet overeen. Probeer opnieuw.");
                 txtPostcode.setText("");
                 txtGemeente.setText("");
                 }
@@ -309,16 +309,16 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 double leveringskosten = Double.parseDouble(txtLeveringskosten.getText());
                 Vestiging ves = new Vestiging(straat,huisnummer,leveringskosten, plaatsnummer, takeAwayNaam, vestigingsID);
                 d.addVestiging(ves);
-                /*int i = 0;
+                int i = 0;
                 while (i>=0 && i <(stringlevgebied.length()-1)) { 
-                String postcode = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
-                double postcode2 = Double.parseDouble(postcode.getText());
+                String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+                String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
+                int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
+                String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));               
+                int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
+                d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, ves);
                 stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
-                String gemeente = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
-                int plaatsnummer = d.getPlaatsnummer(gemeente, postcode2);
-                d.addLeveringsgebiedToTake_Away(plaatsnummer, ves);
-                stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
-                }*/
+                }
                 JOptionPane.showMessageDialog(null,"De vestiging werd succesvol toegevoegd.");
                 vestiging.hide();
                 myCaller.show();
