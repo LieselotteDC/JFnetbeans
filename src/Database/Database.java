@@ -1717,16 +1717,22 @@ public class Database {
         ArrayList<Hot_Item> gecumuleerdeHoeveelheidPerTakeaway = new ArrayList<>();
         String start = DatumFinder.getEersteDag(maand, jaar);
         String eind = DatumFinder.getLaatsteDag(maand, jaar);
+        System.out.println(start + "  " + eind);
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
+                System.out.println("eerste for ok");
                 for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
-                    String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B, tbl_order O WHERE (B.productID = " + p.getProductID() + ") and (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
+                    System.out.println("tweede for ok");
+                    String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B JOIN tbl_menu M ON (B.menuID=M.menuID) JOIN tbl_order O ON (M.orderID=O.orderID) WHERE (B.productID = " + p.getProductID() + ") AND (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
                     ResultSet srs = getData(sql);
+                    System.out.println("sql ok");
                     if (srs.next()) {
                         int productID = p.getProductID();
+                        System.out.println(productID);
                         int gecumuleerd = srs.getInt("gecumuleerd");
+                        System.out.println(gecumuleerd);
                         gecumuleerdeHoeveelheidPerTakeaway.add(new Hot_Item(gecumuleerd, productID));
-                    }          
+                    }
                 }
                 Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
                 hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
@@ -1849,12 +1855,14 @@ public class Database {
                     String takeaway = ta.getNaam();
                     int avgReview = srs.getInt("avgReview");
                     scorePerTakeaway.add(new Users_Choice(avgReview, takeaway));
+                    
 
                 }
             }
             this.closeConnection();
             Collections.sort(scorePerTakeaway);
-            //in het geval dat bestseller en users choice dezelfde take-away toewijzen
+            //in het geval dat bestseller en users choice dezelfde take-away toewijzen, stel nu dat er maar 1 TA in het systeem zit dan kan dit een error geven
+            //moet ik dit oplossen? of laten we dit zo? kan oplgelost worden met getsize.
             Bestseller actieveBestseller = this.getBestseller();
             Users_Choice usersChoice1 = new Users_Choice(maand, scorePerTakeaway.get(0).getBeoordeling(), scorePerTakeaway.get(0).getTakeawayNaam());
             Users_Choice usersChoice2 = new Users_Choice(maand, scorePerTakeaway.get(1).getBeoordeling(), scorePerTakeaway.get(1).getTakeawayNaam());

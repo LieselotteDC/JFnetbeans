@@ -160,7 +160,7 @@ public class AanmaakAward extends javax.swing.JFrame {
             d.undoVisualisationAwards();
             d.deleteAllAwards();
             d.addAwardBestseller(maand, jaar);
-            //d.addAwardHotItem(maand, jaar);
+            d.addAwardHotItem(maand, jaar);
             d.addAwardUsersChoice(maand);
             d.addAwardJustFeeder(maand);
             d.doVisualisationAwards();
