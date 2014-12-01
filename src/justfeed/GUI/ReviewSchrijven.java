@@ -172,11 +172,11 @@ public class ReviewSchrijven extends javax.swing.JFrame {
             }
          }
          else{
-             Double score2 = Double.parseDouble(score);
-             //CONSTRUCTOR NOG AANPASSEN: tussen login en tekst moet nog productID komen
-             //Review nieuweReview = new Review(score2, actief.getLogin(), reviewTekst );
-            // d.invullenReview(actief, nieuweReview);
-             JOptionPane.showMessageDialog(null, "Uw review werd succesvol toegevoegd.");
+            Double score2 = Double.parseDouble(score);
+            //CONSTRUCTOR NOG AANPASSEN: tussen login en tekst moet nog productID komen
+            //Review nieuweReview = new Review(score2, actief.getLogin(), reviewTekst );
+            //d.invullenReview(actief, nieuweReview);
+            JOptionPane.showMessageDialog(null, "Uw review werd succesvol toegevoegd.");
          }
     }//GEN-LAST:event_btnToevoegenReviewActionPerformed
 
