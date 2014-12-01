@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.ArrayList;
+
 public class Orderverwerking {
 
     private int productID;
@@ -15,7 +17,7 @@ public class Orderverwerking {
         this.productNaam = null;
         this.type = null;
         this.prijs = 0;
-        this.hoeveelheid=0;
+        this.hoeveelheid = 0;
         this.takeawayNaam = null;
         this.vestigingsID = null;
     }
@@ -30,6 +32,17 @@ public class Orderverwerking {
         this.vestigingsID = vestigingsID;
     }
 
+    public ArrayList<Orderverwerking> verdelingBesteldeProducten(ArrayList<Orderverwerking> besteldeProducten, String takeaway, String vestiging) {
+
+        ArrayList<Orderverwerking> menu = new ArrayList<>();
+        for (Orderverwerking o : besteldeProducten) {
+            if ((o.takeawayNaam.equalsIgnoreCase(takeaway)) && o.vestigingsID.equalsIgnoreCase(vestiging)) {
+                menu.add(o);
+            }
+        }
+        return menu;
+    }
+
     public int getHoeveelheid() {
         return hoeveelheid;
     }
@@ -37,7 +50,6 @@ public class Orderverwerking {
     public void setHoeveelheid(int hoeveelheid) {
         this.hoeveelheid = hoeveelheid;
     }
-
 
     public int getProductID() {
         return productID;

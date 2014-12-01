@@ -1897,7 +1897,37 @@ public class Database {
         }
 
     }
+    //METHODES IVM MENU'S
+
+    private void addMenu(Menu m, int orderID) 
+    {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("INSERT INTO tbl_menu VALUES (null,"+m.getMenuprijs()+","+orderID+",'"+m.getTakeawayNaam()+"','"+m.getVestiging()+"');");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
 
     //METHODES IVM ORDERS
-    //METHODES IVM MENU'S
+    public void addOrder(Order o, ArrayList<Menu> menus) {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("INSERT INTO tbl_order VALUES (null," + o.getTotaalPrijs() + ",'" + o.getDatum() + "','" + o.getStraat() + "'," + o.getHuisnummer() + "," + o.getPlaatsnummer() + ",'" + o.getLogin() + "',FALSE);");
+            String sql = "SELECT LAST_INSERT_ID() as;";
+            ResultSet srs = stmt.executeQuery(sql);
+            int lastInsert = srs.getInt("LAST_INSERT_ID()");
+            for (Menu menu : menus) {
+                this.addMenu(menu, lastInsert);
+            }
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
 }

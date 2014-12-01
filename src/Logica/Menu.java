@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.ArrayList;
+
 public class Menu {
 
     private int menuID;
@@ -30,6 +32,29 @@ public class Menu {
         this.orderID = orderID;
         this.takeawayNaam = takeawayNaam;
         this.vestiging = vestiging;
+    }
+
+    public Menu(double menuprijs, String takeawayNaam, String vestiging) {
+        this.menuID = 0;
+        this.menuprijs = menuprijs;
+        this.orderID = 0;
+        this.takeawayNaam = takeawayNaam;
+        this.vestiging = vestiging;
+    }
+
+    public Menu berekenMenuprijs(ArrayList<Orderverwerking> besteldeProductenMenu) {
+        if (!(besteldeProductenMenu.isEmpty())) {
+            String takeaway1 = besteldeProductenMenu.get(0).getTakeawayNaam();
+            String vestiging1 = besteldeProductenMenu.get(0).getVestigingsID();
+            double menuprijs1 = 0;
+            for (Orderverwerking o : besteldeProductenMenu) {
+                menuprijs1 += o.getHoeveelheid() * o.getPrijs();
+            }
+            Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
+            return menu;
+        } else {
+            return null;
+        }
     }
 
     public String getVestiging() {
