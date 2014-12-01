@@ -334,6 +334,8 @@ public class RegistratieKlant extends javax.swing.JFrame {
         Klant k = new Klant(login, paswoord, email, naam, voornaam);
         d.addKlant(k);
         d.addKortingRegistratie(k);
+        MailingClass mail=new MailingClass();
+        mail.sendRegistratiemail(k);
         JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol aangemaakt");
         LoginKlant loginscherm = LoginKlant.getInstance(registratie);
 //      profiel.setSize(300,300);

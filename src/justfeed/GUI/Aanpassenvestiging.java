@@ -257,7 +257,7 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
             //ophalen welke vestiging er achter de ingevoerde naam + id zit 
             Vestiging aangepasteVestiging = new Vestiging(nieuweStraat, nieuwHuisnummer, nieuweLeveringskosten, plaatsnummer, huidigeTakeAwayNaam, huidigID);
             d.updateVestiging(huidigeVestiging, aangepasteVestiging);
-            //methode die alle leveringsgebieden van aangepaste vestiging verwijdert
+            d.deleteLeveringsgebiedenFromVestiging(huidigeVestiging);
             //nieuwe ingevoerde leveringsgebieden erinsteken mbv loop die je bij aanmaakvestiging gebruikt
             int i = 0;
             while (i>=0 && i <(stringlevgebied.length()-1)) { 

@@ -33,6 +33,12 @@ public class Profielklant extends javax.swing.JFrame {
         return profiel;
     }
     
+        public static Profielklant getInstance(Contact caller)
+    {
+        myCaller = caller;
+        return profiel;
+    }
+    
     public static Profielklant getInstance(RegistratieKlant caller)
     {
         myCaller = caller;

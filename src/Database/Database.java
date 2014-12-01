@@ -547,11 +547,11 @@ public class Database {
         }
     }
 
-    public void deleteLeveringsgebiedFromVestiging(int plaatsnummer, Vestiging ves) {
+    public void deleteLeveringsgebiedenFromVestiging(Vestiging ves) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='" + ves.getVestigingsID() + "') and (naam='" + ves.getTakeawayNaam() + "') and(plaatsnummer=" + plaatsnummer + ");");
+            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='" + ves.getVestigingsID() + "') and (naam='" + ves.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1717,15 +1717,11 @@ public class Database {
         ArrayList<Hot_Item> gecumuleerdeHoeveelheidPerTakeaway = new ArrayList<>();
         String start = DatumFinder.getEersteDag(maand, jaar);
         String eind = DatumFinder.getLaatsteDag(maand, jaar);
-        System.out.println(start + "  " + eind);
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
-                System.out.println("eerste for ok");
                 for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
-                    System.out.println("tweede for ok");
                     String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B JOIN tbl_menu M ON (B.menuID=M.menuID) JOIN tbl_order O ON (M.orderID=O.orderID) WHERE (B.productID = " + p.getProductID() + ") AND (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
                     ResultSet srs = getData(sql);
-                    System.out.println("sql ok");
                     if (srs.next()) {
                         int productID = p.getProductID();
                         System.out.println(productID);
@@ -1855,7 +1851,6 @@ public class Database {
                     String takeaway = ta.getNaam();
                     int avgReview = srs.getInt("avgReview");
                     scorePerTakeaway.add(new Users_Choice(avgReview, takeaway));
-                    
 
                 }
             }
