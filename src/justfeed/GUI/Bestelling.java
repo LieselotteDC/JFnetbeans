@@ -168,11 +168,6 @@ public class Bestelling extends javax.swing.JFrame {
             }
         ));
         tblSuggesties.getTableHeader().setReorderingAllowed(false);
-        tblSuggesties.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSuggestiesMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(tblSuggesties);
 
         buttonGroup1.add(rbtnType);
@@ -387,10 +382,6 @@ public class Bestelling extends javax.swing.JFrame {
         txtEenheidsPrijs.setEnabled(false);
         spnrHoeveelheid.setValue(0);
     }//GEN-LAST:event_tblKeuzesMouseClicked
-
-    private void tblSuggestiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuggestiesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblSuggestiesMouseClicked
 
     private void rbtnTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTypeMouseClicked
         DefaultComboBoxModel c = d.initialiseerCombobox("SELECT type FROM tbl_product;", "type");
