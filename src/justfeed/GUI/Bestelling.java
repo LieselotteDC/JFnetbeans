@@ -391,6 +391,14 @@ public class Bestelling extends javax.swing.JFrame {
         }
         orderZonderKorting.setTotaalPrijs(totaalprijs);
         
+        //bovenaan de file
+        /*Order orderMetKorting = new Order();
+        double totaalprijs = 0;
+        for(Menu m:berekendeMenus){
+            totaalprijs += m.getMenuprijs();
+        }
+        orderMetKorting.setTotaalPrijs(totaalprijs);
+        */
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
         bestellingOverzicht.pack();
         bestelling.hide();

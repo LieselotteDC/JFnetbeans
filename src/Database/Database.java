@@ -1368,7 +1368,7 @@ public class Database {
         }
     }
 
-    public Boolean kortingEenmaligPeriodeBestaat(int code, String vestiging, String takeawayNaam, Klant kl) {
+    private Boolean kortingEenmaligPeriodeBestaat(int code, String vestiging, String takeawayNaam, Klant kl) {
         try {
             String sql = "SELECT * FROM tbl_kortingPeriode WHERE kortingscode = (kortingscode = '" + code + "') and (vestiging = '" + vestiging + "') and (naam = '" + takeawayNaam + "')and (login = '" + kl.getLogin() + "');";
             ResultSet srs = getData(sql);
@@ -1914,7 +1914,6 @@ public class Database {
     }
 
     //deze methode oproepen bij het ingeven van kortingscodes niet, de bestaat bij methodes korting
-
     public boolean kortingEenmaligBruikbaarBijMenu(int code, ArrayList<Menu> berekendeMenus, Klant kl) {
         boolean status = false;
         for (Menu menu : berekendeMenus) {
