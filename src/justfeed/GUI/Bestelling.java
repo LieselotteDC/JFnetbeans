@@ -358,6 +358,9 @@ public class Bestelling extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
             model.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
                 txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});
+            /*DefaultTableModel model2 = (DefaultTableModel) tblSuggesties.getModel();
+            model2.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
+                txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});*/
             int productID = Integer.parseInt(txtProductID.getText());
             Product p = d.getProduct(productID);
             }
