@@ -72,6 +72,7 @@ public static AanmaakNieuwProduct getInstance(AanpassenProduct aangepastproduct)
         jLabel1.setText("Voeg het nieuwe product toe");
 
         btnToevoegenProduct.setBackground(new java.awt.Color(0, 0, 0));
+        btnToevoegenProduct.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnToevoegenProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnToevoegenProduct.setText("Toevoegen");
         btnToevoegenProduct.addActionListener(new java.awt.event.ActionListener() {

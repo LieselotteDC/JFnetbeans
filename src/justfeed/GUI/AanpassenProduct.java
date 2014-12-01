@@ -71,6 +71,7 @@ public class AanpassenProduct extends javax.swing.JFrame {
         jLabel7.setText("Nieuwe eenheidsprijs");
 
         btnProductAanpassen.setBackground(new java.awt.Color(0, 0, 0));
+        btnProductAanpassen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnProductAanpassen.setForeground(new java.awt.Color(255, 255, 255));
         btnProductAanpassen.setText("Aanpassen");
         btnProductAanpassen.addActionListener(new java.awt.event.ActionListener() {

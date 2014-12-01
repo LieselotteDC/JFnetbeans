@@ -54,6 +54,9 @@ public class BestellingBevestiging extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("Bedankt voor uw bestelling!");
 
+        btnHerinneringReview.setBackground(new java.awt.Color(0, 0, 0));
+        btnHerinneringReview.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnHerinneringReview.setForeground(new java.awt.Color(255, 255, 255));
         btnHerinneringReview.setText("OK");
         btnHerinneringReview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

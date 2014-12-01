@@ -48,10 +48,15 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Verwijderen Take-Away");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Naam van de te verwijderen take-away:");
 
+        txtJAVerwijderTakeAway.setBackground(new java.awt.Color(0, 0, 0));
+        txtJAVerwijderTakeAway.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtJAVerwijderTakeAway.setForeground(new java.awt.Color(255, 255, 255));
         txtJAVerwijderTakeAway.setText("Ja, ik weet het zeker");
         txtJAVerwijderTakeAway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +64,9 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
             }
         });
 
+        txtNEEVerwijderTakeAway.setBackground(new java.awt.Color(0, 0, 0));
+        txtNEEVerwijderTakeAway.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtNEEVerwijderTakeAway.setForeground(new java.awt.Color(255, 255, 255));
         txtNEEVerwijderTakeAway.setText("Nee");
         txtNEEVerwijderTakeAway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,32 +83,31 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(43, 43, 43))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtJAVerwijderTakeAway)
-                                .addGap(32, 32, 32)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNEEVerwijderTakeAway)
-                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(43, 43, 43)
+                        .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtJAVerwijderTakeAway)
+                .addGap(18, 18, 18)
+                .addComponent(txtNEEVerwijderTakeAway)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addGap(42, 42, 42)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtJAVerwijderTakeAway)
                     .addComponent(txtNEEVerwijderTakeAway))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         pack();

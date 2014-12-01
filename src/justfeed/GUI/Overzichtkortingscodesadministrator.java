@@ -100,8 +100,10 @@ public class Overzichtkortingscodesadministrator extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblRgKorting);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Registratie kortingscode");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Take-Away Boss kortingscode");
 
         tblRvKorting.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,8 +116,10 @@ public class Overzichtkortingscodesadministrator extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tblRvKorting);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Just-Feed Boss kortingscode");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Review kortingscode");
 
         tblJFBKorting.setModel(new javax.swing.table.DefaultTableModel(
@@ -128,6 +132,7 @@ public class Overzichtkortingscodesadministrator extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tblJFBKorting);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Eenmalige Unieke Actie kortingscode");
 
         tblEUAKorting.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,6 +145,7 @@ public class Overzichtkortingscodesadministrator extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(tblEUAKorting);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Periodieke Unieke Actie kortingscode");
 
         tblPUAKorting.setModel(new javax.swing.table.DefaultTableModel(

@@ -46,6 +46,9 @@ public class Commissieberekening extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnCommissieberekening.setBackground(new java.awt.Color(0, 0, 0));
+        btnCommissieberekening.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCommissieberekening.setForeground(new java.awt.Color(255, 255, 255));
         btnCommissieberekening.setText("Bereken de commissie");
         btnCommissieberekening.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +69,7 @@ public class Commissieberekening extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCommissie);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Commissieberekening");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,7 +93,7 @@ public class Commissieberekening extends javax.swing.JFrame {
                 .addComponent(btnCommissieberekening)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();

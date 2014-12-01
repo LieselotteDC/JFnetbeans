@@ -73,6 +73,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblOverzichtBestelling);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Totaalbedrag:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

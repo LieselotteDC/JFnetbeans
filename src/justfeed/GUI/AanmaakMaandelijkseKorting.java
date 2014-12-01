@@ -92,7 +92,7 @@ public class AanmaakMaandelijkseKorting extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel7.setText("*Verplicht");
+        jLabel7.setText("* Verplicht");
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
 

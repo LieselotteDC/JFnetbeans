@@ -64,17 +64,23 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Rapport met stand van zaken opvragen");
 
         comboboxInhoud.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Verkopen", "Lopende orders", "Lopende unieke actie kortingscodes" }));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inhoud rapport");
 
+        lblVestiging.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblVestiging.setText("Selecteer de gewenste vestiging:");
 
+        lblTakeAway.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTakeAway.setText("Kies de betreffende take-away:");
 
+        btnRapportMaken.setBackground(new java.awt.Color(0, 0, 0));
+        btnRapportMaken.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnRapportMaken.setForeground(new java.awt.Color(255, 255, 255));
         btnRapportMaken.setText("Rapport maken");
         btnRapportMaken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +88,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Genereer rapport:");
 
         buttonGroup1.add(rbtnTakeAway);
@@ -135,7 +142,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
                             .addComponent(lblVestiging)
                             .addComponent(jLabel2)
                             .addComponent(lblTakeAway))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboboxInhoud, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

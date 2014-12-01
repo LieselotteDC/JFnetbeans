@@ -103,8 +103,10 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Gemeente:");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Leveringsgebied(en):");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel10.setText("(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)");
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));

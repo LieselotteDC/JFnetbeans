@@ -56,7 +56,7 @@ public class Contact extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Contact");
 
         jLabel2.setText("Heeft u problemen met het aanpassen van uw gegevens, met onze zoekfunctie,");
@@ -67,12 +67,16 @@ public class Contact extends javax.swing.JFrame {
 
         jLabel5.setText("Het Just-Feed team staat steeds ter uwer beschikking.");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Omschrijving van uw probleem:");
 
         txtProbleem.setColumns(20);
         txtProbleem.setRows(5);
         jScrollPane1.setViewportView(txtProbleem);
 
+        btnVerzendEmail.setBackground(new java.awt.Color(0, 0, 0));
+        btnVerzendEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnVerzendEmail.setForeground(new java.awt.Color(255, 255, 255));
         btnVerzendEmail.setText("Verzend e-mail");
         btnVerzendEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +90,7 @@ public class Contact extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Onderwerp:");
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
@@ -137,11 +142,11 @@ public class Contact extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(txtonderwerp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtonderwerp, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)

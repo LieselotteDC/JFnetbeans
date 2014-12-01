@@ -180,12 +180,7 @@ private static final BestellingAfleveradres adres = new BestellingAfleveradres()
                 }
             else{
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
-                //if(controle of plaatsnummer overeenkomt met 1 van de plaatsnummers die horen bij elk van de takeaways waarbij wordt besteld){
-                //JOptionPane.showMessageDialog(null, "De take-aways waar u bij wil bestellen leveren niet op het ingevoerde adres. Probeer opnieuw.")
-                //}
-                //else{
-                //ga naar afrekenscherm
-                //}
+                Order order = new Order();
             }
        }
        BestellingFactuur factuur = BestellingFactuur.getInstance(adres);

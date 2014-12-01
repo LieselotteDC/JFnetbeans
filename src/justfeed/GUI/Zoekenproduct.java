@@ -53,6 +53,7 @@ public class Zoekenproduct extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Zoeken op gerecht ");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Naam product:");
 
         btnNaarZoekresultatenProduct.setBackground(new java.awt.Color(0, 0, 0));
@@ -77,6 +78,9 @@ public class Zoekenproduct extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblZoekenProduct);
 
+        btnZoeken.setBackground(new java.awt.Color(0, 0, 0));
+        btnZoeken.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnZoeken.setForeground(new java.awt.Color(255, 255, 255));
         btnZoeken.setText("Zoeken");
         btnZoeken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

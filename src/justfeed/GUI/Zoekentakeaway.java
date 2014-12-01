@@ -63,6 +63,9 @@ public class Zoekentakeaway extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblZoekenTakeaway);
 
+        btnZoeken.setBackground(new java.awt.Color(0, 0, 0));
+        btnZoeken.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnZoeken.setForeground(new java.awt.Color(255, 255, 255));
         btnZoeken.setText("Zoeken");
         btnZoeken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
