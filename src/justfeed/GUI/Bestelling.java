@@ -20,12 +20,16 @@ import javax.swing.table.DefaultTableModel;
  * @author liedcost
  */
 public class Bestelling extends javax.swing.JFrame {
-   private static final Bestelling bestelling = new Bestelling();
+
+    private static final Bestelling bestelling = new Bestelling();
     public static JFrame myCaller;
     public Database d = new Database();
-    
+
     public Klant actief = LoginKlant.getInstance().getActief();
-    
+    ArrayList<Orderverwerking> besteldeProducten = new ArrayList<>();
+    ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
+    Order orderZonderKorting = new Order(); // ook meegegeven worden
+
     //String[] columNames = new String[5];
     //Object data [][] = null;
     /**
@@ -33,27 +37,22 @@ public class Bestelling extends javax.swing.JFrame {
      */
     public Bestelling() {
         initComponents();
-       
-        
+
     }
     //private String[] columnNames = {"productID", "naam", "type", "eenheidsprijs", "hoeveelheid"};
     //DefaultTableModel table = new DefaultTableModel(columnNames, 0);
-   
 
-    
-   /*public void addRow(String productID, String naam, String type, String eenheidsprijs, String hoeveelheid)
-    {
-        Object [] row = new Object [5];
-        row[0] = productID;
-        row[1] = naam;
-        row[2] = type;
-        row[3] = eenheidsprijs;
-        row[4] = hoeveelheid;
-        //table.addRow(row);
-    }*/
- 
-    public static Bestelling getInstance(Profielklant caller)
-    {
+    /*public void addRow(String productID, String naam, String type, String eenheidsprijs, String hoeveelheid)
+     {
+     Object [] row = new Object [5];
+     row[0] = productID;
+     row[1] = naam;
+     row[2] = type;
+     row[3] = eenheidsprijs;
+     row[4] = hoeveelheid;
+     //table.addRow(row);
+     }*/
+    public static Bestelling getInstance(Profielklant caller) {
         myCaller = caller;
         return bestelling;
     }
@@ -376,58 +375,72 @@ public class Bestelling extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBestellingPlaatsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestellingPlaatsenActionPerformed
+        Orderverwerking o = new Orderverwerking();
+        Menu menu = new Menu();
+        double totaalprijs = 0;
+
+        for (Take_Away ta : d.getAlleTakeaways()) {
+            for (Vestiging v : d.getAlleVestigingen(ta.getNaam())) {
+                ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, v.getTakeawayNaam(), v.getVestigingsID());
+                berekendeMenus.add(menu.berekenMenuprijs(productenPerVestiging));
+            }
+        }
+        for (Menu m : berekendeMenus) {
+
+            totaalprijs += m.getMenuprijs();
+        }
+        orderZonderKorting.setTotaalPrijs(totaalprijs);
+        
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
-            bestellingOverzicht.pack();
-            bestelling.hide();
-            bestellingOverzicht.show();
-            bestellingOverzicht.setLocationRelativeTo(null);
+        bestellingOverzicht.pack();
+        bestelling.hide();
+        bestellingOverzicht.show();
+        bestellingOverzicht.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnBestellingPlaatsenActionPerformed
 
     private void btnToevoegenAanBestellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenAanBestellingActionPerformed
         /*columNames = new String[] {"productID","naam","type","eenheidsprijs","hoeveelheid"};
-        data = new Object[1][5];
-        int i = 0;
-        data [i][0] = txtProductID.getText();
-        data [i][1] = txtProductNaam.getText();
-        data [i][2] = txtType.getText();
-        data [i][3] = txtEenheidsPrijs.getText();
-        data [i][4] = txtHoeveelheid.getText();
-        tblBestelling.setModel(new DefaultTableModel(data, columNames));
-        i++;*/
+         data = new Object[1][5];
+         int i = 0;
+         data [i][0] = txtProductID.getText();
+         data [i][1] = txtProductNaam.getText();
+         data [i][2] = txtType.getText();
+         data [i][3] = txtEenheidsPrijs.getText();
+         data [i][4] = txtHoeveelheid.getText();
+         tblBestelling.setModel(new DefaultTableModel(data, columNames));
+         i++;*/
         //
         String productNaam = txtProductNaam.getText();
         String type = txtType.getText();
         //Double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
-        
+
         if (txtProductID.getText().isEmpty() || productNaam.isEmpty() || type.isEmpty()
-                || txtEenheidsPrijs.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Gelieve een product te selecteren.");
-        }
-        else{
-            if(Integer.parseInt(spnrHoeveelheid.getValue().toString()) > 0){
-            DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
-            model.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
-                txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue(),txtTakeAwayNaam.getText(),txtVestigingsID.getText()});
-            int productID = Integer.parseInt(txtProductID.getText());
-            double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
-            String hoeveelheid1 = spnrHoeveelheid.getValue().toString();
-            int hoeveelheid = Integer.parseInt(hoeveelheid1);
-            String takeAwayNaam = txtTakeAwayNaam.getText();
-            String vestigingsID = txtVestigingsID.getText();
-            Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
-            ArrayList<Orderverwerking> besteldeProducten = new ArrayList<>();
-            besteldeProducten.add(null);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Gelieve een geldige hoeveelheid in te voeren.");
+                || txtEenheidsPrijs.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Gelieve een product te selecteren.");
+        } else {
+            if (Integer.parseInt(spnrHoeveelheid.getValue().toString()) > 0) {
+                DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
+                model.addRow(new Object[]{txtProductID.getText(), txtProductNaam.getText(),
+                    txtType.getText(), txtEenheidsPrijs.getText(), spnrHoeveelheid.getValue(), txtTakeAwayNaam.getText(), txtVestigingsID.getText()});
+                int productID = Integer.parseInt(txtProductID.getText());
+                double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
+                String hoeveelheid1 = spnrHoeveelheid.getValue().toString();
+                int hoeveelheid = Integer.parseInt(hoeveelheid1);
+                String takeAwayNaam = txtTakeAwayNaam.getText();
+                String vestigingsID = txtVestigingsID.getText();
+                Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
+                //we hebben de initialisatie van de arratlist uit de methode gehaald omdat wij die moeten kunnen oproepen bij de knop bestelling aanmaken
+                besteldeProducten.add(null);
+            } else {
+                JOptionPane.showMessageDialog(null, "Gelieve een geldige hoeveelheid in te voeren.");
             }
         }
     }//GEN-LAST:event_btnToevoegenAanBestellingActionPerformed
- 
+
 
     private void tblKeuzesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKeuzesMouseClicked
         int row = tblKeuzes.getSelectedRow();
-        String tabel_click = (tblKeuzes.getModel().getValueAt(row,0).toString());
+        String tabel_click = (tblKeuzes.getModel().getValueAt(row, 0).toString());
         String sql = "select * from tbl_product where productID = '" + tabel_click + "' ";
         txtProductID.setText(d.bestelFormulier(sql, "productID"));
         txtProductID.setEnabled(false);
@@ -438,7 +451,7 @@ public class Bestelling extends javax.swing.JFrame {
         txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
         txtEenheidsPrijs.setEnabled(false);
         spnrHoeveelheid.setValue(0);
-        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row,5).toString());
+        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row, 5).toString());
         String sql2 = "select * from tbl_vestigingen where vestigingsID = '" + tabel_click2 + "' ";
         txtTakeAwayNaam.setText(d.bestelFormulier(sql2, "naam"));
         txtTakeAwayNaam.setEnabled(false);
@@ -454,24 +467,22 @@ public class Bestelling extends javax.swing.JFrame {
     private void btnZoekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekActionPerformed
         int postcode = Integer.parseInt(txtPostcode.getText());
         String gemeente = txtGemeente.getText();
-            if(d.getPlaatsnummer(gemeente, postcode) == 0){
-                JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente voor uw levering stemmen niet overeen. Probeer opnieuw.");
-                txtPostcode.setText("");
-                txtGemeente.setText("");
-                }
-            else{
-                int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
-                if (rbtnType.isSelected()){
+        if (d.getPlaatsnummer(gemeente, postcode) == 0) {
+            JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente voor uw levering stemmen niet overeen. Probeer opnieuw.");
+            txtPostcode.setText("");
+            txtGemeente.setText("");
+        } else {
+            int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
+            if (rbtnType.isSelected()) {
                 String gekozenType = combobox.getSelectedItem().toString();
-                DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.type = '" + gekozenType + "') AND (L.leveringsgebied= "+plaatsnummer+")");
+                DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.type = '" + gekozenType + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                 tblKeuzes.setModel(t);
-                }
-                else if(rbtnTakeAway.isSelected()){
+            } else if (rbtnTakeAway.isSelected()) {
                 String gekozenTakeAway = combobox.getSelectedItem().toString();
-                DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (B.naam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= "+plaatsnummer+")");
+                DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (B.naam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                 tblKeuzes.setModel(q);
-                }
             }
+        }
     }//GEN-LAST:event_btnZoekActionPerformed
 
     private void rbtnTakeAwayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTakeAwayMouseClicked
@@ -481,7 +492,7 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void tblSuggestiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuggestiesMouseClicked
         int row = tblSuggesties.getSelectedRow();
-        String tabel_click = (tblSuggesties.getModel().getValueAt(row,0).toString());
+        String tabel_click = (tblSuggesties.getModel().getValueAt(row, 0).toString());
         String sql = "select * from tbl_product where productID = '" + tabel_click + "' ";
         txtProductID.setText(d.bestelFormulier(sql, "productID"));
         txtProductID.setEnabled(false);
@@ -492,7 +503,7 @@ public class Bestelling extends javax.swing.JFrame {
         txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
         txtEenheidsPrijs.setEnabled(false);
         spnrHoeveelheid.setValue(0);
-        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row,5).toString());
+        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row, 5).toString());
         String sql2 = "select * from tbl_vestigingen where vestigingsID = '" + tabel_click2 + "' ";
         txtTakeAwayNaam.setText(d.bestelFormulier(sql2, "naam"));
         txtTakeAwayNaam.setEnabled(false);
