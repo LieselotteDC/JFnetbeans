@@ -94,6 +94,11 @@ public class Bestelling extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtPostcode = new javax.swing.JTextField();
         txtGemeente = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtTakeAwayNaam = new javax.swing.JTextField();
+        txtVestigingsID = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -159,6 +164,9 @@ public class Bestelling extends javax.swing.JFrame {
         tblBestelling.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblBestelling);
 
+        tblSuggesties.setBackground(new java.awt.Color(255, 153, 0));
+        tblSuggesties.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        tblSuggesties.setForeground(new java.awt.Color(255, 153, 0));
         tblSuggesties.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -202,6 +210,12 @@ public class Bestelling extends javax.swing.JFrame {
 
         jLabel8.setText("Gemeente waar moet worden geleverd:");
 
+        jLabel9.setText("Take-awaynaam");
+
+        jLabel10.setText("VestigingsID");
+
+        jLabel11.setText("Suggesties:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,49 +223,49 @@ public class Bestelling extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(rbtnTakeAway)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbtnType))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(130, 130, 130)
-                                .addComponent(btnBestellingPlaatsen))
+                                    .addComponent(rbtnType)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addComponent(btnToevoegenAanBestelling))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
+                                        .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel5)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel2)
                                                 .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3)
-                                                    .addComponent(jLabel2)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(jLabel4))
-                                                .addGap(51, 51, 51)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtProductNaam)
-                                                    .addComponent(txtType)
-                                                    .addComponent(txtEenheidsPrijs, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(72, 72, 72)))))))
+                                                .addComponent(jLabel10))
+                                            .addGap(57, 57, 57)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnToevoegenAanBestelling)
+                                    .addComponent(btnBestellingPlaatsen)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtEenheidsPrijs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                        .addComponent(txtType, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtProductNaam, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtProductID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtVestigingsID, javax.swing.GroupLayout.Alignment.TRAILING))))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnZoek)
                         .addGroup(layout.createSequentialGroup()
@@ -262,7 +276,7 @@ public class Bestelling extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtGemeente, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                                 .addComponent(txtPostcode)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,47 +298,54 @@ public class Bestelling extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnZoek))
-                .addGap(18, 18, 18)
+                    .addComponent(btnZoek)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtVestigingsID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtProductNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addGap(114, 114, 114))
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtProductNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtEenheidsPrijs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel5)
-                                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnToevoegenAanBestelling)))
-                        .addGap(262, 262, 262)
-                        .addComponent(btnBestellingPlaatsen)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEenheidsPrijs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)))))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addGap(142, 142, 142)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(btnToevoegenAanBestelling)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBestellingPlaatsen))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,6 +386,7 @@ public class Bestelling extends javax.swing.JFrame {
                 txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});
             int productID = Integer.parseInt(txtProductID.getText());
             Product p = d.getProduct(productID);
+            
             }
             else{
                 JOptionPane.showMessageDialog(null,"Gelieve een geldige hoeveelheid in te voeren.");
@@ -386,6 +408,12 @@ public class Bestelling extends javax.swing.JFrame {
         txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
         txtEenheidsPrijs.setEnabled(false);
         spnrHoeveelheid.setValue(0);
+        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row,5).toString());
+        String sql2 = "select * from tbl_vestigingen where vestigingsID = '" + tabel_click2 + "' ";
+        txtTakeAwayNaam.setText(d.bestelFormulier(sql2, "naam"));
+        txtTakeAwayNaam.setEnabled(false);
+        txtVestigingsID.setText(d.bestelFormulier(sql2, "vestigingsID"));
+        txtVestigingsID.setEnabled(false);
     }//GEN-LAST:event_tblKeuzesMouseClicked
 
     private void rbtnTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTypeMouseClicked
@@ -402,14 +430,15 @@ public class Bestelling extends javax.swing.JFrame {
                 txtGemeente.setText("");
                 }
             else{
+                int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
                 if (rbtnType.isSelected()){
                 String gekozenType = combobox.getSelectedItem().toString();
-                DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_product WHERE (type = '" + gekozenType + "');");
+                DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.type = '" + gekozenType + "') AND (L.leveringsgebied= "+plaatsnummer+")");
                 tblKeuzes.setModel(t);
                 }
                 else if(rbtnTakeAway.isSelected()){
                 String gekozenTakeAway = combobox.getSelectedItem().toString();
-                DefaultTableModel q = d.naarTabel("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';");
+                DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.naam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.naam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (B.naam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= "+plaatsnummer+")");
                 tblKeuzes.setModel(q);
                 }
             }
@@ -477,6 +506,8 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox combobox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -484,6 +515,7 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -498,6 +530,8 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtProductID;
     private javax.swing.JTextField txtProductNaam;
+    private javax.swing.JTextField txtTakeAwayNaam;
     private javax.swing.JTextField txtType;
+    private javax.swing.JTextField txtVestigingsID;
     // End of variables declaration//GEN-END:variables
 }
