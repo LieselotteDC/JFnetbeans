@@ -251,12 +251,26 @@ public class Bestelling extends javax.swing.JFrame {
         data [i][4] = txtHoeveelheid.getText();
         tblBestelling.setModel(new DefaultTableModel(data, columNames));
         i++;*/
-        DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
-        model.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
-            txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});
         int productID = Integer.parseInt(txtProductID.getText());
-        Product p = d.getProduct(productID);
+        String productNaam = txtProductNaam.getText();
+        String type = txtType.getText();
+        Double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
         
+        if (txtProductID.getText().isEmpty() || productNaam.isEmpty() || type.isEmpty()
+                || txtEenheidsPrijs.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Gelieve een product te selecteren.");
+        }
+        else{
+            if(Integer.parseInt(spnrHoeveelheid.getValue().toString()) > 0){
+            DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
+            model.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
+                txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});
+            Product p = d.getProduct(productID);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Gelieve een geldige hoeveelheid in te voeren.");
+            }
+        }
     }//GEN-LAST:event_btnToevoegenAanBestellingActionPerformed
  
 
