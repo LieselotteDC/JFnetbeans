@@ -26,7 +26,7 @@ public class ReviewToevoegen extends javax.swing.JFrame {
      */
     public ReviewToevoegen() {
         initComponents();
-        tblProductenVoorReview.setModel(t);
+        tblKeuzes.setModel(t);
     }
      public static ReviewToevoegen getInstance(Profielklant profielklant)
     {
@@ -44,8 +44,28 @@ public class ReviewToevoegen extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductenVoorReview = new javax.swing.JTable();
+        tblKeuzes = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtReviewID = new javax.swing.JTextField();
+        txtProductID = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtProductNaam = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtType = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtEenheidsPrijs = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtTakeAwayNaam = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        comboboxScore = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtBeoordeling = new javax.swing.JTextPane();
+        btnToevoegenReview = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblReviews = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         bntHomeknopProfielklant = new javax.swing.JMenu();
 
@@ -54,7 +74,7 @@ public class ReviewToevoegen extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Toevoegen review");
 
-        tblProductenVoorReview.setModel(new javax.swing.table.DefaultTableModel(
+        tblKeuzes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -65,10 +85,61 @@ public class ReviewToevoegen extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProductenVoorReview);
+        tblKeuzes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKeuzesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblKeuzes);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Overzicht van alle producten waarvan u een review kan schrijven:");
+
+        jLabel3.setText("reviewID:");
+
+        jLabel4.setText("productID:");
+
+        jLabel5.setText("productnaam:");
+
+        jLabel6.setText("type:");
+
+        jLabel7.setText("eenheidsprijs:");
+
+        jLabel8.setText("take-awaynaam:");
+
+        jLabel9.setText("score:");
+
+        comboboxScore.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5" }));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("beoordeling:");
+
+        jScrollPane2.setViewportView(txtBeoordeling);
+
+        btnToevoegenReview.setText("Voeg review toe");
+        btnToevoegenReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToevoegenReviewActionPerformed(evt);
+            }
+        });
+
+        tblReviews.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "reviewID", "productID", "productnaam", "type", "eenheidsprijs", "take-awaynaam", "score", "beoordeling"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblReviews);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -93,23 +164,96 @@ public class ReviewToevoegen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel9))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(14, 14, 14)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtReviewID)
+                                                .addComponent(txtProductID)
+                                                .addComponent(txtProductNaam)
+                                                .addComponent(txtType)
+                                                .addComponent(txtEenheidsPrijs)
+                                                .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(comboboxScore, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)))
+                            .addComponent(btnToevoegenReview, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtReviewID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtProductNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEenheidsPrijs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(comboboxScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnToevoegenReview))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,12 +265,72 @@ public class ReviewToevoegen extends javax.swing.JFrame {
        toevoegenReview.hide();
        profiel.show();
        profiel.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_bntHomeknopProfielklantActionPerformed
 
     private void bntHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntHomeknopProfielklantMouseClicked
         toevoegenReview.hide();
         myCaller.show();
+        DefaultTableModel model = (DefaultTableModel)tblReviews.getModel();
+        model.setRowCount(0);
+        /*       for(int i = 0; i < tblReviews.getRowCount(); i++){
+           for (int j = 0; j <tblReviews.getColumnCount();j++){
+               tblReviews.setValueAt("",i,j);
+           }
+       }*/
     }//GEN-LAST:event_bntHomeknopProfielklantMouseClicked
+
+    private void btnToevoegenReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenReviewActionPerformed
+        String productNaam = txtProductNaam.getText();
+        String type = txtType.getText();
+        String score = comboboxScore.getSelectedItem().toString();
+        String reviewTekst = txtBeoordeling.getText();
+        String takeAwayNaam = txtTakeAwayNaam.getText();
+
+        if (txtReviewID.getText().isEmpty() || txtProductID.getText().isEmpty() || productNaam.isEmpty() || type.isEmpty()
+                || txtEenheidsPrijs.getText().isEmpty() ||txtTakeAwayNaam.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Gelieve een product te selecteren.");
+        } 
+        else {
+            if (!score.isEmpty() && !reviewTekst.isEmpty()) {
+                DefaultTableModel model = (DefaultTableModel) tblReviews.getModel();
+                model.addRow(new Object[]{txtReviewID.getText(), txtProductID.getText(), txtProductNaam.getText(),
+                    txtType.getText(), txtEenheidsPrijs.getText(), txtTakeAwayNaam.getText(), 
+                    comboboxScore.getSelectedItem().toString(), txtBeoordeling.getText()});
+                int reviewID = Integer.parseInt(txtReviewID.getText());
+                int score2 = Integer.parseInt(score);
+                int productID = Integer.parseInt(txtProductID.getText());
+                double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
+                Review review = new Review(reviewID, score2, reviewTekst);
+                d.invullenReview(actief, review);
+            } else {
+                JOptionPane.showMessageDialog(null, "Gelieve een score en beoordeling in te voeren.");
+            }
+        }
+    }//GEN-LAST:event_btnToevoegenReviewActionPerformed
+
+    private void tblKeuzesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKeuzesMouseClicked
+        int row = tblKeuzes.getSelectedRow();
+        String tabel_click = (tblKeuzes.getModel().getValueAt(row, 1).toString());
+        String sql = "select * from tbl_product where productID = '" + tabel_click + "' ";
+        txtProductID.setText(d.bestelFormulier(sql, "productID"));
+        txtProductID.setEnabled(false);
+        txtProductNaam.setText(d.bestelFormulier(sql, "naam"));
+        txtProductNaam.setEnabled(false);
+        txtType.setText(d.bestelFormulier(sql, "type"));
+        txtType.setEnabled(false);
+        txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
+        txtEenheidsPrijs.setEnabled(false);
+        String sql2 = "select * from tbl_biedtAan where productID = '" + tabel_click + "' ";
+        txtTakeAwayNaam.setText(d.bestelFormulier(sql, "naam"));
+        txtTakeAwayNaam.setEnabled(false);
+        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row, 0).toString());
+        String sql3 = "select * from tbl_review where reviewID = '" + tabel_click2 + "' ";
+        txtReviewID.setText(d.bestelFormulier(sql3, "reviewID"));
+        txtReviewID.setEnabled(false);
+        comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
+        txtBeoordeling.setText(d.bestelFormulier(sql3, "beoordeling"));
+    }//GEN-LAST:event_tblKeuzesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -165,10 +369,30 @@ public class ReviewToevoegen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu bntHomeknopProfielklant;
+    private javax.swing.JButton btnToevoegenReview;
+    private javax.swing.JComboBox comboboxScore;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProductenVoorReview;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tblKeuzes;
+    private javax.swing.JTable tblReviews;
+    private javax.swing.JTextPane txtBeoordeling;
+    private javax.swing.JTextField txtEenheidsPrijs;
+    private javax.swing.JTextField txtProductID;
+    private javax.swing.JTextField txtProductNaam;
+    private javax.swing.JTextField txtReviewID;
+    private javax.swing.JTextField txtTakeAwayNaam;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,8 @@
 
 package justfeed.GUI;
 
+import Logica.*;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -14,6 +16,9 @@ import javax.swing.JFrame;
  */
 public class BestellingOverzicht extends javax.swing.JFrame {
     
+    public Klant actief = LoginKlant.getInstance().getActief();
+    public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+    public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     private static final BestellingOverzicht bestellingOverzicht = new BestellingOverzicht();
     public static JFrame myCaller;
 

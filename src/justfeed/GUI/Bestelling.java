@@ -25,11 +25,13 @@ public class Bestelling extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
 
+
     public Klant actief = LoginKlant.getInstance().getActief();
     ArrayList<Orderverwerking> besteldeProducten = new ArrayList<>();
-    ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
-    Order orderZonderKorting = new Order(); // ook meegegeven worden
-
+    public ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
+    public Order orderZonderKorting = new Order(); // ook meegegeven worden
+    
+    
     //String[] columNames = new String[5];
     //Object data [][] = null;
     /**
@@ -37,7 +39,9 @@ public class Bestelling extends javax.swing.JFrame {
      */
     public Bestelling() {
         initComponents();
-
+    }
+     public static Bestelling getInstance(){
+        return bestelling;
     }
     //private String[] columnNames = {"productID", "naam", "type", "eenheidsprijs", "hoeveelheid"};
     //DefaultTableModel table = new DefaultTableModel(columnNames, 0);
@@ -604,4 +608,23 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JTextField txtType;
     private javax.swing.JTextField txtVestigingsID;
     // End of variables declaration//GEN-END:variables
+
+public ArrayList<Menu> getBerekendeMenus() {
+        return berekendeMenus;
+    }
+
+    public Order getOrderZonderKorting() {
+        return orderZonderKorting;
+    }
+    
+
+    public void setBerekendeMenus(ArrayList<Menu> berekendeMenus) {
+        this.berekendeMenus = berekendeMenus;
+    }
+
+    public void setOrderZonderKorting(Order orderZonderKorting) {
+        this.orderZonderKorting = orderZonderKorting;
+    }
+
+
 }

@@ -8,6 +8,7 @@ package justfeed.GUI;
 
 import Database.*;
 import Logica.*;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class BestellingKortingscode extends javax.swing.JFrame {
     
-    
+    public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     private static final BestellingKortingscode bestellingKortingscode = new BestellingKortingscode();
     public static JFrame myCaller;
      public Database d = new Database();
