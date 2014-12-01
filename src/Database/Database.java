@@ -366,6 +366,7 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("INSERT INTO tbl_takeaway VALUES ('" + tw.getNaam() + "','" + tw.getEmail() + "',0);");
+            stmt.executeUpdate("INSERT INTO tbl_hulpkorting VALUES ('" + tw.getNaam() + "',0);");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1278,7 +1279,7 @@ public class Database {
         }
     }
 
-    public Boolean kortingEenmaligUniekBestaat(int code, String vestiging, String takeawayNaam, Klant kl) {
+    private Boolean kortingEenmaligUniekBestaat(int code, String vestiging, String takeawayNaam, Klant kl) {
         try {
             String sql = "SELECT * FROM tbl_kortingEenmalig WHERE (kortingscode = " + code + ") and (vestiging = '" + vestiging + "') and (naam = '" + takeawayNaam + "')and (login = '" + kl.getLogin() + "') ;";
             ResultSet srs = getData(sql);
@@ -1897,19 +1898,49 @@ public class Database {
         }
 
     }
+
     //METHODES IVM MENU'S
 
-    private void addMenu(Menu m, int orderID) 
-    {
+    private void addMenu(Menu m, int orderID) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_menu VALUES (null,"+m.getMenuprijs()+","+orderID+",'"+m.getTakeawayNaam()+"','"+m.getVestiging()+"');");
+            stmt.executeUpdate("INSERT INTO tbl_menu VALUES (null," + m.getMenuprijs() + "," + orderID + ",'" + m.getTakeawayNaam() + "','" + m.getVestiging() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
         }
+    }
+
+    //deze methode oproepen bij het ingeven van kortingscodes niet, de bestaat bij methodes korting
+
+    public boolean kortingEenmaligBruikbaarBijMenu(int code, ArrayList<Menu> berekendeMenus, Klant kl) {
+        boolean status = false;
+        for (Menu menu : berekendeMenus) {
+            if (this.kortingEenmaligUniekBestaat(code, menu.getVestiging(), menu.getTakeawayNaam(), kl)) {
+                status = true;
+            }
+        }
+        return status;
+    }
+
+    public boolean kortingPeriodeBruikbaarBijMenu(int code, ArrayList<Menu> berekendeMenus, Klant kl) {
+        boolean status = false;
+        for (Menu menu : berekendeMenus) {
+            if (this.kortingEenmaligPeriodeBestaat(code, menu.getVestiging(), menu.getTakeawayNaam(), kl)) {
+                status = true;
+            }
+        }
+        return status;
+    }
+
+    public boolean kortingEenmaligBruikbaarBijMenu(int code, Menu menu, Klant kl) {
+        return (this.kortingEenmaligUniekBestaat(code, menu.getVestiging(), menu.getTakeawayNaam(), kl));
+    }
+
+    public boolean kortingPeriodeBruikbaarBijMenu(int code, Menu menu, Klant kl) {
+        return (this.kortingEenmaligPeriodeBestaat(code, menu.getVestiging(), menu.getTakeawayNaam(), kl));
     }
 
     //METHODES IVM ORDERS

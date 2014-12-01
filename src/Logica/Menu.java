@@ -1,5 +1,6 @@
 package Logica;
 
+import Database.Database;
 import java.util.ArrayList;
 
 public class Menu {
@@ -55,6 +56,32 @@ public class Menu {
         } else {
             return null;
         }
+    }
+    
+    public void toepassenUniekePeriodiekeKortingen(int code, ArrayList<Menu> berekendeMenus, Klant kl){
+        Database d=new Database();
+        for(Menu menu:berekendeMenus){
+            if(d.kortingPeriodeBruikbaarBijMenu(code, menu, kl)){
+              if(d.getKortingEenmaligPeriode(code).getBedrag()==0){
+                  menu.setMenuprijs(menuprijs*(1-d.getKortingEenmaligPeriode(code).getPercentage()));
+              }else{
+                  menu.setMenuprijs(menuprijs-d.getKortingEenmaligPeriode(code).getBedrag());
+              }       
+            }
+        }           
+    }
+    
+    public void toepassenUniekeEenmailgeKortingen(int code, ArrayList<Menu> berekendeMenus, Klant kl){
+        Database d=new Database();
+        for(Menu menu:berekendeMenus){
+            if(d.kortingEenmaligBruikbaarBijMenu(code, menu, kl)){
+              if(d.getKortingEenmaligPeriode(code).getBedrag()==0){
+                  menu.setMenuprijs(menuprijs*(1-d.getKortingEenmaligPeriode(code).getPercentage()));
+              }else{
+                  menu.setMenuprijs(menuprijs-d.getKortingEenmaligPeriode(code).getBedrag());
+              }       
+            }
+        }           
     }
 
     public String getVestiging() {
