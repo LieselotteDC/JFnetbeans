@@ -168,6 +168,11 @@ public class Bestelling extends javax.swing.JFrame {
             }
         ));
         tblSuggesties.getTableHeader().setReorderingAllowed(false);
+        tblSuggesties.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSuggestiesMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblSuggesties);
 
         buttonGroup1.add(rbtnType);
@@ -358,9 +363,6 @@ public class Bestelling extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
             model.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
                 txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});
-            /*DefaultTableModel model2 = (DefaultTableModel) tblSuggesties.getModel();
-            model2.addRow(new Object[]{txtProductID.getText(),txtProductNaam.getText(),
-                txtType.getText(),txtEenheidsPrijs.getText(),spnrHoeveelheid.getValue()});*/
             int productID = Integer.parseInt(txtProductID.getText());
             Product p = d.getProduct(productID);
             }
@@ -417,6 +419,21 @@ public class Bestelling extends javax.swing.JFrame {
         DefaultComboBoxModel f = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
         combobox.setModel(f);
     }//GEN-LAST:event_rbtnTakeAwayMouseClicked
+
+    private void tblSuggestiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuggestiesMouseClicked
+        int row = tblSuggesties.getSelectedRow();
+        String tabel_click = (tblSuggesties.getModel().getValueAt(row,0).toString());
+        String sql = "select * from tbl_product where productID = '" + tabel_click + "' ";
+        txtProductID.setText(d.bestelFormulier(sql, "productID"));
+        txtProductID.setEnabled(false);
+        txtProductNaam.setText(d.bestelFormulier(sql, "naam"));
+        txtProductNaam.setEnabled(false);
+        txtType.setText(d.bestelFormulier(sql, "type"));
+        txtType.setEnabled(false);
+        txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
+        txtEenheidsPrijs.setEnabled(false);
+        spnrHoeveelheid.setValue(0);
+    }//GEN-LAST:event_tblSuggestiesMouseClicked
 
     /**
      * @param args the command line arguments
