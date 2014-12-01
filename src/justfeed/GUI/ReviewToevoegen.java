@@ -46,6 +46,8 @@ public class ReviewToevoegen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductenVoorReview = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        bntHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,24 @@ public class ReviewToevoegen extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Overzicht van alle producten waarvan u een review kan schrijven:");
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        bntHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        bntHomeknopProfielklant.setText("Home");
+        bntHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        bntHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(bntHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +105,7 @@ public class ReviewToevoegen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,6 +114,19 @@ public class ReviewToevoegen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bntHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHomeknopProfielklantActionPerformed
+       Profielklant profiel = Profielklant.getInstance(toevoegenReview);
+       profiel.pack();
+       toevoegenReview.hide();
+       profiel.show();
+       profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_bntHomeknopProfielklantActionPerformed
+
+    private void bntHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntHomeknopProfielklantMouseClicked
+        toevoegenReview.hide();
+        myCaller.show();
+    }//GEN-LAST:event_bntHomeknopProfielklantMouseClicked
 
     /**
      * @param args the command line arguments
@@ -131,8 +164,10 @@ public class ReviewToevoegen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu bntHomeknopProfielklant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductenVoorReview;
     // End of variables declaration//GEN-END:variables

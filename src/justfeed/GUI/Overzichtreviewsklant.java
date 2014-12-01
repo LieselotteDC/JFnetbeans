@@ -68,6 +68,11 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
 
         btnHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
         btnHomeknopProfielklant.setText("Home");
+        btnHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopProfielklantMouseClicked(evt);
+            }
+        });
         btnHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeknopProfielklantActionPerformed(evt);
@@ -111,6 +116,11 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
        profiel.show();
        profiel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
+
+    private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
+      reviewsklant.hide();
+      myCaller.show();
+    }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**
      * @param args the command line arguments

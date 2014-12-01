@@ -50,10 +50,8 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtBedrag = new javax.swing.JTextField();
         txtPercentage = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -95,15 +93,11 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Percentage:");
 
-        jLabel6.setText("*");
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel8.setText("* Indien u bedrag invult, gelieve percentage op 0 te zetten.");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel9.setText("Indien u echter percentage invult, gelieve bedrag op 0 te zetten.");
-
-        jLabel10.setText("*");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 51, 51));
@@ -125,6 +119,11 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
 
         btnHomeknopAdministrator.setBackground(new java.awt.Color(255, 153, 0));
         btnHomeknopAdministrator.setText("Home");
+        btnHomeknopAdministrator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdministratorMouseClicked(evt);
+            }
+        });
         btnHomeknopAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeknopAdministratorActionPerformed(evt);
@@ -151,23 +150,19 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel15))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel13))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel14))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel15))))
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,7 +207,6 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,7 +216,6 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
                     .addComponent(txtPercentage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jLabel10)
                         .addComponent(jLabel14)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +226,7 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel11)))
                     .addComponent(aanmakenEenmaligeUniekeKorting, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,6 +290,15 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
        admini.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
+    private void btnHomeknopAdministratorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorMouseClicked
+        uniekeActie.hide();
+        myCaller.show();
+        txtTakeAwayNaam.setText("");
+        txtVestigingsNaam.setText("");
+        txtBedrag.setText("");
+        txtPercentage.setText("");
+    }//GEN-LAST:event_btnHomeknopAdministratorMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -337,7 +339,6 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
     private javax.swing.JButton aanmakenEenmaligeUniekeKorting;
     private javax.swing.JMenu btnHomeknopAdministrator;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -347,7 +348,6 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;

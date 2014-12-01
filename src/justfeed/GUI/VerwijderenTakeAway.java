@@ -45,6 +45,8 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
         txtTakeAwayNaam = new javax.swing.JTextField();
         txtJAVerwijderTakeAway = new javax.swing.JButton();
         txtNEEVerwijderTakeAway = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopAdmini = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,40 +76,60 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopAdmini.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopAdmini.setText("Home");
+        btnHomeknopAdmini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdminiMouseClicked(evt);
+            }
+        });
+        btnHomeknopAdmini.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnHomeknopAdminiKeyTyped(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopAdmini);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(43, 43, 43)
-                        .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtJAVerwijderTakeAway)
-                .addGap(18, 18, 18)
-                .addComponent(txtNEEVerwijderTakeAway)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTakeAwayNaam)))
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtJAVerwijderTakeAway)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNEEVerwijderTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(64, 64, 64)
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtJAVerwijderTakeAway)
-                    .addComponent(txtNEEVerwijderTakeAway))
-                .addGap(32, 32, 32))
+                    .addComponent(txtJAVerwijderTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNEEVerwijderTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
 
         pack();
@@ -149,6 +171,20 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
         admini.setLocationRelativeTo(null);
     }//GEN-LAST:event_txtNEEVerwijderTakeAwayActionPerformed
 
+    private void btnHomeknopAdminiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiKeyTyped
+       Administrator admini = Administrator.getInstance(verwijderenTakeAway);
+       admini.pack();
+       verwijderenTakeAway.hide();
+       admini.show();
+       admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopAdminiKeyTyped
+
+    private void btnHomeknopAdminiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiMouseClicked
+       verwijderenTakeAway.hide();
+       myCaller.show();
+       txtTakeAwayNaam.setText("");
+    }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -185,8 +221,10 @@ public class VerwijderenTakeAway extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopAdmini;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton txtJAVerwijderTakeAway;
     private javax.swing.JButton txtNEEVerwijderTakeAway;
     private javax.swing.JTextField txtTakeAwayNaam;

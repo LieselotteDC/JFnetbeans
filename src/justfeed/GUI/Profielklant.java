@@ -44,6 +44,31 @@ public class Profielklant extends javax.swing.JFrame {
         myCaller = caller;
         return profiel;
     }
+    public static Profielklant getInstance(ZoekenReview zoekenReview)
+    {
+        myCaller = zoekenReview;
+        return profiel;
+    }
+    public static Profielklant getInstance(Zoekencategorie zoekenCategorie)
+    {
+        myCaller = zoekenCategorie;
+        return profiel;
+    }
+    public static Profielklant getInstance(Zoekengemeente zoekenGemeente)
+    {
+        myCaller = zoekenGemeente;
+        return profiel;
+    }
+    public static Profielklant getInstance(Zoekentakeaway zoekenTakeaway)
+    {
+        myCaller = zoekenTakeaway;
+        return profiel;
+    }
+    public static Profielklant getInstance(Zoekenproduct zoekenProduct)
+    {
+        myCaller = zoekenProduct;
+        return profiel;
+    }
     
     public static Profielklant getInstance(Overzichtkortingscodesklant codesklant)
     {
@@ -63,6 +88,16 @@ public class Profielklant extends javax.swing.JFrame {
         public static Profielklant getInstance(BestellingFactuur factuur)
     {
         myCaller = factuur;
+        return profiel;
+    }
+        public static Profielklant getInstance(ReviewSchrijven schrijvenReview)
+    {
+        myCaller = schrijvenReview;
+        return profiel;
+    }
+        public static Profielklant getInstance(ReviewToevoegen toevoegenReview)
+    {
+        myCaller = toevoegenReview;
         return profiel;
     }
    
@@ -125,6 +160,9 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        jMenu2.setBackground(new java.awt.Color(255, 153, 0));
         jMenu2.setText("Aanpassen");
 
         jMenuItem2.setText("Gegevens");
@@ -145,6 +183,7 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu1.setBackground(new java.awt.Color(255, 153, 0));
         jMenu1.setText("Order plaatsen");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +201,7 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setBackground(new java.awt.Color(255, 153, 0));
         jMenu3.setText("Kortingscodes");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,6 +210,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(255, 153, 0));
         jMenu4.setText("Reviews");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -203,6 +244,7 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu5.setBackground(new java.awt.Color(255, 153, 0));
         jMenu5.setText("Zoeken");
 
         naarCategorie.setText("Categorie");
@@ -239,6 +281,7 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        naarContact.setBackground(new java.awt.Color(255, 153, 0));
         naarContact.setText("Contact");
         naarContact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

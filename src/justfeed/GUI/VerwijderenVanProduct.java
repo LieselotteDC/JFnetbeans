@@ -45,6 +45,8 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtProductID = new javax.swing.JTextField();
         btnNEEVerwijderProduct = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopAdmini = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +76,24 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopAdmini.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopAdmini.setText("Home");
+        btnHomeknopAdmini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdminiMouseClicked(evt);
+            }
+        });
+        btnHomeknopAdmini.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopAdminiActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopAdmini);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +103,7 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnJAVerwijderProduct)
-                        .addGap(34, 34, 34)
+                        .addGap(18, 18, 18)
                         .addComponent(btnNEEVerwijderProduct))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -97,14 +117,14 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtProductID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnJAVerwijderProduct)
-                    .addComponent(btnNEEVerwijderProduct))
+                    .addComponent(btnJAVerwijderProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNEEVerwijderProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
 
@@ -147,6 +167,20 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
         admini.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnNEEVerwijderProductActionPerformed
 
+    private void btnHomeknopAdminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiActionPerformed
+       Administrator admini = Administrator.getInstance(verwijderenVanProduct);
+        admini.pack();
+        verwijderenVanProduct.hide();
+        admini.show();
+        admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopAdminiActionPerformed
+
+    private void btnHomeknopAdminiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiMouseClicked
+        verwijderenVanProduct.hide();
+       myCaller.show();
+       txtProductID.setText("");
+    }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -183,10 +217,12 @@ public class VerwijderenVanProduct extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopAdmini;
     private javax.swing.JButton btnJAVerwijderProduct;
     private javax.swing.JButton btnNEEVerwijderProduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField txtProductID;
     // End of variables declaration//GEN-END:variables
 }

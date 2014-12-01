@@ -52,6 +52,8 @@ public class Zoekengemeente extends javax.swing.JFrame {
         tblZoekenGemeente = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         txtPostcode = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +97,24 @@ public class Zoekengemeente extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Postcode:");
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopProfielklant.setText("Home");
+        btnHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        btnHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,7 +161,7 @@ public class Zoekengemeente extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNaarZoekresultatenGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -182,6 +202,21 @@ public class Zoekengemeente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnZoekenActionPerformed
 
+    private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
+       Profielklant profiel = Profielklant.getInstance(zoekenGemeente);
+       profiel.pack();
+       zoekenGemeente.hide();
+       profiel.show();
+       profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
+
+    private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
+       zoekenGemeente.hide();
+       myCaller.show();
+       txtPostcode.setText("");
+       txtGemeente.setText("");
+    }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -218,11 +253,13 @@ public class Zoekengemeente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopProfielklant;
     private javax.swing.JButton btnNaarZoekresultatenGemeente;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblZoekenGemeente;
     private javax.swing.JTextField txtGemeente;

@@ -215,6 +215,13 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
     private void back(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back
         aangepastevestiging.hide();
         myCaller.show();
+        txtHuidigeNaam.setText("");
+        txtHuidigID.setText("");
+        txtLeveringskosten.setText("");
+        txtStraat.setText("");
+        txtHuisnummer.setText("");
+        txtPostcode.setText("");
+        txtGemeente.setText("");
     }//GEN-LAST:event_back
 
     private void toevoegenAanpassenVestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenAanpassenVestiging

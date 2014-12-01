@@ -47,6 +47,8 @@ public class Zoekenproduct extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekenProduct = new javax.swing.JTable();
         btnZoeken = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +90,24 @@ public class Zoekenproduct extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopProfielklant.setText("Home");
+        btnHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        btnHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +143,7 @@ public class Zoekenproduct extends javax.swing.JFrame {
                     .addComponent(btnZoeken))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNaarZoekresultatenProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -148,6 +168,20 @@ public class Zoekenproduct extends javax.swing.JFrame {
             txtProductnaam.requestFocus();
         }
     }//GEN-LAST:event_btnZoekenActionPerformed
+
+    private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
+         Profielklant profiel = Profielklant.getInstance(zoekenProduct);
+       profiel.pack();
+       zoekenProduct.hide();
+       profiel.show();
+       profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
+
+    private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
+       zoekenProduct.hide();
+       myCaller.show();
+       txtProductnaam.setText("");
+    }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**
      * @param args the command line arguments
@@ -186,10 +220,12 @@ public class Zoekenproduct extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopProfielklant;
     private javax.swing.JButton btnNaarZoekresultatenProduct;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblZoekenProduct;
     private javax.swing.JTextField txtProductnaam;

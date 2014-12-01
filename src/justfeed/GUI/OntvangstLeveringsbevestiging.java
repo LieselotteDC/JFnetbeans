@@ -44,6 +44,8 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtOrderID = new javax.swing.JTextField();
         btnLeveringsbevestiging = new javax.swing.JToggleButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopAdmini = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +54,12 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("OrderID waarvan u de leveringsbevestiging heeft ontvangen:");
+
+        txtOrderID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrderIDActionPerformed(evt);
+            }
+        });
 
         btnLeveringsbevestiging.setBackground(new java.awt.Color(0, 0, 0));
         btnLeveringsbevestiging.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -63,33 +71,57 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopAdmini.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopAdmini.setText("Home");
+        btnHomeknopAdmini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdminiMouseClicked(evt);
+            }
+        });
+        btnHomeknopAdmini.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopAdminiActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopAdmini);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnLeveringsbevestiging, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLeveringsbevestiging)))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(btnLeveringsbevestiging)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnLeveringsbevestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -108,6 +140,24 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
             txtOrderID.requestFocus();
         }*/
     }//GEN-LAST:event_btnLeveringsbevestigingActionPerformed
+
+    private void txtOrderIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrderIDActionPerformed
+
+    private void btnHomeknopAdminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiActionPerformed
+       Administrator admini = Administrator.getInstance(ontvangstleveringsbevestiging);
+       admini.pack();
+       ontvangstleveringsbevestiging.hide();
+       admini.show();
+       admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopAdminiActionPerformed
+
+    private void btnHomeknopAdminiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiMouseClicked
+       ontvangstleveringsbevestiging.hide();
+       myCaller.show();
+       txtOrderID.setText("");
+    }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -145,9 +195,11 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopAdmini;
     private javax.swing.JToggleButton btnLeveringsbevestiging;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField txtOrderID;
     // End of variables declaration//GEN-END:variables
 }

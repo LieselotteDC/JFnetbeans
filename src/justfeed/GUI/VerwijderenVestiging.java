@@ -46,6 +46,8 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         txtVestigingsNaam = new javax.swing.JTextField();
         btnJAVerwijderVestiging = new javax.swing.JButton();
         btnNEEVerwijderVestiging = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        bntHomeknopAdmini = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,10 +55,10 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         jLabel1.setText("Verwijderen vestiging");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Naam van take-away waarvan u vestiging wil verwijderen");
+        jLabel2.setText("Naam van take-away waarvan u vestiging wil verwijderen:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("VestigingsID van te verwijderen vestiging");
+        jLabel3.setText("VestigingsID van te verwijderen vestiging:");
 
         btnJAVerwijderVestiging.setBackground(new java.awt.Color(0, 0, 0));
         btnJAVerwijderVestiging.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -73,6 +75,24 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         btnNEEVerwijderVestiging.setForeground(new java.awt.Color(255, 255, 255));
         btnNEEVerwijderVestiging.setText("Nee");
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        bntHomeknopAdmini.setBackground(new java.awt.Color(255, 153, 0));
+        bntHomeknopAdmini.setText("Home");
+        bntHomeknopAdmini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntHomeknopAdminiMouseClicked(evt);
+            }
+        });
+        bntHomeknopAdmini.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntHomeknopAdminiActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(bntHomeknopAdmini);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,40 +100,40 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                            .addComponent(txtVestigingsNaam))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVestigingsNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1))
+                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnJAVerwijderVestiging)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNEEVerwijderVestiging)
-                .addGap(11, 11, 11))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtVestigingsNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnJAVerwijderVestiging)
-                    .addComponent(btnNEEVerwijderVestiging))
+                    .addComponent(btnJAVerwijderVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNEEVerwijderVestiging, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
         );
 
@@ -149,6 +169,21 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
                     
         }
     }//GEN-LAST:event_btnJAVerwijderVestigingActionPerformed
+
+    private void bntHomeknopAdminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHomeknopAdminiActionPerformed
+       Administrator admini = Administrator.getInstance(verwijderenVestiging);
+        admini.pack();
+        verwijderenVestiging.hide();
+        admini.show();
+        admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_bntHomeknopAdminiActionPerformed
+
+    private void bntHomeknopAdminiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntHomeknopAdminiMouseClicked
+       verwijderenVestiging.hide();
+        myCaller.show();
+        txtTakeAwayNaam.setText("");
+        txtVestigingsNaam.setText("");
+    }//GEN-LAST:event_bntHomeknopAdminiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -186,11 +221,13 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu bntHomeknopAdmini;
     private javax.swing.JButton btnJAVerwijderVestiging;
     private javax.swing.JButton btnNEEVerwijderVestiging;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField txtTakeAwayNaam;
     private javax.swing.JTextField txtVestigingsNaam;
     // End of variables declaration//GEN-END:variables

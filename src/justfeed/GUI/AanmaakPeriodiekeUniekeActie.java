@@ -164,6 +164,11 @@ public class AanmaakPeriodiekeUniekeActie extends javax.swing.JFrame {
 
         btnHomeknopAdministrator.setBackground(new java.awt.Color(255, 153, 0));
         btnHomeknopAdministrator.setText("Home");
+        btnHomeknopAdministrator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdministratorMouseClicked(evt);
+            }
+        });
         btnHomeknopAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeknopAdministratorActionPerformed(evt);
@@ -366,6 +371,15 @@ public class AanmaakPeriodiekeUniekeActie extends javax.swing.JFrame {
        administrator.show();
        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
+
+    private void btnHomeknopAdministratorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorMouseClicked
+       periodiekeActie.hide();
+       myCaller.show();
+       txtTakeAwayNaam.setText("");
+       txtVestigingsNaam.setText("");
+       txtBedrag.setText("");
+       txtPercentage.setText("");
+    }//GEN-LAST:event_btnHomeknopAdministratorMouseClicked
 
     /**
      * @param args the command line arguments

@@ -130,6 +130,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(255, 51, 51));
         jLabel19.setText("*");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Leveringsgebied(en):");
 
         jLabel10.setText("(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)");
@@ -153,6 +154,11 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
 
         btnHomeknopAdministrator.setBackground(new java.awt.Color(255, 153, 0));
         btnHomeknopAdministrator.setText("Home");
+        btnHomeknopAdministrator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdministratorMouseClicked(evt);
+            }
+        });
         btnHomeknopAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeknopAdministratorActionPerformed(evt);
@@ -390,6 +396,18 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
        administrator.show();
        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
+
+    private void btnHomeknopAdministratorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorMouseClicked
+       vestiging.hide();
+        myCaller.show();  
+        txtTakeAwayNaam.setText("");
+        txtVestigingNaam.setText("");
+        txtStraat.setText("");
+        txtHuisnummer.setText("");
+        txtPostcode.setText("");
+        txtGemeente.setText("");
+        txtLeveringskosten.setText("");
+    }//GEN-LAST:event_btnHomeknopAdministratorMouseClicked
 
     /**
      * @param args the command line arguments

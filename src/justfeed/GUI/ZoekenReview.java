@@ -47,6 +47,8 @@ public class ZoekenReview extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReviews = new javax.swing.JTable();
         btnZoeken = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        bntHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,36 +81,54 @@ public class ZoekenReview extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        bntHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        bntHomeknopProfielklant.setText("Home");
+        bntHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bntHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        bntHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(bntHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtProductNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnZoeken))
-                    .addComponent(jScrollPane1))
+                        .addComponent(btnZoeken)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(56, 56, 56)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(txtProductNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnZoeken)
-                    .addComponent(jLabel2))
-                .addGap(35, 35, 35)
+                    .addComponent(btnZoeken))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,6 +148,20 @@ public class ZoekenReview extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnZoekenActionPerformed
+
+    private void bntHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntHomeknopProfielklantActionPerformed
+        Profielklant profiel = Profielklant.getInstance(zoekenReview);
+       profiel.pack();
+       zoekenReview.hide();
+       profiel.show();
+       profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_bntHomeknopProfielklantActionPerformed
+
+    private void bntHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntHomeknopProfielklantMouseClicked
+       zoekenReview.hide();
+        myCaller.show();
+        txtProductNaam.setText("");
+    }//GEN-LAST:event_bntHomeknopProfielklantMouseClicked
 
     /**
      * @param args the command line arguments
@@ -165,9 +199,11 @@ public class ZoekenReview extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu bntHomeknopProfielklant;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblReviews;
     private javax.swing.JTextField txtProductNaam;

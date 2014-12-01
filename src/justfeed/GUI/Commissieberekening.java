@@ -43,6 +43,8 @@ public class Commissieberekening extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCommissie = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopAdmini = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,28 +74,47 @@ public class Commissieberekening extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Commissieberekening");
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopAdmini.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopAdmini.setText("Home");
+        btnHomeknopAdmini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdminiMouseClicked(evt);
+            }
+        });
+        btnHomeknopAdmini.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopAdminiActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopAdmini);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCommissieberekening))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCommissieberekening)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(46, 46, 46)
-                .addComponent(btnCommissieberekening)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCommissieberekening, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -104,6 +125,19 @@ public class Commissieberekening extends javax.swing.JFrame {
         DefaultTableModel t = d.naarTabel("SELECT naam, commissie FROM tbl_takeaway;");
         tblCommissie.setModel(t);
     }//GEN-LAST:event_btnCommissieberekeningActionPerformed
+
+    private void btnHomeknopAdminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiActionPerformed
+      Administrator admini = Administrator.getInstance(commissieberekening);
+       admini.pack();
+       commissieberekening.hide();
+       admini.show();
+       admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopAdminiActionPerformed
+
+    private void btnHomeknopAdminiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiMouseClicked
+       commissieberekening.hide();
+       myCaller.show();
+    }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -142,7 +176,9 @@ public class Commissieberekening extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCommissieberekening;
+    private javax.swing.JMenu btnHomeknopAdmini;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCommissie;
     // End of variables declaration//GEN-END:variables

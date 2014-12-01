@@ -92,11 +92,37 @@ public class Administrator extends javax.swing.JFrame {
         myCaller = verwijderenVanProduct;
         return admini;   
     }
-                public static Administrator getInstance(VerwijderenTakeAway verwijderenTakeAway)
+       public static Administrator getInstance(VerwijderenTakeAway verwijderenTakeAway)
     {
         myCaller = verwijderenTakeAway;
         return admini;   
     }
+       public static Administrator getInstance(VerwijderenVestiging verwijderenVestiging)
+    {
+        myCaller = verwijderenVestiging;
+        return admini;   
+    }
+      public static Administrator getInstance(Commissieberekening commissieberekening)
+    {
+        myCaller = commissieberekening;
+        return admini;   
+    }
+      public static Administrator getInstance(OntvangstLeveringsbevestiging ontvangstLeveringsbevestiging)
+    {
+        myCaller = ontvangstLeveringsbevestiging;
+        return admini;   
+    }
+      public static Administrator getInstance(RapportFlyer rapportFlyer)
+    {
+        myCaller = rapportFlyer;
+        return admini;   
+    }
+         public static Administrator getInstance(RapportStandVanZaken rapportSVZ)
+    {
+        myCaller = rapportSVZ;
+        return admini;   
+    }
+    
 //    public static Administrator getInstance(VerwijderenProduct verwijderenProduct)
 //    {
 //        myCaller = verwijderenProduct;
@@ -163,6 +189,9 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        jMenu3.setBackground(new java.awt.Color(255, 153, 0));
         jMenu3.setText("Toevoegen");
 
         jMenuItem1.setText("Takeaway");
@@ -191,6 +220,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(255, 153, 0));
         jMenu4.setText("Wijzigen");
 
         nrAanpassenVestiging.setText("Vestiging");
@@ -211,6 +241,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu1.setBackground(new java.awt.Color(255, 153, 0));
         jMenu1.setText("Verwijderen");
 
         btnNaarVerwijderenTakeaway.setText("Take-away");
@@ -239,6 +270,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu6.setBackground(new java.awt.Color(255, 153, 0));
         jMenu6.setText("Awards");
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,6 +296,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu5.setBackground(new java.awt.Color(255, 153, 0));
         jMenu5.setText("Kortingen");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -305,6 +338,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu7.setBackground(new java.awt.Color(255, 153, 0));
         jMenu7.setText("Rapporten");
 
         jMenuItem7.setText("Flyers maken");
@@ -325,6 +359,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu2.setBackground(new java.awt.Color(255, 153, 0));
         jMenu2.setText("Order");
 
         jMenuItem11.setText("Ontvangst leveringsbevestiging");
@@ -337,6 +372,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu8.setBackground(new java.awt.Color(255, 153, 0));
         jMenu8.setText("Commissie");
 
         jMenuItem12.setText("Commissieberekening");
@@ -355,22 +391,22 @@ public class Administrator extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(435, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(147, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 

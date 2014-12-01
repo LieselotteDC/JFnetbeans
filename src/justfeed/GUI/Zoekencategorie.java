@@ -55,6 +55,8 @@ public class Zoekencategorie extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekencategorie = new javax.swing.JTable();
         btnZoeken = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,24 @@ public class Zoekencategorie extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopProfielklant.setText("Home");
+        btnHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        btnHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,13 +139,14 @@ public class Zoekencategorie extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(95, 95, 95)
+                                .addGap(18, 18, 18)
                                 .addComponent(comboboxCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnZoeken)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -133,14 +154,14 @@ public class Zoekencategorie extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(comboboxCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnZoeken))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,6 +188,20 @@ public class Zoekencategorie extends javax.swing.JFrame {
         DefaultTableModel t = d.naarTabel("SELECT * FROM tbl_soort WHERE (categorie = '" + selectedItem + "');");
         tblZoekencategorie.setModel(t);
     }//GEN-LAST:event_btnZoekenActionPerformed
+
+    private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
+       Profielklant profiel = Profielklant.getInstance(zoekenCategorie);
+       profiel.pack();
+       zoekenCategorie.hide();
+       profiel.show();
+       profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
+
+    private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
+        zoekenCategorie.hide();
+        myCaller.show();
+        comboboxCategorie.setSelectedItem(null);
+    }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**
      * @param args the command line arguments
@@ -204,11 +239,13 @@ public class Zoekencategorie extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopProfielklant;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JComboBox comboboxCategorie;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblZoekencategorie;
     // End of variables declaration//GEN-END:variables

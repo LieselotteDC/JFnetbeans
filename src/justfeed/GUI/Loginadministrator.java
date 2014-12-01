@@ -48,6 +48,7 @@ public class Loginadministrator extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Gelieve uw wachtwoord op te geven");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Paswoord:");
 
         txtPaswoord.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +57,8 @@ public class Loginadministrator extends javax.swing.JFrame {
             }
         });
 
+        btnLogin.setBackground(new java.awt.Color(0, 0, 0));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Inloggen");
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -68,7 +71,7 @@ public class Loginadministrator extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

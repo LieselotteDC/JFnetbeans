@@ -173,6 +173,10 @@ public class AanpassenProduct extends javax.swing.JFrame {
     private void back(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back
         aangepastproduct.hide();
         myCaller.show();
+        txtHuidigID.setText("");
+        txtNieuweNaam.setText("");
+        comboboxType.setSelectedItem("gerecht");
+        txtEenheidsprijs.setText("");
     }//GEN-LAST:event_back
 
     private void btnProductAanpassenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductAanpassenActionPerformed

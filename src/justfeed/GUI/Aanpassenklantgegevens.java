@@ -126,6 +126,9 @@ public class Aanpassenklantgegevens extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(255, 51, 51));
         jLabel21.setText("*");
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        jMenu1.setBackground(new java.awt.Color(255, 153, 0));
         jMenu1.setText("Home");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

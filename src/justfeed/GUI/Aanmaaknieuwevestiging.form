@@ -25,6 +25,7 @@
             <Property name="text" type="java.lang.String" value="Home"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHomeknopAdministratorMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeknopAdministratorActionPerformed"/>
           </Events>
         </Menu>
@@ -336,6 +337,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Leveringsgebied(en):"/>
       </Properties>
     </Component>

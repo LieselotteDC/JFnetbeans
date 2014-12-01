@@ -96,6 +96,11 @@ public class AanmaakAward extends javax.swing.JFrame {
 
         btnHomeknopAdministrator.setBackground(new java.awt.Color(255, 153, 0));
         btnHomeknopAdministrator.setText("Home");
+        btnHomeknopAdministrator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopAdministratorMouseClicked(evt);
+            }
+        });
         btnHomeknopAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeknopAdministratorActionPerformed(evt);
@@ -209,6 +214,13 @@ public class AanmaakAward extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAanmaakAwardActionPerformed
+
+    private void btnHomeknopAdministratorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorMouseClicked
+        aanmaakAward.hide();
+        myCaller.show();
+        txtJaar.setText("");
+        comboboxMaand.setSelectedItem("januari");
+    }//GEN-LAST:event_btnHomeknopAdministratorMouseClicked
 
     /**
      * @param args the command line arguments
