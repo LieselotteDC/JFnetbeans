@@ -7,6 +7,8 @@
 package justfeed.GUI;
 import Database.*;
 import Logica.*;
+import java.sql.Date;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
@@ -15,7 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class BestellingAfleveradres extends javax.swing.JFrame {
 private static final BestellingAfleveradres adres = new BestellingAfleveradres();
-    public static JFrame myCaller;
+public Klant actief = LoginKlant.getInstance().getActief();
+public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+public static JFrame myCaller;
     
     public Database d = new Database();
     /**
@@ -180,7 +185,11 @@ private static final BestellingAfleveradres adres = new BestellingAfleveradres()
                 }
             else{
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
-                Order order = new Order();
+                //Order(double totaalPrijs, Date datum, String straat, int huisnummer, int plaatsnummer, String login, boolean status)
+                orderZonderKorting.setHuisnummer(huisnummer);
+                orderZonderKorting.setPlaatsnummer(plaatsnummer);
+                orderZonderKorting.setStraat(straat);
+
             }
        }
        BestellingFactuur factuur = BestellingFactuur.getInstance(adres);

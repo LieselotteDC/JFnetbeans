@@ -9,6 +9,7 @@ package justfeed.GUI;
 import Logica.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +21,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     private static final BestellingOverzicht bestellingOverzicht = new BestellingOverzicht();
+    public DefaultTableModel model = Bestelling.getInstance().getModel();
     public static JFrame myCaller;
 
     /**
@@ -27,6 +29,9 @@ public class BestellingOverzicht extends javax.swing.JFrame {
      */
     public BestellingOverzicht() {
         initComponents();
+        String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        txtTotaalbedrag.setText(totaalprijs2);
+        tblOverzichtBestelling.setModel(model);
     }
     
     public static BestellingOverzicht getInstance(Bestelling caller)

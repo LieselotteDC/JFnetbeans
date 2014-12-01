@@ -24,6 +24,9 @@ public class Bestelling extends javax.swing.JFrame {
     private static final Bestelling bestelling = new Bestelling();
     public static JFrame myCaller;
     public Database d = new Database();
+    public DefaultTableModel model = new DefaultTableModel();
+
+
 
 
     public Klant actief = LoginKlant.getInstance().getActief();
@@ -394,12 +397,12 @@ public class Bestelling extends javax.swing.JFrame {
         Menu menu = new Menu();
         double totaalprijs = 0;
 
-        for (Take_Away ta : d.getAlleTakeaways()) {
+        /*for (Take_Away ta : d.getAlleTakeaways()) {
             for (Vestiging v : d.getAlleVestigingen(ta.getNaam())) {
                 ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, v.getTakeawayNaam(), v.getVestigingsID());
                 berekendeMenus.add(menu.berekenMenuprijs(productenPerVestiging));
             }
-        }
+        }*/
         for (Menu m : berekendeMenus) {
 
             totaalprijs += m.getMenuprijs();
@@ -442,7 +445,8 @@ public class Bestelling extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gelieve een product te selecteren.");
         } else {
             if (Integer.parseInt(spnrHoeveelheid.getValue().toString()) > 0) {
-                DefaultTableModel model = (DefaultTableModel) tblBestelling.getModel();
+                //DefaultTableModel 
+                model = (DefaultTableModel) tblBestelling.getModel();
                 model.addRow(new Object[]{txtProductID.getText(), txtProductNaam.getText(),
                     txtType.getText(), txtEenheidsPrijs.getText(), spnrHoeveelheid.getValue(), txtTakeAwayNaam.getText(), txtVestigingsID.getText()});
                 int productID = Integer.parseInt(txtProductID.getText());
@@ -453,6 +457,8 @@ public class Bestelling extends javax.swing.JFrame {
                 String vestigingsID = txtVestigingsID.getText();
                 java.sql.Date leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
                 Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
+                orderZonderKorting.setDatum(leveringsdatum);
+                orderZonderKorting.setLogin(actief.getLogin());
                 //we hebben de initialisatie van de arratlist uit de methode gehaald omdat wij die moeten kunnen oproepen bij de knop bestelling aanmaken
                 besteldeProducten.add(null);
             } else {
@@ -626,5 +632,7 @@ public ArrayList<Menu> getBerekendeMenus() {
         this.orderZonderKorting = orderZonderKorting;
     }
 
-
+    public DefaultTableModel getModel() {
+        return model;
+    }
 }
