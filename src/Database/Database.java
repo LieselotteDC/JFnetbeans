@@ -1900,7 +1900,6 @@ public class Database {
     }
 
     //METHODES IVM MENU'S
-
     private void addMenu(Menu m, int orderID) {
         try {
             dbConnection = getConnection();
@@ -1960,4 +1959,57 @@ public class Database {
             this.closeConnection();
         }
     }
+
+    public ArrayList<Menu> getLopendeOrders() {
+
+        try {
+            ArrayList<Menu> lopendeOrders = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = FALSE);";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int menuID = srs.getInt("menuID");
+                double menuprijs = srs.getDouble("menuprijs");
+                int orderID = srs.getInt("orderID");
+                String takeawayNaam = srs.getString("takeaway");
+                String vestiging = srs.getString("vestiging");
+                Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
+                lopendeOrders.add(menu);
+
+            }
+            this.closeConnection();
+            return lopendeOrders;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+    }
+        
+        public ArrayList<Menu> getVerkopen() {
+
+        try {
+            ArrayList<Menu> Verkopen = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = TRUE);";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int menuID = srs.getInt("menuID");
+                double menuprijs = srs.getDouble("menuprijs");
+                int orderID = srs.getInt("orderID");
+                String takeawayNaam = srs.getString("takeaway");
+                String vestiging = srs.getString("vestiging");
+                Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
+                Verkopen.add(menu);
+
+            }
+            this.closeConnection();
+            return Verkopen;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
+    }
+    
+    
 }
