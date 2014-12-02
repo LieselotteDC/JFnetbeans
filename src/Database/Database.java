@@ -1947,7 +1947,7 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("INSERT INTO tbl_order VALUES (null," + o.getTotaalPrijs() + ",'" + o.getDatum() + "','" + o.getStraat() + "'," + o.getHuisnummer() + "," + o.getPlaatsnummer() + ",'" + o.getLogin() + "',FALSE);");
-            String sql = "SELECT LAST_INSERT_ID() as;";
+            String sql = "SELECT LAST_INSERT_ID();";
             ResultSet srs = stmt.executeQuery(sql);
             int lastInsert = srs.getInt("LAST_INSERT_ID()");
             for (Menu menu : menus) {
