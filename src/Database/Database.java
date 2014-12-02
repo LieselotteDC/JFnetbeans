@@ -1450,7 +1450,7 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("UPDATE tbl_review SET score = " + rev.getScore() + " WHERE reviewID= " + rev.getReviewId() + ";");
             stmt.executeUpdate("UPDATE tbl_review SET status = FALSE WHERE reviewID= " + rev.getReviewId() + ";");
-            stmt.executeUpdate("UPDATE tbl_review SET beoordeling = " + rev.getBeoordeling() + " WHERE reviewID= " + rev.getReviewId() + ";");
+            stmt.executeUpdate("UPDATE tbl_review SET beoordeling = '" + rev.getBeoordeling() + "' WHERE reviewID= " + rev.getReviewId() + ";");
             this.addKortingReview(kl);
             this.closeConnection();
         } catch (SQLException sqle) {
