@@ -397,12 +397,12 @@ public class Bestelling extends javax.swing.JFrame {
         Menu menu = new Menu();
         double totaalprijs = 0;
 
-        /*for (Take_Away ta : d.getAlleTakeaways()) {
+        for (Take_Away ta : d.getAlleTakeaways()) {
             for (Vestiging v : d.getAlleVestigingen(ta.getNaam())) {
                 ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, v.getTakeawayNaam(), v.getVestigingsID());
                 berekendeMenus.add(menu.berekenMenuprijs(productenPerVestiging));
             }
-        }*/
+        }
         for (Menu m : berekendeMenus) {
 
             totaalprijs += m.getMenuprijs();
