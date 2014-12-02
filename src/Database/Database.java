@@ -1902,9 +1902,9 @@ public class Database {
     // ALLE AWARDS IN 1 ARRAYLIST
     public ArrayList<Award> getAlleAwards() {
         ArrayList<Award> alleAwards = new ArrayList<>();
-        alleAwards.add(0, this.getBestseller());
-        alleAwards.add(1, this.getJustfeeder());
-        alleAwards.add(2, this.getUsersChoice());
+        alleAwards.add(this.getBestseller());
+        alleAwards.add(this.getJustfeeder());
+        alleAwards.add(this.getUsersChoice());
         for (Award a : this.getHotItems()) {
             alleAwards.add(a);
         }
@@ -1924,17 +1924,15 @@ public class Database {
         }
     }
 
-    public ArrayList<Menu> getAlleMenus() {
+    public ArrayList<Menu> getAlleMenus(String takeawayNaam, String vestiging) {
         try {
             ArrayList<Menu> alleMenus = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_menu;";
+            String sql = "SELECT * FROM tbl_menu WHERE (takeaway = '" + takeawayNaam + "')and (vestiging = '" + vestiging + "' ) ;";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 int menuID = srs.getInt("menuID");
                 double menuprijs = srs.getDouble("menuprijs");
                 int orderID = srs.getInt("orderID");
-                String takeawayNaam = srs.getString("takeaway");
-                String vestiging = srs.getString("vestiging");
 
                 Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
                 alleMenus.add(menu);
@@ -1997,18 +1995,17 @@ public class Database {
         }
     }
 
-    public ArrayList<Menu> getLopendeOrders() {
+    public ArrayList<Menu> getLopendeOrders(String takeawayNaam, String vestiging) {
 
         try {
             ArrayList<Menu> lopendeOrders = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = FALSE);";
+            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = FALSE) and (M.takeaway = '" + takeawayNaam + "')and (M.vestiging = '" + vestiging + "' ) ;";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 int menuID = srs.getInt("menuID");
                 double menuprijs = srs.getDouble("menuprijs");
-                int orderID = srs.getInt("orderID");
-                String takeawayNaam = srs.getString("takeaway");
-                String vestiging = srs.getString("vestiging");
+                int orderID = srs.getInt("M.orderID");
+
                 Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
                 lopendeOrders.add(menu);
 
@@ -2022,18 +2019,17 @@ public class Database {
         }
     }
 
-    public ArrayList<Menu> getVerkopen() {
+    public ArrayList<Menu> getVerkopen(String takeawayNaam, String vestiging) {
 
         try {
             ArrayList<Menu> Verkopen = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = TRUE);";
+            String sql = "SELECT * FROM tbl_order O, tbl_menu M WHERE (M.orderID = O.orderID) and (O.status = TRUE) and (M.takeaway = '" + takeawayNaam + "')and (M.vestiging = '" + vestiging + "' );";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 int menuID = srs.getInt("menuID");
                 double menuprijs = srs.getDouble("menuprijs");
-                int orderID = srs.getInt("orderID");
-                String takeawayNaam = srs.getString("takeaway");
-                String vestiging = srs.getString("vestiging");
+                int orderID = srs.getInt("M.orderID");
+
                 Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
                 Verkopen.add(menu);
 
