@@ -798,10 +798,7 @@ public class Database {
     }
 
     //METHODES IVM KORTINGEN
-    
-    
-    
-   /* public ArrayList<UniekeActie> rapportKortingAlgemeen(String takeawayNaam) {
+    /* public ArrayList<UniekeActie> rapportKortingAlgemeen(String takeawayNaam) {
      ArrayList<UniekeActie> alleKortingen = new ArrayList<>();
      try {
      for (Vestiging ves : this.getAlleVestigingen(takeawayNaam)) {
@@ -922,11 +919,16 @@ public class Database {
         }
     }
 
-    public void gebruiktKortingRegistratie(int code) {
+    public void gebruiktKortingRegistratie(ArrayList<Korting> kortingen) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_kortingRegistratie SET status = FALSE WHERE kortingscode= " + code + ";");
+            for (Korting k : kortingen) {
+                if (k instanceof RegistratieKorting) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingRegistratie SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1006,11 +1008,17 @@ public class Database {
         }
     }
 
-    public void gebruiktKortingReview(int code) {
+    public void gebruiktKortingReview(ArrayList<Korting> kortingen) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_kortingReview SET status = FALSE WHERE kortingscode= " + code + ";");
+            for (Korting k : kortingen) {
+                if (k instanceof ReviewKorting) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingReview SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
+
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1091,11 +1099,16 @@ public class Database {
         }
     }
 
-    public void gebruiktKortingJustfeedBoss(int code) {
+    public void gebruiktKortingJustfeedBoss(ArrayList<Korting> kortingen) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_kortingJustfeed_boss SET status = FALSE WHERE kortingscode= " + code + ";");
+            for (Korting k : kortingen) {
+                if (k instanceof JustFeedBoss) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingJustfeed_boss SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1206,11 +1219,16 @@ public class Database {
         }
     }
 
-    public void gebruiktKortingTakeawayBoss(int code) {
+    public void gebruiktKortingTakeawayBoss(ArrayList<Korting> kortingen) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_kortingTakeaway_boss SET status = FALSE WHERE kortingscode= " + code + ";");
+            for (Korting k : kortingen) {
+                if (k instanceof TakeawayBoss) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingTakeaway_boss SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1318,11 +1336,16 @@ public class Database {
         }
     }
 
-    public void gebruiktKortingEenmaligUniek(int code) {
+    public void gebruiktKortingEenmaligUniek(ArrayList<Korting> kortingen) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("UPDATE tbl_kortingEenmalig SET status = FALSE WHERE kortingscode= " + code + ";");
+            for (Korting k : kortingen) {
+                if (k instanceof UniekeActieEenmalig) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingEenmalig SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1997,6 +2020,24 @@ public class Database {
             this.closeConnection();
         }
     }
+//  DIT NOG AANPASSEN !!
+    /*public void addHulpKorting(ArrayList<HulpKorting> hulpkortingen) {
+
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            for (HulpKorting hk : hulpkortingen){
+                // kortingsbedrag eruit halen, dan optellen met bedrag dat we hebben en dan er terug in steken
+                stmt.executeUpdate("UPDATE tbl_hulpkorting SET () WHERE ('"+ hk.getTakeawayNaam() +"');");
+            }
+            
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+
+    }*/
 
     public ArrayList<Menu> getLopendeOrders(String takeawayNaam, String vestiging) {
 

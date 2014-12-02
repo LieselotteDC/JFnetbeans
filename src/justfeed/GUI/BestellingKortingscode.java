@@ -65,6 +65,12 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Unieke kortingscode:");
 
+        txtKortingsCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKortingsCodeActionPerformed(evt);
+            }
+        });
+
         btnNogCode.setBackground(new java.awt.Color(0, 0, 0));
         btnNogCode.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNogCode.setForeground(new java.awt.Color(255, 255, 255));
@@ -89,6 +95,11 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         jLabel3.setText("Type kortingscode:");
 
         comboboxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Just Feed Boss korting", "Registratiekorting", "Unieke actie korting: eenmalig", "Unieke actie korting: periodiek", "Takeaway Boss korting", "Review korting", "" }));
+        comboboxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,6 +281,14 @@ public class BestellingKortingscode extends javax.swing.JFrame {
        kortingscode.show();
        kortingscode.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnNogCodeActionPerformed
+
+    private void txtKortingsCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKortingsCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKortingsCodeActionPerformed
+
+    private void comboboxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboboxTypeActionPerformed
 
     /**
      * @param args the command line arguments
