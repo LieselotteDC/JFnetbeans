@@ -6,7 +6,9 @@
 
 package justfeed.GUI;
 
+import Logica.*;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +20,8 @@ public class BestellingFactuur extends javax.swing.JFrame {
      * Creates new form Betaling
      */
     private static final BestellingFactuur factuur = new BestellingFactuur();
+    public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+    public DefaultTableModel model = Bestelling.getInstance().getModel();
     public static JFrame myCaller;
     public BestellingFactuur() {
         initComponents();
@@ -108,17 +112,17 @@ public class BestellingFactuur extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTotaalBedrag, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTotaalBedrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,7 +138,6 @@ public class BestellingFactuur extends javax.swing.JFrame {
 
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
         txtTotaalBedrag.setText("");
-
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();
         factuur.hide();
@@ -144,7 +147,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
 
     private void btnAfkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfkeurenActionPerformed
         txtTotaalBedrag.setText("");
-
+        model.setRowCount(0);
         Profielklant profiel = Profielklant.getInstance(factuur);
         profiel.pack();
         factuur.hide();

@@ -46,7 +46,6 @@ public class Zoekengemeente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtGemeente = new javax.swing.JTextField();
-        btnNaarZoekresultatenGemeente = new javax.swing.JButton();
         btnZoeken = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekenGemeente = new javax.swing.JTable();
@@ -62,15 +61,6 @@ public class Zoekengemeente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Gemeente:");
-
-        btnNaarZoekresultatenGemeente.setBackground(new java.awt.Color(0, 0, 0));
-        btnNaarZoekresultatenGemeente.setForeground(new java.awt.Color(255, 255, 255));
-        btnNaarZoekresultatenGemeente.setText("Volgende");
-        btnNaarZoekresultatenGemeente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNaarZoekresultatenGemeenteActionPerformed(evt);
-            }
-        });
 
         btnZoeken.setBackground(new java.awt.Color(0, 0, 0));
         btnZoeken.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -128,9 +118,6 @@ public class Zoekengemeente extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNaarZoekresultatenGemeente))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -161,17 +148,11 @@ public class Zoekengemeente extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNaarZoekresultatenGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNaarZoekresultatenGemeenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNaarZoekresultatenGemeenteActionPerformed
-
-    }//GEN-LAST:event_btnNaarZoekresultatenGemeenteActionPerformed
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String gemeente = txtGemeente.getText();
@@ -254,7 +235,6 @@ public class Zoekengemeente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnHomeknopProfielklant;
-    private javax.swing.JButton btnNaarZoekresultatenGemeente;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -28,7 +28,6 @@ public class Zoekentakeaway extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNaamTakeAway = new javax.swing.JTextField();
-        btnNaarZoekresultatenTakeaway = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekenTakeaway = new javax.swing.JTable();
         btnZoeken = new javax.swing.JButton();
@@ -42,15 +41,6 @@ public class Zoekentakeaway extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Naam takeaway:");
-
-        btnNaarZoekresultatenTakeaway.setBackground(new java.awt.Color(0, 0, 0));
-        btnNaarZoekresultatenTakeaway.setForeground(new java.awt.Color(255, 255, 255));
-        btnNaarZoekresultatenTakeaway.setText("Volgende");
-        btnNaarZoekresultatenTakeaway.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naarZoekresultaten(evt);
-            }
-        });
 
         tblZoekenTakeaway.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,10 +87,6 @@ public class Zoekentakeaway extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNaarZoekresultatenTakeaway)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,17 +115,11 @@ public class Zoekentakeaway extends javax.swing.JFrame {
                     .addComponent(btnZoeken))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNaarZoekresultatenTakeaway, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void naarZoekresultaten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekresultaten
-
-    }//GEN-LAST:event_naarZoekresultaten
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String takeAwayNaam = txtNaamTakeAway.getText();
@@ -205,7 +185,6 @@ public class Zoekentakeaway extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnHomeknopProfielklant;
-    private javax.swing.JButton btnNaarZoekresultatenTakeaway;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

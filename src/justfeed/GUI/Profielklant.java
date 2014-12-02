@@ -90,12 +90,12 @@ public class Profielklant extends javax.swing.JFrame {
         myCaller = factuur;
         return profiel;
     }
-        public static Profielklant getInstance(ReviewSchrijven schrijvenReview)
+        public static Profielklant getInstance(ReviewBestaandOvernemen schrijvenReview)
     {
         myCaller = schrijvenReview;
         return profiel;
     }
-        public static Profielklant getInstance(ReviewToevoegen toevoegenReview)
+        public static Profielklant getInstance(ReviewNieuwToevoegen toevoegenReview)
     {
         myCaller = toevoegenReview;
         return profiel;
@@ -122,6 +122,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        naarReviewBestaandOvernemen = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         naarCategorie = new javax.swing.JMenuItem();
@@ -233,6 +234,14 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem10);
+
+        naarReviewBestaandOvernemen.setText("Neem bestaande review over");
+        naarReviewBestaandOvernemen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naarReviewBestaandOvernemenActionPerformed(evt);
+            }
+        });
+        jMenu4.add(naarReviewBestaandOvernemen);
 
         jMenuItem9.setText("Overzicht van uw geschreven reviews");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -439,7 +448,7 @@ public class Profielklant extends javax.swing.JFrame {
     }//GEN-LAST:event_naarOverzichtReviews
 
     private void naarToevoegenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarToevoegenReview
-       ReviewToevoegen reviewToevoegen = ReviewToevoegen.getInstance(profiel);
+       ReviewNieuwToevoegen reviewToevoegen = ReviewNieuwToevoegen.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
        reviewToevoegen.pack();
        profiel.hide();
@@ -481,6 +490,15 @@ public class Profielklant extends javax.swing.JFrame {
         zoekencategorie.show();
         zoekencategorie.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarCategorieActionPerformed
+
+    private void naarReviewBestaandOvernemenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarReviewBestaandOvernemenActionPerformed
+        ReviewBestaandOvernemen reviewOvernemen = ReviewBestaandOvernemen.getInstance(profiel);
+//     reviewsklant.setSize(300,300);
+       reviewOvernemen.pack();
+       profiel.hide();
+       reviewOvernemen.show();
+       reviewOvernemen.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarReviewBestaandOvernemenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -543,5 +561,6 @@ public class Profielklant extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem naarCategorie;
     private javax.swing.JMenu naarContact;
+    private javax.swing.JMenuItem naarReviewBestaandOvernemen;
     // End of variables declaration//GEN-END:variables
 }

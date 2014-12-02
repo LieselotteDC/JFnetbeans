@@ -43,7 +43,6 @@ public class Zoekenproduct extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtProductnaam = new javax.swing.JTextField();
-        btnNaarZoekresultatenProduct = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekenProduct = new javax.swing.JTable();
         btnZoeken = new javax.swing.JButton();
@@ -57,15 +56,6 @@ public class Zoekenproduct extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Naam product:");
-
-        btnNaarZoekresultatenProduct.setBackground(new java.awt.Color(0, 0, 0));
-        btnNaarZoekresultatenProduct.setForeground(new java.awt.Color(255, 255, 255));
-        btnNaarZoekresultatenProduct.setText("Volgende");
-        btnNaarZoekresultatenProduct.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNaarZoekresultatenProductActionPerformed(evt);
-            }
-        });
 
         tblZoekenProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,10 +105,7 @@ public class Zoekenproduct extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 460, Short.MAX_VALUE)
-                        .addComponent(btnNaarZoekresultatenProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -143,17 +130,11 @@ public class Zoekenproduct extends javax.swing.JFrame {
                     .addComponent(btnZoeken))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNaarZoekresultatenProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNaarZoekresultatenProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNaarZoekresultatenProductActionPerformed
-        
-    }//GEN-LAST:event_btnNaarZoekresultatenProductActionPerformed
 
     private void btnZoekenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekenActionPerformed
         String productnaam = txtProductnaam.getText();
@@ -221,7 +202,6 @@ public class Zoekenproduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnHomeknopProfielklant;
-    private javax.swing.JButton btnNaarZoekresultatenProduct;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

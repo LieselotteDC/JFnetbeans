@@ -50,7 +50,6 @@ public class Zoekencategorie extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         comboboxCategorie = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblZoekencategorie = new javax.swing.JTable();
@@ -65,15 +64,6 @@ public class Zoekencategorie extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Selecteer categorie: ");
-
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Volgende");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                naarZoekresultaten(evt);
-            }
-        });
 
         comboboxCategorie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,9 +125,6 @@ public class Zoekencategorie extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,17 +150,11 @@ public class Zoekencategorie extends javax.swing.JFrame {
                     .addComponent(btnZoeken))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(61, 61, 61))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void naarZoekresultaten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekresultaten
-
-    }//GEN-LAST:event_naarZoekresultaten
 
     private void comboboxCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxCategorieActionPerformed
         // TODO add your handling code here:
@@ -242,7 +223,6 @@ public class Zoekencategorie extends javax.swing.JFrame {
     private javax.swing.JMenu btnHomeknopProfielklant;
     private javax.swing.JButton btnZoeken;
     private javax.swing.JComboBox comboboxCategorie;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;

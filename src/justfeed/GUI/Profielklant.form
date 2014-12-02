@@ -99,6 +99,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="naarToevoegenReview"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="naarReviewBestaandOvernemen">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Neem bestaande review over"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="naarReviewBestaandOvernemenActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Overzicht van uw geschreven reviews"/>
