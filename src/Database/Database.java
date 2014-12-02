@@ -798,6 +798,9 @@ public class Database {
     }
 
     //METHODES IVM KORTINGEN
+    
+    
+    
    /* public ArrayList<UniekeActie> rapportKortingAlgemeen(String takeawayNaam) {
      ArrayList<UniekeActie> alleKortingen = new ArrayList<>();
      try {

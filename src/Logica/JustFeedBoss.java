@@ -2,7 +2,7 @@ package Logica;
 
 public class JustFeedBoss extends Korting {
 
-    private static final double PERCENTAGE = 40.0;
+    private static final double PERCENTAGE = 0.40;
     private double percentage;
     private boolean status;
 

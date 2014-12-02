@@ -2,7 +2,7 @@ package Logica;
 
 public class ReviewKorting extends Korting {
 
-    private static final double PERCENTAGE = 10.0;
+    private static final double PERCENTAGE = 0.10;
     private double percentage;
     private boolean status;
 

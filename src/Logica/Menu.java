@@ -44,44 +44,159 @@ public class Menu {
     }
 
     public Menu berekenMenuprijs(ArrayList<Orderverwerking> besteldeProductenMenu) {
+        Database d = new Database();
         if (!(besteldeProductenMenu.isEmpty())) {
             String takeaway1 = besteldeProductenMenu.get(0).getTakeawayNaam();
             String vestiging1 = besteldeProductenMenu.get(0).getVestigingsID();
+            double leveringskosten = d.getVestiging(takeaway1, vestiging1).getLeveringskosten();
             double menuprijs1 = 0;
             for (Orderverwerking o : besteldeProductenMenu) {
                 menuprijs1 += o.getHoeveelheid() * o.getPrijs();
             }
-            Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
-            return menu;
+            if (menuprijs1 > 20.0) {
+                Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
+                return menu;
+            } else {
+                menuprijs1 += leveringskosten;
+                Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
+                return menu;
+            }
         } else {
             return null;
         }
     }
-    
-    public void toepassenUniekePeriodiekeKortingen(int code, ArrayList<Menu> berekendeMenus, Klant kl){
-        Database d=new Database();
-        for(Menu menu:berekendeMenus){
-            if(d.kortingPeriodeBruikbaarBijMenu(code, menu, kl)){
-              if(d.getKortingEenmaligPeriode(code).getBedrag()==0){
-                  menu.setMenuprijs(menuprijs*(1-d.getKortingEenmaligPeriode(code).getPercentage()));
-              }else{
-                  menu.setMenuprijs(menuprijs-d.getKortingEenmaligPeriode(code).getBedrag());
-              }       
-            }
-        }           
+
+    public double berekenOrderprijs(ArrayList<Menu> berekendeMenus) {
+        double totaalprijs = 0.0;
+        for (Menu m : berekendeMenus) {
+
+            totaalprijs += m.getMenuprijs();
+        }
+        return totaalprijs;
     }
-    
-    public void toepassenUniekeEenmailgeKortingen(int code, ArrayList<Menu> berekendeMenus, Klant kl){
-        Database d=new Database();
-        for(Menu menu:berekendeMenus){
-            if(d.kortingEenmaligBruikbaarBijMenu(code, menu, kl)){
-              if(d.getKortingEenmaligPeriode(code).getBedrag()==0){
-                  menu.setMenuprijs(menuprijs*(1-d.getKortingEenmaligPeriode(code).getPercentage()));
-              }else{
-                  menu.setMenuprijs(menuprijs-d.getKortingEenmaligPeriode(code).getBedrag());
-              }       
+
+    private double gecumuleerdPercentageKortingOpOrderprijs(ArrayList<Korting> kortingen, Order orderZonderKorting) {
+        double orderprijs = orderZonderKorting.getTotaalPrijs();
+        double gecumuleerdPercentageOpOrderprijs = 0;
+        for (Korting k : kortingen) {
+            if (k instanceof RegistratieKorting) {
+                RegistratieKorting reg = (RegistratieKorting) k;
+                gecumuleerdPercentageOpOrderprijs += reg.getBedrag() / orderprijs;
+            } else if (k instanceof ReviewKorting) {
+                ReviewKorting rev = (ReviewKorting) k;
+                gecumuleerdPercentageOpOrderprijs += rev.getPercentage();
+            } else if (k instanceof TakeawayBoss) {
+                TakeawayBoss tab = (TakeawayBoss) k;
+                gecumuleerdPercentageOpOrderprijs += tab.getPercentage();
+            } else if (k instanceof JustFeedBoss) {
+                JustFeedBoss jfb = (JustFeedBoss) k;
+                gecumuleerdPercentageOpOrderprijs += jfb.getPercentage();
             }
-        }           
+        }
+        return gecumuleerdPercentageOpOrderprijs;
+
+    }
+
+    private double gecumuleerdPercentageKortingOpMenuprijs(ArrayList<Korting> kortingen, Order orderZonderKorting, ArrayList<Menu> berekendeMenus) {
+        double orderprijs = orderZonderKorting.getTotaalPrijs();
+        double gecumuleerdPercentageOpOrderprijs = 0;
+
+        for (Korting k : kortingen) {
+
+            if (k instanceof UniekeActieEenmalig) {
+                UniekeActieEenmalig uae = (UniekeActieEenmalig) k;
+                for (Menu m : berekendeMenus) {
+                    if ((m.getTakeawayNaam().equalsIgnoreCase(uae.getTakeawayNaam())) && (m.getVestiging().equalsIgnoreCase(uae.getVestiging()))) {
+                        if (uae.getBedrag() == 0) {
+                            gecumuleerdPercentageOpOrderprijs += (uae.getPercentage() * m.menuprijs) / orderprijs;
+                        } else {
+                            gecumuleerdPercentageOpOrderprijs += uae.getBedrag() / orderprijs;
+                        }
+                    }
+                }
+
+            } else if (k instanceof UniekeActiePeriode) {
+                UniekeActiePeriode uap = (UniekeActiePeriode) k;
+                for (Menu m : berekendeMenus) {
+                    if ((m.getTakeawayNaam().equalsIgnoreCase(uap.getTakeawayNaam())) && (m.getVestiging().equalsIgnoreCase(uap.getVestiging()))) {
+                        if (uap.getBedrag() == 0) {
+                            gecumuleerdPercentageOpOrderprijs += (uap.getPercentage() * m.menuprijs) / orderprijs;
+                        } else {
+                            gecumuleerdPercentageOpOrderprijs += uap.getBedrag() / orderprijs;
+                        }
+                    }
+                }
+            }
+        }
+        return gecumuleerdPercentageOpOrderprijs;
+
+    }
+
+    private void toepassenUniekePeriodiekeKortingen(ArrayList<Korting> kortingen, ArrayList<Menu> berekendeMenus, Klant kl, ArrayList<HulpKorting> hulpKorting) { // arraylist hulpkorting initialiseren en wij moeten die dan setten
+        Database d = new Database();
+        for (Korting k : kortingen) {
+            if (k instanceof UniekeActiePeriode) {
+                UniekeActiePeriode uap = (UniekeActiePeriode) k;
+                int code = uap.getKortingscode();
+                for (Menu menu : berekendeMenus) {
+                    if (d.kortingPeriodeBruikbaarBijMenu(code, menu, kl)) {
+
+                        if (d.getKortingEenmaligPeriode(code).getBedrag() == 0) {
+                            double korting = d.getKortingEenmaligPeriode(code).getPercentage() * menu.getMenuprijs();
+                            menu.setMenuprijs(menu.getMenuprijs() - korting);
+                            hulpKorting.add(new HulpKorting(menu.getTakeawayNaam(), korting));
+                        } else {
+                            menu.setMenuprijs(menuprijs - d.getKortingEenmaligPeriode(code).getBedrag());
+                            hulpKorting.add(new HulpKorting(menu.getTakeawayNaam(), d.getKortingEenmaligPeriode(code).getBedrag()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void toepassenUniekeEenmailgeKortingen(ArrayList<Korting> kortingen, ArrayList<Menu> berekendeMenus, Klant kl, ArrayList<HulpKorting> hulpKorting) {
+        Database d = new Database();
+        for (Korting k : kortingen) {
+            if (k instanceof UniekeActieEenmalig) {
+                UniekeActieEenmalig uae = (UniekeActieEenmalig) k;
+                int code = uae.getKortingscode();
+                for (Menu menu : berekendeMenus) {
+                    if (d.kortingEenmaligBruikbaarBijMenu(code, menu, kl)) {
+                        if (d.getKortingEenmaligUniek(code).getBedrag() == 0) {
+                            double korting = d.getKortingEenmaligUniek(code).getPercentage() * menu.getMenuprijs();
+                            menu.setMenuprijs(menu.getMenuprijs() - korting);
+                            hulpKorting.add(new HulpKorting(menu.getTakeawayNaam(), korting));
+                            menu.setMenuprijs(menuprijs * (1 - d.getKortingEenmaligUniek(code).getPercentage()));
+                        } else {
+                            menu.setMenuprijs(menuprijs - d.getKortingEenmaligUniek(code).getBedrag());
+                            hulpKorting.add(new HulpKorting(menu.getTakeawayNaam(), d.getKortingEenmaligUniek(code).getBedrag()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void toepassenDefinitieveKortingen(ArrayList<Korting> kortingen, Order orderZonderKorting, Order orderMetKorting, Klant kl, ArrayList<Menu> berekendeMenus, ArrayList<HulpKorting> hulpKorting)//LIESELOTTE MOET DEFAULT VAN ORDERMETKORTING AANMAKEN EN WIJ DAN SETTEN
+    {
+        double gecumuleerdPercentageKortingOpOrderprijs = this.gecumuleerdPercentageKortingOpOrderprijs(kortingen, orderZonderKorting);
+        double gecumuleerdPercentageKortingOpMenuprijs = this.gecumuleerdPercentageKortingOpMenuprijs(kortingen, orderZonderKorting, berekendeMenus);
+        double totaalGecumuleerdPercentage = gecumuleerdPercentageKortingOpMenuprijs + gecumuleerdPercentageKortingOpOrderprijs;
+        if (totaalGecumuleerdPercentage <= 0.50) {
+            this.toepassenUniekeEenmailgeKortingen(kortingen, berekendeMenus, kl, hulpKorting);
+            this.toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl, hulpKorting);
+            orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
+            double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
+            orderMetKorting.setTotaalPrijs(orderprijsMetKortingenOpOrderprijs);
+        } else {
+            this.toepassenUniekeEenmailgeKortingen(kortingen, berekendeMenus, kl, hulpKorting);
+            this.toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl, hulpKorting);
+            double aangepastGecumuleerdPercentageKortingOpOrderprijs = 0.50 - gecumuleerdPercentageKortingOpMenuprijs;
+            orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
+            double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
+            orderMetKorting.setTotaalPrijs(orderprijsMetKortingenOpOrderprijs);
+        }
     }
 
     public String getVestiging() {
@@ -123,14 +238,14 @@ public class Menu {
     public void setTakeawayNaam(String takeawayNaam) {
         this.takeawayNaam = takeawayNaam;
     }
-    
-    public String toString () {
+
+    public String toString() {
         String result;
-        result = "\t MenuID:\t" + this.getMenuID()+ "\n";
-        result += "\t Menuprijs:\t" + this.getMenuprijs()+ "\n";
-        result += "\t orderID:\t" + this.getOrderID()+ "\n";
-        result += "\t Takeaway:\t" + this.getTakeawayNaam()+ "\n";
-        result += "\t Vestiging:\t" + this.getVestiging()+ "\n";
+        result = "\t MenuID:\t" + this.getMenuID() + "\n";
+        result += "\t Menuprijs:\t" + this.getMenuprijs() + "\n";
+        result += "\t orderID:\t" + this.getOrderID() + "\n";
+        result += "\t Takeaway:\t" + this.getTakeawayNaam() + "\n";
+        result += "\t Vestiging:\t" + this.getVestiging() + "\n";
         result += "\n";
         return result;
     }
