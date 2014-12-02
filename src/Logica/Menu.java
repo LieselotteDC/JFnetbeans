@@ -123,5 +123,16 @@ public class Menu {
     public void setTakeawayNaam(String takeawayNaam) {
         this.takeawayNaam = takeawayNaam;
     }
+    
+    public String toString () {
+        String result;
+        result = "\t MenuID:\t" + this.getMenuID()+ "\n";
+        result += "\t Menuprijs:\t" + this.getMenuprijs()+ "\n";
+        result += "\t orderID:\t" + this.getOrderID()+ "\n";
+        result += "\t Takeaway:\t" + this.getTakeawayNaam()+ "\n";
+        result += "\t vestiging:\t" + this.getVestiging()+ "\n";
+        result += "\n";
+        return result;
+    }
 
 }

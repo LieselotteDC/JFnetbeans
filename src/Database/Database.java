@@ -1899,6 +1899,18 @@ public class Database {
 
     }
 
+    // ALLE AWARDS IN 1 ARRAYLIST
+    public ArrayList<Award> getAlleAwards() {
+        ArrayList<Award> alleAwards = new ArrayList<>();
+        alleAwards.add(0, this.getBestseller());
+        alleAwards.add(1, this.getJustfeeder());
+        alleAwards.add(2, this.getUsersChoice());
+        for (Award a : this.getHotItems()) {
+            alleAwards.add(a);
+        }
+        return alleAwards;
+    }
+
     //METHODES IVM MENU'S
     private void addMenu(Menu m, int orderID) {
         try {
@@ -1910,6 +1922,31 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
         }
+    }
+
+    public ArrayList<Menu> getAlleMenus() {
+        try {
+            ArrayList<Menu> alleMenus = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_menu;";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int menuID = srs.getInt("menuID");
+                double menuprijs = srs.getDouble("menuprijs");
+                int orderID = srs.getInt("orderID");
+                String takeawayNaam = srs.getString("takeaway");
+                String vestiging = srs.getString("vestiging");
+
+                Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
+                alleMenus.add(menu);
+            }
+            this.closeConnection();
+            return alleMenus;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
     }
 
     //deze methode oproepen bij het ingeven van kortingscodes niet, de bestaat bij methodes korting
@@ -1984,8 +2021,8 @@ public class Database {
             return null;
         }
     }
-        
-        public ArrayList<Menu> getVerkopen() {
+
+    public ArrayList<Menu> getVerkopen() {
 
         try {
             ArrayList<Menu> Verkopen = new ArrayList<>();
@@ -2010,6 +2047,5 @@ public class Database {
         }
 
     }
-    
-    
+
 }
