@@ -13,7 +13,7 @@ public class Vestiging {
     private double leveringskosten;
     private int plaatsnummer;
     private ArrayList<Gemeente> leveringsgebied;
-
+    
     public Vestiging(String straat, int huisnummer, double leveringskosten, int plaatsnummer, String takeawayNaam, String vestigingsID) {
         this.straat = straat;
         this.huisnummer = huisnummer;
@@ -93,7 +93,7 @@ public class Vestiging {
     public String toString() {
         Database d = new Database();
         String result;
-        result = "VestigingsID:\t" + this.getVestigingsID() + "\n";
+        result = "VestigingsID:\t" + this.getVestigingsID()+ "\n";
         result += d.getCoordinaten(this.getPlaatsnummer()).toString();
         result += "Straat:\t" + this.getStraat() + "\n";
         result += "Huisnummer:\t" + this.getHuisnummer() + "\n";
