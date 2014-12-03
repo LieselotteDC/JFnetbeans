@@ -1,5 +1,11 @@
 package Logica;
 
+//import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class DatumFinder {
 
     public String maand;
@@ -42,7 +48,8 @@ public class DatumFinder {
         }
         return datum;
     }
-       public static String getEersteDag(String maand, int jaar) {
+
+    public static String getEersteDag(String maand, int jaar) {
         String datum = null;
         if (maand.equalsIgnoreCase("januari")) {
             datum = "01,01," + jaar;
@@ -79,5 +86,13 @@ public class DatumFinder {
             datum = "12,01," + jaar;
         }
         return datum;
+    }
+
+    public String getStringFromDate() {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = new Date();
+        String tekst = dateFormat.format(date);
+        return tekst;
     }
 }

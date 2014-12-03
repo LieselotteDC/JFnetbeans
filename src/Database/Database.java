@@ -779,13 +779,11 @@ public class Database {
 
     public Take_Away getTakeawaynaamProduct(int productID) {
         try {
-            String sql = "SELECT naam FROM tbl_product P, tbl_biedtAan B WHERE (P.productID = B.productID)and (P.productID = " + productID + ");";
+            String sql = "SELECT * FROM tbl_product P, tbl_biedtAan B WHERE (P.productID = B.productID)and (P.productID = " + productID + ");";
             ResultSet srs = getData(sql);
             if (srs.next()) {
-                String naam = srs.getString("naam");
-                String email = srs.getString("email");
-                double commissie = srs.getDouble("commissie");
-                Take_Away ta = new Take_Away(naam, email, commissie);
+                String naam1 = srs.getString("takeawaynaam");
+                Take_Away ta = new Take_Away(naam1);
                 this.closeConnection();
                 return ta;
             } else {
