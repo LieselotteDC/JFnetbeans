@@ -1,6 +1,5 @@
 package Logica;
 
-import Database.Database;
 
 public class Klant {
 

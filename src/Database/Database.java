@@ -361,6 +361,30 @@ public class Database {
         }
     }
 
+    public Boolean heeftTakeawayAlVestiging(String takeaway) {
+        try {
+            String sql = "SELECT COUNT(*) AS aantal FROM tbl_vestigingen WHERE naam = '" + takeaway + "';";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                int aantal = srs.getInt("aantal");
+                if (aantal == 0) {
+                    this.closeConnection();
+                    return false;
+                } else {
+                    this.closeConnection();
+                    return true;
+                }
+            } else {
+                this.closeConnection();
+                return false;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return false;
+        }
+    }
+
     public void addTake_Away(Take_Away tw) {
         try {
             dbConnection = getConnection();
@@ -2020,24 +2044,46 @@ public class Database {
             this.closeConnection();
         }
     }
-//  DIT NOG AANPASSEN !!
-    /*public void addHulpKorting(ArrayList<HulpKorting> hulpkortingen) {
+
+    public void addHulpKorting(ArrayList<HulpKorting> hulpkortingen) {
 
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            for (HulpKorting hk : hulpkortingen){
-                // kortingsbedrag eruit halen, dan optellen met bedrag dat we hebben en dan er terug in steken
-                stmt.executeUpdate("UPDATE tbl_hulpkorting SET () WHERE ('"+ hk.getTakeawayNaam() +"');");
+
+            for (HulpKorting hk : hulpkortingen) {
+                double huidigKortingsbedrag = this.getHuidigeHulpKorting(hk.getTakeawayNaam());
+                double nieuwKortingsbedrag = huidigKortingsbedrag + hk.getKortingsbedrag();
+                stmt.executeUpdate("UPDATE tbl_hulpkorting SET kortingsbedrag=" + nieuwKortingsbedrag + " WHERE (takeawaynaam='" + hk.getTakeawayNaam() + "');");
             }
-            
+
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
         }
 
-    }*/
+    }
+
+    private double getHuidigeHulpKorting(String takeawayNaam) {
+        double huidigeHulpkorting = 0.0;
+        try {
+            String sql = "SELECT * FROM tbl_hulpkorting WHERE (takeawaynaam='" + takeawayNaam + "');";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                huidigeHulpkorting = srs.getInt("kortingsbedrag");
+                this.closeConnection();
+                return huidigeHulpkorting;
+            } else {
+                this.closeConnection();
+                return huidigeHulpkorting;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return huidigeHulpkorting;
+        }
+    }
 
     public ArrayList<Menu> getLopendeOrders(String takeawayNaam, String vestiging) {
 
@@ -2088,4 +2134,61 @@ public class Database {
 
     }
 
+    //METHODES IVM COMMISSIE
+    public void addCommissie(String maand, int jaar) {
+        try {
+            for (Take_Away ta : this.getAlleTakeaways()) {
+                double berekendeCommissie = this.berekenenCommissie(ta.getNaam(), maand, jaar);
+                dbConnection = getConnection();
+                Statement stmt = dbConnection.createStatement();
+                stmt.executeUpdate("UPDATE tbl_takeaway SET commissie = " + berekendeCommissie + " WHERE naam = '" + ta.getNaam() + "';");
+            }
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
+
+    private double berekenenCommissie(String takeawayNaam, String maand, int jaar) {
+        String start = DatumFinder.getEersteDag(maand, jaar);
+        String eind = DatumFinder.getLaatsteDag(maand, jaar);
+        double totaleGeldwaarde = 0.0; //sum die we ophalen + hulpkorting
+        double opgehaaldeMenusPrijs = 0.0;
+        double opgehaaldeHulpkorting = 0.0;
+        double aantalOrders = 0;
+        ResultSet srs;
+        //ophalen van gegevens
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            String sql = "SELECT * FROM tbl_hulpkorting WHERE (takeawaynaam='" + takeawayNaam + "');";
+            srs = stmt.executeQuery(sql);
+            if (srs.next()) {
+                opgehaaldeHulpkorting = srs.getDouble("kortingsbedrag");
+            }
+
+            String sql1 = "SELECT SUM(M.menuprijs) AS gecumuleerdeMenuprijs FROM tbl_menu M , tbl_order O WHERE (M.orderID=O.orderID)and (M.takeaway='" + takeawayNaam + "')and (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
+            srs = stmt.executeQuery(sql1);
+            if (srs.next()) {
+                opgehaaldeMenusPrijs = srs.getDouble("gecumuleerdeMenuprijs");
+            }
+
+            String sql2 = "SELECT COUNT(*) AS aantalOrders FROM tbl_menu M, tbl_order O WHERE (M.orderID=O.orderID) and (M.takeaway='" + takeawayNaam + "')and (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
+            srs = stmt.executeQuery(sql2);
+            if (srs.next()) {
+                aantalOrders = srs.getDouble("aantalOrders");
+            }
+            this.closeConnection();
+
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+        // berekening van de commissie
+        totaleGeldwaarde = opgehaaldeMenusPrijs + opgehaaldeHulpkorting;
+        double berekendeCommisie = Math.max(0.07 * (totaleGeldwaarde), Math.min(0.1 * (totaleGeldwaarde), ((-1 / 5000) * (aantalOrders) + (11 / 100)) * (totaleGeldwaarde)));
+        return berekendeCommisie;
+    }
 }
