@@ -229,6 +229,11 @@ public class Bestelling extends javax.swing.JFrame {
                 rbtnTakeAwayMouseClicked(evt);
             }
         });
+        rbtnTakeAway.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnTakeAwayActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Postcode waar moet worden  geleverd:");
@@ -540,6 +545,10 @@ public class Bestelling extends javax.swing.JFrame {
         txtVestigingsID.setText(d.bestelFormulier(sql2, "vestigingsID"));
         txtVestigingsID.setEnabled(false);
     }//GEN-LAST:event_tblSuggestiesMouseClicked
+
+    private void rbtnTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTakeAwayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnTakeAwayActionPerformed
 
     /**
      * @param args the command line arguments

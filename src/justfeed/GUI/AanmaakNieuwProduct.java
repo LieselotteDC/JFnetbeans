@@ -262,13 +262,39 @@ public static AanmaakNieuwProduct getInstance(AanpassenProduct aangepastproduct)
             JOptionPane.showMessageDialog(null, "Dit product bestaat reeds. Probeer opnieuw.");
             txtProductnaam.setText("");
         }
+        else if(!d.heeftTakeawayAlVestiging(takeAwayNaam)){
+            int reply = JOptionPane.showConfirmDialog(null, "U kan enkel producten toevoegen aan takeaways die minstens één vestiging hebben. Wil U een vestiging toevoegen?", "Toevoegen vestiging",JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+            Aanmaaknieuwevestiging vestiging = Aanmaaknieuwevestiging.getInstance(nieuwproduct);
+    //      vestiging.setSize(300,300);
+            vestiging.pack();
+            nieuwproduct.hide();
+            vestiging.show();
+            vestiging.setLocationRelativeTo(null);
+            }
+            else {
+            JOptionPane.showConfirmDialog(null, "U kan enkel producten toevoegen aan takeaways die minstens één vestiging hebben. Probeer opnieuw.");
+            Profielklant profiel = Profielklant.getInstance(nieuwproduct);
+            profiel.pack();
+            nieuwproduct.hide();
+            profiel.show();
+            profiel.setLocationRelativeTo(null);
+            txtTakeawayNaam.setText("");
+            txtProductnaam.setText("");
+            comboboxType.setSelectedItem(null);
+            txtEenheidsprijs.setText("");
+            }
+        }
         else{
             double eenheidsprijs = Double.parseDouble(txtEenheidsprijs.getText());
             Product p = new Product(productNaam, producttype, eenheidsprijs);
             d.addProduct(p, takeAwayNaam);
             JOptionPane.showMessageDialog(null, "Het product werd succesvol toegevoegd.");
+            Profielklant profiel = Profielklant.getInstance(nieuwproduct);
+            profiel.pack();
             nieuwproduct.hide();
-            myCaller.show();  
+            profiel.show();
+            profiel.setLocationRelativeTo(null);
             txtTakeawayNaam.setText("");
             txtProductnaam.setText("");
             comboboxType.setSelectedItem(null);

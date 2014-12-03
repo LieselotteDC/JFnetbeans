@@ -100,6 +100,11 @@ public class Profielklant extends javax.swing.JFrame {
         myCaller = toevoegenReview;
         return profiel;
     }
+        public static Profielklant getInstance(AanmaakNieuwProduct nieuwproduct)
+    {
+        myCaller = nieuwproduct;
+        return profiel;
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

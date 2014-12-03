@@ -41,6 +41,11 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         myCaller = uniekeActie;
         return vestiging;
     }
+    public static Aanmaaknieuwevestiging getInstance(AanmaakNieuwProduct nieuwproduct)
+    {
+        myCaller = nieuwproduct;
+        return vestiging;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
