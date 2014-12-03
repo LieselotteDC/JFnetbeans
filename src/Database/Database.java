@@ -642,7 +642,7 @@ public class Database {
     //METHODES IVM PRODUCTEN
     public Boolean productBestaat(String product, String takeaway) {
         try {
-            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.naam = '" + takeaway + "') and (P.naam = '" + product + "');";
+            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.takeawaynaam = '" + takeaway + "') and (P.naam = '" + product + "');";
             ResultSet srs = getData(sql);
             if (srs.next()) {
                 this.closeConnection();
@@ -800,7 +800,7 @@ public class Database {
     public ArrayList<Product> getProductsOfTakeaway(String takeawayNaam) {
         try {
             ArrayList<Product> alleProducten = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.naam = '" + takeawayNaam + "');";
+            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.takeawaynaam = '" + takeawayNaam + "');";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 int productID = srs.getInt("productID");
@@ -820,43 +820,7 @@ public class Database {
     }
 
     //METHODES IVM KORTINGEN
-    /* public ArrayList<UniekeActie> rapportKortingAlgemeen(String takeawayNaam) {
-     ArrayList<UniekeActie> alleKortingen = new ArrayList<>();
-     try {
-     for (Vestiging ves : this.getAlleVestigingen(takeawayNaam)) {
-     String vestiging = ves.getVestigingsID();
-     String sql = "SELECT * FROM tbl_kortingEenmalig WHERE (naam='" + takeawayNaam + "') and (status=TRUE);";
-     ResultSet srs = getData(sql);
-     while (srs.next()) {
-     int code = srs.getInt("kortingscode");
-     double bedrag = srs.getDouble("bedrag");
-     double percentage = srs.getDouble("percentage");
-     String login = srs.getString("login");
-     UniekeActieEenmalig uae = new UniekeActieEenmalig(code, vestiging, bedrag, percentage, login, takeawayNaam);
-     alleKortingen.add(uae);
-     }
-     String sql2 = "SELECT * FROM tbl_kortingPeriode WHERE (naam='" + takeawayNaam + "') and (CURDATE() BETWEEN startdatum AND einddatum);";
-     ResultSet srs2 = getData(sql2);
-     while (srs2.next()) {
-     int code2 = srs2.getInt("kortingscode");
-     double bedrag2 = srs2.getDouble("bedrag");
-     double percentage2 = srs2.getDouble("percentage");
-     String login2 = srs2.getString("login");
-     Date startdatum = srs2.getDate("startdatum");
-     Date einddatum = srs2.getDate("einddatum");
-     UniekeActiePeriode uap = new UniekeActiePeriode(startdatum, einddatum, code2, vestiging, bedrag2, percentage2, login2, takeawayNaam);
-     alleKortingen.add(uap);
-     }
-     }
-     this.closeConnection();
-     return alleKortingen;
-     } catch (SQLException sqle) {
-     System.out.println("SQLException: " + sqle.getMessage());
-     this.closeConnection();
-     return null;
-     }
-     }*/
-    // in schrijven naar document, eerst checken of ze algemeen schrijven of een vestiging, bij algemeen een TOSTRING VAN TAKEAWAY dan for(getallevest) et (toString vestiging,oproepen specifieke,toString van producten ) 
+        // in schrijven naar document, eerst checken of ze algemeen schrijven of een vestiging, bij algemeen een TOSTRING VAN TAKEAWAY dan for(getallevest) et (toString vestiging,oproepen specifieke,toString van producten ) 
     public ArrayList<UniekeActie> rapportKortingSpecifiek(String takeawayNaam, String vestiging) {
         ArrayList<UniekeActie> alleKortingen = new ArrayList<>();
         try {
@@ -1894,7 +1858,7 @@ public class Database {
         ArrayList<Users_Choice> scorePerTakeaway = new ArrayList<>();
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
-                String sql = "SELECT AVG(score) AS avgReview FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.naam='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.naam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
+                String sql = "SELECT AVG(score) AS avgReview FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
                 ResultSet srs = getData(sql);
                 if (srs.next()) {
                     String takeaway = ta.getNaam();
