@@ -138,6 +138,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Leveringsgebied(en):");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel10.setText("(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)");
 
         jLabel15.setForeground(new java.awt.Color(255, 51, 51));
@@ -365,6 +366,10 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 txtPostcode.setText("");
                 txtGemeente.setText("");
                 }
+            else if(stringlevgebied.charAt(stringlevgebied.length()-1) != ';'){
+                JOptionPane.showMessageDialog(null, "De ingevoerde leveringsgebieden hebben niet de vereiste syntax. Probeer opnieuw.");
+                txtLeveringsgebied.setText("");
+            }
             else{
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
                 double leveringskosten = Double.parseDouble(txtLeveringskosten.getText());

@@ -191,26 +191,35 @@ public class AanmaakAward extends javax.swing.JFrame {
                 txtJaar.requestFocus();
             }
         } else {
-                //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
-            //visualisatie gebeurd dus pas na het toekennen van alle awards!
-            int jaar = Integer.parseInt(txtJaar.getText());
-            d.undoVisualisationAwards();
-            d.deleteAllAwards();
-            d.addAwardBestseller(maand, jaar);
-            d.addAwardHotItem(maand, jaar);
-            d.addAwardUsersChoice(maand);
-            d.addAwardJustFeeder(maand);
-            d.doVisualisationAwards();
-            comboboxMaand.setSelectedItem(null);
-            txtJaar.setText("");
-            JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
-            Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
-//     amdministrator.setSize(300,300);
-            awardsoverzicht.pack();
-            aanmaakAward.hide();
-            awardsoverzicht.show();
-            awardsoverzicht.setLocationRelativeTo(null);
-
+            int reply = JOptionPane.showConfirmDialog(null, "Heeft U de commissies reeds berekend?", "Commissieberekening", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+               //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
+               //visualisatie gebeurd dus pas na het toekennen van alle awards!
+               int jaar = Integer.parseInt(txtJaar.getText());
+               d.undoVisualisationAwards();
+               d.deleteAllAwards();
+               d.addAwardBestseller(maand, jaar);
+               d.addAwardHotItem(maand, jaar);
+               d.addAwardUsersChoice(maand);
+               d.addAwardJustFeeder(maand);
+               d.doVisualisationAwards();
+               comboboxMaand.setSelectedItem(null);
+               txtJaar.setText("");
+               JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
+               Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
+               //     amdministrator.setSize(300,300);
+               awardsoverzicht.pack();
+               aanmaakAward.hide();
+               awardsoverzicht.show();
+               awardsoverzicht.setLocationRelativeTo(null);   
+            }
+            else {
+                Commissieberekening commissie = Commissieberekening.getInstance(aanmaakAward);
+                commissie.pack();
+                aanmaakAward.hide();
+                commissie.show();
+                commissie.setLocationRelativeTo(null);
+            }
         }
 
     }//GEN-LAST:event_btnAanmaakAwardActionPerformed

@@ -263,6 +263,10 @@ public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
             txtCategorie.setText("");
             txtEmailadres.setText("");
         }
+        else if(categoriestring.charAt(categoriestring.length()-1) != ';'){
+                JOptionPane.showMessageDialog(null, "De ingevoerde categorie(ën) hebben niet de vereiste syntax. Probeer opnieuw.");
+                txtCategorie.setText("");
+            }
         else{
             Take_Away ta = new Take_Away(naam,email,0);
             d.addTake_Away(ta);
@@ -272,7 +276,7 @@ public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
             d.addCategorieFromTake_Away(categorie, ta);
             categoriestring = categoriestring.substring(categoriestring.indexOf(';')+1);
             }
-            JOptionPane.showMessageDialog(null,"De Take-Away werd succesvol toegevoegd.");
+            JOptionPane.showMessageDialog(null,"De Take-Away werd succesvol toegevoegd. \n Vergeet geen vestiging toe te voegen aan deze Take-Away alvorens een product toe te voegen.");
             takeaway.hide();
             myCaller.show();
             txtNaam.setText("");
