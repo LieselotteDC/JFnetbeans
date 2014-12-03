@@ -19,7 +19,7 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
-    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
+    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.takeawaynaam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
 
 
     /**
@@ -162,7 +162,7 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("score:");
 
-        comboboxScore.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5" }));
+        comboboxScore.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0", "1", "2", "3", "4", "5" }));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("beoordeling:");
@@ -336,8 +336,8 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         String sql3 = "select * from tbl_review where reviewID = '" + tabel_click2 + "' ";
         txtReviewID.setText(d.bestelFormulier(sql3, "reviewID"));
         txtReviewID.setEnabled(false);
-        comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
-        comboboxScore.setEnabled(false);
+        //comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
+        comboboxScore.setEnabled(true);
         txtBeoordeling.setText(d.bestelFormulier(sql3, "beoordeling"));
         txtBeoordeling.setEditable(false);
     }//GEN-LAST:event_tblReedsGeschrevenReviewsMouseClicked
@@ -394,7 +394,7 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
             Review review = new Review(reviewID, score2, reviewTekst);
             d.invullenReview(actief, review);
         } else {
-            JOptionPane.showMessageDialog(null, "Gelieve de review te selecteren die U wil toevoegen.");
+            JOptionPane.showMessageDialog(null, "Gelieve de review te selecteren die U wil toevoegen en zelf een score toe te voegen.");
         }
         }
     }//GEN-LAST:event_btnToevoegenReviewActionPerformed
