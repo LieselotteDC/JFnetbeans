@@ -820,7 +820,7 @@ public class Database {
     }
 
     //METHODES IVM KORTINGEN
-        // in schrijven naar document, eerst checken of ze algemeen schrijven of een vestiging, bij algemeen een TOSTRING VAN TAKEAWAY dan for(getallevest) et (toString vestiging,oproepen specifieke,toString van producten ) 
+    // in schrijven naar document, eerst checken of ze algemeen schrijven of een vestiging, bij algemeen een TOSTRING VAN TAKEAWAY dan for(getallevest) et (toString vestiging,oproepen specifieke,toString van producten ) 
     public ArrayList<UniekeActie> rapportKortingSpecifiek(String takeawayNaam, String vestiging) {
         ArrayList<UniekeActie> alleKortingen = new ArrayList<>();
         try {
@@ -1444,11 +1444,16 @@ public class Database {
     }
 
     //METHODES IVM REVIEWS
-    public void aanmakenReview(Klant kl, int productId, Date orderdatum) {
+    //bij elk besteld product een review aanmaken met constructor uit de logica (methode aanmaken review voorlopen) en die dan in een arraylist steken
+    //bij het goedkeuren deze methode oproepen met de arraylist
+    public void aanmakenReview(ArrayList<Review> besteldeProducten) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + kl.getLogin() + "'," + productId + ",TRUE,'geen beoordeling','" + orderdatum + "');");
+            for (Review rev : besteldeProducten) {
+                if(!(this.getProduct(rev.getProductId()).getProducttype().equalsIgnoreCase("drank"))){
+                stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin()+ "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + rev.getStartdatum() + "');");
+            }}
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1463,8 +1468,10 @@ public class Database {
             stmt.executeUpdate("UPDATE tbl_review SET score = " + rev.getScore() + " WHERE reviewID= " + rev.getReviewId() + ";");
             stmt.executeUpdate("UPDATE tbl_review SET status = FALSE WHERE reviewID= " + rev.getReviewId() + ";");
             stmt.executeUpdate("UPDATE tbl_review SET beoordeling = '" + rev.getBeoordeling() + "' WHERE reviewID= " + rev.getReviewId() + ";");
-            this.addKortingReview(kl);
             this.closeConnection();
+            if (this.eersteReview(kl, rev)) {
+                this.addKortingReview(kl);
+            }
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
@@ -1506,6 +1513,24 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
             return null;
+        }
+    }
+
+    private Boolean eersteReview(Klant kl, Review rev) {
+        try {
+            String sql = "SELECT * FROM tbl_review WHERE (productID = " + rev.getProductId() + ") and (login='" + kl.getLogin() + "') and (status=FALSE);";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                this.closeConnection();
+                return false;
+            } else {
+                this.closeConnection();
+                return true;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return false;
         }
     }
 

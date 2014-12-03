@@ -10,7 +10,7 @@ public class Review {
     private int productId;
     private boolean status;
     private String beoordeling;
-     private Date startdatum;
+    private Date startdatum;
 
     public Review() {
         this.reviewId = 0;
@@ -19,7 +19,7 @@ public class Review {
         this.productId = 0;
         this.status = true;
         this.beoordeling = null;
-        this.startdatum=null;
+        this.startdatum = null;
     }
 
     public Review(int reviewId, double score, String login, int productId, boolean status, String beoordeling, Date startdatum) {
@@ -29,7 +29,7 @@ public class Review {
         this.productId = productId;
         this.status = status;
         this.beoordeling = beoordeling;
-        this.startdatum=startdatum;
+        this.startdatum = startdatum;
     }
 
     public Review(String login, int productId) {
@@ -39,7 +39,7 @@ public class Review {
         this.productId = productId;
         this.status = true;
         this.beoordeling = null;
-        this.startdatum=null;
+        this.startdatum = null;
     }
 
     public Review(int reviewId, double score, String beoordeling) {
@@ -49,17 +49,32 @@ public class Review {
         this.productId = 0;
         this.status = true;
         this.beoordeling = beoordeling;
-        this.startdatum=null;
+        this.startdatum = null;
     }
 
-    public Review(int reviewId, double score,int productId, String beoordeling) {
+    public Review(int reviewId, double score, int productId, String beoordeling) {
         this.reviewId = reviewId;
         this.score = score;
         this.login = null;
         this.productId = productId;
         this.status = true;
         this.beoordeling = beoordeling;
-        this.startdatum=null;
+        this.startdatum = null;
+    }
+
+    public Review(String login, int productId, Date startdatum) {
+        this.reviewId = 0;
+        this.score = 0;
+        this.login = login;
+        this.productId = productId;
+        this.status = true;
+        this.beoordeling = null;
+        this.startdatum = startdatum;
+    }
+
+    public Review aanmaakReviewVoorlopig(Klant kl, Orderverwerking besteldProduct, Date orderdatum) {
+        Review rev = new Review(kl.getLogin(), besteldProduct.getProductID(), orderdatum);
+        return rev;
     }
 
     public int getReviewId() {
@@ -90,7 +105,6 @@ public class Review {
         this.startdatum = startdatum;
     }
 
-    
     public void setLogin(String login) {
         this.login = login;
     }

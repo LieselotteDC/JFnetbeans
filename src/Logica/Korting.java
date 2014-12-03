@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.ArrayList;
+
 public class Korting {
 
     private int kortingscode;
@@ -23,6 +25,20 @@ public class Korting {
     public Korting(int kortingscode) {
         this.kortingscode = kortingscode;
         this.login = null;
+    }
+    
+    public Boolean bevatTypeKorting(Korting ingevoerdeKorting, ArrayList<Korting> reedsIngevoerdeKortingen){
+        boolean bevatType=false;
+        if(reedsIngevoerdeKortingen.isEmpty()){
+            bevatType=false;
+        }else{
+            for(Korting kor:reedsIngevoerdeKortingen)  {
+                if(reedsIngevoerdeKortingen.contains(kor)){
+                    bevatType=true;
+                }
+            }
+        }
+        return bevatType;
     }
 
     @Override
