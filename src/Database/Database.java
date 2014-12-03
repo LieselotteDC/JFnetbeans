@@ -620,11 +620,11 @@ public class Database {
                 int plaatsnummer = srs.getInt("plaatsnummer");
                 String vestigingsID = srs.getString("vestigingsID");
 
-                String sql2 = "SELECT * FROM tbl_vestigingen V, tbl_leveringsregio L WHERE (V.naam = '" + takeawayNaam + "')and (V.vestigingsID = '" + vestigingsID + "') ;";
+                String sql2 = "SELECT * FROM tbl_vestigingen V, tbl_leveringsregio L WHERE(V.naam=L.naam) and (V.vestigingsID=L.vestigingsID) and (V.naam = '" + takeawayNaam + "')and (V.vestigingsID = '" + vestigingsID + "');";
                 ResultSet srs2 = getData(sql2);
+                leveringsgebied.clear();
                 while (srs2.next()) {
-                    leveringsgebied.clear();
-                    int plaatsnrLevering = srs.getInt("leveringsgebied");
+                    int plaatsnrLevering = srs2.getInt("leveringsgebied");
                     leveringsgebied.add(this.getCoordinaten(plaatsnrLevering));
                 }
                 Vestiging ves = new Vestiging(vestigingsID, takeawayNaam, straat, huisnummer, plaatsnummer, leveringskosten, leveringsgebied);
@@ -1451,9 +1451,10 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             for (Review rev : besteldeProducten) {
-                if(!(this.getProduct(rev.getProductId()).getProducttype().equalsIgnoreCase("drank"))){
-                stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin()+ "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + rev.getStartdatum() + "');");
-            }}
+                if (!(this.getProduct(rev.getProductId()).getProducttype().equalsIgnoreCase("drank"))) {
+                    stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin() + "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + rev.getStartdatum() + "');");
+                }
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());

@@ -14,7 +14,7 @@ public class testMain {
      WriteFile test= new WriteFile();
      test.awardsPerTakeaway("januari", 2014);
      test.lopendeOrdersPerTakeaway("pizzahut");
-     test.verkopenPerTakeaway("pizzahut");
-     test.menukaartPerTakeaway("pizzahut");
+     //test.verkopenPerTakeaway("pizzahut");
+     //test.menukaartPerTakeaway("pizzahut");
     }
 }
