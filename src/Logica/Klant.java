@@ -9,7 +9,7 @@ public class Klant {
     private String email;
     private String naam;
     private String voornaam;
-    Database wdb = new Database();
+   
 
     public Klant() {
         this.login = null;
