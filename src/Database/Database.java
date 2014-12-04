@@ -887,7 +887,7 @@ public class Database {
         }
     }
 
-    public Boolean kortingRegistratieGeldig(int code, Klant kl) {
+    public Boolean kortingRegistratieGeldig(int code) {
         try {
             String sql = "SELECT * FROM tbl_kortingRegistratie WHERE (kortingscode = " + code + ") and (status =TRUE);";
             ResultSet srs = getData(sql);
