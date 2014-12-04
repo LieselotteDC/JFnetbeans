@@ -2122,6 +2122,18 @@ public class Database {
 
     }
 
+    public void OntvangstbevestigingOrder(int orderID) {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("UPDATE tbl_order SET status = TRUE WHERE orderID = " + orderID + ";");
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
+
     //METHODES IVM COMMISSIE
     public void addCommissie(String maand, int jaar) {
         try {
