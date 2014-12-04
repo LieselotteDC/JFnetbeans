@@ -6,12 +6,22 @@ public class Product {
     private String naam;
     private String producttype;
     private double eenheidsprijs;
+    private String takeawaynaam;
 
     public Product() {
         this.ProductID = 0;
         this.naam = null;
         this.producttype = null;
         this.eenheidsprijs = 0;
+        this.takeawaynaam = null;
+    }
+
+    public Product(int ProductID, String naam, String producttype, double eenheidsprijs, String takeawaynaam) {
+        this.ProductID = ProductID;
+        this.naam = naam;
+        this.producttype = producttype;
+        this.eenheidsprijs = eenheidsprijs;
+        this.takeawaynaam = takeawaynaam;
     }
 
     public Product(int ProductID, String naam, String producttype, double eenheidsprijs) {
@@ -19,6 +29,7 @@ public class Product {
         this.naam = naam;
         this.producttype = producttype;
         this.eenheidsprijs = eenheidsprijs;
+        this.takeawaynaam = null;
     }
 
     public Product(int ProductID) {
@@ -26,6 +37,15 @@ public class Product {
         this.naam = null;
         this.producttype = null;
         this.eenheidsprijs = 0;
+        this.takeawaynaam = null;
+    }
+
+    public Product(String naam, String type, double eenheidsprijs, String takeawaynaam) {
+        this.ProductID = 0;
+        this.naam = naam;
+        this.producttype = type;
+        this.eenheidsprijs = eenheidsprijs;
+        this.takeawaynaam = takeawaynaam;
     }
 
     public Product(String naam, String type, double eenheidsprijs) {
@@ -33,6 +53,7 @@ public class Product {
         this.naam = naam;
         this.producttype = type;
         this.eenheidsprijs = eenheidsprijs;
+        this.takeawaynaam = null;
     }
 
     public int getProductID() {
@@ -49,6 +70,14 @@ public class Product {
 
     public double getEenheidsprijs() {
         return eenheidsprijs;
+    }
+
+    public String getTakeawaynaam() {
+        return takeawaynaam;
+    }
+
+    public void setTakeawaynaam(String takeawaynaam) {
+        this.takeawaynaam = takeawaynaam;
     }
 
     @Override

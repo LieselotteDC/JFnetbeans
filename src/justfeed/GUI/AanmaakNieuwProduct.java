@@ -287,8 +287,8 @@ public static AanmaakNieuwProduct getInstance(AanpassenProduct aangepastproduct)
         }
         else{
             double eenheidsprijs = Double.parseDouble(txtEenheidsprijs.getText());
-            Product p = new Product(productNaam, producttype, eenheidsprijs);
-            d.addProduct(p, takeAwayNaam);
+            Product p = new Product(productNaam, producttype, eenheidsprijs, takeAwayNaam);
+            d.addProduct(p);
             JOptionPane.showMessageDialog(null, "Het product werd succesvol toegevoegd.");
             Profielklant profiel = Profielklant.getInstance(nieuwproduct);
             profiel.pack();

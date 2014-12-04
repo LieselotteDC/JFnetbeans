@@ -4,23 +4,26 @@
  * and open the template in the editor.
  */
 package justfeed.GUI;
+
 import Database.*;
 import Logica.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author liedcost
  */
 public class ReviewBestaandOvernemen extends javax.swing.JFrame {
+
     private static final ReviewBestaandOvernemen overnemenReview = new ReviewBestaandOvernemen();
     public static JFrame myCaller;
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
-    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.takeawaynaam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
-
+    // DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.takeawaynaam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
+    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,R.score,R.beoordeling FROM tbl_review R, tbl_product P WHERE (R.productID=P.productID) and (R.status=TRUE) and('" + actief.getLogin() + "'=R.login);");
 
     /**
      * Creates new form ToevoegenReview
@@ -28,14 +31,14 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
     public ReviewBestaandOvernemen() {
         initComponents();
         tblKeuzes.setModel(t);
-        
+
     }
 
-    public static ReviewBestaandOvernemen getInstance(Profielklant profiel)
-    {
+    public static ReviewBestaandOvernemen getInstance(Profielklant profiel) {
         myCaller = profiel;
         return overnemenReview;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,19 +308,19 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
-       Profielklant profiel = Profielklant.getInstance(overnemenReview);
-       profiel.pack();
-       overnemenReview.hide();
-       profiel.show();
-       profiel.setLocationRelativeTo(null);
+        Profielklant profiel = Profielklant.getInstance(overnemenReview);
+        profiel.pack();
+        overnemenReview.hide();
+        profiel.show();
+        profiel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
 
     private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
         overnemenReview.hide();
         myCaller.show();
-        DefaultTableModel model = (DefaultTableModel)tblReviews.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblReviews.getModel();
         model.setRowCount(0);
-        DefaultTableModel model2 = (DefaultTableModel)tblReedsGeschrevenReviews.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) tblReedsGeschrevenReviews.getModel();
         model2.setRowCount(0);
         txtReviewID.setText("");
         txtProductID.setText("");
@@ -327,7 +330,7 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         txtTakeAwayNaam.setText("");
         comboboxScore.setSelectedItem(null);
         txtBeoordeling.setText("");
-                
+
     }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     private void tblReedsGeschrevenReviewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReedsGeschrevenReviewsMouseClicked
@@ -354,8 +357,7 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         txtType.setEnabled(false);
         txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
         txtEenheidsPrijs.setEnabled(false);
-        String sql2 = "select * from tbl_biedtAan where productID = '" + tabel_click + "' ";
-        txtTakeAwayNaam.setText(d.bestelFormulier(sql, "naam"));
+        txtTakeAwayNaam.setText(d.bestelFormulier(sql, "takeawaynaam"));
         txtTakeAwayNaam.setEnabled(false);
         DefaultTableModel t = d.naarTabel("select * from tbl_review where productID = '" + tabel_click + "'");
         tblReedsGeschrevenReviews.setModel(t);
@@ -363,11 +365,11 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         txtBeoordeling.setEnabled(false);
         comboboxScore.setEnabled(false);
         /*String tabel_click2 = (tblKeuzes.getModel().getValueAt(row, 0).toString());
-        String sql3 = "select * from tbl_review where reviewID = '" + tabel_click2 + "' ";
-        txtReviewID.setText(d.bestelFormulier(sql3, "reviewID"));
-        txtReviewID.setEnabled(false);
-        comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
-        txtBeoordeling.setText(d.bestelFormulier(sql3, "beoordeling"));*/
+         String sql3 = "select * from tbl_review where reviewID = '" + tabel_click2 + "' ";
+         txtReviewID.setText(d.bestelFormulier(sql3, "reviewID"));
+         txtReviewID.setEnabled(false);
+         comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
+         txtBeoordeling.setText(d.bestelFormulier(sql3, "beoordeling"));*/
     }//GEN-LAST:event_tblKeuzesMouseClicked
 
     private void btnToevoegenReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenReviewActionPerformed
@@ -378,24 +380,23 @@ public class ReviewBestaandOvernemen extends javax.swing.JFrame {
         String takeAwayNaam = txtTakeAwayNaam.getText();
 
         if (txtProductID.getText().isEmpty() || productNaam.isEmpty() || type.isEmpty()
-            || txtEenheidsPrijs.getText().isEmpty() ||txtTakeAwayNaam.getText().isEmpty()) {
+                || txtEenheidsPrijs.getText().isEmpty() || txtTakeAwayNaam.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Gelieve een product te selecteren.");
-        }
-        else {
-            if (!score.isEmpty() && !reviewTekst.isEmpty() &&!txtReviewID.getText().isEmpty()) {
-            DefaultTableModel model = (DefaultTableModel) tblReviews.getModel();
-            model.addRow(new Object[]{txtReviewID.getText(), txtProductID.getText(), txtProductNaam.getText(),
+        } else {
+            if (!score.isEmpty() && !reviewTekst.isEmpty() && !txtReviewID.getText().isEmpty()) {
+                DefaultTableModel model = (DefaultTableModel) tblReviews.getModel();
+                model.addRow(new Object[]{txtReviewID.getText(), txtProductID.getText(), txtProductNaam.getText(),
                     txtType.getText(), txtEenheidsPrijs.getText(), txtTakeAwayNaam.getText(),
                     comboboxScore.getSelectedItem().toString(), txtBeoordeling.getText()});
-            int reviewID = Integer.parseInt(txtReviewID.getText());
-            int score2 = Integer.parseInt(score);
-            int productID = Integer.parseInt(txtProductID.getText());
-            double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
-            Review review = new Review(reviewID, score2, reviewTekst);
-            d.invullenReview(actief, review);
-        } else {
-            JOptionPane.showMessageDialog(null, "Gelieve de review te selecteren die U wil toevoegen en zelf een score toe te voegen.");
-        }
+                int reviewID = Integer.parseInt(txtReviewID.getText());
+                int score2 = Integer.parseInt(score);
+                int productID = Integer.parseInt(txtProductID.getText());
+                double eenheidsprijs = Double.parseDouble(txtEenheidsPrijs.getText());
+                Review review = new Review(reviewID, score2, reviewTekst);
+                d.invullenReview(actief, review);
+            } else {
+                JOptionPane.showMessageDialog(null, "Gelieve de review te selecteren die U wil toevoegen en zelf een score toe te voegen.");
+            }
         }
     }//GEN-LAST:event_btnToevoegenReviewActionPerformed
 

@@ -642,7 +642,7 @@ public class Database {
     //METHODES IVM PRODUCTEN
     public Boolean productBestaat(String product, String takeaway) {
         try {
-            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.takeawaynaam = '" + takeaway + "') and (P.naam = '" + product + "');";
+            String sql = "SELECT * FROM tbl_product WHERE  (takeawaynaam = '" + takeaway + "') and (naam = '" + product + "');";
             ResultSet srs = getData(sql);
             if (srs.next()) {
                 this.closeConnection();
@@ -695,32 +695,16 @@ public class Database {
         }
     }
 
-    private int getProductID() {
-        try {
-            String sql = "SELECT productID FROM tbl_product WHERE naam = 'dummyID';";
-            ResultSet srs = getData(sql);
-            srs.next();
-            int id = srs.getInt("productID");
-            this.closeConnection();
-            return id;
-
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
-            return 0;
-        }
-    } //enkel gebruiken in de methode addProduct
-
-    public void addProduct(Product prod, String takeawayNaam) {
+    public void addProduct(Product prod) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_product VALUES (null,'dummyID','null',0);");
-            int id = this.getProductID();
-            stmt.executeUpdate("UPDATE tbl_product SET type = '" + prod.getProducttype() + "' WHERE productID = " + id + ";");
-            stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = " + prod.getEenheidsprijs() + " WHERE productID = " + id + ";");
-            stmt.executeUpdate("UPDATE tbl_product SET naam = '" + prod.getNaam() + "' WHERE productID = " + id + ";");
-            stmt.executeUpdate("INSERT INTO tbl_biedtAan VALUES ('" + takeawayNaam + "'," + id + ");");
+            stmt.executeUpdate("INSERT INTO tbl_product VALUES (null,'" + prod.getNaam() + "','" + prod.getProducttype() + "'," + prod.getEenheidsprijs() + ", '" + prod.getTakeawaynaam() + "');");
+            //int id = this.getProductID();
+            //stmt.executeUpdate("UPDATE tbl_product SET type = '" + prod.getProducttype() + "' WHERE productID = " + id + ";");
+            //stmt.executeUpdate("UPDATE tbl_product SET eenheidsprijs = " + prod.getEenheidsprijs() + " WHERE productID = " + id + ";");
+            //stmt.executeUpdate("UPDATE tbl_product SET naam = '" + prod.getNaam() + "' WHERE productID = " + id + ";");
+            //stmt.executeUpdate("INSERT INTO tbl_biedtAan VALUES ('" + takeawayNaam + "'," + id + ");");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -763,29 +747,10 @@ public class Database {
                 String naam = srs.getString("naam");
                 String type = srs.getString("type");
                 double prijs = srs.getDouble("eenheidsprijs");
-                Product p = new Product(productID1, naam, type, prijs);
+                String takeawaynaam = srs.getString("takeawaynaam");
+                Product p = new Product(productID1, naam, type, prijs, takeawaynaam);
                 this.closeConnection();
                 return p;
-            } else {
-                this.closeConnection();
-                return null;
-            }
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
-            return null;
-        }
-    }
-
-    public Take_Away getTakeawaynaamProduct(int productID) {
-        try {
-            String sql = "SELECT * FROM tbl_product P, tbl_biedtAan B WHERE (P.productID = B.productID)and (P.productID = " + productID + ");";
-            ResultSet srs = getData(sql);
-            if (srs.next()) {
-                String naam1 = srs.getString("takeawaynaam");
-                Take_Away ta = new Take_Away(naam1);
-                this.closeConnection();
-                return ta;
             } else {
                 this.closeConnection();
                 return null;
@@ -800,14 +765,14 @@ public class Database {
     public ArrayList<Product> getProductsOfTakeaway(String takeawayNaam) {
         try {
             ArrayList<Product> alleProducten = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_product P,tbl_biedtAan B WHERE (P.productID=B.productID) and (B.takeawaynaam = '" + takeawayNaam + "');";
+            String sql = "SELECT * FROM tbl_product WHERE (takeawaynaam = '" + takeawayNaam + "');";
             ResultSet srs = getData(sql);
             while (srs.next()) {
                 int productID = srs.getInt("productID");
                 String naam = srs.getString("naam");
                 String type = srs.getString("type");
                 double prijs = srs.getDouble("eenheidsprijs");
-                Product p = new Product(productID, naam, type, prijs);
+                Product p = new Product(productID, naam, type, prijs, takeawayNaam);
                 alleProducten.add(p);
             }
             this.closeConnection();
@@ -1761,16 +1726,22 @@ public class Database {
                 for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
                     String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B JOIN tbl_menu M ON (B.menuID=M.menuID) JOIN tbl_order O ON (M.orderID=O.orderID) WHERE (B.productID = " + p.getProductID() + ") AND (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
                     ResultSet srs = getData(sql);
-                    if (srs.next()) {
+                    while (srs.next()) {
                         int productID = p.getProductID();
-                        System.out.println(productID);
                         int gecumuleerd = srs.getInt("gecumuleerd");
-                        System.out.println(gecumuleerd);
                         gecumuleerdeHoeveelheidPerTakeaway.add(new Hot_Item(gecumuleerd, productID));
                     }
                 }
                 Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
-                hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
+                if (gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld() == gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld()) {
+                    Product product1 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID());
+                    Product product2 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID());
+                    if (product1.getEenheidsprijs() > product2.getEenheidsprijs()) {
+                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
+                    } else {
+                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID()));
+                    }
+                }
             }
             this.closeConnection();
             return hotItemPerTakeaway;
@@ -1884,7 +1855,8 @@ public class Database {
         ArrayList<Users_Choice> scorePerTakeaway = new ArrayList<>();
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
-                String sql = "SELECT AVG(score) AS avgReview FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
+                //String sql = "SELECT AVG(score) AS avgReview FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R,tbl_biedtAan B WHERE (R.productID=B.productID) and (B.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
+                String sql = "SELECT AVG(score) as avgReview FROM tbl_review R, tbl_product P WHERE (R.productID = P.productID) and (P.takeawaynaam ='" + ta.getNaam() + "') and(R.status=FALSE) and ((SELECT COUNT(*) AS aantalReviews FROM tbl_review R, tbl_product P WHERE (R.productID=P.productID)and (P.takeawaynaam='" + ta.getNaam() + "') and(R.status=FALSE))>=3);";
                 ResultSet srs = getData(sql);
                 if (srs.next()) {
                     String takeaway = ta.getNaam();

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.Database;
@@ -13,20 +12,19 @@ import javax.swing.table.DefaultTableModel;
 
 public class Overzichtreviewsklant extends javax.swing.JFrame {
 
-   private static final Overzichtreviewsklant reviewsklant = new Overzichtreviewsklant();
+    private static final Overzichtreviewsklant reviewsklant = new Overzichtreviewsklant();
     public static JFrame myCaller;
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
-    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=FALSE) and('" + actief.getLogin() + "'=R.login);");
+    // DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID WHERE (R.status=FALSE) and('" + actief.getLogin() + "'=R.login);");
+    DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,R.score,R.beoordeling FROM tbl_review R, tbl_product P WHERE (R.productID=P.productID) and (R.status=FALSE) and('" + actief.getLogin() + "'=R.login);");
 
     public Overzichtreviewsklant() {
         initComponents();
         tblOverzichtReviewsKlant.setModel(t);
     }
 
-
-    public static Overzichtreviewsklant getInstance(Profielklant caller)
-    {
+    public static Overzichtreviewsklant getInstance(Profielklant caller) {
         myCaller = caller;
         return reviewsklant;
     }
@@ -109,17 +107,17 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
-       Profielklant profiel = Profielklant.getInstance(reviewsklant);
+        Profielklant profiel = Profielklant.getInstance(reviewsklant);
 //     profiel.setSize(300,300);
-       profiel.pack();
-       reviewsklant.hide();
-       profiel.show();
-       profiel.setLocationRelativeTo(null);
+        profiel.pack();
+        reviewsklant.hide();
+        profiel.show();
+        profiel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
 
     private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
-      reviewsklant.hide();
-      myCaller.show();
+        reviewsklant.hide();
+        myCaller.show();
     }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**

@@ -138,7 +138,8 @@ public class ZoekenReview extends javax.swing.JFrame {
         String productnaam = txtProductNaam.getText(); 
         if(d.productProductnaamBestaat(productnaam))
         {
-            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=FALSE) and('" + productnaam + "'=P.naam);");
+           // DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,B.naam,R.score,R.beoordeling FROM tbl_review R JOIN tbl_product P ON R.productID=P.productID JOIN tbl_biedtAan B ON P.productID=B.productID WHERE (R.status=FALSE) and('" + productnaam + "'=P.naam);");
+            DefaultTableModel t = d.naarTabel("SELECT R.reviewID,R.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,R.score,R.beoordeling FROM tbl_review R, tbl_product P WHERE (R.productID=P.productID) and (R.status=FALSE) and('" + productnaam + "'=P.naam);");
             tblReviews.setModel(t);
         }
         else{
