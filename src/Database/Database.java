@@ -2122,7 +2122,7 @@ public class Database {
 
     }
 
-    public void OntvangstbevestigingOrder(int orderID) {
+    public void ontvangstbevestigingOrder(int orderID) {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
@@ -2131,6 +2131,24 @@ public class Database {
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
+        }
+    }
+
+    public boolean orderIdBestaat(int orderID) {
+        try {
+            String sql = "SELECT * FROM tbl_order WHERE orderID = " + orderID + ";";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                this.closeConnection();
+                return true;
+            } else {
+                this.closeConnection();
+                return false;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return false;
         }
     }
 
