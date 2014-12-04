@@ -944,7 +944,7 @@ public class Database {
         }
     }
 
-    //registratiekorting
+    //reviewkorting
     public void addKortingReview(Klant kl) {
         ReviewKorting rev = new ReviewKorting();
         try {

@@ -26,16 +26,14 @@ public class Korting {
         this.kortingscode = kortingscode;
         this.login = null;
     }
-    
-    public Boolean bevatTypeKorting(Korting ingevoerdeKorting, ArrayList<Korting> reedsIngevoerdeKortingen){
-        boolean bevatType=false;
-        if(reedsIngevoerdeKortingen.isEmpty()){
-            bevatType=false;
-        }else{
-            for(Korting kor:reedsIngevoerdeKortingen)  {
-                if(reedsIngevoerdeKortingen.contains(kor)){
-                    bevatType=true;
-                }
+
+    public Boolean bevatTypeKorting(Korting ingevoerdeKorting, ArrayList<Korting> reedsIngevoerdeKortingen) {
+        boolean bevatType = false;
+        if (reedsIngevoerdeKortingen.isEmpty()) {
+            bevatType = false;
+        } else {
+            if (reedsIngevoerdeKortingen.contains(ingevoerdeKorting)) {
+                bevatType = true;
             }
         }
         return bevatType;
@@ -44,8 +42,8 @@ public class Korting {
     @Override
     public String toString() {
         String result = null;
-        result += "\tKortingscode:\t" + this.getKortingscode()+ "\n";
-        result += "\tEigenaar code:\t" + this.getLogin()+ "\n";
+        result += "\tKortingscode:\t" + this.getKortingscode() + "\n";
+        result += "\tEigenaar code:\t" + this.getLogin() + "\n";
         return result;
     }
 
