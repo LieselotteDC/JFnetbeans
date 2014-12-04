@@ -442,4 +442,13 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     public void setOrderMetKorting(Order orderMetKorting) {
         this.orderMetKorting = orderMetKorting;
     }
+
+    public ArrayList<HulpKorting> getHulpKorting() {
+        return hulpKorting;
+    }
+
+    public void setHulpKorting(ArrayList<HulpKorting> hulpKorting) {
+        this.hulpKorting = hulpKorting;
+    }
+    
 }

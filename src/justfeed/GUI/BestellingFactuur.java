@@ -27,6 +27,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
     public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
     public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    public ArrayList<HulpKorting> hulpKorting = BestellingKortingscode.getInstance().getHulpKorting();
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
     public static JFrame myCaller;
@@ -162,6 +163,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
         d.addOrder(orderMetKorting, berekendeMenus);
         d.aanmakenReview(voorlopigeReviews);
+        d.addHulpKorting(hulpKorting);
         txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();
