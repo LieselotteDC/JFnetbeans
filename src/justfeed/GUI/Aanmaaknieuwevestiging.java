@@ -84,6 +84,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         btnHomeknopAdministrator = new javax.swing.JMenu();
 
@@ -141,6 +142,12 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel10.setText("(voorbeeld vereiste syntax: 9000Gent;9400Ninove;2000Antwerpen;...;)");
 
+        txtLeveringsgebied.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLeveringsgebiedActionPerformed(evt);
+            }
+        });
+
         jLabel15.setForeground(new java.awt.Color(255, 51, 51));
         jLabel15.setText("*");
 
@@ -155,6 +162,9 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
 
         jLabel22.setForeground(new java.awt.Color(255, 51, 51));
         jLabel22.setText("*");
+
+        jLabel23.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel23.setText("*");
 
         jMenuBar2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -192,7 +202,6 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,13 +220,17 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTakeAwayNaam)
                                     .addGroup(layout.createSequentialGroup()
@@ -239,7 +252,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(226, 226, 226))
                                     .addComponent(jLabel10))
-                                .addGap(0, 100, Short.MAX_VALUE)))))
+                                .addGap(0, 103, Short.MAX_VALUE)))))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -290,7 +303,8 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtLeveringsgebied, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLeveringsgebied, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -419,6 +433,10 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
         txtLeveringskosten.setText("");
     }//GEN-LAST:event_btnHomeknopAdministratorMouseClicked
 
+    private void txtLeveringsgebiedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLeveringsgebiedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLeveringsgebiedActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -470,6 +488,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
