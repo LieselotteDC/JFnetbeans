@@ -185,7 +185,7 @@ public class Menu {
             orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
-                double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;
+                double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;        
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
             }
 
@@ -197,7 +197,7 @@ public class Menu {
             orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
-                double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;
+                double hulpkorting = m.getMenuprijs() *aangepastGecumuleerdPercentageKortingOpOrderprijs ;
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
             }
             orderMetKorting.setTotaalPrijs(orderprijsMetKortingenOpOrderprijs);
