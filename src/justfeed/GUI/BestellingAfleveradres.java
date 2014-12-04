@@ -20,6 +20,9 @@ private static final BestellingAfleveradres adres = new BestellingAfleveradres()
 public Klant actief = LoginKlant.getInstance().getActief();
 public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
 public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+String gemeente = Bestelling.getInstance().getGemeente();
+int postcode = Bestelling.getInstance().getPostcode();
+String postcode2 = Integer.toString(postcode);
 public static JFrame myCaller;
     
     public Database d = new Database();
@@ -28,6 +31,8 @@ public static JFrame myCaller;
      */
     public BestellingAfleveradres() {
         initComponents();
+        txtGemeente.setText(gemeente);
+        txtPostcode.setText(postcode2);
     }
     public static BestellingAfleveradres getInstance(BestellingOverzicht bestellingOverzicht)
     {

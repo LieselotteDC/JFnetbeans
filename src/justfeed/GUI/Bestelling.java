@@ -8,6 +8,7 @@ package justfeed.GUI;
 import Database.*;
 import Logica.*;
 import java.awt.Color;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -25,12 +26,13 @@ public class Bestelling extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
     public DefaultTableModel model = new DefaultTableModel();
-
-
-
-
+    int postcode = 0;
+    String gemeente = null;
+    java.sql.Date leveringsdatum = null;
+    
     public Klant actief = LoginKlant.getInstance().getActief();
     ArrayList<Orderverwerking> besteldeProducten = new ArrayList<>();
+    ArrayList<Review> voorlopigeReviews = new ArrayList<>(); //doorgeven 
     public ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
     public Order orderZonderKorting = new Order(); // ook meegegeven worden
     
@@ -112,6 +114,8 @@ public class Bestelling extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         rbtnProduct = new javax.swing.JRadioButton();
         txtProduct = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblHotItems = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -260,6 +264,25 @@ public class Bestelling extends javax.swing.JFrame {
             }
         });
 
+        tblHotItems.setBackground(new java.awt.Color(255, 153, 0));
+        tblHotItems.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        tblHotItems.setForeground(new java.awt.Color(255, 153, 0));
+        tblHotItems.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblHotItems.getTableHeader().setReorderingAllowed(false);
+        tblHotItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHotItemsMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblHotItems);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,34 +296,41 @@ public class Bestelling extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel8)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(rbtnProduct)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(rbtnTakeAway)
-                                                        .addGap(8, 8, 8)
-                                                        .addComponent(rbtnCategorie)))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtGemeente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(combobox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(28, 28, 28)
-                                        .addComponent(btnZoek)))))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel7)
+                                                .addComponent(jLabel8)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel12)
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(rbtnProduct)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(rbtnTakeAway)
+                                                            .addGap(8, 8, 8)
+                                                            .addComponent(rbtnCategorie)))))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtGemeente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(combobox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(28, 28, 28)
+                                            .addComponent(btnZoek))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE))))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
@@ -332,8 +362,8 @@ public class Bestelling extends javax.swing.JFrame {
                                             .addComponent(txtProductNaam, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtProductID, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtVestigingsID, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addComponent(btnToevoegenAanBestelling)
-                                    .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnToevoegenAanBestelling))))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -349,10 +379,9 @@ public class Bestelling extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -382,35 +411,41 @@ public class Bestelling extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnToevoegenAanBestelling)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBestellingPlaatsen))
+                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbtnCategorie)
                             .addComponent(rbtnTakeAway)
                             .addComponent(jLabel12)
-                            .addComponent(combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnZoek))
+                            .addComponent(combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbtnProduct)
-                            .addComponent(txtProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnZoek))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11)
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnToevoegenAanBestelling)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jLabel13))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBestellingPlaatsen))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -428,11 +463,13 @@ public class Bestelling extends javax.swing.JFrame {
                 berekendeMenus.add(menu.berekenMenuprijs(productenPerVestiging));
             }
         }
-        for (Menu m : berekendeMenus) {
 
-            totaalprijs += m.getMenuprijs();
-        }
+        totaalprijs = menu.berekenOrderprijs(berekendeMenus);
         orderZonderKorting.setTotaalPrijs(totaalprijs);
+        for(Orderverwerking orderver : this.besteldeProducten){
+            Review rev = new Review();
+            rev.aanmaakReviewVoorlopig(actief, orderver, leveringsdatum);
+        }
         
         //bovenaan de file
         /*Order orderMetKorting = new Order();
@@ -480,7 +517,7 @@ public class Bestelling extends javax.swing.JFrame {
                 int hoeveelheid = Integer.parseInt(hoeveelheid1);
                 String takeAwayNaam = txtTakeAwayNaam.getText();
                 String vestigingsID = txtVestigingsID.getText();
-                java.sql.Date leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
+                leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
                 Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
                 orderZonderKorting.setDatum(leveringsdatum);
                 orderZonderKorting.setLogin(actief.getLogin());
@@ -520,7 +557,7 @@ public class Bestelling extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnCategorieMouseClicked
 
     private void btnZoekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekActionPerformed
-        String gemeente = txtGemeente.getText();
+        gemeente = txtGemeente.getText();
         if(txtPostcode.getText().isEmpty() || txtGemeente.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Gelieve een postcode en gemeente toe te voegen.");
         }
@@ -528,7 +565,7 @@ public class Bestelling extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gelieve te selecteren waarop u wil zoeken.");
         }
         else{
-            int postcode = Integer.parseInt(txtPostcode.getText());
+            postcode = Integer.parseInt(txtPostcode.getText());
             if (d.getPlaatsnummer(gemeente, postcode) == 0) {
             JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente voor uw levering stemmen niet overeen. Probeer opnieuw.");
             txtPostcode.setText("");
@@ -589,6 +626,10 @@ public class Bestelling extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rbtnProductMouseClicked
 
+    private void tblHotItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHotItemsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblHotItemsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -647,11 +688,13 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JRadioButton rbtnCategorie;
     private javax.swing.JRadioButton rbtnProduct;
     private javax.swing.JRadioButton rbtnTakeAway;
     private javax.swing.JSpinner spnrHoeveelheid;
     private javax.swing.JTable tblBestelling;
+    private javax.swing.JTable tblHotItems;
     private javax.swing.JTable tblKeuzes;
     private javax.swing.JTable tblSuggesties;
     private javax.swing.JTextField txtEenheidsPrijs;
@@ -685,4 +728,35 @@ public ArrayList<Menu> getBerekendeMenus() {
     public DefaultTableModel getModel() {
         return model;
     }
+    public Date getLeveringsdatum() {
+        return leveringsdatum;
+    }
+
+    public void setLeveringsdatum(Date leveringsdatum) {
+        this.leveringsdatum = leveringsdatum;
+    }
+    public int getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(int postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getGemeente() {
+        return gemeente;
+    }
+
+    public void setGemeente(String gemeente) {
+        this.gemeente = gemeente;
+    }
+
+    public ArrayList<Review> getVoorlopigeReviews() {
+        return voorlopigeReviews;
+    }
+
+    public void setVoorlopigeReviews(ArrayList<Review> voorlopigeReviews) {
+        this.voorlopigeReviews = voorlopigeReviews;
+    }
+    
 }

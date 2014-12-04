@@ -20,6 +20,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     public Klant actief = LoginKlant.getInstance().getActief();
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     private static final BestellingOverzicht bestellingOverzicht = new BestellingOverzicht();
     public DefaultTableModel model = Bestelling.getInstance().getModel();
     public static JFrame myCaller;
@@ -32,6 +33,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
         txtTotaalbedrag.setText(totaalprijs2);
         tblOverzichtBestelling.setModel(model);
+        txtTotaalbedrag.setEnabled(false);
     }
     
     public static BestellingOverzicht getInstance(Bestelling caller)

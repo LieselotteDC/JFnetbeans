@@ -129,16 +129,16 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
 
     private void btnLeveringsbevestigingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeveringsbevestigingActionPerformed
         int orderID = Integer.parseInt(txtOrderID.getText());
-        /*if(d.orderIDBestaat(orderID))
+        if(d.orderIdBestaat(orderID))
         {
             //e-mail versturen naar klant met herinnering voor termijn van 7d voor review
-            //methode zet status order op geleverd
+            d.ontvangstbevestigingOrder(orderID);
         }
         else{
             JOptionPane.showMessageDialog(null, "Er bestaat geen order met dit orderID. Probeer opnieuw.");
             txtOrderID.setText("");
             txtOrderID.requestFocus();
-        }*/
+        }
     }//GEN-LAST:event_btnLeveringsbevestigingActionPerformed
 
     private void txtOrderIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderIDActionPerformed

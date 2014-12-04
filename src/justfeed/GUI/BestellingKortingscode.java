@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -17,28 +16,38 @@ import javax.swing.JOptionPane;
  * @author UGent
  */
 public class BestellingKortingscode extends javax.swing.JFrame {
-    
+
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    public ArrayList<Menu> berekendeMenusInclKorting = berekendeMenus;
+    public ArrayList<HulpKorting> hulpKorting = new ArrayList<>();
     private static final BestellingKortingscode bestellingKortingscode = new BestellingKortingscode();
+    //doorgeven: leveringsdatum, reedsIngevoerdeKortingen, berekendeMenusInclKorting, orderMetKorting
+    java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     public static JFrame myCaller;
-     public Database d = new Database();
-     public Klant actief = LoginKlant.getInstance().getActief();
+    public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+    public Order orderMetKorting = new Order();
+    public Menu testMenu = new Menu();
+    public Database d = new Database();
+    public Klant actief = LoginKlant.getInstance().getActief();
+    Korting testKorting = new Korting();
+    public ArrayList<Korting> reedsIngevoerdeKortingen = new ArrayList<>();
 
     public BestellingKortingscode() {
         initComponents();
     }
-    
-    public static BestellingKortingscode getInstance(BestellingAfleveradres bestellingAfleveradres)
-    {
+
+    public static BestellingKortingscode getInstance(BestellingAfleveradres bestellingAfleveradres) {
         myCaller = bestellingAfleveradres;
         return bestellingKortingscode;
     }
-    public static BestellingKortingscode getInstance(BestellingKortingscode bestellingKortingscode)
-    {
+    
+    public static BestellingKortingscode getInstance() {
+        return bestellingKortingscode;
+    }
+    public static BestellingKortingscode getInstance(BestellingKortingscode bestellingKortingscode) {
         myCaller = bestellingKortingscode;
         return bestellingKortingscode;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +103,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Type kortingscode:");
 
-        comboboxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Just Feed Boss korting", "Registratiekorting", "Unieke actie korting: eenmalig", "Unieke actie korting: periodiek", "Takeaway Boss korting", "Review korting", "" }));
+        comboboxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Registratiekorting", "Review korting", "Just Feed Boss korting", "Takeaway Boss korting", "Unieke actie korting: eenmalig", "Unieke actie korting: periodiek" }));
         comboboxType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboboxTypeActionPerformed(evt);
@@ -155,131 +164,212 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
-        /*String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
-        if(uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()){
-            int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat U wil doorgaan zonder kortingscodes?", "Geen kortingscodes ingevoerd", JOptionPane.YES_NO_OPTION);
+        String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
+        String kortingscode = txtKortingsCode.getText();
+        if (uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()) {
+            int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat u klaar bent met het invoeren van kortingscodes?", "Geen kortingscodes ingevoerd", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-              //naar afrekenen  
-            }
-            else {
+                BestellingFactuur factuur = BestellingFactuur.getInstance(bestellingKortingscode);
+                factuur.pack();
+                bestellingKortingscode.hide();
+                factuur.show();
+                factuur.setLocationRelativeTo(null);
+            } else {
                 JOptionPane.showMessageDialog(null, "Gelieve een type te selecteren en uw code(s) in te voeren.");
-                if (uniekeKortingsCode.isEmpty()){
-                comboboxType.requestFocus();
-                }
-                else if(txtKortingsCode.getText().isEmpty()){
-                txtKortingsCode.requestFocus();
+                if (uniekeKortingsCode.isEmpty()) {
+                    comboboxType.requestFocus();
+                } else if (txtKortingsCode.getText().isEmpty()) {
+                    txtKortingsCode.requestFocus();
                 }
             }
-        } 
-        else if(uniekeKortingsCode.equals("Just Feed Boss korting")){
+        } else if (uniekeKortingsCode.equals("Registratiekorting")) {
             int code = Integer.parseInt(txtKortingsCode.getText());
-            if(!d.kortingJustfeedBossGeldig(code)){
-                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            }
-            else if(!d.kortingJustfeedBossBestaat(code, actief)){
+            if (!d.kortingRegistratieBestaat(code, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingRegistratieGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                RegistratieKorting test = d.getKortingRegistratie(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
             }
-            else{
-                d.gebruiktKortingJustfeedBoss(code);
-                //methode om korting op te halen
-                //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
+        } else if (uniekeKortingsCode.equals("Reviewkorting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingReviewBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingReviewGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                ReviewKorting test = d.getKortingReview(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Just Feed Boss korting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingJustfeedBossBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingJustfeedBossGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                JustFeedBoss test = d.getKortingJustfeedBoss(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Takeaway Boss korting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingTakeawayBossBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingTakeawayBossGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                TakeawayBoss test = d.getKortingTakeawayBoss(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Unieke actie korting: eenmalig")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenus, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingEenmaligUniekGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                UniekeActieEenmalig test = d.getKortingEenmaligUniek(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenus, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingEenmaligPeriodeGeldig(code, leveringsdatum)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                UniekeActiePeriode test = d.getKortingEenmaligPeriode(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
             }
         }
-        else if(uniekeKortingsCode.equals("Registratiekorting")){
-            int code = Integer.parseInt(txtKortingsCode.getText());
-            if(!d.kortingRegistratieGeldig(code,actief)){
-                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            }
-            else if(!d.kortingRegistratieBestaat(code, actief)){
-                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
-            }
-            else{
-                d.gebruiktKortingRegistratie(code);
-                //methode om korting op te halen
-                //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
-            }
-        }
-        else if(uniekeKortingsCode.equals("Unieke actie korting: eenmalig")){
-            int code = Integer.parseInt(txtKortingsCode.getText());
-            if(!d.kortingEenmaligUniekGeldig(code)){
-                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            }
-            //bij de 1e null moet worden nagegaan of klant wel bij deze vestiging bestelt, 
-            //bij 2e null of klant wel bij deze takeaway bestelt
-            //de gegevens hiervoor komen uit het order
-            else if(!d.kortingEenmaligUniekBestaat(code, null, null, actief)){
-                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
-            }
-            else{
-            //methode om korting op false te zetten
-            //methode om korting op te halen
-            //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
-            }
-        }  
-        else if(uniekeKortingsCode.equals("Unieke actie korting: periodiek")){
-            int code = Integer.parseInt(txtKortingsCode.getText());
-            //orderdatum moet hieronder erin
-            //deze info komt van order
-            //if(!d.kortingEenmaligPeriodeGeldig(code, orderdatum)){
-            //    JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            //}
-            //bij de 1e null moet worden nagegaan of klant wel bij deze vestiging bestelt, 
-            //bij 2e null of klant wel bij deze takeaway bestelt
-            //de gegevens hiervoor komen uit het order
-            //else 
-            if(!d.kortingEenmaligPeriodeBestaat(code, null, null, actief)){
-                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
-            }
-            else{
-                //methode om korting op te halen
-                //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
-            }
-        } 
-        else if(uniekeKortingsCode.equals("Takeaway Boss korting")){
-            int code = Integer.parseInt(txtKortingsCode.getText());
-            if(!d.kortingTakeawayBossGeldig(code)){
-                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            }
-            else if(!d.kortingTakeawayBossBestaat(code, actief)){
-                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
-            }
-            else{
-                d.gebruiktKortingTakeawayBoss(code);
-                //methode om korting op te halen
-                //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
-            }
-        }       
-        else if(uniekeKortingsCode.equals("Review korting")){
-            int code = Integer.parseInt(txtKortingsCode.getText());
-            if(!d.kortingReviewGeldig(code)){
-                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
-            }
-            else if(!d.kortingReviewBestaat(code, actief)){
-                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
-            }
-            else{
-                d.gebruiktKortingReview(code);
-                //methode om korting op te halen
-                //bedrag/% ophalen van deze korting, moet bij afrekenen eraf worden getrokken. misschien doen zoals setactief maar dan setkorting?
-            }
-        }*/
-       BestellingFactuur factuur = BestellingFactuur.getInstance(bestellingKortingscode);
-       factuur.pack();
-       bestellingKortingscode.hide();
-       factuur.show();
-       factuur.setLocationRelativeTo(null);
-       txtKortingsCode.setText("");
-       comboboxType.setSelectedItem(null);
+        testMenu.toepassenDefinitieveKortingen(reedsIngevoerdeKortingen, orderZonderKorting, orderMetKorting, actief, berekendeMenusInclKorting, hulpKorting);
+        BestellingFactuur factuur = BestellingFactuur.getInstance(bestellingKortingscode);
+        factuur.pack();
+        bestellingKortingscode.hide();
+        factuur.show();
+        factuur.setLocationRelativeTo(null);
+        txtKortingsCode.setText("");
+        comboboxType.setSelectedItem(null);
     }//GEN-LAST:event_btnAfrekenenActionPerformed
-
+   
     private void btnNogCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNogCodeActionPerformed
-       txtKortingsCode.setText("");
-       comboboxType.setSelectedItem(null);
-       BestellingKortingscode kortingscode = BestellingKortingscode.getInstance(bestellingKortingscode);
-       kortingscode.pack();
-       bestellingKortingscode.hide();
-       kortingscode.show();
-       kortingscode.setLocationRelativeTo(null);
+        String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
+        if (uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Gelieve een eerste kortingscode in te voeren.");
+        }
+        else if (uniekeKortingsCode.equals("Registratiekorting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingRegistratieBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingRegistratieGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                RegistratieKorting test = d.getKortingRegistratie(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Reviewkorting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingReviewBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingReviewGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                ReviewKorting test = d.getKortingReview(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Just Feed Boss korting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingJustfeedBossBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingJustfeedBossGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                JustFeedBoss test = d.getKortingJustfeedBoss(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Takeaway Boss korting")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingTakeawayBossBestaat(code, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingTakeawayBossGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                TakeawayBoss test = d.getKortingTakeawayBoss(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else if (uniekeKortingsCode.equals("Unieke actie korting: eenmalig")) {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenus, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingEenmaligUniekGeldig(code)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                UniekeActieEenmalig test = d.getKortingEenmaligUniek(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        } else {
+            int code = Integer.parseInt(txtKortingsCode.getText());
+            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenus, actief)) {
+                JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
+            } else if (!d.kortingEenmaligPeriodeGeldig(code, leveringsdatum)) {
+                JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
+            } else {
+                UniekeActiePeriode test = d.getKortingEenmaligPeriode(code);
+                if (testKorting.bevatTypeKorting(test, reedsIngevoerdeKortingen)) {
+                    JOptionPane.showMessageDialog(null, "U heeft dit type kortingscode reeds toegevoegd.");
+                } else {
+                    reedsIngevoerdeKortingen.add(test);
+                }
+            }
+        }
+        testMenu.toepassenDefinitieveKortingen(reedsIngevoerdeKortingen, orderZonderKorting, orderMetKorting, actief, berekendeMenusInclKorting, hulpKorting);
+        txtKortingsCode.setText("");
+        comboboxType.setSelectedItem(null);
     }//GEN-LAST:event_btnNogCodeActionPerformed
 
     private void txtKortingsCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKortingsCodeActionPerformed
@@ -337,4 +427,19 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtKortingsCode;
     // End of variables declaration//GEN-END:variables
+    public ArrayList<Menu> getBerekendeMenusInclKorting() {
+        return berekendeMenusInclKorting;
+    }
+
+    public void setBerekendeMenusInclKorting(ArrayList<Menu> berekendeMenusInclKorting) {
+        this.berekendeMenusInclKorting = berekendeMenusInclKorting;
+    }
+
+    public Order getOrderMetKorting() {
+        return orderMetKorting;
+    }
+
+    public void setOrderMetKorting(Order orderMetKorting) {
+        this.orderMetKorting = orderMetKorting;
+    }
 }

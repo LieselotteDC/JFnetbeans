@@ -6,7 +6,9 @@
 
 package justfeed.GUI;
 
+import Database.Database;
 import Logica.*;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,9 +24,25 @@ public class BestellingFactuur extends javax.swing.JFrame {
     private static final BestellingFactuur factuur = new BestellingFactuur();
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
     public DefaultTableModel model = Bestelling.getInstance().getModel();
+    public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
+    public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
+    public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    public Klant actief = LoginKlant.getInstance().getActief();
+    public Database d = new Database();
     public static JFrame myCaller;
+    
     public BestellingFactuur() {
         initComponents();
+        String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        txtTotaalBedragExcl.setText(totaalprijs2);
+        txtTotaalBedragExcl.setEnabled(false);
+        String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
+        txtTotaalBedragIncl.setText(totaalprijs3);
+        txtTotaalBedragIncl.setEnabled(false);
+        double kortingsbedrag = (orderZonderKorting.getTotaalPrijs()-orderMetKorting.getTotaalPrijs());
+        String kortingsbedrag2 = String.valueOf(kortingsbedrag);
+        txtKortingsbedrag.setText(kortingsbedrag2);
+        txtKortingsbedrag.setEnabled(false);
     }
 
     public static BestellingFactuur getInstance(BestellingKortingscode caller)
@@ -50,9 +68,11 @@ public class BestellingFactuur extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnGoedkeuren = new javax.swing.JButton();
         btnAfkeuren = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblBetaling = new javax.swing.JTable();
-        txtTotaalBedrag = new javax.swing.JTextField();
+        txtTotaalBedragIncl = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTotaalBedragExcl = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtKortingsbedrag = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,18 +100,11 @@ public class BestellingFactuur extends javax.swing.JFrame {
             }
         });
 
-        tblBetaling.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Het totale bedrag van uw order bedraagt (excl. korting):");
 
-            }
-        ));
-        jScrollPane1.setViewportView(tblBetaling);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Totale toegekende korting:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,26 +120,36 @@ public class BestellingFactuur extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTotaalBedrag, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTotaalBedragIncl, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(txtTotaalBedragExcl)
+                            .addComponent(txtKortingsbedrag))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTotaalBedragExcl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtKortingsbedrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTotaalBedrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(txtTotaalBedragIncl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGoedkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAfkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -137,7 +160,9 @@ public class BestellingFactuur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
-        txtTotaalBedrag.setText("");
+        d.addOrder(orderMetKorting, berekendeMenus);
+        d.aanmakenReview(voorlopigeReviews);
+        txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();
         factuur.hide();
@@ -146,7 +171,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGoedkeurenActionPerformed
 
     private void btnAfkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfkeurenActionPerformed
-        txtTotaalBedrag.setText("");
+        txtTotaalBedragIncl.setText("");
         model.setRowCount(0);
         Profielklant profiel = Profielklant.getInstance(factuur);
         profiel.pack();
@@ -198,8 +223,10 @@ public class BestellingFactuur extends javax.swing.JFrame {
     private javax.swing.JButton btnGoedkeuren;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblBetaling;
-    private javax.swing.JTextField txtTotaalBedrag;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtKortingsbedrag;
+    private javax.swing.JTextField txtTotaalBedragExcl;
+    private javax.swing.JTextField txtTotaalBedragIncl;
     // End of variables declaration//GEN-END:variables
 }
