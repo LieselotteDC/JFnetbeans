@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Database {
 
+    MailingClass mc = new MailingClass();
+    
     private Connection dbConnection = null;
 
     public Connection getConnection() {
@@ -2132,6 +2134,7 @@ public class Database {
                 dbConnection = getConnection();
                 Statement stmt = dbConnection.createStatement();
                 stmt.executeUpdate("UPDATE tbl_takeaway SET commissie = " + berekendeCommissie + " WHERE naam = '" + ta.getNaam() + "';");
+                mc.sendCommissiemail(ta, maand, jaar, berekendeCommissie);
             }
             this.closeConnection();
         } catch (SQLException sqle) {

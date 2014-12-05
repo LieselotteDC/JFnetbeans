@@ -20,7 +20,9 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     /**
      * Creates new form Bevestiging
      */
+    MailingClass mc = new MailingClass();
     private static final BestellingBevestiging bevestiging = new BestellingBevestiging();
+    public Klant actief = LoginKlant.getInstance().getActief();
     
     public static JFrame myCaller;
     public BestellingBevestiging() {
@@ -115,6 +117,7 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHerinneringReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHerinneringReviewActionPerformed
+        mc.sendHerinneringReviewmail(actief);
         JOptionPane.showMessageDialog(null, "Vergeet niet dat u nu een review kan plaatsen over uw bestelde producten. \n Ga hiervoor naar uw profiel > reviews > voeg nieuwe review toe.");
         Profielklant profiel = Profielklant.getInstance(bevestiging);
         profiel.pack();

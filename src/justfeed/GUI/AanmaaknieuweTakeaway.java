@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -17,35 +16,31 @@ import javax.swing.JOptionPane;
  * @author UGent
  */
 public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
-    
 
     private static final AanmaaknieuweTakeaway takeaway = new AanmaaknieuweTakeaway();
     public static JFrame myCaller;
     public Database d = new Database();
-    
+
     public AanmaaknieuweTakeaway() {
         initComponents();
     }
-    
-    public static AanmaaknieuweTakeaway getInstance(Administrator admini)
-    {
+
+    public static AanmaaknieuweTakeaway getInstance(Administrator admini) {
         myCaller = admini;
         return takeaway;
     }
-    public static AanmaaknieuweTakeaway getInstance(Aanmaaknieuwevestiging vestiging)
-    {
+
+    public static AanmaaknieuweTakeaway getInstance(Aanmaaknieuwevestiging vestiging) {
         myCaller = vestiging;
         return takeaway;
     }
-    
-    public static AanmaaknieuweTakeaway getInstance(AanmaakNieuwProduct nieuwproduct)
-    {
+
+    public static AanmaaknieuweTakeaway getInstance(AanmaakNieuwProduct nieuwproduct) {
         myCaller = nieuwproduct;
         return takeaway;
     }
-    
-    public static AanmaaknieuweTakeaway getInstance(AanmaakEenmaligeUniekeActie uniekeActie)
-    {
+
+    public static AanmaaknieuweTakeaway getInstance(AanmaakEenmaligeUniekeActie uniekeActie) {
         myCaller = uniekeActie;
         return takeaway;
     }
@@ -220,71 +215,67 @@ public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void back(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_back
-       takeaway.hide();
-       myCaller.show();
-       txtNaam.setText("");
-       txtEmailadres.setText("");
-       txtCategorie.setText("");
+        takeaway.hide();
+        myCaller.show();
+        txtNaam.setText("");
+        txtEmailadres.setText("");
+        txtCategorie.setText("");
     }//GEN-LAST:event_back
 
 
     private void aanmakenNieuweTakeaway(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aanmakenNieuweTakeaway
+        MailingClass mc = new MailingClass();
         String naam = txtNaam.getText();
         String categoriestring = txtCategorie.getText();
         String email = txtEmailadres.getText();
         EmailValidator checkemail = new EmailValidator();
-        
-        if(naam.isEmpty() || categoriestring.isEmpty() ||  email.isEmpty()){
-        JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
-        if (naam.isEmpty()){
-        txtNaam.requestFocus();
-        }
-        else if(categoriestring.isEmpty()){
-        txtCategorie.requestFocus();
-        }
-        else if(email.isEmpty()){
-        txtEmailadres.requestFocus();
-        }
-        }
-        else if(!checkemail.validate(email)){
-        JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres heeft niet de vereiste syntax. Probeer opnieuw");
-        txtEmailadres.setText("");
-        txtEmailadres.requestFocus();
-        }
-        else if(d.emailBestaatTakeaway(email)){
-        JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres is reeds in gebruik. Probeer opnieuw");
-        txtEmailadres.setText("");
-        txtEmailadres.requestFocus();
-        }       
-        else if(d.take_AwayBestaat(naam)){
+
+        if (naam.isEmpty() || categoriestring.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
+            if (naam.isEmpty()) {
+                txtNaam.requestFocus();
+            } else if (categoriestring.isEmpty()) {
+                txtCategorie.requestFocus();
+            } else if (email.isEmpty()) {
+                txtEmailadres.requestFocus();
+            }
+        } else if (!checkemail.validate(email)) {
+            JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres heeft niet de vereiste syntax. Probeer opnieuw");
+            txtEmailadres.setText("");
+            txtEmailadres.requestFocus();
+        } else if (d.emailBestaatTakeaway(email)) {
+            JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres is reeds in gebruik. Probeer opnieuw");
+            txtEmailadres.setText("");
+            txtEmailadres.requestFocus();
+        } else if (d.take_AwayBestaat(naam)) {
             JOptionPane.showMessageDialog(null, "Deze Take-Away bestaat reeds. Probeer opnieuw.");
             txtNaam.setText("");
             txtNaam.requestFocus();
             txtCategorie.setText("");
             txtEmailadres.setText("");
-        }
-        else if(categoriestring.charAt(categoriestring.length()-1) != ';'){
-                JOptionPane.showMessageDialog(null, "De ingevoerde categorie(ën) hebben niet de vereiste syntax. Probeer opnieuw.");
-                txtCategorie.setText("");
-            }
-        else{
-            Take_Away ta = new Take_Away(naam,email,0);
+        } else if (categoriestring.charAt(categoriestring.length() - 1) != ';') {
+            JOptionPane.showMessageDialog(null, "De ingevoerde categorie(ën) hebben niet de vereiste syntax. Probeer opnieuw.");
+            txtCategorie.setText("");
+        } else {
+            Take_Away ta = new Take_Away(naam, email, 0);
             d.addTake_Away(ta);
             int i = 0;
-            while (i>=0 && i <(categoriestring.length()-1)) { 
-            String categorie = categoriestring.substring(i, categoriestring.indexOf(';'));
-            d.addCategorieFromTake_Away(categorie, ta);
-            categoriestring = categoriestring.substring(categoriestring.indexOf(';')+1);
+            while (i >= 0 && i < (categoriestring.length() - 1)) {
+                String categorie = categoriestring.substring(i, categoriestring.indexOf(';'));
+                d.addCategorieFromTake_Away(categorie, ta);
+                categoriestring = categoriestring.substring(categoriestring.indexOf(';') + 1);
             }
-            JOptionPane.showMessageDialog(null,"De Take-Away werd succesvol toegevoegd. \n Vergeet geen vestiging toe te voegen aan deze Take-Away alvorens een product toe te voegen.");
+            JOptionPane.showMessageDialog(null, "De Take-Away werd succesvol toegevoegd. \n Vergeet geen vestiging toe te voegen aan deze Take-Away alvorens een product toe te voegen.");
+            mc.sendRegistratiemailTakeaway(ta);
             takeaway.hide();
             myCaller.show();
             txtNaam.setText("");
             txtCategorie.setText("");
             txtEmailadres.setText("");
+
         }
-        
-        
+
+
     }//GEN-LAST:event_aanmakenNieuweTakeaway
 
     private void txtEmailadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailadresActionPerformed
@@ -292,12 +283,12 @@ public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailadresActionPerformed
 
     private void btnHomeknopAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorActionPerformed
-       Administrator administrator = Administrator.getInstance(takeaway);
+        Administrator administrator = Administrator.getInstance(takeaway);
 //     administrator.setSize(300,300);
-       administrator.pack();
-       takeaway.hide();
-       administrator.show();
-       administrator.setLocationRelativeTo(null);
+        administrator.pack();
+        takeaway.hide();
+        administrator.show();
+        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
     /**
