@@ -2147,6 +2147,7 @@ public class Database {
         double opgehaaldeMenusPrijs = 0.0;
         double opgehaaldeHulpkorting = 0.0;
         double aantalOrders = 0;
+        String justfeeder = "geenjustfeeder";
         ResultSet srs;
         //ophalen van gegevens
         try {
@@ -2170,6 +2171,12 @@ public class Database {
             if (srs.next()) {
                 aantalOrders = srs.getDouble("aantalOrders");
             }
+
+            String sql3 = "SELECT * FROM tbl_awardJustfeeder";
+            srs = stmt.executeQuery(sql2);
+            if (srs.next()) {
+                justfeeder = srs.getString("naam");
+            }
             this.closeConnection();
 
         } catch (SQLException sqle) {
@@ -2178,7 +2185,11 @@ public class Database {
         }
         // berekening van de commissie
         totaleGeldwaarde = opgehaaldeMenusPrijs + opgehaaldeHulpkorting;
-        double berekendeCommisie = Math.max(0.07 * (totaleGeldwaarde), Math.min(0.1 * (totaleGeldwaarde), ((-1 / 5000) * (aantalOrders) + (11 / 100)) * (totaleGeldwaarde)));
-        return berekendeCommisie;
+        double berekendeCommissie = Math.max(0.07 * (totaleGeldwaarde), Math.min(0.1 * (totaleGeldwaarde), ((-1 / 5000) * (aantalOrders) + (11 / 100)) * (totaleGeldwaarde)));
+        if (justfeeder.equalsIgnoreCase(takeawayNaam)) {
+            berekendeCommissie *= 0.99;
+        }
+        return berekendeCommissie;
     }
+
 }
