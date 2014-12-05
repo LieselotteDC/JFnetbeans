@@ -22,6 +22,7 @@ public class Profielklant extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
      private static final LoginKlant login = new LoginKlant();
+     public Klant actief = LoginKlant.getInstance().getActief();
     
     public Profielklant() {
         initComponents();
@@ -117,12 +118,14 @@ public class Profielklant extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblKlant = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
+        naarOverzichtTakeAwaysReedsBesteld = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -142,7 +145,7 @@ public class Profielklant extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Welkom op jouw profiel!");
+        jLabel1.setText("Welkom op jouw profiel,");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel2.setText("Eén menu bestaat uit gerechten van slechts één vestiging.");
@@ -190,7 +193,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu1.setBackground(new java.awt.Color(255, 153, 0));
-        jMenu1.setText("Order plaatsen");
+        jMenu1.setText("Order");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orderPlaatsen(evt);
@@ -204,6 +207,14 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem12);
+
+        naarOverzichtTakeAwaysReedsBesteld.setText("Overzicht takeaways waarbij u reeds besteld heeft");
+        naarOverzichtTakeAwaysReedsBesteld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naarOverzichtTakeAwaysReedsBesteldActionPerformed(evt);
+            }
+        });
+        jMenu1.add(naarOverzichtTakeAwaysReedsBesteld);
 
         jMenuBar1.add(jMenu1);
 
@@ -332,16 +343,23 @@ public class Profielklant extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(lblKlant, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel1)
-                .addGap(131, 131, 131)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblKlant, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -505,6 +523,15 @@ public class Profielklant extends javax.swing.JFrame {
        reviewOvernemen.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarReviewBestaandOvernemenActionPerformed
 
+    private void naarOverzichtTakeAwaysReedsBesteldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOverzichtTakeAwaysReedsBesteldActionPerformed
+         OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld = OverzichtTakeAwaysReedsBesteld.getInstance(profiel);
+//     reviewsklant.setSize(300,300);
+       ontvangenTakeAwaysReedsBesteld.pack();
+       profiel.hide();
+       ontvangenTakeAwaysReedsBesteld.show();
+       ontvangenTakeAwaysReedsBesteld.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarOverzichtTakeAwaysReedsBesteldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -564,8 +591,10 @@ public class Profielklant extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JLabel lblKlant;
     private javax.swing.JMenuItem naarCategorie;
     private javax.swing.JMenu naarContact;
+    private javax.swing.JMenuItem naarOverzichtTakeAwaysReedsBesteld;
     private javax.swing.JMenuItem naarReviewBestaandOvernemen;
     // End of variables declaration//GEN-END:variables
 }

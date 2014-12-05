@@ -37,6 +37,7 @@ public class Bestelling extends javax.swing.JFrame {
     public Order orderZonderKorting = new Order(); // ook meegegeven worden
     
     
+    
     //String[] columNames = new String[5];
     //Object data [][] = null;
     /**
@@ -45,6 +46,8 @@ public class Bestelling extends javax.swing.JFrame {
     public Bestelling() {
         initComponents();
         txtProduct.setEnabled(false);
+        combobox.setEnabled(false);
+        
     }
      public static Bestelling getInstance(){
         return bestelling;
@@ -116,6 +119,8 @@ public class Bestelling extends javax.swing.JFrame {
         txtProduct = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHotItems = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,6 +288,10 @@ public class Bestelling extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblHotItems);
 
+        jLabel14.setText("Hot items:");
+
+        jLabel15.setText("Overzicht van uw bestelling:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,9 +303,6 @@ public class Bestelling extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,13 +330,17 @@ public class Bestelling extends javax.swing.JFrame {
                                             .addGap(28, 28, 28)
                                             .addComponent(btnZoek))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel11)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel11)
                                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(0, 0, Short.MAX_VALUE))))))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel15))
+                                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
@@ -379,7 +389,7 @@ public class Bestelling extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -427,25 +437,30 @@ public class Bestelling extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14)
+                        .addGap(5, 5, 5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnToevoegenAanBestelling)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBestellingPlaatsen))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -552,6 +567,7 @@ public class Bestelling extends javax.swing.JFrame {
     }//GEN-LAST:event_tblKeuzesMouseClicked
 
     private void rbtnCategorieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnCategorieMouseClicked
+        combobox.setEnabled(true);
         DefaultComboBoxModel c = d.initialiseerCombobox("SELECT categorie FROM tbl_soort;", "categorie");
         combobox.setModel(c);
     }//GEN-LAST:event_rbtnCategorieMouseClicked
@@ -572,20 +588,28 @@ public class Bestelling extends javax.swing.JFrame {
             txtGemeente.setText("");
             } else {
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
+                DefaultTableModel v = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_awardHotitem A ON (A.productID=P.productID) WHERE (L.leveringsgebied= " + plaatsnummer + ")");
+                tblHotItems.setModel(v);
                 if (rbtnCategorie.isSelected()) {
-                    String gekozenType = combobox.getSelectedItem().toString();
-                    DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.type = '" + gekozenType + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
+                    String gekozenCategorie = combobox.getSelectedItem().toString();
+                    DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_soort S ON (S.naam=V.naam) WHERE (L.leveringsgebied= " + plaatsnummer + ") AND (S.categorie='"+gekozenCategorie+"')");
                     tblKeuzes.setModel(t);
                 } else if (rbtnTakeAway.isSelected()) {
                     String gekozenTakeAway = combobox.getSelectedItem().toString();
-                    DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,B.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_biedtAan B ON (P.productID=B.productID) JOIN tbl_vestigingen V ON (B.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (B.takeawaynaam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
+                    DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.takeawaynaam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                     tblKeuzes.setModel(q);
+                }
+                else if(rbtnProduct.isSelected()){
+                    String gekozenProduct = combobox.getSelectedItem().toString();
+                    DefaultTableModel r = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.naam= '" + gekozenProduct + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
+                    tblKeuzes.setModel(r);
                 }
         }
         }
     }//GEN-LAST:event_btnZoekActionPerformed
 
     private void rbtnTakeAwayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTakeAwayMouseClicked
+        combobox.setEnabled(true);
         DefaultComboBoxModel f = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
         combobox.setModel(f);
     }//GEN-LAST:event_rbtnTakeAwayMouseClicked
@@ -627,7 +651,24 @@ public class Bestelling extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnProductMouseClicked
 
     private void tblHotItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHotItemsMouseClicked
-        // TODO add your handling code here:
+        int row = tblHotItems.getSelectedRow();
+        String tabel_click = (tblHotItems.getModel().getValueAt(row, 0).toString());
+        String sql = "select * from tbl_product where productID = '" + tabel_click + "' ";
+        txtProductID.setText(d.bestelFormulier(sql, "productID"));
+        txtProductID.setEnabled(false);
+        txtProductNaam.setText(d.bestelFormulier(sql, "naam"));
+        txtProductNaam.setEnabled(false);
+        txtType.setText(d.bestelFormulier(sql, "type"));
+        txtType.setEnabled(false);
+        txtEenheidsPrijs.setText(d.bestelFormulier(sql, "eenheidsprijs"));
+        txtEenheidsPrijs.setEnabled(false);
+        spnrHoeveelheid.setValue(0);
+        String tabel_click2 = (tblKeuzes.getModel().getValueAt(row, 5).toString());
+        String sql2 = "select * from tbl_vestigingen where vestigingsID = '" + tabel_click2 + "' ";
+        txtTakeAwayNaam.setText(d.bestelFormulier(sql2, "naam"));
+        txtTakeAwayNaam.setEnabled(false);
+        txtVestigingsID.setText(d.bestelFormulier(sql2, "vestigingsID"));
+        txtVestigingsID.setEnabled(false);
     }//GEN-LAST:event_tblHotItemsMouseClicked
 
     /**
@@ -677,6 +718,8 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
