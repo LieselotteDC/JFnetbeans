@@ -262,6 +262,7 @@ public class Bestelling extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Kies de gewenste leverdatum:");
 
+        buttonGroup1.add(rbtnProduct);
         rbtnProduct.setText("product");
         rbtnProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -600,9 +601,18 @@ public class Bestelling extends javax.swing.JFrame {
                     tblKeuzes.setModel(q);
                 }
                 else if(rbtnProduct.isSelected()){
+                    String product = txtProduct.getText().trim();
+                    if(!d.productProductnaamBestaat(product))
+                    {
+                        JOptionPane.showMessageDialog(null, "Sorry, Just-Feed biedt dit product momenteel niet aan. Probeer opnieuw.");
+                        txtProduct.setText("");
+                        txtProduct.requestFocus();
+                    }
+                    else{                    
                     String gekozenProduct = combobox.getSelectedItem().toString();
                     DefaultTableModel r = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.naam= '" + gekozenProduct + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                     tblKeuzes.setModel(r);
+                    }
                 }
         }
         }
@@ -637,17 +647,7 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void rbtnProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnProductMouseClicked
         txtProduct.setEnabled(true);
-        String product = txtProduct.getText().trim();
-        if(d.productProductnaamBestaat(product))
-        {
-            DefaultComboBoxModel g = d.initialiseerCombobox("SELECT * FROM tbl_product WHERE (naam = '" + product + "');", "naam");
-            combobox.setModel(g);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Sorry, Just-Feed biedt dit product momenteel niet aan. Probeer opnieuw.");
-            txtProduct.setText("");
-            txtProduct.requestFocus();
-        }
+        
     }//GEN-LAST:event_rbtnProductMouseClicked
 
     private void tblHotItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHotItemsMouseClicked
