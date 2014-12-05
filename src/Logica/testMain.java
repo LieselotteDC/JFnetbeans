@@ -12,9 +12,6 @@ package Logica;
 public class testMain {
  public static void main(String[] args) {
      WriteFile test= new WriteFile();
-     test.awardsPerTakeaway("januari", 2014);
-     test.lopendeOrdersPerTakeaway("pizzahut");
-     //test.verkopenPerTakeaway("pizzahut");
-     //test.menukaartPerTakeaway("pizzahut");
+     test.pdfAwards("januari", 2014);
     }
 }

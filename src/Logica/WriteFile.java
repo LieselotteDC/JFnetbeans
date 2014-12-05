@@ -6,14 +6,20 @@
 package Logica;
 
 import Database.Database;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author kpittoor
+ * @author odkeyser,liedcost,mehillew
  */
 public class WriteFile extends Exception {
 
@@ -239,4 +245,46 @@ public class WriteFile extends Exception {
 
     }
 
+    public void pdfAwards(String maand, int jaar) {
+        try {
+            DatumFinder date = new DatumFinder();
+            String datum = date.getStringFromDate();
+
+            String path = System.getProperty("user.dir") + "\\rapporten\\";
+            String naam = "Awards_" + maand + "_" + jaar;
+            String extensie = ".pdf";
+            String bestandsnaam = path + naam + "_" + datum + extensie;
+            String pdf = naam + extensie;
+
+            String hoofd = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
+            String tekst="";
+            Database d = new Database();
+
+            /*for (Award a : d.getAlleAwards()) {
+
+                tekst += a.toString();
+            }*/
+
+            // this.writeFile(bestandsnaam, this.awardsBoodschap(maand, jaar
+            Document doc = new Document() {
+            };
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.open();
+            try {
+               // doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
+               // doc.add(new Paragraph(tekst,FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
+                doc.add(new Paragraph("Lieselot aka Lotje69*BLING*BLING*", FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
+                doc.add(new Paragraph("testje voor Menno",FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
