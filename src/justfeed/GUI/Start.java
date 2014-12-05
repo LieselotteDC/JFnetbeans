@@ -98,7 +98,7 @@ public static Start getInstance(GuiMain caller)
         getContentPane().add(jButton2);
         jButton2.setBounds(290, 360, 130, 50);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/justfeed/GUI/10811540_10204471935752039_284025396_n.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(500, 500));
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 500));
         jLabel3.setName(""); // NOI18N

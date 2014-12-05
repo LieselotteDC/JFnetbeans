@@ -22,6 +22,7 @@ public class LoginKlant extends javax.swing.JFrame {
     public Database d = new Database();
     public Klant k = null;
     public Klant actief = null;
+    public String loginnaam = null;
 
     public LoginKlant() {
         initComponents();
@@ -136,7 +137,7 @@ public class LoginKlant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String loginnaam = txtLogin.getText(); 
+        loginnaam = txtLogin.getText(); 
         String paswoord = txtPaswoord.getText();
         if(!d.loginBestaat(loginnaam)){
         JOptionPane.showMessageDialog(null, "Deze login bestaat niet. Probeer opnieuw.");
@@ -231,4 +232,13 @@ public class LoginKlant extends javax.swing.JFrame {
     public void setActief(Klant actief) {
         this.actief = actief;
     }
+
+    public String getLoginnaam() {
+        return loginnaam;
+    }
+
+    public void setLoginnaam(String loginnaam) {
+        this.loginnaam = loginnaam;
+    }
+    
 }

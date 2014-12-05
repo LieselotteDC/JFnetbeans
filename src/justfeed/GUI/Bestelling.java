@@ -29,15 +29,13 @@ public class Bestelling extends javax.swing.JFrame {
     int postcode = 0;
     String gemeente = null;
     java.sql.Date leveringsdatum = null;
-    
+
     public Klant actief = LoginKlant.getInstance().getActief();
     ArrayList<Orderverwerking> besteldeProducten = new ArrayList<>();
     ArrayList<Review> voorlopigeReviews = new ArrayList<>(); //doorgeven 
     public ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
     public Order orderZonderKorting = new Order(); // ook meegegeven worden
-    
-    
-    
+
     //String[] columNames = new String[5];
     //Object data [][] = null;
     /**
@@ -47,9 +45,10 @@ public class Bestelling extends javax.swing.JFrame {
         initComponents();
         txtProduct.setEnabled(false);
         combobox.setEnabled(false);
-        
+
     }
-     public static Bestelling getInstance(){
+
+    public static Bestelling getInstance() {
         return bestelling;
     }
     //private String[] columnNames = {"productID", "naam", "type", "eenheidsprijs", "hoeveelheid"};
@@ -333,15 +332,16 @@ public class Bestelling extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel11)
-                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel15))
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(0, 0, Short.MAX_VALUE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel15)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
@@ -390,7 +390,7 @@ public class Bestelling extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -422,7 +422,16 @@ public class Bestelling extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(spnrHoeveelheid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnToevoegenAanBestelling)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBestellingPlaatsen)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbtnCategorie)
@@ -436,33 +445,19 @@ public class Bestelling extends javax.swing.JFrame {
                             .addComponent(btnZoek))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14)
-                        .addGap(5, 5, 5)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnToevoegenAanBestelling)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(calendarLeveringsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBestellingPlaatsen))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
 
         pack();
@@ -482,19 +477,19 @@ public class Bestelling extends javax.swing.JFrame {
 
         totaalprijs = menu.berekenOrderprijs(berekendeMenus);
         orderZonderKorting.setTotaalPrijs(totaalprijs);
-        for(Orderverwerking orderver : this.besteldeProducten){
+        for (Orderverwerking orderver : this.besteldeProducten) {
             Review rev = new Review();
             rev.aanmaakReviewVoorlopig(actief, orderver, leveringsdatum);
         }
-        
+
         //bovenaan de file
         /*Order orderMetKorting = new Order();
-        double totaalprijs = 0;
-        for(Menu m:berekendeMenus){
-            totaalprijs += m.getMenuprijs();
-        }
-        orderMetKorting.setTotaalPrijs(totaalprijs);
-        */
+         double totaalprijs = 0;
+         for(Menu m:berekendeMenus){
+         totaalprijs += m.getMenuprijs();
+         }
+         orderMetKorting.setTotaalPrijs(totaalprijs);
+         */
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
         bestellingOverzicht.pack();
         bestelling.hide();
@@ -576,46 +571,45 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void btnZoekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoekActionPerformed
         gemeente = txtGemeente.getText();
-        if(txtPostcode.getText().isEmpty() || txtGemeente.getText().isEmpty()){
+        if (txtPostcode.getText().isEmpty() || txtGemeente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Gelieve een postcode en gemeente toe te voegen.");
-        }
-        else if(!rbtnTakeAway.isSelected() && !rbtnCategorie.isSelected() && !rbtnProduct.isSelected()){
+        } else if (!rbtnTakeAway.isSelected() && !rbtnCategorie.isSelected() && !rbtnProduct.isSelected()) {
             JOptionPane.showMessageDialog(null, "Gelieve te selecteren waarop u wil zoeken.");
-        }
-        else{
+        } else {
             postcode = Integer.parseInt(txtPostcode.getText());
             if (d.getPlaatsnummer(gemeente, postcode) == 0) {
-            JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente voor uw levering stemmen niet overeen. Probeer opnieuw.");
-            txtPostcode.setText("");
-            txtGemeente.setText("");
+                JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente voor uw levering stemmen niet overeen. Probeer opnieuw.");
+                txtPostcode.setText("");
+                txtGemeente.setText("");
             } else {
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
                 DefaultTableModel v = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_awardHotitem A ON (A.productID=P.productID) WHERE (L.leveringsgebied= " + plaatsnummer + ")");
                 tblHotItems.setModel(v);
+                DefaultTableModel u = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID))"
+                        + "JOIN tbl_review R ON (R.productID=P.productID) WHERE (L.leveringsgebied= " + plaatsnummer + ") "
+                        + "AND ((SELECT DISTINCT R.productID FROM tbl_review R JOIN tbl_product P ON R.productID = P.productID WHERE (R.score>4))=P.productID)");
+                tblSuggesties.setModel(u);
                 if (rbtnCategorie.isSelected()) {
                     String gekozenCategorie = combobox.getSelectedItem().toString();
-                    DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_soort S ON (S.naam=V.naam) WHERE (L.leveringsgebied= " + plaatsnummer + ") AND (S.categorie='"+gekozenCategorie+"')");
+                    DefaultTableModel t = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_soort S ON (S.naam=V.naam) WHERE (L.leveringsgebied= " + plaatsnummer + ") AND (S.categorie='" + gekozenCategorie + "')");
                     tblKeuzes.setModel(t);
                 } else if (rbtnTakeAway.isSelected()) {
                     String gekozenTakeAway = combobox.getSelectedItem().toString();
                     DefaultTableModel q = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.takeawaynaam = '" + gekozenTakeAway + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                     tblKeuzes.setModel(q);
-                }
-                else if(rbtnProduct.isSelected()){
+                } else if (rbtnProduct.isSelected()) {
                     String product = txtProduct.getText().trim();
-                    if(!d.productProductnaamBestaat(product))
-                    {
+                    if (!d.productProductnaamBestaat(product)) {
                         JOptionPane.showMessageDialog(null, "Sorry, Just-Feed biedt dit product momenteel niet aan. Probeer opnieuw.");
                         txtProduct.setText("");
                         txtProduct.requestFocus();
-                    }
-                    else{                    
-                    String gekozenProduct = combobox.getSelectedItem().toString();
-                    DefaultTableModel r = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.naam= '" + gekozenProduct + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
-                    tblKeuzes.setModel(r);
+                    } else {
+                        String gekozenProduct = combobox.getSelectedItem().toString();
+                        DefaultTableModel r = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.naam= '" + gekozenProduct + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
+                        tblKeuzes.setModel(r);
                     }
                 }
-        }
+            }
         }
     }//GEN-LAST:event_btnZoekActionPerformed
 
@@ -753,14 +747,13 @@ public class Bestelling extends javax.swing.JFrame {
     private javax.swing.JTextField txtVestigingsID;
     // End of variables declaration//GEN-END:variables
 
-public ArrayList<Menu> getBerekendeMenus() {
+    public ArrayList<Menu> getBerekendeMenus() {
         return berekendeMenus;
     }
 
     public Order getOrderZonderKorting() {
         return orderZonderKorting;
     }
-    
 
     public void setBerekendeMenus(ArrayList<Menu> berekendeMenus) {
         this.berekendeMenus = berekendeMenus;
@@ -773,6 +766,7 @@ public ArrayList<Menu> getBerekendeMenus() {
     public DefaultTableModel getModel() {
         return model;
     }
+
     public Date getLeveringsdatum() {
         return leveringsdatum;
     }
@@ -780,6 +774,7 @@ public ArrayList<Menu> getBerekendeMenus() {
     public void setLeveringsdatum(Date leveringsdatum) {
         this.leveringsdatum = leveringsdatum;
     }
+
     public int getPostcode() {
         return postcode;
     }
@@ -803,5 +798,5 @@ public ArrayList<Menu> getBerekendeMenus() {
     public void setVoorlopigeReviews(ArrayList<Review> voorlopigeReviews) {
         this.voorlopigeReviews = voorlopigeReviews;
     }
-    
+
 }

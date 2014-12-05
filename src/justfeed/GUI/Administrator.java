@@ -576,14 +576,6 @@ public class Administrator extends javax.swing.JFrame {
         rapportFlyer.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarRapportFlyer
 
-    private void naarOntvangstLeveringsbevestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOntvangstLeveringsbevestiging
-        OntvangstLeveringsbevestiging ontvangstleveringsbevestiging = OntvangstLeveringsbevestiging.getInstance(admini);
-        ontvangstleveringsbevestiging.pack();
-        admini.hide();
-        ontvangstleveringsbevestiging.show();
-        ontvangstleveringsbevestiging.setLocationRelativeTo(null);
-    }//GEN-LAST:event_naarOntvangstLeveringsbevestiging
-
     private void naarCommissieBerekening(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarCommissieBerekening
         Commissieberekening commissieberekening = Commissieberekening.getInstance(admini);
         commissieberekening.pack();
@@ -591,6 +583,14 @@ public class Administrator extends javax.swing.JFrame {
         commissieberekening.show();
         commissieberekening.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarCommissieBerekening
+
+    private void naarOntvangstLeveringsbevestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOntvangstLeveringsbevestiging
+        OntvangstLeveringsbevestiging ontvangstleveringsbevestiging = OntvangstLeveringsbevestiging.getInstance(admini);
+        ontvangstleveringsbevestiging.pack();
+        admini.hide();
+        ontvangstleveringsbevestiging.show();
+        ontvangstleveringsbevestiging.setLocationRelativeTo(null);
+    }//GEN-LAST:event_naarOntvangstLeveringsbevestiging
    
     /**
      * @param args the command line arguments
