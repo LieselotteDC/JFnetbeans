@@ -6,6 +6,7 @@
 package justfeed.GUI;
 
 import Database.*;
+import Logica.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
@@ -19,6 +20,7 @@ public class RapportFlyer extends javax.swing.JFrame {
      public static JFrame myCaller;
      public Database d = new Database();
     DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
+    MailingClass mc = new MailingClass();
     /**
      * Creates new form Rapport
      */
@@ -60,6 +62,11 @@ public class RapportFlyer extends javax.swing.JFrame {
         btnFlyerMaken.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnFlyerMaken.setForeground(new java.awt.Color(255, 255, 255));
         btnFlyerMaken.setText("Flyer maken");
+        btnFlyerMaken.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFlyerMakenActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -130,6 +137,11 @@ public class RapportFlyer extends javax.swing.JFrame {
        myCaller.show();
        comboboxTakeAway.setSelectedItem(null);
     }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
+
+    private void btnFlyerMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlyerMakenActionPerformed
+        // TODO add your handling code here:
+       // mc.sendMenukaartmail(null, null); hoe geraak ik hier aan de takeawaynaam en aan het bestandsnaam?
+    }//GEN-LAST:event_btnFlyerMakenActionPerformed
 
     /**
      * @param args the command line arguments

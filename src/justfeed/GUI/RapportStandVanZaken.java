@@ -24,6 +24,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     public Database d = new Database();
     public static JFrame myCaller;
     DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
+    MailingClass mc = new MailingClass();
 
     /**
      * Creates new form RapportStandVanZaken //
@@ -70,6 +71,11 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
         jLabel1.setText("Rapport met stand van zaken opvragen");
 
         comboboxInhoud.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Verkopen", "Lopende orders", "Lopende unieke actie kortingscodes" }));
+        comboboxInhoud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxInhoudActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Inhoud rapport");
@@ -250,13 +256,13 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
         else{}
         String inhoud = comboboxInhoud.getSelectedItem().toString();
         if(inhoud.equals("Verkopen")){
-            
+          //  mc.sendVerkopenmail(gekozenTakeAway, inhoud); bestandsnaam moet nog meegegeven worden
         }
         else if(inhoud.equals("Lopende orders")){
-            
+            //mc.sendLopendeOrdersmail(gekozenTakeAway, inhoud); idem bestandsnaam
         }
         else{
-            
+            //mc.sendLopendeUniekeKortingscodesmail(gekozenTakeAway, inhoud); idem bestandsnaam
         }
     }//GEN-LAST:event_btnRapportMakenActionPerformed
 
@@ -275,6 +281,10 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
        comboboxTakeAway.setSelectedItem(null);
        
     }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
+
+    private void comboboxInhoudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxInhoudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboboxInhoudActionPerformed
 
     /**
      * @param args the command line arguments
