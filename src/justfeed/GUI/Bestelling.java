@@ -288,7 +288,7 @@ public class Bestelling extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblHotItems);
 
-        jLabel14.setText("Hot items:");
+        jLabel14.setText("U bent mogelijk ook geïnteresseerd in....");
 
         jLabel15.setText("Overzicht van uw bestelling:");
 

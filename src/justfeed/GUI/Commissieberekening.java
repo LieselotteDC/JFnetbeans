@@ -207,10 +207,12 @@ public class Commissieberekening extends javax.swing.JFrame {
                 txtJaar.requestFocus();
             }
         }
-        
-        d.addCommissie(maand, WIDTH);
-        DefaultTableModel t = d.naarTabel("SELECT naam, commissie FROM tbl_takeaway;");
-        tblCommissie.setModel(t);
+        else{
+            int jaar = Integer.parseInt(txtJaar.getText());
+            d.addCommissie(maand, jaar);
+            DefaultTableModel t = d.naarTabel("SELECT naam, commissie FROM tbl_takeaway;");
+            tblCommissie.setModel(t);
+        }
     }//GEN-LAST:event_btnCommissieberekeningActionPerformed
 
     private void btnHomeknopAdminiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdminiActionPerformed

@@ -621,7 +621,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hot items:"/>
+        <Property name="text" type="java.lang.String" value="U bent mogelijk ook ge&#xef;nteresseerd in...."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">

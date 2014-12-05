@@ -8,6 +8,7 @@ package justfeed.GUI;
 import Database.Database;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import Logica.*;
 
 /**
  *
@@ -17,7 +18,8 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
         private static final OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld = new OverzichtTakeAwaysReedsBesteld();
         public static JFrame myCaller;
         public Database d = new Database();
-       // DefaultTableModel t = d.naarTabel("SELECT M.menuID, M.menuprijs, M.orderID,M.takeaway, M.vestiging FROM tbl_menu M, tbl_order O WHERE (M.orderID = O.orderID) and (O.login = '"+ actief.getLogin() +"')");
+        public Klant actief = LoginKlant.getInstance().getActief();
+        DefaultTableModel t = d.naarTabel("SELECT M.menuID, M.menuprijs, M.orderID,M.takeaway, M.vestiging FROM tbl_menu M, tbl_order O WHERE (M.orderID = O.orderID) and (O.login = '"+ actief.getLogin() +"')");
     /**
      * Creates new form OverzichtTakeAwaysReedsBesteld
      */
