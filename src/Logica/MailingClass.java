@@ -191,6 +191,7 @@ public class MailingClass {
     }
 
     //MOET NOG OPGEROEPEN WORDEN
+    //OLIVIER: ik heb sendArwardemail al opgeroepen in de aanmaak van de pfd dus deze is in orde!
     public void sendAwardemail(String takeaway, String bestandsnaam) {
         // Recipient's email ID needs to be mentioned.
         Database d = new Database();
@@ -443,7 +444,7 @@ public class MailingClass {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void sendCommissiemail(Take_Away ta, String maand, int jaar, double bedrag) {
         // Recipient's email ID needs to be mentioned.
 
@@ -478,7 +479,7 @@ public class MailingClass {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
             // Set Subject: header field
-            message.setSubject("Commissie "+maand+" "+jaar);
+            message.setSubject("Commissie " + maand + " " + jaar);
 
             // This mail has 3 parts, the bod, the embedded image and an attachment
             MimeMultipart multipart = new MimeMultipart("related");
@@ -486,7 +487,7 @@ public class MailingClass {
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
             String htmlText = "<font color='#FF9933' size='+2'>Beste " + ta.getNaam() + ",</font>"
-                    + "<P>De commissie van "+maand+" "+ jaar + " bedraagt: "+ bedrag+" euro.<br> "
+                    + "<P>De commissie van " + maand + " " + jaar + " bedraagt: " + bedrag + " euro.<br> "
                     + "Gelieve dit te storten op BE53001496589253 voor het einde van de maand!"
                     + "Indien u vragen hebt over deze berekeningen, aarzel dan niet om ons te contacteren<br>"
                     + "op het onderstaande e-mailadres</P>"
@@ -525,11 +526,27 @@ public class MailingClass {
             throw new RuntimeException(e);
         }
     }
+
+    //OLIVIER: nog een mail met als onderwerp menukaart.. en met wat tekst van beste naamvantakeaway, in de bijlage vindt u het overzicht van de menukaart die u hebt aangevraagd bij onze dienst...
+//ik heb de naam methodenaam al aangemaakt, je moet ze juist nog opstellen en bij de bijlage verwijzen naar bestandsnaam (zoals bij methode sendAwardsmail)
+// mail voor rapporten. meekrijgen welke takeaway . ook met attachment
+    public void sendMenukaartmail(String takeaway, String bestandsnaam) {
+
+    }
+
+    public void sendLopendeOrdersmail(String takeaway, String bestandsnaam) {
+
+    }
+
+    public void sendVerkopenmail(String takeaway, String bestandsnaam) {
+
+    }
+
+    public void sendLopendeUniekeKortingscodesmail(String takeaway, String bestandsnaam) {
+
+    }
 }
 // herrinnering review,     OKE
 //commissie double bedrag string takeaway maand?    OKE
 //welkomstmail takeaways die zicht registreren      OKE 
 
-
-
-// mail voor rapporten. meekrijgen welke takeaway . ook met attachment

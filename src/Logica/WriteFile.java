@@ -23,33 +23,32 @@ import java.util.logging.Logger;
  */
 public class WriteFile extends Exception {
 
-    //DatumFinder date = new DatumFinder();
-    //String datum = date.getStringFromDate();
-    //Awardrapporten
-    public void awardsPerTakeaway(String maand, int jaar) {
-        DatumFinder date = new DatumFinder();
-        String datum = date.getStringFromDate();
+    MailingClass mail = new MailingClass();
+    Database d = new Database();
 
-        String path = System.getProperty("user.dir") + "\\rapporten\\";
-        String naam = "Awards_" + maand + "_" + jaar;
-        String extensie = ".doc";
-        String bestandsnaam = path + naam + "_" + datum + extensie;
+    /*public void awardsPerTakeaway(String maand, int jaar) {
+     DatumFinder date = new DatumFinder();
+     String datum = date.getStringFromDate();
 
-        this.writeFile(bestandsnaam, this.awardsBoodschap(maand, jaar));
-    }
+     String path = System.getProperty("user.dir") + "\\rapporten\\";
+     String naam = "Awards_" + maand + "_" + jaar;
+     String extensie = ".doc";
+     String bestandsnaam = path + naam + "_" + datum + extensie;
 
-    private String awardsBoodschap(String maand, int jaar) {
-        String tekst = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
-        Database d = new Database();
+     this.writeFile(bestandsnaam, this.awardsBoodschap(maand, jaar));
+     }
 
-        for (Award a : d.getAlleAwards()) {
+     private String awardsBoodschap(String maand, int jaar) {
+     String tekst = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
+     Database d = new Database();
 
-            tekst += a.toString();
-        }
+     for (Award a : d.getAlleAwards()) {
 
-        return tekst;
-    }
+     tekst += a.toString();
+     }
 
+     return tekst;
+     }*/
     //Lopende orders
     public void lopendeOrdersPerTakeaway(String takeawayNaam) {
         DatumFinder date = new DatumFinder();
@@ -189,7 +188,7 @@ public class WriteFile extends Exception {
         }
         return tekst;
     }
-
+/*
     //menu
     public void menukaartPerTakeaway(String takeawayNaam) {
         DatumFinder date = new DatumFinder();
@@ -211,7 +210,7 @@ public class WriteFile extends Exception {
         }
         return tekst;
     }
-
+*/
     public void writeFile(String file, String msg) {
 
         PrintWriter outFile = null;
@@ -245,29 +244,29 @@ public class WriteFile extends Exception {
 
     }
 
+    //AWARDS
+    //deze methode moet opgeroepen worden net na het berekenen van de awars
     public void pdfAwards(String maand, int jaar) {
+        //aanmaken van de documentsnaam
+        DatumFinder date = new DatumFinder();
+        String datum = date.getStringFromDate();
+
+        String path = System.getProperty("user.dir") + "\\rapporten\\";
+        String naam = "Awards_" + maand + "_" + jaar;
+        String extensie = ".pdf";
+        String bestandsnaam = path + naam + "_" + datum + extensie;
+        String pdfVoorMail = naam + "_" + datum + extensie;
+
+        //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
+        String hoofd = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
+        String tekst = "";
+
+        for (Award a : d.getAlleAwards()) {
+            tekst += a.toString();
+        }
+        //openen van documenten, toevoegen van tekst en sluiten van document
         try {
-            DatumFinder date = new DatumFinder();
-            String datum = date.getStringFromDate();
-
-            String path = System.getProperty("user.dir") + "\\rapporten\\";
-            String naam = "Awards_" + maand + "_" + jaar;
-            String extensie = ".pdf";
-            String bestandsnaam = path + naam + "_" + datum + extensie;
-            String pdf = naam + extensie;
-
-            String hoofd = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
-            String tekst="";
-            Database d = new Database();
-
-            /*for (Award a : d.getAlleAwards()) {
-
-                tekst += a.toString();
-            }*/
-
-            // this.writeFile(bestandsnaam, this.awardsBoodschap(maand, jaar
-            Document doc = new Document() {
-            };
+            Document doc = new Document();
             try {
                 PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
             } catch (DocumentException ex) {
@@ -275,10 +274,10 @@ public class WriteFile extends Exception {
             }
             doc.open();
             try {
-               // doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
-               // doc.add(new Paragraph(tekst,FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
-                doc.add(new Paragraph("Lieselot aka Lotje69*BLING*BLING*", FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
-                doc.add(new Paragraph("testje voor Menno",FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
+                doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, Font.BOLD, BaseColor.ORANGE)));
+                doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.TIMES_ROMAN, 12)));
+                //doc.add(new Paragraph("Lieselot aka Lotje69*BLING*BLING*", FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
+                //doc.add(new Paragraph("testje voor Menno",FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
             } catch (DocumentException ex) {
                 Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -286,5 +285,57 @@ public class WriteFile extends Exception {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        //verzenden van mail met bijlage naar de take-aways
+        for (Take_Away ta : d.getAlleTakeaways()) {
+            mail.sendAwardemail(ta.getEmail(), pdfVoorMail);
+        }
+
     }
+
+    //MENUKAART
+    public void pdfMenukaartVanTakeaway(String takeawayNaam) {
+        //aanmaken van de documentsnaam
+        DatumFinder date = new DatumFinder();
+        String datum = date.getStringFromDate();
+
+        String path = System.getProperty("user.dir") + "\\rapporten\\";
+        String naam = "Menu_" + takeawayNaam;
+        String extensie = ".pdf";
+        String bestandsnaam = path + naam + "_" + datum + extensie;
+        String pdfVoorMail = naam + "_" + datum + extensie;
+
+        //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
+        String hoofd = "Ovezicht van de producten aangeboden door " + takeawayNaam + "\n\n";
+        String tekst = "";
+
+        for (Product p : d.getProductsOfTakeaway(takeawayNaam)) {
+            tekst += p.toString();
+        }
+        //openen van documenten, toevoegen van tekst en sluiten van document
+        try {
+            Document doc = new Document();
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.open();
+            try {
+                doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, Font.BOLD, BaseColor.ORANGE)));
+                doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.TIMES_ROMAN, 12)));
+                //doc.add(new Paragraph("Lieselot aka Lotje69*BLING*BLING*", FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
+                //doc.add(new Paragraph("testje voor Menno",FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //verzenden van mail met bijlage naar de take-aways
+        mail.sendMenukaartmail(d.getTakeaway(takeawayNaam).getEmail(), pdfVoorMail);
+}
+
 }
