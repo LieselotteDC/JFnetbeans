@@ -226,7 +226,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu4.setBackground(new java.awt.Color(255, 153, 0));
         jMenu4.setText("Wijzigen");
 
-        nrAanpassenVestiging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpasplus.png"))); // NOI18N
+        nrAanpassenVestiging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpassenvest.png"))); // NOI18N
         nrAanpassenVestiging.setText("Vestiging");
         nrAanpassenVestiging.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +235,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu4.add(nrAanpassenVestiging);
 
-        btnNaarAanpassenProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpasplus.png"))); // NOI18N
+        btnNaarAanpassenProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpassenprod.png"))); // NOI18N
         btnNaarAanpassenProduct.setText("Product bij een takeaway");
         btnNaarAanpassenProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,6 +267,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem10);
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/deleteproduct.png"))); // NOI18N
         jMenuItem8.setText("Product");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +314,7 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
+        EenmaligeUniekeActieAanmaken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eenmaligkort.png"))); // NOI18N
         EenmaligeUniekeActieAanmaken.setText("Eenmalige unieke actie aanmaken");
         EenmaligeUniekeActieAanmaken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,6 +323,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu5.add(EenmaligeUniekeActieAanmaken);
 
+        PeriodiekeActieAanmaken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/periodiekkort.png"))); // NOI18N
         PeriodiekeActieAanmaken.setText("Periodieke unieke actie aanmaken");
         PeriodiekeActieAanmaken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +332,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu5.add(PeriodiekeActieAanmaken);
 
+        MaandelijkseActieAanmaken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/maandkort.png"))); // NOI18N
         MaandelijkseActieAanmaken.setText("Maandelijkse acties aanmaken");
         MaandelijkseActieAanmaken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,6 +341,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu5.add(MaandelijkseActieAanmaken);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/overzichtkort2.png"))); // NOI18N
         jMenuItem6.setText("Overzicht kortingscodes");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

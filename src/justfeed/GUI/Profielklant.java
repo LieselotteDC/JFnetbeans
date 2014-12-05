@@ -185,7 +185,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenu2.setBackground(new java.awt.Color(255, 153, 0));
         jMenu2.setText("Aanpassen");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpassen.png"))); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/wrench.png"))); // NOI18N
         jMenuItem2.setText("Gegevens");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +250,7 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoekrev.png"))); // NOI18N
         jMenuItem11.setText("Zoek reviews van bepaald product");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +259,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem11);
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addreview.png"))); // NOI18N
         jMenuItem10.setText("Voeg nieuwe review toe");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +268,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
+        naarReviewBestaandOvernemen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/overzichtreviews.png"))); // NOI18N
         naarReviewBestaandOvernemen.setText("Neem bestaande review over");
         naarReviewBestaandOvernemen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +277,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu4.add(naarReviewBestaandOvernemen);
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/listreviews.png"))); // NOI18N
         jMenuItem9.setText("Overzicht van uw geschreven reviews");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,6 +291,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenu5.setBackground(new java.awt.Color(255, 153, 0));
         jMenu5.setText("Zoeken");
 
+        naarCategorie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoekcat.png"))); // NOI18N
         naarCategorie.setText("Categorie");
         naarCategorie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +300,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu5.add(naarCategorie);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoekprod.png"))); // NOI18N
         jMenuItem5.setText("Product");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,6 +309,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoektakeaway.png"))); // NOI18N
         jMenuItem6.setText("Takeaway");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,6 +318,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem6);
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoekengemeente3.png"))); // NOI18N
         jMenuItem7.setText("Gemeente");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -27,7 +27,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/aanpassen.png"/>
+                  <Image iconType="3" name="/icons/wrench.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gegevens"/>
               </Properties>
@@ -107,6 +107,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/zoekrev.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Zoek reviews van bepaald product"/>
               </Properties>
               <Events>
@@ -115,6 +118,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/addreview.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Voeg nieuwe review toe"/>
               </Properties>
               <Events>
@@ -123,6 +129,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="naarReviewBestaandOvernemen">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/overzichtreviews.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Neem bestaande review over"/>
               </Properties>
               <Events>
@@ -131,6 +140,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/listreviews.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Overzicht van uw geschreven reviews"/>
               </Properties>
               <Events>
@@ -149,6 +161,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="naarCategorie">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/zoekcat.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Categorie"/>
               </Properties>
               <Events>
@@ -157,6 +172,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/zoekprod.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Product"/>
               </Properties>
               <Events>
@@ -165,6 +183,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/zoektakeaway.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Takeaway"/>
               </Properties>
               <Events>
@@ -173,6 +194,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/zoekengemeente3.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Gemeente"/>
               </Properties>
               <Events>

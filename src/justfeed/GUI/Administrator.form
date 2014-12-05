@@ -73,7 +73,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="nrAanpassenVestiging">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/aanpasplus.png"/>
+                  <Image iconType="3" name="/icons/aanpassenvest.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Vestiging"/>
               </Properties>
@@ -84,7 +84,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="btnNaarAanpassenProduct">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/aanpasplus.png"/>
+                  <Image iconType="3" name="/icons/aanpassenprod.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Product bij een takeaway"/>
               </Properties>
@@ -126,6 +126,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/deleteproduct.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Product"/>
               </Properties>
               <Events>
@@ -182,6 +185,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="EenmaligeUniekeActieAanmaken">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/eenmaligkort.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eenmalige unieke actie aanmaken"/>
               </Properties>
               <Events>
@@ -190,6 +196,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="PeriodiekeActieAanmaken">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/periodiekkort.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Periodieke unieke actie aanmaken"/>
               </Properties>
               <Events>
@@ -198,6 +207,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MaandelijkseActieAanmaken">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/maandkort.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Maandelijkse acties aanmaken"/>
               </Properties>
               <Events>
@@ -206,6 +218,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/overzichtkort2.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Overzicht kortingscodes"/>
               </Properties>
               <Events>
