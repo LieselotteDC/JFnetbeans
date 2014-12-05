@@ -7,6 +7,8 @@ package Logica;
 
 import Database.Database;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -188,29 +190,30 @@ public class WriteFile extends Exception {
         }
         return tekst;
     }
-/*
-    //menu
-    public void menukaartPerTakeaway(String takeawayNaam) {
-        DatumFinder date = new DatumFinder();
-        String datum = date.getStringFromDate();
+    /*
+     //menu
+     public void menukaartPerTakeaway(String takeawayNaam) {
+     DatumFinder date = new DatumFinder();
+     String datum = date.getStringFromDate();
 
-        String path = System.getProperty("user.dir") + "\\rapporten\\";
-        String naam = "Menu_" + takeawayNaam;
-        String extensie = ".doc";
-        String bestandsnaam = path + naam + "_" + datum + extensie;
+     String path = System.getProperty("user.dir") + "\\rapporten\\";
+     String naam = "Menu_" + takeawayNaam;
+     String extensie = ".doc";
+     String bestandsnaam = path + naam + "_" + datum + extensie;
 
-        this.writeFile(bestandsnaam, this.menukaartPerTakeawayBoodschap(takeawayNaam));
-    }
+     this.writeFile(bestandsnaam, this.menukaartPerTakeawayBoodschap(takeawayNaam));
+     }
 
-    private String menukaartPerTakeawayBoodschap(String takeawayNaam) {
-        String tekst = "Menukaart " + takeawayNaam;
-        Database d = new Database();
-        for (Product p : d.getProductsOfTakeaway(takeawayNaam)) {
-            tekst += p.toString();
-        }
-        return tekst;
-    }
-*/
+     private String menukaartPerTakeawayBoodschap(String takeawayNaam) {
+     String tekst = "Menukaart " + takeawayNaam;
+     Database d = new Database();
+     for (Product p : d.getProductsOfTakeaway(takeawayNaam)) {
+     tekst += p.toString();
+     }
+     return tekst;
+     }
+     */
+
     public void writeFile(String file, String msg) {
 
         PrintWriter outFile = null;
@@ -256,17 +259,46 @@ public class WriteFile extends Exception {
         String extensie = ".pdf";
         String bestandsnaam = path + naam + "_" + datum + extensie;
         String pdfVoorMail = naam + "_" + datum + extensie;
+        String imagepath = System.getProperty("user.dir") + "\\src\\rsz_logo.png";
 
-        //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
-        String hoofd = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
-        String tekst = "";
+        //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak, ook nog een eindaftiteling)
+        /*String hoofd = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
+         String tekst = "";
+         for (Award a : d.getAlleAwards()) {
+         tekst += a.toString();
+         }*/
+        String aftiteling1 = "Het team van Just-Feed\n";
+        String aftiteling2
+                = "        De Coster Lieselotte\n"
+                + "        De Kerpel Laura\n"
+                + "        De Keyser Olivier\n"
+                + "        Hillewaere Menno\n"
+                + "        Pittoors Kimberley\n"
+                + "        Van der Poten Kelly\n";
+        String aftiteling3 = "Project Beleidsinformatica, Prof. dr. Geert Poels, Begeleider Jan Claes";
 
-        for (Award a : d.getAlleAwards()) {
-            tekst += a.toString();
+        Anchor anchor = new Anchor("justfeedgroep01@gmail.com", FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY));
+        anchor.setReference("mailto: justfeedgroep01@gmail.com");
+
+        //aanmaken van de image (logo)
+        Image image = null;
+        try {
+            image = Image.getInstance(imagepath);
+        } catch (BadElementException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // aanmaken van heading
+        PdfPTable table = new PdfPTable(1);
+        PdfPCell cell= new PdfPCell(new Paragraph("Overzicht van een bepaalde takeaway", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 16, Font.BOLD, BaseColor.BLACK)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.ORANGE);
+        table.addCell(cell);
         //openen van documenten, toevoegen van tekst en sluiten van document
         try {
-            Document doc = new Document();
+            Document doc = new Document(PageSize.A4);
             try {
                 PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
             } catch (DocumentException ex) {
@@ -274,10 +306,18 @@ public class WriteFile extends Exception {
             }
             doc.open();
             try {
-                doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, Font.BOLD, BaseColor.ORANGE)));
-                doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.TIMES_ROMAN, 12)));
-                //doc.add(new Paragraph("Lieselot aka Lotje69*BLING*BLING*", FontFactory.getFont(FontFactory.TIMES_ROMAN,18,Font.BOLD,BaseColor.ORANGE)));
-                //doc.add(new Paragraph("testje voor Menno",FontFactory.getFont(FontFactory.TIMES_ROMAN,12)));
+                //doc.add(new Paragraph(hoofd, FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 16, Font.BOLD, BaseColor.ORANGE)));
+                doc.add(table);
+                doc.add(new Paragraph("Overzicht van een bepaalde takeaway", FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 16, Font.BOLD, BaseColor.ORANGE)));
+                doc.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------\n", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, BaseColor.ORANGE)));
+                //doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.add(new Paragraph("testje voor Mennofdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfhhhhhhhhhhhhhhhhh\n", FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.add(image);
+                doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
+                doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
+                doc.add(anchor);
+                doc.add(new Paragraph(aftiteling3, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
+                //deze uit commentaar halen als we een link willen om te mailen
             } catch (DocumentException ex) {
                 Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -287,10 +327,9 @@ public class WriteFile extends Exception {
         }
 
         //verzenden van mail met bijlage naar de take-aways
-        for (Take_Away ta : d.getAlleTakeaways()) {
-            mail.sendAwardemail(ta.getEmail(), pdfVoorMail);
-        }
-
+        /*for (Take_Away ta : d.getAlleTakeaways()) {
+         mail.sendAwardemail(ta.getEmail(), pdfVoorMail);
+         }*/
     }
 
     //MENUKAART
@@ -336,6 +375,6 @@ public class WriteFile extends Exception {
 
         //verzenden van mail met bijlage naar de take-aways
         mail.sendMenukaartmail(d.getTakeaway(takeawayNaam).getEmail(), pdfVoorMail);
-}
+    }
 
 }
