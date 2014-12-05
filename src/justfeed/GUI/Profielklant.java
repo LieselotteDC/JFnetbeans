@@ -185,6 +185,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenu2.setBackground(new java.awt.Color(255, 153, 0));
         jMenu2.setText("Aanpassen");
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpassen.png"))); // NOI18N
         jMenuItem2.setText("Gegevens");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +194,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/verwijderen.png"))); // NOI18N
         jMenuItem3.setText("Account verwijderen");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +213,7 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shoppingbasket.png"))); // NOI18N
         jMenuItem12.setText("Plaats een bestelling");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +222,7 @@ public class Profielklant extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem12);
 
+        naarOverzichtTakeAwaysReedsBesteld.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tables.png"))); // NOI18N
         naarOverzichtTakeAwaysReedsBesteld.setText("Overzicht takeaways waarbij u reeds besteld heeft");
         naarOverzichtTakeAwaysReedsBesteld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,6 +329,7 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/mail.png"))); // NOI18N
         jMenuItem8.setText("Zend e-mail naar klantendienst");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -194,6 +194,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu3.setBackground(new java.awt.Color(255, 153, 0));
         jMenu3.setText("Toevoegen");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/newvest.png"))); // NOI18N
         jMenuItem1.setText("Takeaway");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +203,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/newvest2.png"))); // NOI18N
         jMenuItem2.setText("Vestiging");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +212,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
         jMenuItem3.setText("Product bij een takeaway");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +226,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu4.setBackground(new java.awt.Color(255, 153, 0));
         jMenu4.setText("Wijzigen");
 
+        nrAanpassenVestiging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpasplus.png"))); // NOI18N
         nrAanpassenVestiging.setText("Vestiging");
         nrAanpassenVestiging.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +235,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu4.add(nrAanpassenVestiging);
 
+        btnNaarAanpassenProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanpasplus.png"))); // NOI18N
         btnNaarAanpassenProduct.setText("Product bij een takeaway");
         btnNaarAanpassenProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,6 +249,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu1.setBackground(new java.awt.Color(255, 153, 0));
         jMenu1.setText("Verwijderen");
 
+        btnNaarVerwijderenTakeaway.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/deletetakeway.png"))); // NOI18N
         btnNaarVerwijderenTakeaway.setText("Take-away");
         btnNaarVerwijderenTakeaway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +258,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu1.add(btnNaarVerwijderenTakeaway);
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/deletevest.png"))); // NOI18N
         jMenuItem10.setText("Vestiging");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +285,7 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
+        btnNaarAanmaakAward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/aanmaakawards.png"))); // NOI18N
         btnNaarAanmaakAward.setText("Award aanmaken");
         btnNaarAanmaakAward.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +294,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu6.add(btnNaarAanmaakAward);
 
+        naarAwardsAdministrator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/overzichtawards.png"))); // NOI18N
         naarAwardsAdministrator.setText("Overzicht awards");
         naarAwardsAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,6 +350,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu7.setBackground(new java.awt.Color(255, 153, 0));
         jMenu7.setText("Rapporten");
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menus.png"))); // NOI18N
         jMenuItem7.setText("Flyers maken");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,6 +359,7 @@ public class Administrator extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem7);
 
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rapporten.png"))); // NOI18N
         jMenuItem9.setText("Stand van zaken");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,6 +373,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu2.setBackground(new java.awt.Color(255, 153, 0));
         jMenu2.setText("Order");
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/levbev.png"))); // NOI18N
         jMenuItem11.setText("Ontvangst leveringsbevestiging");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,6 +387,7 @@ public class Administrator extends javax.swing.JFrame {
         jMenu8.setBackground(new java.awt.Color(255, 153, 0));
         jMenu8.setText("Commissie");
 
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/commissie.png"))); // NOI18N
         jMenuItem12.setText("Commissieberekening");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

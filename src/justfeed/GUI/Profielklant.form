@@ -26,6 +26,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/aanpassen.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Gegevens"/>
               </Properties>
               <Events>
@@ -34,6 +37,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/verwijderen.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Account verwijderen"/>
               </Properties>
               <Events>
@@ -55,6 +61,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/shoppingbasket.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Plaats een bestelling"/>
               </Properties>
               <Events>
@@ -63,6 +72,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="naarOverzichtTakeAwaysReedsBesteld">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/tables.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Overzicht takeaways waarbij u reeds besteld heeft"/>
               </Properties>
               <Events>
@@ -182,6 +194,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/mail.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Zend e-mail naar klantendienst"/>
               </Properties>
               <Events>
