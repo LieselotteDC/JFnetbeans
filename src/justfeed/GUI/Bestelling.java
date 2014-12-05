@@ -569,6 +569,7 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void rbtnCategorieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnCategorieMouseClicked
         combobox.setEnabled(true);
+        txtProduct.setEnabled(false);
         DefaultComboBoxModel c = d.initialiseerCombobox("SELECT categorie FROM tbl_soort;", "categorie");
         combobox.setModel(c);
     }//GEN-LAST:event_rbtnCategorieMouseClicked
@@ -620,6 +621,7 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void rbtnTakeAwayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnTakeAwayMouseClicked
         combobox.setEnabled(true);
+        txtProduct.setEnabled(false);
         DefaultComboBoxModel f = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
         combobox.setModel(f);
     }//GEN-LAST:event_rbtnTakeAwayMouseClicked
@@ -647,7 +649,7 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void rbtnProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnProductMouseClicked
         txtProduct.setEnabled(true);
-        
+        combobox.setEnabled(false);
     }//GEN-LAST:event_rbtnProductMouseClicked
 
     private void tblHotItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHotItemsMouseClicked
