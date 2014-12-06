@@ -143,6 +143,7 @@ public class RapportFlyer extends javax.swing.JFrame {
         gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
        // mc.sendMenukaartmail(null, null); hoe geraak ik hier aan de takeawaynaam en aan het bestandsnaam?
        //takeawaynaam krijg je via gekozenTakeAway :)
+        
     }//GEN-LAST:event_btnFlyerMakenActionPerformed
 
     /**
