@@ -190,8 +190,6 @@ public class MailingClass {
         }
     }
 
-    //MOET NOG OPGEROEPEN WORDEN
-    //OLIVIER: ik heb sendArwardemail al opgeroepen in de aanmaak van de pfd dus deze is in orde!
     public void sendAwardemail(String takeaway, String bestandsnaam) {
         // Recipient's email ID needs to be mentioned.
         Database d = new Database();
@@ -489,7 +487,7 @@ public class MailingClass {
             String htmlText = "<font color='#FF9933' size='+2'>Beste " + ta.getNaam() + ",</font>"
                     + "<P>De commissie van " + maand + " " + jaar + " bedraagt: " + bedrag + " euro.<br> "
                     + "Gelieve dit te storten op BE53001496589253 voor het einde van de maand!"
-                    + "Indien u vragen hebt over deze berekeningen, aarzel dan niet om ons te contacteren<br>"
+                    + "Indien u vragen heeft over deze berekeningen, aarzel dan niet om ons te contacteren<br>"
                     + "op het onderstaande e-mailadres</P>"
                     + "<br><img src=\"cid:image\"> <br>"
                     + "<i><b>Het team van Just-Feed</b><br>"
@@ -527,9 +525,6 @@ public class MailingClass {
         }
     }
 
-    //OLIVIER: nog een mail met als onderwerp menukaart.. en met wat tekst van beste naamvantakeaway, in de bijlage vindt u het overzicht van de menukaart die u hebt aangevraagd bij onze dienst...
-//ik heb de naam methodenaam al aangemaakt, je moet ze juist nog opstellen en bij de bijlage verwijzen naar bestandsnaam (zoals bij methode sendAwardsmail)
-// mail voor rapporten. meekrijgen welke takeaway . ook met attachment
     public void sendMenukaartmail(String takeaway, String bestandsnaam) {
         {
             // Recipient's email ID needs to be mentioned.
@@ -894,7 +889,5 @@ public class MailingClass {
         }
     }
 }
-// herrinnering review,     OKE
-//commissie double bedrag string takeaway maand?    OKE
-//welkomstmail takeaways die zicht registreren      OKE 
+
 

@@ -20,7 +20,7 @@ public class RapportFlyer extends javax.swing.JFrame {
      public static JFrame myCaller;
      public Database d = new Database();
     DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
-    MailingClass mc = new MailingClass();
+    WriteFile pdf=new WriteFile();
     /**
      * Creates new form Rapport
      */
@@ -54,6 +54,12 @@ public class RapportFlyer extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Flyers maken");
+
+        comboboxTakeAway.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxTakeAwayActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Desbetreffende take-away:");
@@ -141,10 +147,13 @@ public class RapportFlyer extends javax.swing.JFrame {
     private void btnFlyerMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlyerMakenActionPerformed
         String gekozenTakeAway;
         gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
-       // mc.sendMenukaartmail(null, null); hoe geraak ik hier aan de takeawaynaam en aan het bestandsnaam?
-       //takeawaynaam krijg je via gekozenTakeAway :)
+        pdf.pdfMenukaartVanTakeaway(gekozenTakeAway);
         
     }//GEN-LAST:event_btnFlyerMakenActionPerformed
+
+    private void comboboxTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxTakeAwayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboboxTakeAwayActionPerformed
 
     /**
      * @param args the command line arguments

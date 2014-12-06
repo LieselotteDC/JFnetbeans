@@ -24,7 +24,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     public Database d = new Database();
     public static JFrame myCaller;
     DefaultComboBoxModel c = d.initialiseerCombobox("SELECT naam FROM tbl_takeaway;", "naam");
-    MailingClass mc = new MailingClass();
+    WriteFile pdf=new WriteFile();
 
     /**
      * Creates new form RapportStandVanZaken //
