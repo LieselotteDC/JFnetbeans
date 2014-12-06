@@ -139,8 +139,10 @@ public class RapportFlyer extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeknopAdminiMouseClicked
 
     private void btnFlyerMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlyerMakenActionPerformed
-        // TODO add your handling code here:
+        String gekozenTakeAway;
+        gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
        // mc.sendMenukaartmail(null, null); hoe geraak ik hier aan de takeawaynaam en aan het bestandsnaam?
+       //takeawaynaam krijg je via gekozenTakeAway :)
     }//GEN-LAST:event_btnFlyerMakenActionPerformed
 
     /**
