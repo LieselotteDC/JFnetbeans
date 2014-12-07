@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class Database {
 
     MailingClass mc = new MailingClass();
-    
+
     private Connection dbConnection = null;
 
     public Connection getConnection() {
@@ -1957,6 +1957,47 @@ public class Database {
             return null;
         }
 
+    }
+
+    public ArrayList<Orderverwerking> getAlleProductenVanMenu(int menuID) {
+        try {
+            ArrayList<Orderverwerking> productenVanMenu = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_behoortTot WHERE menuID=" + menuID + ";";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int productID = srs.getInt("productID");
+                int hoeveelheid = srs.getInt("hoeveelheid");
+                Product p = this.getProduct(productID);
+                Orderverwerking orderverw= new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid);
+                productenVanMenu.add(orderverw);
+            }
+            this.closeConnection();
+            return productenVanMenu;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+    }
+
+    //enkel om op te halen bij welke vestiging het besteld is
+    private String getVestigingVanMenu(int menuID) {
+        try {
+            String sql = "SELECT * FROM tbl_menu WHERE (menuID = " + menuID + ");";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                String vestiging=srs.getString("vestiging");
+                this.closeConnection();
+                return vestiging;
+            } else {
+                this.closeConnection();
+                return "";
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return "";
+        }
     }
 
     //deze methode oproepen bij het ingeven van kortingscodes niet, de bestaat bij methodes korting

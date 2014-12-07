@@ -32,6 +32,16 @@ public class Orderverwerking {
         this.vestigingsID = vestigingsID;
     }
 
+    public Orderverwerking(int productID, String productNaam, String type, int hoeveelheid) {
+        this.productID = productID;
+        this.productNaam = productNaam;
+        this.type = type;
+        this.prijs = 0;
+        this.hoeveelheid = hoeveelheid;
+        this.takeawayNaam = null;
+        this.vestigingsID = null;
+    }
+
     public ArrayList<Orderverwerking> verdelingBesteldeProducten(ArrayList<Orderverwerking> besteldeProducten, String takeaway, String vestiging) {
 
         ArrayList<Orderverwerking> menu = new ArrayList<>();
@@ -41,6 +51,16 @@ public class Orderverwerking {
             }
         }
         return menu;
+    }
+
+    @Override
+    public String toString() {
+        String result;
+        result = "\t" + "ProductID:\t" + this.getProductID() + "\n";
+        result +="\t" + "Naam:\t\t" + this.getProductNaam() + "\n";
+        result += "\t" + "Producttype:\t" + this.getType()+ "\n";
+        result += "\t" + "Hoeveelheid:\t" + this.getHoeveelheid() +"\n\n";
+        return result;
     }
 
     public int getHoeveelheid() {
