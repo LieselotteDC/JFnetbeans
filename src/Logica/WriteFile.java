@@ -34,6 +34,7 @@ public class WriteFile extends Exception {
     // nog die rapporten en awards oproepen
     //AWARDS
     //deze methode moet opgeroepen worden net na het berekenen van de awards, mail wordt automatisch verzonden naar alle takeaways
+    //MENNO: heb ik gedaan aanmakenawards na de joption pane 
     public void pdfAwards(String maand, int jaar) {
         //aanmaken van de documentsnaam
         DatumFinder date = new DatumFinder();

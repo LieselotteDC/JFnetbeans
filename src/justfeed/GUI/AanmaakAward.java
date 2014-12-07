@@ -19,6 +19,7 @@ public class AanmaakAward extends javax.swing.JFrame {
     private static final AanmaakAward aanmaakAward = new AanmaakAward();
     public Database d = new Database();
     public static JFrame myCaller;
+    WriteFile wf = new WriteFile ();
 
     public AanmaakAward() {
         initComponents();
@@ -206,6 +207,7 @@ public class AanmaakAward extends javax.swing.JFrame {
                comboboxMaand.setSelectedItem(null);
                txtJaar.setText("");
                JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
+               wf.pdfAwards(maand, jaar);
                Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
                //     amdministrator.setSize(300,300);
                awardsoverzicht.pack();

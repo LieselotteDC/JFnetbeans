@@ -107,6 +107,11 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
                 rbtnTakeAwayMouseClicked(evt);
             }
         });
+        rbtnTakeAway.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnTakeAwayActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbtnVestiging);
         rbtnVestiging.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -114,6 +119,11 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
         rbtnVestiging.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rbtnVestigingMouseClicked(evt);
+            }
+        });
+        rbtnVestiging.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnVestigingActionPerformed(evt);
             }
         });
 
@@ -256,13 +266,24 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
         else{}
         String inhoud = comboboxInhoud.getSelectedItem().toString();
         if(inhoud.equals("Verkopen")){
-          //  mc.sendVerkopenmail(gekozenTakeAway, inhoud); bestandsnaam moet nog meegegeven worden
+         /* pdf.pdfVerkopenTakeawayAlgemeen(gekozenTakeAway);
+          pdf.pdfVerkopenTakeawayVestiging(gekozenTakeAway, inhoud);
+            nog een if else met wat ze kiezen? ta of vestiging, en dan nog vestiging ophalen om mee te geven aan functie
+            */
         }
         else if(inhoud.equals("Lopende orders")){
-            //mc.sendLopendeOrdersmail(gekozenTakeAway, inhoud); idem bestandsnaam
+           /*
+            pdf.pdfLopendeOrdersTakeawayAlgemeen(gekozenTakeAway);
+           pdf.pdfLopendeOrdersTakeawayVestiging(gekozenTakeAway, inhoud);
+            IDEM HIER
+            */
         }
         else{
-            //mc.sendLopendeUniekeKortingscodesmail(gekozenTakeAway, inhoud); idem bestandsnaam
+            /*
+            pdf.pdfKortingscodesTakeawayAlgemeen(gekozenTakeAway);
+            pdf.pdfKortingscodesTakeawayVestiging(gekozenTakeAway, inhoud);
+            IDEM
+            */
         }
     }//GEN-LAST:event_btnRapportMakenActionPerformed
 
@@ -285,6 +306,14 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     private void comboboxInhoudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxInhoudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboboxInhoudActionPerformed
+
+    private void rbtnTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTakeAwayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnTakeAwayActionPerformed
+
+    private void rbtnVestigingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVestigingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnVestigingActionPerformed
 
     /**
      * @param args the command line arguments
