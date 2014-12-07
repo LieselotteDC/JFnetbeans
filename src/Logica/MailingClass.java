@@ -444,93 +444,95 @@ public class MailingClass {
         }
     }
 
-    public void sendBesteldeProductenVanOrder(ArrayList<Menu> besteldeMenus, String orderdatum) {
+    public void sendBesteldeProductenVanOrder(Take_Away takeaway, String bestandsnaam) {
         // Recipient's email ID needs to be mentioned.
-        for (Menu besteldeMenu : besteldeMenus) {
-            Database d = new Database();
-            String to = d.getTakeaway(besteldeMenu.getTakeawayNaam()).getEmail();
-            String tekst = "";
-            for (Orderverwerking orderver : d.getAlleProductenVanMenu(besteldeMenu.getMenuID())) {
-                tekst += orderver.toString();
-            }
+        String to = takeaway.getEmail();
+        
+        // Sender's email ID needs to be mentioned
+        final String username = "justfeedgroep01@gmail.com";
+        final String password = "JustFeed01";
 
-            // Sender's email ID needs to be mentioned
-            final String username = "justfeedgroep01@gmail.com";
-            final String password = "JustFeed01";
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
 
-            Properties props = new Properties();
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.port", "587");
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(username, password);
-                        }
-                    });
+        try {
+            // Create a default MimeMessage object.
+            Message message = new MimeMessage(session);
 
-            try {
-                // Create a default MimeMessage object.
-                Message message = new MimeMessage(session);
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(username));
 
-                // Set From: header field of the header.
-                message.setFrom(new InternetAddress(username));
+            // Set To: header field of the header.
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
-                // Set To: header field of the header.
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            // Set Subject: header field
+            message.setSubject("Overzicht van bestelling");
 
-                // Set Subject: header field
-                message.setSubject("Overzicht van bestelling met orderID " + besteldeMenu.getOrderID() + " (" + besteldeMenu.getMenuID() + ")");
+            // This mail has 3 parts, the bod, the embedded image and an attachment
+            MimeMultipart multipart = new MimeMultipart("related");
 
-                // This mail has 3 parts, the bod, the embedded image and an attachment
-                MimeMultipart multipart = new MimeMultipart("related");
+            // first part (the html)
+            BodyPart messageBodyPart = new MimeBodyPart();
+            String htmlText = "<font color='#FF9933' size='+2'>Beste, " + takeaway.getNaam() + ",</font>"
+                    + "<P>Er is zonet een menu besteld bij een vestiging van uw takeaway!<br> "
+                    + "In de bijlage vindt u de bestelbon met de nodige informatie <br>"
+                    + "Indien u vragen heeft over deze bestelling, aarzel dan niet om ons te contacteren<br>"
+                    + "op het onderstaande e-mailadres</P>"
+                    + "<br><img src=\"cid:image\"> <br>"
+                    + "<i><b>Het team van Just-Feed</b><br>"
+                    + "<font color='#FFFFFF'>.........</font>De Coster Lieselotte<br>"
+                    + "<font color='#FFFFFF'>.........</font>De Kerpel Laura<br>"
+                    + "<font color='#FFFFFF'>.........</font>De Keyser Olivier<br>"
+                    + "<font color='#FFFFFF'>.........</font>Hillewaere Menno<br>"
+                    + "<font color='#FFFFFF'>.........</font>Pittoors Kimberley<br>"
+                    + "<font color='#FFFFFF'>.........</font>Van der Poten Kelly<br>"
+                    + "<a href=\"mailto:justfeedgroep01@gmail.com\">justfeedgroep01@gmail.com</a> <br> "
+                    + "Project Beleidsinformatica, Prof. dr. Geert Poels, Begeleider Jan Claes</i>";
+            messageBodyPart.setContent(htmlText, "text/html");
+            // add it to the multipart
+            multipart.addBodyPart(messageBodyPart);
 
-                // first part (the html)
-                BodyPart messageBodyPart = new MimeBodyPart();
-                String htmlText = "<font color='#FF9933' size='+2'>Beste, " + besteldeMenu.getTakeawayNaam() + ",</font>"
-                        + "<P>Er is zonet een menu besteld bij uw takeaway met vestigingsID " + besteldeMenu.getVestiging() + "<br> "
-                        + "Hieronder vindt u een lijst van de bestelde producten, de levering is voorzien op: " + orderdatum + "<br>"
-                        + tekst + "<br>"
-                        + "Indien u vragen heeft over deze bestelling, aarzel dan niet om ons te contacteren<br>"
-                        + "op het onderstaande e-mailadres</P>"
-                        + "<br><img src=\"cid:image\"> <br>"
-                        + "<i><b>Het team van Just-Feed</b><br>"
-                        + "<font color='#FFFFFF'>.........</font>De Coster Lieselotte<br>"
-                        + "<font color='#FFFFFF'>.........</font>De Kerpel Laura<br>"
-                        + "<font color='#FFFFFF'>.........</font>De Keyser Olivier<br>"
-                        + "<font color='#FFFFFF'>.........</font>Hillewaere Menno<br>"
-                        + "<font color='#FFFFFF'>.........</font>Pittoors Kimberley<br>"
-                        + "<font color='#FFFFFF'>.........</font>Van der Poten Kelly<br>"
-                        + "<a href=\"mailto:justfeedgroep01@gmail.com\">justfeedgroep01@gmail.com</a> <br> "
-                        + "Project Beleidsinformatica, Prof. dr. Geert Poels, Begeleider Jan Claes</i>";
-                messageBodyPart.setContent(htmlText, "text/html");
-                // add it to the multipart
-                multipart.addBodyPart(messageBodyPart);
+            // second part (the image)
+            messageBodyPart = new MimeBodyPart();
+            String filename1 = System.getProperty("user.dir"); //om de claspath overal te kunnen gebruiken
+            filename1 += "\\src\\resizedlogo.png";
+            DataSource fds = new FileDataSource(filename1);
 
-                // second part (the image)
-                messageBodyPart = new MimeBodyPart();
-                String filename1 = System.getProperty("user.dir"); //om de claspath overal te kunnen gebruiken
-                filename1 += "\\src\\resizedlogo.png";
-                DataSource fds = new FileDataSource(filename1);
+            messageBodyPart.setDataHandler(new DataHandler(fds));
+            messageBodyPart.setHeader("Content-ID", "<image>");
+            // add image to the multipart
+            multipart.addBodyPart(messageBodyPart);
 
-                messageBodyPart.setDataHandler(new DataHandler(fds));
-                messageBodyPart.setHeader("Content-ID", "<image>");
-                // add image to the multipart
-                multipart.addBodyPart(messageBodyPart);
+            //third part (the attachment)
+            messageBodyPart = new MimeBodyPart();
+            String filename2 = System.getProperty("user.dir"); //om de claspath overal te kunnen gebruiken
+            filename2 += "\\rapporten\\" + bestandsnaam;
+            DataSource source = new FileDataSource(filename2);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(source.getName());
+            // add image to the multipart
+            multipart.addBodyPart(messageBodyPart);
+            // put everything together
+            message.setContent(multipart);
 
-                // put everything together
-                message.setContent(multipart);
+            // Send message
+            Transport.send(message);
 
-                // Send message
-                Transport.send(message);
-
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
         }
+
     }
 
     public void sendCommissiemail(Take_Away ta, String maand, int jaar, double bedrag) {

@@ -32,7 +32,6 @@ public class BestellingFactuur extends javax.swing.JFrame {
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
     public static JFrame myCaller;
-    public String orderdatumString=orderZonderKorting.getDatum().toString();
     
     public BestellingFactuur() {
         initComponents();
@@ -167,8 +166,8 @@ public class BestellingFactuur extends javax.swing.JFrame {
         d.aanmakenReview(voorlopigeReviews);
         d.addHulpKorting(hulpKorting);
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn
-        MailingClass mc=new MailingClass();
-        mc.sendBesteldeProductenVanOrder(berekendeMenus, orderdatumString);
+        WriteFile pdf=new WriteFile();
+        pdf.pdfBesteldeProductenBijTakeaway(berekendeMenus, orderMetKorting);
         txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();

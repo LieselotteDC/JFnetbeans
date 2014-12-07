@@ -34,6 +34,17 @@ public class Order {
         this.login = login;
         this.status = status;
     }
+    
+        public Order(int orderID,String straat, int huisnummer, int plaatsnummer) {
+        this.orderID = orderID;
+        this.totaalPrijs = 0;
+        this.datum = null;
+        this.straat = straat;
+        this.huisnummer = huisnummer;
+        this.plaatsnummer = plaatsnummer;
+        this.login = null;
+        this.status = false;
+    }
 
     public int getOrderID() {
         return orderID;

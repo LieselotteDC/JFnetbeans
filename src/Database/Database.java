@@ -1959,6 +1959,7 @@ public class Database {
 
     }
 
+    //deze methodes wordt gebruikt bij het sturen van de mails naar de take-away met een bestelling van de klant
     public ArrayList<Orderverwerking> getAlleProductenVanMenu(int menuID) {
         try {
             ArrayList<Orderverwerking> productenVanMenu = new ArrayList<>();
@@ -1968,7 +1969,7 @@ public class Database {
                 int productID = srs.getInt("productID");
                 int hoeveelheid = srs.getInt("hoeveelheid");
                 Product p = this.getProduct(productID);
-                Orderverwerking orderverw= new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid);
+                Orderverwerking orderverw = new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid);
                 productenVanMenu.add(orderverw);
             }
             this.closeConnection();
@@ -1977,26 +1978,6 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
             return null;
-        }
-    }
-
-    //enkel om op te halen bij welke vestiging het besteld is
-    private String getVestigingVanMenu(int menuID) {
-        try {
-            String sql = "SELECT * FROM tbl_menu WHERE (menuID = " + menuID + ");";
-            ResultSet srs = getData(sql);
-            if (srs.next()) {
-                String vestiging=srs.getString("vestiging");
-                this.closeConnection();
-                return vestiging;
-            } else {
-                this.closeConnection();
-                return "";
-            }
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
-            return "";
         }
     }
 
@@ -2170,10 +2151,10 @@ public class Database {
     //METHODES IVM COMMISSIE
     public void addCommissie(String maand, int jaar) {
         try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
             for (Take_Away ta : this.getAlleTakeaways()) {
                 double berekendeCommissie = this.berekenenCommissie(ta.getNaam(), maand, jaar);
-                dbConnection = getConnection();
-                Statement stmt = dbConnection.createStatement();
                 stmt.executeUpdate("UPDATE tbl_takeaway SET commissie = " + berekendeCommissie + " WHERE naam = '" + ta.getNaam() + "';");
                 mc.sendCommissiemail(ta, maand, jaar, berekendeCommissie);
             }
@@ -2187,7 +2168,7 @@ public class Database {
     private double berekenenCommissie(String takeawayNaam, String maand, int jaar) {
         String start = DatumFinder.getEersteDag(maand, jaar);
         String eind = DatumFinder.getLaatsteDag(maand, jaar);
-        double totaleGeldwaarde = 0.0; //sum die we ophalen + hulpkorting
+        double totaleGeldwaarde = 0.0; //sum van menuprijzen die we ophalen + hulpkorting
         double opgehaaldeMenusPrijs = 0.0;
         double opgehaaldeHulpkorting = 0.0;
         double aantalOrders = 0;
@@ -2198,11 +2179,7 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT * FROM tbl_hulpkorting WHERE (takeawaynaam='" + takeawayNaam + "');";
-            srs = stmt.executeQuery(sql);
-            if (srs.next()) {
-                opgehaaldeHulpkorting = srs.getDouble("kortingsbedrag");
-            }
+            opgehaaldeHulpkorting = this.getHuidigeHulpKorting(takeawayNaam);
 
             String sql1 = "SELECT SUM(M.menuprijs) AS gecumuleerdeMenuprijs FROM tbl_menu M , tbl_order O WHERE (M.orderID=O.orderID)and (M.takeaway='" + takeawayNaam + "')and (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
             srs = stmt.executeQuery(sql1);
@@ -2233,7 +2210,21 @@ public class Database {
         if (justfeeder.equalsIgnoreCase(takeawayNaam)) {
             berekendeCommissie *= 0.99;
         }
+        this.resetTabelHulpkorting(); // om alle te zorgen da elke take-away terug op 0 staat qua kortingen  van just-feed die zijn gebruikt bij hun takeaway 
         return berekendeCommissie;
+    }
+
+    private void resetTabelHulpkorting() {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            stmt.executeUpdate("UPDATE tbl_hulpkorting SET kortingsbedrag = 0;");
+
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
     }
 
 }
