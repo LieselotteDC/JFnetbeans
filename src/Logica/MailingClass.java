@@ -92,7 +92,7 @@ public class MailingClass {
             //third part (the attachment)
             messageBodyPart = new MimeBodyPart();
             String filename2 = System.getProperty("user.dir"); //om de claspath overal te kunnen gebruiken
-            filename2 += "\\rapporten\\handleidingJustFeed.docx";
+            filename2 += "\\rapporten\\handleidingJustFeed.pdf";
             DataSource source = new FileDataSource(filename2);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(source.getName());
