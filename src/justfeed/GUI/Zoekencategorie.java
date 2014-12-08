@@ -182,6 +182,8 @@ public class Zoekencategorie extends javax.swing.JFrame {
         zoekenCategorie.hide();
         myCaller.show();
         comboboxCategorie.setSelectedItem(null);
+        DefaultTableModel model = (DefaultTableModel) tblZoekencategorie.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**

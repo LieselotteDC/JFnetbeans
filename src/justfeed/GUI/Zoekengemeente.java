@@ -196,6 +196,8 @@ public class Zoekengemeente extends javax.swing.JFrame {
        myCaller.show();
        txtPostcode.setText("");
        txtGemeente.setText("");
+        DefaultTableModel model = (DefaultTableModel) tblZoekenGemeente.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**

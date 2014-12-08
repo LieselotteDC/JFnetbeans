@@ -162,6 +162,8 @@ public class ZoekenReview extends javax.swing.JFrame {
        zoekenReview.hide();
         myCaller.show();
         txtProductNaam.setText("");
+        DefaultTableModel model = (DefaultTableModel) tblReviews.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_bntHomeknopProfielklantMouseClicked
 
     /**
