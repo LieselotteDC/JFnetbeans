@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -24,13 +23,11 @@ public class AanpassenProduct extends javax.swing.JFrame {
     public AanpassenProduct() {
         initComponents();
     }
-    
-    public static AanpassenProduct getInstance(Administrator admini)
-    {
+
+    public static AanpassenProduct getInstance(Administrator admini) {
         myCaller = admini;
         return aangepastproduct;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +60,12 @@ public class AanpassenProduct extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Huidig productID");
+
+        txtHuidigID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHuidigIDActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Nieuwe naam");
@@ -180,48 +183,53 @@ public class AanpassenProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_back
 
     private void btnProductAanpassenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductAanpassenActionPerformed
-         int huidigID = Integer.parseInt(txtHuidigID.getText().trim());
-         String nieuweNaam = txtNieuweNaam.getText();
-         String nieuwProducttype = (String)comboboxType.getSelectedItem();
-         
-         if(!d.productIDBestaat(huidigID))
-         {
-         int reply = JOptionPane.showConfirmDialog(null, "Dit product bestaat nog niet. Wil U dit product toevoegen?", "Product aanmaken", JOptionPane.YES_NO_OPTION);
+        int huidigID = Integer.parseInt(txtHuidigID.getText().trim());
+        String nieuweNaam = txtNieuweNaam.getText();
+        String nieuwProducttype = (String) comboboxType.getSelectedItem();
+
+        if (!d.productIDBestaat(huidigID)) {
+            int reply = JOptionPane.showConfirmDialog(null, "Dit product bestaat nog niet. Wil U dit product toevoegen?", "Product aanmaken", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-               AanmaakNieuwProduct nieuwproduct = AanmaakNieuwProduct.getInstance(aangepastproduct);
-       //      vestiging.setSize(300,300);
-               nieuwproduct.pack();
-               aangepastproduct.hide();
-               nieuwproduct.show();
-               nieuwproduct.setLocationRelativeTo(null);
+                AanmaakNieuwProduct nieuwproduct = AanmaakNieuwProduct.getInstance(aangepastproduct);
+                //      vestiging.setSize(300,300);
+                nieuwproduct.pack();
+                aangepastproduct.hide();
+                nieuwproduct.show();
+                nieuwproduct.setLocationRelativeTo(null);
+            } else {
+                JOptionPane.showMessageDialog(null, "U kan enkel bestaande producten wijzigen. Probeer opnieuw.");
+                txtHuidigID.setText("");
+                txtNieuweNaam.setText("");
+                txtEenheidsprijs.setText("");
+                comboboxType.setSelectedItem(null);
             }
-         
-            else {
-            JOptionPane.showMessageDialog(null, "U kan enkel bestaande producten wijzigen. Probeer opnieuw.");
-             txtHuidigID.setText("");
-             txtNieuweNaam.setText("");
-             txtEenheidsprijs.setText("");
-             comboboxType.setSelectedItem(null);
-            }
-         }
-         else{
-         double nieuweEenheidsprijs = Double.parseDouble(txtEenheidsprijs.getText());
-         Product aangepastProduct = new Product(huidigID, nieuweNaam, nieuwProducttype, nieuweEenheidsprijs);
-         Product huidigProduct = d.getProduct(huidigID);
-         d.updateProduct(huidigProduct, aangepastProduct);
-         JOptionPane.showMessageDialog(null, "Uw product werd met succes aangepast.");
-         }
-         
+        } else {
+            double nieuweEenheidsprijs = Double.parseDouble(txtEenheidsprijs.getText());
+            Product aangepastProduct = new Product(huidigID, nieuweNaam, nieuwProducttype, nieuweEenheidsprijs);
+            Product huidigProduct = d.getProduct(huidigID);
+            d.updateProduct(huidigProduct, aangepastProduct);
+            JOptionPane.showMessageDialog(null, "Uw product werd met succes aangepast.");
+            aangepastproduct.hide();
+            myCaller.show();
+            txtHuidigID.setText("");
+            txtNieuweNaam.setText("");
+            txtEenheidsprijs.setText("");
+        }
+
     }//GEN-LAST:event_btnProductAanpassenActionPerformed
 
     private void btnHomeknopAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorActionPerformed
-       Administrator administrator = Administrator.getInstance(aangepastproduct);
+        Administrator administrator = Administrator.getInstance(aangepastproduct);
 //     administrator.setSize(300,300);
-       administrator.pack();
-       aangepastproduct.hide();
-       administrator.show();
-       administrator.setLocationRelativeTo(null);
+        administrator.pack();
+        aangepastproduct.hide();
+        administrator.show();
+        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
+
+    private void txtHuidigIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHuidigIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHuidigIDActionPerformed
 
     /**
      * @param args the command line arguments

@@ -78,7 +78,7 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Huidige naam:");
+        jLabel8.setText("Huidige takeawaynaam:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Leveringskosten:");
