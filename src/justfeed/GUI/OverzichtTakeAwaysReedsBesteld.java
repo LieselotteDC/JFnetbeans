@@ -45,6 +45,8 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTakeAwaysReedsBesteld = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnHomeknopProfielklant = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,21 +66,39 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblTakeAwaysReedsBesteld);
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
+
+        btnHomeknopProfielklant.setBackground(new java.awt.Color(255, 153, 0));
+        btnHomeknopProfielklant.setText("Home");
+        btnHomeknopProfielklant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHomeknopProfielklantMouseClicked(evt);
+            }
+        });
+        btnHomeknopProfielklant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeknopProfielklantActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(btnHomeknopProfielklant);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,6 +107,20 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
+        ontvangenTakeAwaysReedsBesteld.hide();
+        myCaller.show();
+    }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
+
+    private void btnHomeknopProfielklantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantActionPerformed
+        Profielklant profiel = Profielklant.getInstance(ontvangenTakeAwaysReedsBesteld );
+        //     profiel.setSize(300,300);
+        profiel.pack();
+        ontvangenTakeAwaysReedsBesteld .hide();
+        profiel.show();
+        profiel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,7 +158,9 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnHomeknopProfielklant;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTakeAwaysReedsBesteld;
     // End of variables declaration//GEN-END:variables
