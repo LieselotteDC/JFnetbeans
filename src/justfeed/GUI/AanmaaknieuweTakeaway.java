@@ -243,11 +243,11 @@ public class AanmaaknieuweTakeaway extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres heeft niet de vereiste syntax. Probeer opnieuw");
             txtEmailadres.setText("");
             txtEmailadres.requestFocus();
-        } else if (d.emailBestaatTakeaway(email)) {
+        } /*else if (d.emailBestaatTakeaway(email)) {
             JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres is reeds in gebruik. Probeer opnieuw");
             txtEmailadres.setText("");
             txtEmailadres.requestFocus();
-        } else if (d.take_AwayBestaat(naam)) {
+        }*/ else if (d.take_AwayBestaat(naam)) {
             JOptionPane.showMessageDialog(null, "Deze Take-Away bestaat reeds. Probeer opnieuw.");
             txtNaam.setText("");
             txtNaam.requestFocus();
