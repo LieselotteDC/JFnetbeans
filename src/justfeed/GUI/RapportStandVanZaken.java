@@ -240,6 +240,7 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             //lblVestiging.setForeground(Color.LIGHT_GRAY);
             DefaultTableModel model = (DefaultTableModel)tblVestigingen.getModel();
             model.setRowCount(0);
+            tblVestigingen.setEnabled(false);
     }//GEN-LAST:event_rbtnTakeAwayMouseClicked
 
     private void rbtnVestigingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnVestigingMouseClicked
