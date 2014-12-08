@@ -167,6 +167,7 @@ public class Database {
             ResultSet srs = getData(sql);
             if (srs.next()) {
                 Vector<String> vector = new Vector<>();
+                srs.previous();
                 while (srs.next()) {
                     vector.add(srs.getString(kolomnaam));
                 }
