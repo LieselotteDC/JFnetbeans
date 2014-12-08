@@ -253,37 +253,42 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtnVestigingMouseClicked
 
     private void btnRapportMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRapportMakenActionPerformed
-        String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
-        if(rbtnVestiging.isSelected()){
-            int gekozenVestiging = tblVestigingen.getSelectedRow();
-            String vestigingsID = tblVestigingen.getValueAt(gekozenVestiging,0).toString();
-            Vestiging geselecteerdeVestiging = d.getVestiging(gekozenTakeAway,vestigingsID);
-        }
-        else if (rbtnTakeAway.isSelected()){
-            Take_Away geselecteerdeTakeAway = d.getTakeaway(gekozenTakeAway);
-        }
-                
-        else{}
         String inhoud = comboboxInhoud.getSelectedItem().toString();
+        String gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
         if(inhoud.equals("Verkopen")){
-         /* pdf.pdfVerkopenTakeawayAlgemeen(gekozenTakeAway);
-          pdf.pdfVerkopenTakeawayVestiging(gekozenTakeAway, inhoud);
-            nog een if else met wat ze kiezen? ta of vestiging, en dan nog vestiging ophalen om mee te geven aan functie
-            */
+            if(rbtnVestiging.isSelected()){
+                int gekozenVestiging = tblVestigingen.getSelectedRow();
+                String vestigingsID = tblVestigingen.getValueAt(gekozenVestiging,0).toString();
+                //Vestiging geselecteerdeVestiging = d.getVestiging(gekozenTakeAway,vestigingsID);
+                pdf.pdfVerkopenTakeawayVestiging(gekozenTakeAway, vestigingsID);
+            }
+            else if (rbtnTakeAway.isSelected()){
+                //Take_Away geselecteerdeTakeAway = d.getTakeaway(gekozenTakeAway);
+                pdf.pdfVerkopenTakeawayAlgemeen(gekozenTakeAway);  
+            }  
         }
         else if(inhoud.equals("Lopende orders")){
-           /*
-            pdf.pdfLopendeOrdersTakeawayAlgemeen(gekozenTakeAway);
-           pdf.pdfLopendeOrdersTakeawayVestiging(gekozenTakeAway, inhoud);
-            IDEM HIER
-            */
+             if(rbtnVestiging.isSelected()){
+                int gekozenVestiging = tblVestigingen.getSelectedRow();
+                String vestigingsID = tblVestigingen.getValueAt(gekozenVestiging,0).toString();
+                pdf.pdfLopendeOrdersTakeawayVestiging(gekozenTakeAway, vestigingsID);
+            }
+            else if (rbtnTakeAway.isSelected()){
+                //Take_Away geselecteerdeTakeAway = d.getTakeaway(gekozenTakeAway);
+                pdf.pdfLopendeOrdersTakeawayAlgemeen(gekozenTakeAway);
+            }  
         }
         else{
-            /*
-            pdf.pdfKortingscodesTakeawayAlgemeen(gekozenTakeAway);
-            pdf.pdfKortingscodesTakeawayVestiging(gekozenTakeAway, inhoud);
-            IDEM
-            */
+            if(rbtnVestiging.isSelected()){
+                int gekozenVestiging = tblVestigingen.getSelectedRow();
+                String vestigingsID = tblVestigingen.getValueAt(gekozenVestiging,0).toString();
+                //Vestiging geselecteerdeVestiging = d.getVestiging(gekozenTakeAway,vestigingsID);
+                pdf.pdfKortingscodesTakeawayVestiging(gekozenTakeAway, inhoud);
+            }
+            else if (rbtnTakeAway.isSelected()){
+                //Take_Away geselecteerdeTakeAway = d.getTakeaway(gekozenTakeAway);
+                pdf.pdfKortingscodesTakeawayAlgemeen(gekozenTakeAway);
+            } 
         }
     }//GEN-LAST:event_btnRapportMakenActionPerformed
 
