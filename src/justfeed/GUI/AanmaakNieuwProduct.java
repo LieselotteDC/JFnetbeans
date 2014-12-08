@@ -290,11 +290,8 @@ public static AanmaakNieuwProduct getInstance(AanpassenProduct aangepastproduct)
             Product p = new Product(productNaam, producttype, eenheidsprijs, takeAwayNaam);
             d.addProduct(p);
             JOptionPane.showMessageDialog(null, "Het product werd succesvol toegevoegd.");
-            Profielklant profiel = Profielklant.getInstance(nieuwproduct);
-            profiel.pack();
             nieuwproduct.hide();
-            profiel.show();
-            profiel.setLocationRelativeTo(null);
+            myCaller.show();
             txtTakeawayNaam.setText("");
             txtProductnaam.setText("");
             comboboxType.setSelectedItem(null);
