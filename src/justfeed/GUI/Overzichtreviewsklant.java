@@ -118,6 +118,8 @@ public class Overzichtreviewsklant extends javax.swing.JFrame {
     private void btnHomeknopProfielklantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopProfielklantMouseClicked
         reviewsklant.hide();
         myCaller.show();
+        DefaultTableModel model = (DefaultTableModel) tblOverzichtReviewsKlant.getModel();
+        model.setRowCount(0);
     }//GEN-LAST:event_btnHomeknopProfielklantMouseClicked
 
     /**
