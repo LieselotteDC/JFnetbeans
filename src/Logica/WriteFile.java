@@ -26,8 +26,6 @@ public class WriteFile extends Exception {
     MailingClass mail = new MailingClass();
     Database d = new Database();
 
-    //  document.newPage();                               als we willen dat da aftiteling steeds op een nieuwe pagina komt
-    //  Document doc = new Document(PageSize.A4);         als we willen dat de pdf op het scherm opent  
     // checken of dingen leeg zijn of niet?
     // nog die rapporten en awards oproepen
     //AWARDS
@@ -84,7 +82,7 @@ public class WriteFile extends Exception {
 
         //openen van documenten, toevoegen van tekst en sluiten van document
         try {
-            Document doc = new Document(PageSize.A4);
+            Document doc = new Document();
             try {
                 PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
             } catch (DocumentException ex) {
@@ -94,6 +92,7 @@ public class WriteFile extends Exception {
             try {
                 doc.add(table);
                 doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -130,9 +129,12 @@ public class WriteFile extends Exception {
         //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
         String titel = "Ovezicht van de producten aangeboden door " + takeawayNaam + "\n\n";
         String tekst = "";
-
-        for (Product p : d.getProductsOfTakeaway(takeawayNaam)) {
-            tekst += p.toString();
+        if (d.getProductsOfTakeaway(takeawayNaam).isEmpty()) {
+            tekst = "U heeft nog geen producten toegevoegd!";
+        } else {
+            for (Product p : d.getProductsOfTakeaway(takeawayNaam)) {
+                tekst += p.toString();
+            }
         }
         String aftiteling1 = "Het team van Just-Feed\n";
         String aftiteling2
@@ -263,7 +265,7 @@ public class WriteFile extends Exception {
                     }
                     doc.add(new Paragraph(lopendeKortingscodes, FontFactory.getFont(FontFactory.HELVETICA, 12)));
                 }
-
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -342,6 +344,7 @@ public class WriteFile extends Exception {
             try {
                 doc.add(table);
                 doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -427,7 +430,7 @@ public class WriteFile extends Exception {
                     }
                     doc.add(new Paragraph(lopendeOrders, FontFactory.getFont(FontFactory.HELVETICA, 12)));
                 }
-
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -506,6 +509,7 @@ public class WriteFile extends Exception {
             try {
                 doc.add(table);
                 doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -591,7 +595,7 @@ public class WriteFile extends Exception {
                     }
                     doc.add(new Paragraph(verkopen, FontFactory.getFont(FontFactory.HELVETICA, 12)));
                 }
-
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -670,6 +674,7 @@ public class WriteFile extends Exception {
             try {
                 doc.add(table);
                 doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
@@ -703,15 +708,15 @@ public class WriteFile extends Exception {
 
             //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
             String titel = "Bestelbon " + bestelling.getTakeawayNaam() + " - " + bestelling.getVestiging() + "\n\n";
-            
+
             String tekst = "";
             for (Orderverwerking orderver : d.getAlleProductenVanMenu(bestelling.getMenuID())) {
                 tekst += orderver.toString();
             }
-           
-            String gegevensVoorLevering="Leverdatum: " +besteldOrder.getDatum().toString()+"\n";
-            gegevensVoorLevering+="Leveringsadres: " +besteldOrder.getStraat()+" " +besteldOrder.getHuisnummer()+", "+d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode()+" "+d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente()+"\n";
-            gegevensVoorLevering+="Totaal bedrag van bestelling (incl. kortingen): "+bestelling.getMenuprijs()+" euro\n";
+
+            String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum().toString() + "\n";
+            gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";
+            gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + bestelling.getMenuprijs() + " euro\n";
             String aftiteling1 = "Het team van Just-Feed\n";
             String aftiteling2
                     = "        De Coster Lieselotte\n"
@@ -756,6 +761,7 @@ public class WriteFile extends Exception {
                     doc.add(table);
                     doc.add(new Paragraph(gegevensVoorLevering, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
                     doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                    doc.newPage();
                     doc.add(image);
                     doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                     doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
