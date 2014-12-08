@@ -182,6 +182,7 @@ public class Administrator extends javax.swing.JFrame {
         jLabel1.setText("Welkom!");
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Log uit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -355,11 +355,12 @@ public class Aanpassenklantgegevens extends javax.swing.JFrame {
         txtNieuwPaswoord2.setText("");
         }       
         else{
-         Klant nieuweKlant = new Klant(login, nieuwPaswoord, email, naam, voornaam);
-         Klant huidigeKlant = d.getKlant(login);
-         d.updateKlant(huidigeKlant, nieuweKlant);
-         aanpassengegevensklant.hide();
-         myCaller.show();
+        Klant nieuweKlant = new Klant(login, nieuwPaswoord, email, naam, voornaam);
+        Klant huidigeKlant = d.getKlant(login);
+        d.updateKlant(huidigeKlant, nieuweKlant);
+        JOptionPane.showMessageDialog(null, "Uw gegevens werden succesvol aangepast.");
+        aanpassengegevensklant.hide();
+        myCaller.show();
         txtLogin.setText("");
         txtHuidigPaswoord.setText("");
         txtNieuwPaswoord.setText("");
