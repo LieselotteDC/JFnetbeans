@@ -404,7 +404,7 @@ public class MailingClass {
 
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
-            String htmlText = "<font color='#FF9933' size='+2'>Beste " + kl.getNaam() + " " + kl.getVoornaam() + ",</font>"
+            String htmlText = "<font color='#FF9933' size='+2'>Beste " + kl.getVoornaam() + " " + kl.getNaam() + ",</font>"
                     + "<P>Bedankt voor het plaatsen van een order!<br> "
                     + "Vergeet niet dat je binnen de 7 dagen een review per product kan schrijven.<br>"
                     + "Per product dat je de eerste keer beoordeelt (uiteraard binnen de 7 dagen), krijg je een review korting.</P>"
@@ -486,7 +486,7 @@ public class MailingClass {
 
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
-            String htmlText = "<font color='#FF9933' size='+2'>Beste, " + takeaway.getNaam() + ",</font>"
+            String htmlText = "<font color='#FF9933' size='+2'>Beste " + takeaway.getNaam() + ",</font>"
                     + "<P>Er is zonet een menu besteld bij een vestiging van uw takeaway!<br> "
                     + "In de bijlage vindt u de bestelbon met de nodige informatie.<br>"
                     + "Indien u vragen heeft over deze bestelling, aarzel dan niet om ons te contacteren<br>"
