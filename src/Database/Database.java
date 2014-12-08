@@ -442,15 +442,20 @@ public class Database {
             ArrayList<String> categorieen = new ArrayList<>();
             String sql = "SELECT * FROM tbl_takeaway T,tbl_soort S WHERE (T.naam=S.naam) and (T.naam = '" + naam + "');";
             ResultSet srs = getData(sql);
-            String email = srs.getString("email");
-            double commissie = srs.getDouble("commissie");
-            while (srs.next()) {
-                String categorie = srs.getString("categorie");
-                categorieen.add(categorie);
+            if (srs.next()) {
+                String email = srs.getString("email");
+                double commissie = srs.getDouble("commissie");
+                while (srs.next()) {
+                    String categorie = srs.getString("categorie");
+                    categorieen.add(categorie);
+                }
+                Take_Away ta = new Take_Away(naam, categorieen, email, commissie);
+                this.closeConnection();
+                return ta;
+            } else {
+                this.closeConnection();
+                return null;
             }
-            Take_Away ta = new Take_Away(naam, categorieen, email, commissie);
-            this.closeConnection();
-            return ta;
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
@@ -590,23 +595,23 @@ public class Database {
             ArrayList<Gemeente> leveringsgebied = new ArrayList<>();
             String sql = "SELECT * FROM tbl_vestigingen V, tbl_leveringsregio L WHERE (V.vestigingsID = L.vestigingsID)and (V.naam=L.naam) and(V.vestigingsID = '" + vestigingsID + "')and (V.naam='" + takeawayNaam + "');";
             ResultSet srs = getData(sql);
-            if(srs.next()){
-            double leveringskosten = srs.getDouble("leveringskosten");
-            String straat = srs.getString("straat");
-            int huisnummer = srs.getInt("huisnummer");
-            int plaatsnummer = srs.getInt("plaatsnummer");
-            while (srs.next()) {
-                int plaatsnrLevering = srs.getInt("leveringsgebied");
-                leveringsgebied.add(this.getCoordinaten(plaatsnrLevering));
-            }
-            Vestiging ves = new Vestiging(vestigingsID, takeawayNaam, straat, huisnummer, plaatsnummer, leveringskosten, leveringsgebied);
-            this.closeConnection();
-            return ves; 
-            }else {
+            if (srs.next()) {
+                double leveringskosten = srs.getDouble("leveringskosten");
+                String straat = srs.getString("straat");
+                int huisnummer = srs.getInt("huisnummer");
+                int plaatsnummer = srs.getInt("plaatsnummer");
+                while (srs.next()) {
+                    int plaatsnrLevering = srs.getInt("leveringsgebied");
+                    leveringsgebied.add(this.getCoordinaten(plaatsnrLevering));
+                }
+                Vestiging ves = new Vestiging(vestigingsID, takeawayNaam, straat, huisnummer, plaatsnummer, leveringskosten, leveringsgebied);
+                this.closeConnection();
+                return ves;
+            } else {
                 this.closeConnection();
                 return null;
             }
-            
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();

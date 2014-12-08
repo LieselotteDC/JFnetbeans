@@ -148,6 +148,8 @@ public class RapportFlyer extends javax.swing.JFrame {
         String gekozenTakeAway;
         gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
         pdf.pdfMenukaartVanTakeaway(gekozenTakeAway);
+        rapportFlyer.hide();
+       myCaller.show();
         
     }//GEN-LAST:event_btnFlyerMakenActionPerformed
 
