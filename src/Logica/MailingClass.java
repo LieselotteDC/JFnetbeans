@@ -404,10 +404,10 @@ public class MailingClass {
 
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
-            String htmlText = "<font color='#FF9933' size='+2'>Beste, " + kl.getNaam() + " " + kl.getVoornaam() + ",</font>"
+            String htmlText = "<font color='#FF9933' size='+2'>Beste " + kl.getNaam() + " " + kl.getVoornaam() + ",</font>"
                     + "<P>Bedankt voor het plaatsen van een order!<br> "
                     + "Vergeet niet dat je binnen de 7 dagen een review per product kan schrijven.<br>"
-                    + "Per product dat je de eerste keer beoordeelt(uiteraard binnen de 7 dagen), krijg je een review korting.</P>"
+                    + "Per product dat je de eerste keer beoordeelt (uiteraard binnen de 7 dagen), krijg je een review korting.</P>"
                     + "<br><img src=\"cid:image\"> <br>"
                     + "<i><b>Het team van Just-Feed</b><br>"
                     + "<font color='#FFFFFF'>.........</font>De Coster Lieselotte<br>"
