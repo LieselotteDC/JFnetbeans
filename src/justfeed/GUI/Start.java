@@ -6,6 +6,7 @@
 
 package justfeed.GUI;
 
+import Logica.JustFeed;
 import javax.swing.JFrame;
 
 /**
@@ -22,6 +23,12 @@ public class Start extends javax.swing.JFrame {
         initComponents();
     }
     
+    public void startProgramma(){
+        //Start start = new Start();
+        start.setSize(580, 520);
+        start.show();
+        start.setLocationRelativeTo(null);
+}
     
     public static Start getInstance(Administrator caller)
     {
@@ -41,12 +48,6 @@ public class Start extends javax.swing.JFrame {
 //    {
 //        return start;
 //    }
-
-    
-   
-
-
-    
     
     /**
      * This method is called from within the constructor to initialize the form.

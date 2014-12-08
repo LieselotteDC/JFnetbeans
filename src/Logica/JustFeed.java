@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Logica;
-
-import justfeed.GUI.Start;
+import justfeed.GUI.*;
 
 /**
  *
@@ -14,13 +12,12 @@ import justfeed.GUI.Start;
  */
 public class JustFeed {
 
-     
+
+
     public static void main(String[] args) {
-        //Start f = new Start (new Main());
+        
         Start f = new Start();
-        f.setSize(580,520);
-        f.show();
-        f.setLocationRelativeTo(null);
+        f.startProgramma();
     }
-    
+
 }
