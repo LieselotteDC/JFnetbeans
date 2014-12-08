@@ -177,6 +177,7 @@ public class WriteFile extends Exception {
             try {
                 doc.add(table);
                 doc.add(new Paragraph(tekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                doc.newPage();
                 doc.add(image);
                 doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
                 doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));

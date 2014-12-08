@@ -83,10 +83,10 @@ public class Product {
     @Override
     public String toString() {
         String result;
-        result = "\t" + "ProductID:\t" + this.getProductID() + "\n";
-        result += "\t" + "Naam:\t\t" + this.getNaam() + "\n";
-        result += "\t" + "Producttype:\t" + this.getProducttype() + "\n";
-        result += "\t" + "Eenheidsprijs:\t" + this.getEenheidsprijs() + " euro" + "\n\n";
+        result = "\t" + "ProductID: \t" + this.getProductID() + "\n";
+        result += "\t" + "Naam: \t\t" + this.getNaam() + "\n";
+        result += "\t" + "Producttype: \t" + this.getProducttype() + "\n";
+        result += "\t" + "Eenheidsprijs: \t" + this.getEenheidsprijs() + " euro" + "\n\n";
 
         return result;
     }
