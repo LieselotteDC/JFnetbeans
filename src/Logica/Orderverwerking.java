@@ -32,13 +32,13 @@ public class Orderverwerking {
         this.vestigingsID = vestigingsID;
     }
 
-    public Orderverwerking(int productID, String productNaam, String type, int hoeveelheid) {
+    public Orderverwerking(int productID, String productNaam, String type, int hoeveelheid, String takeaway) {
         this.productID = productID;
         this.productNaam = productNaam;
         this.type = type;
         this.prijs = 0;
         this.hoeveelheid = hoeveelheid;
-        this.takeawayNaam = null;
+        this.takeawayNaam = takeaway;
         this.vestigingsID = null;
     }
 
@@ -46,7 +46,7 @@ public class Orderverwerking {
 
         ArrayList<Orderverwerking> menu = new ArrayList<>();
         for (Orderverwerking o : besteldeProducten) {
-            if ((o.takeawayNaam.equalsIgnoreCase(takeaway)) && o.vestigingsID.equalsIgnoreCase(vestiging)) {
+            if ((o.takeawayNaam.equalsIgnoreCase(takeaway)) && (o.vestigingsID.equalsIgnoreCase(vestiging))) {
                 menu.add(o);
             }
         }

@@ -43,33 +43,39 @@ public class Menu {
         this.vestiging = vestiging;
     }
 
-    public Menu berekenMenuprijs(ArrayList<Orderverwerking> besteldeProductenMenu) {
+    public void berekenMenuprijs(ArrayList<Orderverwerking> besteldeProductenMenu) {
         Database d = new Database();
         if (!(besteldeProductenMenu.isEmpty())) {
             String takeaway1 = besteldeProductenMenu.get(0).getTakeawayNaam();
+            System.out.println(takeaway1 +"bij begin berekendemenuprijs");
             String vestiging1 = besteldeProductenMenu.get(0).getVestigingsID();
+            System.out.println(vestiging1+"bij begin berekendemenuprijs");
+            this.setTakeawayNaam(takeaway1);
+            this.setVestiging(vestiging1);
             double leveringskosten = d.getVestiging(takeaway1, vestiging1).getLeveringskosten();
-            double menuprijs1 = 0;
+            double menuprijs1 = 0.0;
             for (Orderverwerking o : besteldeProductenMenu) {
                 menuprijs1 += o.getHoeveelheid() * o.getPrijs();
+                String takeaway2 = o.getTakeawayNaam();
+                System.out.println(takeaway2+"bij for lus berekende menus");
+                String vestiging2 = o.getVestigingsID();
+                System.out.println(vestiging2+"bij for lus berekende menus");
+                this.setTakeawayNaam(takeaway2);
+                this.setVestiging(vestiging2);
             }
             if (menuprijs1 > 20.0) {
-                Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
-                return menu;
+                this.setMenuprijs(menuprijs1);
+
             } else {
                 menuprijs1 += leveringskosten;
-                Menu menu = new Menu(menuprijs1, takeaway1, vestiging1);
-                return menu;
+                this.setMenuprijs(menuprijs1);
             }
-        } else {
-            return null;
         }
     }
 
     public double berekenOrderprijs(ArrayList<Menu> berekendeMenus) {
         double totaalprijs = 0.0;
         for (Menu m : berekendeMenus) {
-
             totaalprijs += m.getMenuprijs();
         }
         return totaalprijs;
@@ -182,10 +188,12 @@ public class Menu {
         if (totaalGecumuleerdPercentage <= 0.50) {
             this.toepassenUniekeEenmailgeKortingen(kortingen, berekendeMenus, kl);
             this.toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl);
+            System.out.println(orderMetKorting.getTotaalPrijs());
             orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
+            System.out.println(orderMetKorting.getTotaalPrijs());
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
-                double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;        
+                double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
             }
 
@@ -197,7 +205,7 @@ public class Menu {
             orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
-                double hulpkorting = m.getMenuprijs() *aangepastGecumuleerdPercentageKortingOpOrderprijs ;
+                double hulpkorting = m.getMenuprijs() * aangepastGecumuleerdPercentageKortingOpOrderprijs;
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
             }
             orderMetKorting.setTotaalPrijs(orderprijsMetKortingenOpOrderprijs);

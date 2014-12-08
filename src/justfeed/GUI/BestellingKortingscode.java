@@ -25,7 +25,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     public static JFrame myCaller;
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
-    public Order orderMetKorting = new Order();
+    public Order orderMetKorting = Bestelling.getInstance().getOrderZonderKorting();
     public Menu testMenu = new Menu();
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
@@ -40,10 +40,11 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         myCaller = bestellingAfleveradres;
         return bestellingKortingscode;
     }
-    
+
     public static BestellingKortingscode getInstance() {
         return bestellingKortingscode;
     }
+
     public static BestellingKortingscode getInstance(BestellingKortingscode bestellingKortingscode) {
         myCaller = bestellingKortingscode;
         return bestellingKortingscode;
@@ -276,13 +277,12 @@ public class BestellingKortingscode extends javax.swing.JFrame {
         txtKortingsCode.setText("");
         comboboxType.setSelectedItem(null);
     }//GEN-LAST:event_btnAfrekenenActionPerformed
-   
+
     private void btnNogCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNogCodeActionPerformed
         String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
         if (uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Gelieve een eerste kortingscode in te voeren.");
-        }
-        else if (uniekeKortingsCode.equals("Registratiekorting")) {
+        } else if (uniekeKortingsCode.equals("Registratiekorting")) {
             int code = Integer.parseInt(txtKortingsCode.getText());
             if (!d.kortingRegistratieBestaat(code, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
@@ -450,5 +450,5 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     public void setHulpKorting(ArrayList<HulpKorting> hulpKorting) {
         this.hulpKorting = hulpKorting;
     }
-    
+
 }

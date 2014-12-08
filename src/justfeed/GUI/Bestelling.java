@@ -5,7 +5,6 @@
  */
 package justfeed.GUI;
 
-
 import Database.*;
 import Logica.*;
 import java.awt.Color;
@@ -466,31 +465,29 @@ public class Bestelling extends javax.swing.JFrame {
 
     private void btnBestellingPlaatsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestellingPlaatsenActionPerformed
         Orderverwerking o = new Orderverwerking();
-        Menu menu = new Menu();
+        Menu hulp = new Menu();
         double totaalprijs = 0;
 
         for (Take_Away ta : d.getAlleTakeaways()) {
             for (Vestiging v : d.getAlleVestigingen(ta.getNaam())) {
                 ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, v.getTakeawayNaam(), v.getVestigingsID());
-                berekendeMenus.add(menu.berekenMenuprijs(productenPerVestiging));
-            }
+                if(!(productenPerVestiging.isEmpty())){
+                Menu menu = new Menu();
+                menu.berekenMenuprijs(productenPerVestiging);
+                berekendeMenus.add(menu);
+            }}
         }
 
-        totaalprijs = menu.berekenOrderprijs(berekendeMenus);
+        totaalprijs = hulp.berekenOrderprijs(berekendeMenus);
         orderZonderKorting.setTotaalPrijs(totaalprijs);
+        leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
         for (Orderverwerking orderver : this.besteldeProducten) {
-            Review rev = new Review();
-            rev.aanmaakReviewVoorlopig(actief, orderver, leveringsdatum);
+            Review rev=new Review(actief.getLogin(),orderver.getProductID(),leveringsdatum);
+             voorlopigeReviews.add(rev);
         }
 
-        //bovenaan de file
-        /*Order orderMetKorting = new Order();
-         double totaalprijs = 0;
-         for(Menu m:berekendeMenus){
-         totaalprijs += m.getMenuprijs();
-         }
-         orderMetKorting.setTotaalPrijs(totaalprijs);
-         */
+               
+
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
         bestellingOverzicht.pack();
         bestelling.hide();
@@ -528,13 +525,16 @@ public class Bestelling extends javax.swing.JFrame {
                 String hoeveelheid1 = spnrHoeveelheid.getValue().toString();
                 int hoeveelheid = Integer.parseInt(hoeveelheid1);
                 String takeAwayNaam = txtTakeAwayNaam.getText();
+                System.out.println(takeAwayNaam+" bij toevoegen aan bestelling");
                 String vestigingsID = txtVestigingsID.getText();
+                System.out.println(vestigingsID+" bij toevoegen aan bestelling");
                 leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
                 Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
                 orderZonderKorting.setDatum(leveringsdatum);
                 orderZonderKorting.setLogin(actief.getLogin());
-                //we hebben de initialisatie van de arratlist uit de methode gehaald omdat wij die moeten kunnen oproepen bij de knop bestelling aanmaken
-                besteldeProducten.add(null);
+                besteldeProducten.add(p);
+                
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Gelieve een geldige hoeveelheid in te voeren.");
             }
@@ -566,7 +566,7 @@ public class Bestelling extends javax.swing.JFrame {
     private void rbtnCategorieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtnCategorieMouseClicked
         combobox.setEnabled(true);
         txtProduct.setEnabled(false);
-        DefaultComboBoxModel c = d.initialiseerCombobox("SELECT categorie FROM tbl_soort;", "categorie");
+        DefaultComboBoxModel c = d.initialiseerCombobox("SELECT DISTINCT categorie FROM tbl_soort;", "categorie");
         combobox.setModel(c);
     }//GEN-LAST:event_rbtnCategorieMouseClicked
 
@@ -605,7 +605,7 @@ public class Bestelling extends javax.swing.JFrame {
                         txtProduct.setText("");
                         txtProduct.requestFocus();
                     } else {
-                        String gekozenProduct = combobox.getSelectedItem().toString();
+                        String gekozenProduct = txtProduct.getText();
                         DefaultTableModel r = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) WHERE (P.naam= '" + gekozenProduct + "') AND (L.leveringsgebied= " + plaatsnummer + ")");
                         tblKeuzes.setModel(r);
                     }
@@ -798,6 +798,14 @@ public class Bestelling extends javax.swing.JFrame {
 
     public void setVoorlopigeReviews(ArrayList<Review> voorlopigeReviews) {
         this.voorlopigeReviews = voorlopigeReviews;
+    }
+
+    public ArrayList<Orderverwerking> getBesteldeProducten() {
+        return besteldeProducten;
+    }
+
+    public void setBesteldeProducten(ArrayList<Orderverwerking> besteldeProducten) {
+        this.besteldeProducten = besteldeProducten;
     }
 
 }

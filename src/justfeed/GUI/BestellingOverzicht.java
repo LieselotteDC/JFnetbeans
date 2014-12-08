@@ -21,6 +21,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
+    ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
     private static final BestellingOverzicht bestellingOverzicht = new BestellingOverzicht();
     public DefaultTableModel model = Bestelling.getInstance().getModel();
     public static JFrame myCaller;
@@ -30,10 +31,21 @@ public class BestellingOverzicht extends javax.swing.JFrame {
      */
     public BestellingOverzicht() {
         initComponents();
+        double bedragexcl=0.0;
+        for(Orderverwerking o:besteldeProducten){
+            bedragexcl+=o.getPrijs()*o.getHoeveelheid();
+        }
+        double leveringskosten=orderZonderKorting.getTotaalPrijs()-bedragexcl;
+        String leveringskosten1=String.valueOf(leveringskosten);
+        String bedragexcl1=String.valueOf(bedragexcl);
         String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        txtTotaalbedragexcl.setText(bedragexcl1);
+        txtLeveringskosten.setText(leveringskosten1);
         txtTotaalbedrag.setText(totaalprijs2);
         tblOverzichtBestelling.setModel(model);
         txtTotaalbedrag.setEnabled(false);
+        txtTotaalbedragexcl.setEnabled(false);
+        txtLeveringskosten.setEnabled(false);
     }
     
     public static BestellingOverzicht getInstance(Bestelling caller)
@@ -56,6 +68,11 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         tblOverzichtBestelling = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtTotaalbedrag = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtTotaalbedragexcl = new javax.swing.JTextField();
+        txtLeveringskosten = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,7 +103,27 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblOverzichtBestelling);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Totaalbedrag:");
+        jLabel2.setText("Leveringskosten");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Totaalbedrag:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Totaalbedrag (excl. leveringskosten) :");
+
+        txtTotaalbedragexcl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotaalbedragexclActionPerformed(evt);
+            }
+        });
+
+        txtLeveringskosten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLeveringskostenActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,35 +131,49 @@ public class BestellingOverzicht extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnAfleveradresToevoegen)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTotaalbedrag, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnAfleveradresToevoegen, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotaalbedragexcl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtLeveringskosten, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotaalbedrag, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtTotaalbedragexcl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtLeveringskosten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtTotaalbedrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(76, 76, 76)
+                    .addComponent(txtTotaalbedrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
                 .addComponent(btnAfleveradresToevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addContainerGap())
         );
 
         pack();
@@ -135,6 +186,14 @@ public class BestellingOverzicht extends javax.swing.JFrame {
        adres.show();
        adres.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAfleveradresToevoegenActionPerformed
+
+    private void txtLeveringskostenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLeveringskostenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLeveringskostenActionPerformed
+
+    private void txtTotaalbedragexclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotaalbedragexclActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotaalbedragexclActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,8 +235,13 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     private javax.swing.JButton btnAfleveradresToevoegen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOverzichtBestelling;
+    private javax.swing.JTextField txtLeveringskosten;
     private javax.swing.JTextField txtTotaalbedrag;
+    private javax.swing.JTextField txtTotaalbedragexcl;
     // End of variables declaration//GEN-END:variables
 }

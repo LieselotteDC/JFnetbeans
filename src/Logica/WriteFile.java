@@ -695,6 +695,8 @@ public class WriteFile extends Exception {
     //ORDER DOORGEVEN NAAR BETREFFENDE TAKEAWY
     public void pdfBesteldeProductenBijTakeaway(ArrayList<Menu> besteldeMenus, Order besteldOrder) {
         for (Menu bestelling : besteldeMenus) {
+            ArrayList<Orderverwerking> test=d.getAlleProductenVanMenu(bestelling.getMenuID());
+            System.out.println(test.get(0).getTakeawayNaam()+"via test");
             //aanmaken van de documentsnaam
             DatumFinder date = new DatumFinder();
             String datum = date.getStringFromDate();
@@ -714,7 +716,7 @@ public class WriteFile extends Exception {
                 tekst += orderver.toString();
             }
 
-            String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum().toString() + "\n";
+            String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum() + "\n";
             gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";
             gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + bestelling.getMenuprijs() + " euro\n";
             String aftiteling1 = "Het team van Just-Feed\n";
@@ -774,6 +776,9 @@ public class WriteFile extends Exception {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(bestelling.getTakeawayNaam()+"dit zou takeaway bij writefile");
+            System.out.println(d.getTakeaway(bestelling.getTakeawayNaam()));
+            
             mail.sendBesteldeProductenVanOrder(d.getTakeaway(bestelling.getTakeawayNaam()), pdfVoorMail);
         }
     }

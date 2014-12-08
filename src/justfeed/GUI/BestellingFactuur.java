@@ -114,10 +114,10 @@ public class BestellingFactuur extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAfkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAfkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnGoedkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addComponent(btnGoedkeuren, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,12 +162,18 @@ public class BestellingFactuur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
+        java.sql.Date datumVanLevering=orderMetKorting.getDatum();
+        orderMetKorting.setDatum(datumVanLevering);
         d.addOrder(orderMetKorting, berekendeMenus);
+        System.out.println("toevegoen order en menu oke");
         d.aanmakenReview(voorlopigeReviews);
+        System.out.println("toevegoen review oke");
         d.addHulpKorting(hulpKorting);
+        System.out.println("toevegoen hulkorting oke");
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn
-        WriteFile pdf=new WriteFile();
-        pdf.pdfBesteldeProductenBijTakeaway(berekendeMenus, orderMetKorting);
+        //WriteFile pdf=new WriteFile();
+        //pdf.pdfBesteldeProductenBijTakeaway(berekendeMenus, orderMetKorting);
+        //orderId ophalen en dan alle menus van dat id in plaats van berekende menus
         txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();

@@ -445,10 +445,14 @@ public class Database {
             ResultSet srs = getData(sql);
             if (srs.next()) {
                 String email = srs.getString("email");
+                System.out.println(email);
                 double commissie = srs.getDouble("commissie");
+                System.out.println(commissie);
+                String categorie = srs.getString("categorie");
+                categorieen.add(categorie);
                 while (srs.next()) {
-                    String categorie = srs.getString("categorie");
-                    categorieen.add(categorie);
+                    String categorie1 = srs.getString("categorie");
+                    categorieen.add(categorie1);
                 }
                 Take_Away ta = new Take_Away(naam, categorieen, email, commissie);
                 this.closeConnection();
@@ -1430,7 +1434,8 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             for (Review rev : besteldeProducten) {
                 if (!(this.getProduct(rev.getProductId()).getProducttype().equalsIgnoreCase("drank"))) {
-                    stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin() + "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + rev.getStartdatum() + "');");
+                    java.sql.Date startdatum=rev.getStartdatum();
+                    stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin() + "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + startdatum + "');");
                 }
             }
             this.closeConnection();
@@ -1980,7 +1985,7 @@ public class Database {
                 int productID = srs.getInt("productID");
                 int hoeveelheid = srs.getInt("hoeveelheid");
                 Product p = this.getProduct(productID);
-                Orderverwerking orderverw = new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid);
+                Orderverwerking orderverw = new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid,p.getTakeawaynaam());
                 productenVanMenu.add(orderverw);
             }
             this.closeConnection();
@@ -2024,16 +2029,21 @@ public class Database {
     //METHODES IVM ORDERS
     public void addOrder(Order o, ArrayList<Menu> menus) {
         try {
+            int lastInsert=0;
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("INSERT INTO tbl_order VALUES (null," + o.getTotaalPrijs() + ",'" + o.getDatum() + "','" + o.getStraat() + "'," + o.getHuisnummer() + "," + o.getPlaatsnummer() + ",'" + o.getLogin() + "',FALSE);");
             String sql = "SELECT LAST_INSERT_ID();";
             ResultSet srs = stmt.executeQuery(sql);
-            int lastInsert = srs.getInt("LAST_INSERT_ID()");
-            for (Menu menu : menus) {
-                this.addMenu(menu, lastInsert);
+            if (srs.next()) {
+                lastInsert = srs.getInt("LAST_INSERT_ID()");
             }
-            this.closeConnection();
+                        this.closeConnection();
+            for (Menu menu : menus) {
+                System.out.println("een menu toevoegen voor add");
+                this.addMenu(menu, lastInsert);
+                 System.out.println("een menu toevoegen na add");
+            }
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
