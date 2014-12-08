@@ -57,8 +57,20 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Naam van take-away waarvan u vestiging wil verwijderen:");
 
+        txtTakeAwayNaam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTakeAwayNaamActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("VestigingsID van te verwijderen vestiging:");
+
+        txtVestigingsNaam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVestigingsNaamActionPerformed(evt);
+            }
+        });
 
         btnJAVerwijderVestiging.setBackground(new java.awt.Color(0, 0, 0));
         btnJAVerwijderVestiging.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -74,6 +86,11 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         btnNEEVerwijderVestiging.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNEEVerwijderVestiging.setForeground(new java.awt.Color(255, 255, 255));
         btnNEEVerwijderVestiging.setText("Nee");
+        btnNEEVerwijderVestiging.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNEEVerwijderVestigingActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -184,6 +201,24 @@ public class VerwijderenVestiging extends javax.swing.JFrame {
         txtTakeAwayNaam.setText("");
         txtVestigingsNaam.setText("");
     }//GEN-LAST:event_bntHomeknopAdminiMouseClicked
+
+    private void btnNEEVerwijderVestigingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNEEVerwijderVestigingActionPerformed
+         txtTakeAwayNaam.setText("");   
+         txtVestigingsNaam.setText("");
+        Administrator admini = Administrator.getInstance(verwijderenVestiging);
+        admini.pack();
+        verwijderenVestiging.hide();
+        admini.show();
+        admini.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnNEEVerwijderVestigingActionPerformed
+
+    private void txtTakeAwayNaamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTakeAwayNaamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTakeAwayNaamActionPerformed
+
+    private void txtVestigingsNaamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVestigingsNaamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVestigingsNaamActionPerformed
 
     /**
      * @param args the command line arguments

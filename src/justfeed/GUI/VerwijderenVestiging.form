@@ -117,6 +117,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTakeAwayNaam">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTakeAwayNaamActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -127,6 +130,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtVestigingsNaam">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVestigingsNaamActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnJAVerwijderVestiging">
       <Properties>
@@ -158,6 +164,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Nee"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNEEVerwijderVestigingActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

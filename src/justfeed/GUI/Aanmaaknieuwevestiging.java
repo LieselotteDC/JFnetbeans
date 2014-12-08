@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -24,25 +23,23 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
     public Aanmaaknieuwevestiging() {
         initComponents();
     }
-    
-    public static Aanmaaknieuwevestiging getInstance(Administrator admini)
-    {
+
+    public static Aanmaaknieuwevestiging getInstance(Administrator admini) {
         myCaller = admini;
         return vestiging;
     }
-    public static Aanmaaknieuwevestiging getInstance(Aanpassenvestiging aangepastevestiging)
-    {
+
+    public static Aanmaaknieuwevestiging getInstance(Aanpassenvestiging aangepastevestiging) {
         myCaller = aangepastevestiging;
         return vestiging;
     }
-    
-  public static Aanmaaknieuwevestiging getInstance(AanmaakEenmaligeUniekeActie uniekeActie)
-    {
+
+    public static Aanmaaknieuwevestiging getInstance(AanmaakEenmaligeUniekeActie uniekeActie) {
         myCaller = uniekeActie;
         return vestiging;
     }
-    public static Aanmaaknieuwevestiging getInstance(AanmaakNieuwProduct nieuwproduct)
-    {
+
+    public static Aanmaaknieuwevestiging getInstance(AanmaakNieuwProduct nieuwproduct) {
         myCaller = nieuwproduct;
         return vestiging;
     }
@@ -318,42 +315,34 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void toevoegenNieuweVestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenNieuweVestiging
-       String takeAwayNaam = txtTakeAwayNaam.getText();
-       String vestigingsID = txtVestigingNaam.getText();
-       String straat = txtStraat.getText();
-       String gemeente = txtGemeente.getText();
-       String stringlevgebied = txtLeveringsgebied.getText();
-       
-       if(takeAwayNaam.isEmpty() || vestigingsID.isEmpty() || straat.isEmpty() || 
-               txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() ||
-               gemeente.isEmpty() || txtLeveringskosten.getText().isEmpty() || stringlevgebied.isEmpty()){
+        String takeAwayNaam = txtTakeAwayNaam.getText();
+        String vestigingsID = txtVestigingNaam.getText();
+        String straat = txtStraat.getText();
+        String gemeente = txtGemeente.getText();
+        String stringlevgebied = txtLeveringsgebied.getText();
+
+        if (takeAwayNaam.isEmpty() || vestigingsID.isEmpty() || straat.isEmpty()
+                || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty()
+                || gemeente.isEmpty() || txtLeveringskosten.getText().isEmpty() || stringlevgebied.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
-            if (takeAwayNaam.isEmpty()){
-            txtTakeAwayNaam.requestFocus();
+            if (takeAwayNaam.isEmpty()) {
+                txtTakeAwayNaam.requestFocus();
+            } else if (vestigingsID.isEmpty()) {
+                txtVestigingNaam.requestFocus();
+            } else if (straat.isEmpty()) {
+                txtStraat.requestFocus();
+            } else if (txtHuisnummer.getText().isEmpty()) {
+                txtHuisnummer.requestFocus();
+            } else if (txtPostcode.getText().isEmpty()) {
+                txtPostcode.requestFocus();
+            } else if (gemeente.isEmpty()) {
+                txtGemeente.requestFocus();
+            } else if (txtLeveringskosten.getText().isEmpty()) {
+                txtLeveringskosten.requestFocus();
+            } else if (txtLeveringsgebied.getText().isEmpty()) {
+                txtLeveringsgebied.requestFocus();
             }
-            else if(vestigingsID.isEmpty()){
-            txtVestigingNaam.requestFocus();
-            }
-            else if(straat.isEmpty()){
-            txtStraat.requestFocus();
-            }
-            else if (txtHuisnummer.getText().isEmpty()){
-            txtHuisnummer.requestFocus();
-            }
-            else if(txtPostcode.getText().isEmpty()){
-            txtPostcode.requestFocus();
-            }
-            else if(gemeente.isEmpty()){
-            txtGemeente.requestFocus();
-            }
-            else if(txtLeveringskosten.getText().isEmpty()){
-            txtLeveringskosten.requestFocus();
-            }
-            else if(txtLeveringsgebied.getText().isEmpty()){
-            txtLeveringsgebied.requestFocus();
-            }
-        }
-       else if(!d.take_AwayBestaat(takeAwayNaam)){
+        } else if (!d.take_AwayBestaat(takeAwayNaam)) {
             int reply = JOptionPane.showConfirmDialog(null, "Deze take-away bestaat niet. Wil U deze toevoegen?", "Take-away toevoegen", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 AanmaaknieuweTakeaway nieuweTakeaway = AanmaaknieuweTakeaway.getInstance(vestiging);
@@ -361,45 +350,40 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 vestiging.hide();
                 nieuweTakeaway.show();
                 nieuweTakeaway.setLocationRelativeTo(null);
+            } else {
+                JOptionPane.showMessageDialog(null, "U kan enkel nieuwe vestigingen aanmaken van bestaande take-aways. Probeer opnieuw.");
+                txtTakeAwayNaam.setText("");
             }
-            else {
-             JOptionPane.showMessageDialog(null, "U kan enkel nieuwe vestigingen aanmaken van bestaande take-aways. Probeer opnieuw.");
-             txtTakeAwayNaam.setText("");
-            }
-       }
-       else if(d.bestaatVestiging(vestigingsID, takeAwayNaam)){
+        } else if (d.bestaatVestiging(vestigingsID, takeAwayNaam)) {
             JOptionPane.showMessageDialog(null, "Deze vestiging bestaat reeds.Probeer opnieuw.");
             txtVestigingNaam.setText("");
             txtVestigingNaam.requestFocus();
-       }
-       else{
+        } else {
             int postcode = Integer.parseInt(txtPostcode.getText());
             int huisnummer = Integer.parseInt(txtHuisnummer.getText());
-            if(d.getPlaatsnummer(gemeente, postcode) == 0){
+            if (d.getPlaatsnummer(gemeente, postcode) == 0) {
                 JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente van uw vestiging stemmen niet overeen. Probeer opnieuw.");
                 txtPostcode.setText("");
                 txtGemeente.setText("");
-                }
-            else if(stringlevgebied.charAt(stringlevgebied.length()-1) != ';'){
+            } else if (stringlevgebied.charAt(stringlevgebied.length() - 1) != ';') {
                 JOptionPane.showMessageDialog(null, "De ingevoerde leveringsgebieden hebben niet de vereiste syntax. Probeer opnieuw.");
                 txtLeveringsgebied.setText("");
-            }
-            else{
+            } else {
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
                 double leveringskosten = Double.parseDouble(txtLeveringskosten.getText());
-                Vestiging ves = new Vestiging(straat,huisnummer,leveringskosten, plaatsnummer, takeAwayNaam, vestigingsID);
+                Vestiging ves = new Vestiging(straat, huisnummer, leveringskosten, plaatsnummer, takeAwayNaam, vestigingsID);
                 d.addVestiging(ves);
                 int i = 0;
-                while (i>=0 && i <(stringlevgebied.length()-1)) { 
-                String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
-                String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
-                int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
-                String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));               
-                int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
-                d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, ves);
-                stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
+                while (i >= 0 && i < (stringlevgebied.length() - 1)) {
+                    String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+                    String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
+                    int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
+                    String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));
+                    int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
+                    d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, ves);
+                    stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';') + 1);
                 }
-                JOptionPane.showMessageDialog(null,"De vestiging werd succesvol toegevoegd.");
+                JOptionPane.showMessageDialog(null, "De vestiging werd succesvol toegevoegd.");
                 vestiging.hide();
                 myCaller.show();
                 txtTakeAwayNaam.setText("");
@@ -408,22 +392,24 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 txtHuisnummer.setText("");
                 txtGemeente.setText("");
                 txtPostcode.setText("");
-           }
-       }
+                txtLeveringsgebied.setText("");
+                txtLeveringsgebied.setText("");
+            }
+        }
     }//GEN-LAST:event_toevoegenNieuweVestiging
 
     private void btnHomeknopAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorActionPerformed
-       Administrator administrator = Administrator.getInstance(vestiging);
+        Administrator administrator = Administrator.getInstance(vestiging);
 //     amdministrator.setSize(300,300);
-       administrator.pack();
-       vestiging.hide();
-       administrator.show();
-       administrator.setLocationRelativeTo(null);
+        administrator.pack();
+        vestiging.hide();
+        administrator.show();
+        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
     private void btnHomeknopAdministratorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorMouseClicked
-       vestiging.hide();
-        myCaller.show();  
+        vestiging.hide();
+        myCaller.show();
         txtTakeAwayNaam.setText("");
         txtVestigingNaam.setText("");
         txtStraat.setText("");
