@@ -551,10 +551,9 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-
-            stmt.executeUpdate("UPDATE tbl_vestigingen SET leveringskosten = " + nieuw.getLeveringskosten() + " WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
-            stmt.executeUpdate("UPDATE tbl_vestigingen SET straat = '" + nieuw.getStraat() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
-            stmt.executeUpdate("UPDATE tbl_vestigingen SET huisnummer = '" + nieuw.getHuisnummer() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "'));");
+            stmt.executeUpdate("UPDATE tbl_vestigingen SET leveringskosten = " + nieuw.getLeveringskosten() + " WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "');");
+            stmt.executeUpdate("UPDATE tbl_vestigingen SET straat = '" + nieuw.getStraat() + "' WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "');");
+            stmt.executeUpdate("UPDATE tbl_vestigingen SET huisnummer = " + nieuw.getHuisnummer() + " WHERE (vestigingsID = '" + oud.getVestigingsID() + "') and (naam = '" + oud.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -578,7 +577,7 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestegingsID='" + ves.getVestigingsID() + "') and (naam='" + ves.getTakeawayNaam() + "');");
+            stmt.executeUpdate("DELETE from tbl_leveringsregio WHERE (vestigingsID='" + ves.getVestigingsID() + "') and (naam='" + ves.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -591,6 +590,7 @@ public class Database {
             ArrayList<Gemeente> leveringsgebied = new ArrayList<>();
             String sql = "SELECT * FROM tbl_vestigingen V, tbl_leveringsregio L WHERE (V.vestigingsID = L.vestigingsID)and (V.naam=L.naam) and(V.vestigingsID = '" + vestigingsID + "')and (V.naam='" + takeawayNaam + "');";
             ResultSet srs = getData(sql);
+            if(srs.next()){
             double leveringskosten = srs.getDouble("leveringskosten");
             String straat = srs.getString("straat");
             int huisnummer = srs.getInt("huisnummer");
@@ -601,7 +601,12 @@ public class Database {
             }
             Vestiging ves = new Vestiging(vestigingsID, takeawayNaam, straat, huisnummer, plaatsnummer, leveringskosten, leveringsgebied);
             this.closeConnection();
-            return ves;
+            return ves; 
+            }else {
+                this.closeConnection();
+                return null;
+            }
+            
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();

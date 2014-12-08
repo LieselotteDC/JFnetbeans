@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -20,13 +19,12 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
     private static final Aanpassenvestiging aangepastevestiging = new Aanpassenvestiging();
     public static JFrame myCaller;
     public Database d = new Database();
-   
+
     public Aanpassenvestiging() {
         initComponents();
     }
 
-    public static Aanpassenvestiging getInstance(Administrator admini)
-    {
+    public static Aanpassenvestiging getInstance(Administrator admini) {
         myCaller = admini;
         return aangepastevestiging;
     }
@@ -225,63 +223,60 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
     }//GEN-LAST:event_back
 
     private void toevoegenAanpassenVestiging(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toevoegenAanpassenVestiging
-         String gemeente = txtGemeente.getText();   
-         String huidigID = txtHuidigID.getText();
-         String nieuweStraat = txtStraat.getText();   
-         String huidigeTakeAwayNaam = txtHuidigeNaam.getText();
-          String stringlevgebied = txtLeveringsgebied.getText();
-             
-        if(!d.bestaatVestiging(huidigID, huidigeTakeAwayNaam)){
-         int reply = JOptionPane.showConfirmDialog(null, "Deze vestiging bestaat nog niet. Wil U deze toevoegen?", "Toevoegen vestiging",JOptionPane.YES_NO_OPTION);
+        String gemeente = txtGemeente.getText();
+        String huidigID = txtHuidigID.getText();
+        String nieuweStraat = txtStraat.getText();
+        String huidigeTakeAwayNaam = txtHuidigeNaam.getText();
+        String stringlevgebied = txtLeveringsgebied.getText();
+
+        if (!d.bestaatVestiging(huidigID, huidigeTakeAwayNaam)) {
+            int reply = JOptionPane.showConfirmDialog(null, "Deze vestiging bestaat nog niet. Wil U deze toevoegen?", "Toevoegen vestiging", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-            Aanmaaknieuwevestiging vestiging = Aanmaaknieuwevestiging.getInstance(aangepastevestiging);
-    //      vestiging.setSize(300,300);
-            vestiging.pack();
-            aangepastevestiging.hide();
-            vestiging.show();
-            vestiging.setLocationRelativeTo(null);
+                Aanmaaknieuwevestiging vestiging = Aanmaaknieuwevestiging.getInstance(aangepastevestiging);
+                //      vestiging.setSize(300,300);
+                vestiging.pack();
+                aangepastevestiging.hide();
+                vestiging.show();
+                vestiging.setLocationRelativeTo(null);
+            } else {
+                JOptionPane.showConfirmDialog(null, "U kan enkel bestaande vestigingen wijzigen. Probeer opnieuw.");
+                txtHuidigID.setText("");
+                txtGemeente.setText("");
+                txtPostcode.setText("");
+                txtHuisnummer.setText("");
+                txtStraat.setText("");
+                txtLeveringskosten.setText("");
             }
-            else {
-            JOptionPane.showConfirmDialog(null, "U kan enkel bestaande vestigingen wijzigen. Probeer opnieuw.");
-            txtHuidigID.setText("");
-            txtGemeente.setText("");
-            txtPostcode.setText("");
-            txtHuisnummer.setText("");
-            txtStraat.setText("");
-            txtLeveringskosten.setText("");
+        } else {
+            int postcode = Integer.parseInt(txtPostcode.getText());
+            if (d.getPlaatsnummer(gemeente, postcode) == 0) {
+                JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente stemmen niet overeen. Probeer opnieuw.");
+                txtPostcode.setText("");
+                txtGemeente.setText("");
+            } else {
+                double nieuweLeveringskosten = Double.parseDouble(txtLeveringskosten.getText());
+                int nieuwHuisnummer = Integer.parseInt(txtHuisnummer.getText());
+                int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
+                Vestiging huidigeVestiging = d.getVestiging(huidigeTakeAwayNaam, huidigID);
+                //ophalen welke vestiging er achter de ingevoerde naam + id zit 
+                Vestiging aangepasteVestiging = new Vestiging(nieuweStraat, nieuwHuisnummer, nieuweLeveringskosten, plaatsnummer, huidigeTakeAwayNaam, huidigID);
+                d.updateVestiging(huidigeVestiging, aangepasteVestiging);
+                d.deleteLeveringsgebiedenFromVestiging(huidigeVestiging);
+                //nieuwe ingevoerde leveringsgebieden erinsteken mbv loop die je bij aanmaakvestiging gebruikt
+                int i = 0;
+                while (i >= 0 && i < (stringlevgebied.length() - 1)) {
+                    String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
+                    String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
+                    int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
+                    String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));
+                    int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
+                    d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, aangepasteVestiging);
+                    stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';') + 1);
+                }
+                aangepastevestiging.hide();
+                myCaller.show();
             }
         }
-        else{
-            int postcode = Integer.parseInt(txtPostcode.getText());
-            if(d.getPlaatsnummer(gemeente, postcode) == 0){
-            JOptionPane.showMessageDialog(null, "De ingevoerde postcode en gemeente stemmen niet overeen. Probeer opnieuw.");
-            txtPostcode.setText("");
-            txtGemeente.setText("");
-            }
-            else{
-            double nieuweLeveringskosten = Double.parseDouble(txtLeveringskosten.getText());
-            int nieuwHuisnummer = Integer.parseInt(txtHuisnummer.getText());
-            int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
-            Vestiging huidigeVestiging = d.getVestiging(huidigeTakeAwayNaam, huidigID);
-            //ophalen welke vestiging er achter de ingevoerde naam + id zit 
-            Vestiging aangepasteVestiging = new Vestiging(nieuweStraat, nieuwHuisnummer, nieuweLeveringskosten, plaatsnummer, huidigeTakeAwayNaam, huidigID);
-            d.updateVestiging(huidigeVestiging, aangepasteVestiging);
-            d.deleteLeveringsgebiedenFromVestiging(huidigeVestiging);
-            //nieuwe ingevoerde leveringsgebieden erinsteken mbv loop die je bij aanmaakvestiging gebruikt
-            int i = 0;
-            while (i>=0 && i <(stringlevgebied.length()-1)) { 
-            String postcodeengemeentelevgebied = stringlevgebied.substring(i, stringlevgebied.indexOf(';'));
-            String postcodelevgebied = postcodeengemeentelevgebied.substring(i, 4);
-            int postcodelevgebied2 = Integer.parseInt(postcodelevgebied);
-            String gemeentelevgebied = stringlevgebied.substring(4, stringlevgebied.indexOf(';'));               
-            int plaatsnummerlevgebied = d.getPlaatsnummer(gemeentelevgebied, postcodelevgebied2);
-            d.addLeveringsgebiedFromVestiging(plaatsnummerlevgebied, aangepasteVestiging);
-            stringlevgebied = stringlevgebied.substring(stringlevgebied.indexOf(';')+1);
-            }
-            aangepastevestiging.hide();
-            myCaller.show();  
-            }
-        }      
     }//GEN-LAST:event_toevoegenAanpassenVestiging
 
     private void txtHuisnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHuisnummerActionPerformed
@@ -289,12 +284,12 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
     }//GEN-LAST:event_txtHuisnummerActionPerformed
 
     private void btnHomeknopAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeknopAdministratorActionPerformed
-       Administrator administrator = Administrator.getInstance(aangepastevestiging);
+        Administrator administrator = Administrator.getInstance(aangepastevestiging);
 //     administrator.setSize(300,300);
-       administrator.pack();
-       aangepastevestiging.hide();
-       administrator.show();
-       administrator.setLocationRelativeTo(null);
+        administrator.pack();
+        aangepastevestiging.hide();
+        administrator.show();
+        administrator.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHomeknopAdministratorActionPerformed
 
     /**
