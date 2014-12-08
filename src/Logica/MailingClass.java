@@ -486,7 +486,7 @@ public class MailingClass {
             BodyPart messageBodyPart = new MimeBodyPart();
             String htmlText = "<font color='#FF9933' size='+2'>Beste, " + takeaway.getNaam() + ",</font>"
                     + "<P>Er is zonet een menu besteld bij een vestiging van uw takeaway!<br> "
-                    + "In de bijlage vindt u de bestelbon met de nodige informatie <br>"
+                    + "In de bijlage vindt u de bestelbon met de nodige informatie.<br>"
                     + "Indien u vragen heeft over deze bestelling, aarzel dan niet om ons te contacteren<br>"
                     + "op het onderstaande e-mailadres</P>"
                     + "<br><img src=\"cid:image\"> <br>"

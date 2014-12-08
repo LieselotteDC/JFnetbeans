@@ -239,7 +239,7 @@ public class Aanpassenvestiging extends javax.swing.JFrame {
                 vestiging.show();
                 vestiging.setLocationRelativeTo(null);
             } else {
-                JOptionPane.showConfirmDialog(null, "U kan enkel bestaande vestigingen wijzigen. Probeer opnieuw.");
+                JOptionPane.showConfirmDialog(null, "U kan enkel bestaande vestigingen wijzigen. Probeer opnieuw.", "Toevoegen vestiging", JOptionPane.YES_NO_OPTION);
                 txtHuidigID.setText("");
                 txtGemeente.setText("");
                 txtPostcode.setText("");
