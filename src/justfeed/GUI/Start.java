@@ -7,8 +7,6 @@
 package justfeed.GUI;
 
 import javax.swing.JFrame;
-import justfeed.GUI.Administrator;
-import sun.applet.Main;
 
 /**
  *
@@ -16,7 +14,7 @@ import sun.applet.Main;
  */
 public class Start extends javax.swing.JFrame {
     
-    private Main main;
+    
     private static final Start start = new Start();
     public static JFrame myCaller;
     
@@ -24,10 +22,6 @@ public class Start extends javax.swing.JFrame {
         initComponents();
     }
     
-    public Start(Main m) {
-        main = m;
-        initComponents();
-    }
     
     public static Start getInstance(Administrator caller)
     {
@@ -47,11 +41,7 @@ public class Start extends javax.swing.JFrame {
 //    {
 //        return start;
 //    }
-public static Start getInstance(GuiMain caller)
-    {
-        myCaller = caller;
-        return start;
-    }
+
     
    
 

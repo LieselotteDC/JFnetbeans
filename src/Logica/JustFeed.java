@@ -4,36 +4,23 @@
  * and open the template in the editor.
  */
 
-package justfeed.GUI;
+package Logica;
 
-import javax.swing.JFrame;
-
-
-
-
+import justfeed.GUI.Start;
 
 /**
  *
  * @author UGent
  */
-public class GuiMain extends JFrame{
+public class JustFeed {
 
-    private static final GuiMain start = new GuiMain();
-    public static JFrame myCaller;
      
     public static void main(String[] args) {
         //Start f = new Start (new Main());
-        Start f = Start.getInstance(start);
+        Start f = new Start();
         f.setSize(580,520);
         f.show();
         f.setLocationRelativeTo(null);
     }
-    
-     public static GuiMain getInstance()
-    {
-        return start;
-    }
-
-   
     
 }
