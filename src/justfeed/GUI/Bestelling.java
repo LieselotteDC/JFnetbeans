@@ -471,22 +471,21 @@ public class Bestelling extends javax.swing.JFrame {
         for (Take_Away ta : d.getAlleTakeaways()) {
             for (Vestiging v : d.getAlleVestigingen(ta.getNaam())) {
                 ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, v.getTakeawayNaam(), v.getVestigingsID());
-                if(!(productenPerVestiging.isEmpty())){
-                Menu menu = new Menu();
-                menu.berekenMenuprijs(productenPerVestiging);
-                berekendeMenus.add(menu);
-            }}
+                if (!(productenPerVestiging.isEmpty())) {
+                    Menu menu = new Menu();
+                    menu.berekenMenuprijs(productenPerVestiging);
+                    berekendeMenus.add(menu);
+                }
+            }
         }
 
         totaalprijs = hulp.berekenOrderprijs(berekendeMenus);
         orderZonderKorting.setTotaalPrijs(totaalprijs);
         leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
         for (Orderverwerking orderver : this.besteldeProducten) {
-            Review rev=new Review(actief.getLogin(),orderver.getProductID(),leveringsdatum);
-             voorlopigeReviews.add(rev);
+            Review rev = new Review(actief.getLogin(), orderver.getProductID(), leveringsdatum);
+            voorlopigeReviews.add(rev);
         }
-
-               
 
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
         bestellingOverzicht.pack();
@@ -525,16 +524,13 @@ public class Bestelling extends javax.swing.JFrame {
                 String hoeveelheid1 = spnrHoeveelheid.getValue().toString();
                 int hoeveelheid = Integer.parseInt(hoeveelheid1);
                 String takeAwayNaam = txtTakeAwayNaam.getText();
-                System.out.println(takeAwayNaam+" bij toevoegen aan bestelling");
                 String vestigingsID = txtVestigingsID.getText();
-                System.out.println(vestigingsID+" bij toevoegen aan bestelling");
                 leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
                 Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
                 orderZonderKorting.setDatum(leveringsdatum);
                 orderZonderKorting.setLogin(actief.getLogin());
                 besteldeProducten.add(p);
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Gelieve een geldige hoeveelheid in te voeren.");
             }

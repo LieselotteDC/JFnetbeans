@@ -63,7 +63,7 @@ public class Menu {
                 this.setTakeawayNaam(takeaway2);
                 this.setVestiging(vestiging2);
             }
-            if (menuprijs1 > 20.0) {
+            if (menuprijs1 >= 20.0) {
                 this.setMenuprijs(menuprijs1);
 
             } else {

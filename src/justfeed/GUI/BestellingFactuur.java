@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.Database;
@@ -28,11 +27,12 @@ public class BestellingFactuur extends javax.swing.JFrame {
     public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
     public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    public ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
     public ArrayList<HulpKorting> hulpKorting = BestellingKortingscode.getInstance().getHulpKorting();
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
     public static JFrame myCaller;
-    
+
     public BestellingFactuur() {
         initComponents();
         String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
@@ -41,22 +41,22 @@ public class BestellingFactuur extends javax.swing.JFrame {
         String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
         txtTotaalBedragIncl.setText(totaalprijs3);
         txtTotaalBedragIncl.setEnabled(false);
-        double kortingsbedrag = (orderZonderKorting.getTotaalPrijs()-orderMetKorting.getTotaalPrijs());
+        double kortingsbedrag = (orderZonderKorting.getTotaalPrijs() - orderMetKorting.getTotaalPrijs());
         String kortingsbedrag2 = String.valueOf(kortingsbedrag);
         txtKortingsbedrag.setText(kortingsbedrag2);
         txtKortingsbedrag.setEnabled(false);
     }
 
-    public static BestellingFactuur getInstance(BestellingKortingscode caller)
-    {
+    public static BestellingFactuur getInstance(BestellingKortingscode caller) {
         myCaller = caller;
         return factuur;
     }
-    public static BestellingFactuur getInstance(BestellingAfleveradres caller)
-    {
+
+    public static BestellingFactuur getInstance(BestellingAfleveradres caller) {
         myCaller = caller;
         return factuur;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,14 +162,11 @@ public class BestellingFactuur extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
-        java.sql.Date datumVanLevering=orderMetKorting.getDatum();
+        java.sql.Date datumVanLevering = orderMetKorting.getDatum();
         orderMetKorting.setDatum(datumVanLevering);
-        d.addOrder(orderMetKorting, berekendeMenus);
-        System.out.println("toevegoen order en menu oke");
+        d.addOrder(orderMetKorting, berekendeMenus, besteldeProducten);
         d.aanmakenReview(voorlopigeReviews);
-        System.out.println("toevegoen review oke");
         d.addHulpKorting(hulpKorting);
-        System.out.println("toevegoen hulkorting oke");
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn
         //WriteFile pdf=new WriteFile();
         //pdf.pdfBesteldeProductenBijTakeaway(berekendeMenus, orderMetKorting);

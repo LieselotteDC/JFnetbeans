@@ -1434,7 +1434,7 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             for (Review rev : besteldeProducten) {
                 if (!(this.getProduct(rev.getProductId()).getProducttype().equalsIgnoreCase("drank"))) {
-                    java.sql.Date startdatum=rev.getStartdatum();
+                    java.sql.Date startdatum = rev.getStartdatum();
                     stmt.executeUpdate("INSERT INTO tbl_review VALUES (null,0,'" + rev.getLogin() + "'," + rev.getProductId() + ",TRUE,'geen beoordeling','" + startdatum + "');");
                 }
             }
@@ -1940,11 +1940,36 @@ public class Database {
     }
 
     //METHODES IVM MENU'S
-    private void addMenu(Menu m, int orderID) {
+    private void addMenu(ArrayList<Orderverwerking> besteldeProducten, Menu m, int orderID) {
         try {
+            int lastInsert = 0;
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("INSERT INTO tbl_menu VALUES (null," + m.getMenuprijs() + "," + orderID + ",'" + m.getTakeawayNaam() + "','" + m.getVestiging() + "');");
+            String sql = "SELECT LAST_INSERT_ID();";
+            ResultSet srs = stmt.executeQuery(sql);
+            if (srs.next()) {
+                lastInsert = srs.getInt("LAST_INSERT_ID()");
+            }
+            this.closeConnection();
+            this.addBehoortTot(besteldeProducten, m.getTakeawayNaam(), m.getVestiging(), lastInsert);
+
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+        }
+    }
+
+    private void addBehoortTot(ArrayList<Orderverwerking> besteldeProducten, String takeawayNaam, String vestigingsID, int menuID) {
+        try {
+            Orderverwerking o = new Orderverwerking();
+            ArrayList<Orderverwerking> productenPerVestiging = o.verdelingBesteldeProducten(besteldeProducten, takeawayNaam, vestigingsID);
+
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            for (Orderverwerking orderv : productenPerVestiging) {
+                stmt.executeUpdate("INSERT INTO tbl_behoortTot VALUES (" + orderv.getProductID() + ", " + menuID + "," + orderv.getHoeveelheid() + ");");
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1975,17 +2000,42 @@ public class Database {
 
     }
 
+    public Menu getMenu(int menuID) {
+        try {
+            String sql = "SELECT * FROM tbl_menu WHERE menuID = " + menuID + ";";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                double menuprijs = srs.getDouble("menuprijs");
+                int orderID = srs.getInt("orderID");
+                String takeawayNaam = srs.getString("takeaway");
+                String vestiging = srs.getString("vestiging");
+                Menu menu = new Menu(menuID, menuprijs, orderID, takeawayNaam, vestiging);
+                this.closeConnection();
+                return menu;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
+    }
+
     //deze methodes wordt gebruikt bij het sturen van de mails naar de take-away met een bestelling van de klant
     public ArrayList<Orderverwerking> getAlleProductenVanMenu(int menuID) {
         try {
             ArrayList<Orderverwerking> productenVanMenu = new ArrayList<>();
-            String sql = "SELECT * FROM tbl_behoortTot WHERE menuID=" + menuID + ";";
+            String sql = "SELECT * FROM tbl_behoortTot B, tbl_menu M WHERE (M.menuID=" + menuID + ")and (M.menuID = B.menuID);";
             ResultSet srs = getData(sql);
             while (srs.next()) {
-                int productID = srs.getInt("productID");
-                int hoeveelheid = srs.getInt("hoeveelheid");
+                int productID = srs.getInt("B.productID");
+                int hoeveelheid = srs.getInt("B.hoeveelheid");
+                String vestiging = srs.getString("M.vestiging");
                 Product p = this.getProduct(productID);
-                Orderverwerking orderverw = new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid,p.getTakeawaynaam());
+                Orderverwerking orderverw = new Orderverwerking(productID, p.getNaam(), p.getProducttype(), hoeveelheid, p.getTakeawaynaam(), vestiging);
                 productenVanMenu.add(orderverw);
             }
             this.closeConnection();
@@ -1995,6 +2045,26 @@ public class Database {
             this.closeConnection();
             return null;
         }
+    }
+
+    //deze methode wordt gebruikt om alle menuID's van een orderID te vinden
+    public ArrayList<Integer> getMenuIDsFromProductID(int orderID) {
+        try {
+            ArrayList<Integer> alleMenuID = new ArrayList<>();
+            String sql = "SELECT * FROM tbl_menu WHERE (orderID = " + orderID + ") ;";
+            ResultSet srs = getData(sql);
+            while (srs.next()) {
+                int menuID = srs.getInt("menuID");
+                alleMenuID.add(menuID);
+            }
+            this.closeConnection();
+            return alleMenuID;
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
     }
 
     //deze methode oproepen bij het ingeven van kortingscodes niet, de bestaat bij methodes korting
@@ -2027,9 +2097,9 @@ public class Database {
     }
 
     //METHODES IVM ORDERS
-    public void addOrder(Order o, ArrayList<Menu> menus) {
+    public void addOrder(Order o, ArrayList<Menu> menus, ArrayList<Orderverwerking> besteldeProducten) {
         try {
-            int lastInsert=0;
+            int lastInsert = 0;
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             stmt.executeUpdate("INSERT INTO tbl_order VALUES (null," + o.getTotaalPrijs() + ",'" + o.getDatum() + "','" + o.getStraat() + "'," + o.getHuisnummer() + "," + o.getPlaatsnummer() + ",'" + o.getLogin() + "',FALSE);");
@@ -2038,11 +2108,11 @@ public class Database {
             if (srs.next()) {
                 lastInsert = srs.getInt("LAST_INSERT_ID()");
             }
-                        this.closeConnection();
+            this.closeConnection();
             for (Menu menu : menus) {
                 System.out.println("een menu toevoegen voor add");
-                this.addMenu(menu, lastInsert);
-                 System.out.println("een menu toevoegen na add");
+                this.addMenu(besteldeProducten, menu, lastInsert);
+                System.out.println("een menu toevoegen na add");
             }
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -2167,6 +2237,51 @@ public class Database {
             this.closeConnection();
             return false;
         }
+    }
+
+    public int getLastOrderKlant(Klant kl) {
+        try {
+            String sql = "SELECT MAX(orderID) AS lastOrderID FROM tbl_order WHERE login = '" + kl.getLogin() + "';";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                int orderID = srs.getInt("lastOrderID");
+                this.closeConnection();
+                return orderID;
+            } else {
+                this.closeConnection();
+                return 0;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return 0;
+
+        }
+    }
+
+    public Order getOrder(int orderID) {
+        try {
+            String sql = "SELECT * FROM tbl_order WHERE orderID = " + orderID + ";";
+            ResultSet srs = getData(sql);
+            if (srs.next()) {
+                double totaalPrijs = srs.getDouble("totaalprijs");
+                Date datum = srs.getDate("datum");
+                String straat = srs.getString("straat");
+                int huisnummer = srs.getInt("huisnummer");
+                int plaatsnummer = srs.getInt("plaatsnummer");
+                Order order = new Order(orderID, totaalPrijs, datum, straat, huisnummer, plaatsnummer);
+                this.closeConnection();
+                return order;
+            } else {
+                this.closeConnection();
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
+            return null;
+        }
+
     }
 
     //METHODES IVM COMMISSIE

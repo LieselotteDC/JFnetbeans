@@ -32,14 +32,14 @@ public class Orderverwerking {
         this.vestigingsID = vestigingsID;
     }
 
-    public Orderverwerking(int productID, String productNaam, String type, int hoeveelheid, String takeaway) {
+    public Orderverwerking(int productID, String productNaam, String type, int hoeveelheid, String takeaway, String vestigingsID) {
         this.productID = productID;
         this.productNaam = productNaam;
         this.type = type;
         this.prijs = 0;
         this.hoeveelheid = hoeveelheid;
         this.takeawayNaam = takeaway;
-        this.vestigingsID = null;
+        this.vestigingsID = vestigingsID;
     }
 
     public ArrayList<Orderverwerking> verdelingBesteldeProducten(ArrayList<Orderverwerking> besteldeProducten, String takeaway, String vestiging) {
