@@ -168,9 +168,10 @@ public class BestellingFactuur extends javax.swing.JFrame {
         d.aanmakenReview(voorlopigeReviews);
         d.addHulpKorting(hulpKorting);
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn
-        //WriteFile pdf=new WriteFile();
-        //pdf.pdfBesteldeProductenBijTakeaway(berekendeMenus, orderMetKorting);
         //orderId ophalen en dan alle menus van dat id in plaats van berekende menus
+        WriteFile pdf = new WriteFile();
+        pdf.pdfBesteldeProductenBijTakeaway(d.getLastOrderKlant(actief));
+
         txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);
         bevestiging.pack();
