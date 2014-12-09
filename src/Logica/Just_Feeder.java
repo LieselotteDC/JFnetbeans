@@ -50,8 +50,8 @@ public class Just_Feeder extends Award {
         String result;
         result = "Just Feeder Award\n";
         result += super.toString();
-        result += "Naam van de Takeaway:\t" + this.getTakeawayNaam() + "\n";
-        result += "Commissie:\t" + this.getCommissie() + "\n\n";
+        result += "Naam van de Takeaway: \t" + this.getTakeawayNaam() + "\n";
+        result += "Commissie: \t" + this.getCommissie() + "\n\n";
         return result;
 
     }

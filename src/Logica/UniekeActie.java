@@ -42,9 +42,9 @@ public class UniekeActie extends Korting {
     public String toString() {
         String result = super.toString();
         if (this.bedrag == 0) {
-            result += "\tKortingspercentage:\t" + this.getPercentage() + "%\n";
+            result += "     \tKortingspercentage: \t" + this.getPercentage() + "%\n";
         } else {
-            result += "\tKortingsbedrag:\t" + this.getBedrag() + "%\n";
+            result += "     \tKortingsbedrag: \t" + this.getBedrag() + "%\n";
         }
         return result;
     }

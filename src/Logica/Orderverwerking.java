@@ -56,10 +56,10 @@ public class Orderverwerking {
     @Override
     public String toString() {
         String result;
-        result = "\t" + "ProductID:\t" + this.getProductID() + "\n";
-        result +="\t" + "Naam:\t\t" + this.getProductNaam() + "\n";
-        result += "\t" + "Producttype:\t" + this.getType()+ "\n";
-        result += "\t" + "Hoeveelheid:\t" + this.getHoeveelheid() +"\n\n";
+        result = "     \t" + "ProductID:     \t" + this.getProductID() + "\n";
+        result +="     \t" + "Naam:      \t\t" + this.getProductNaam() + "\n";
+        result += "     \t" + "Producttype: \t" + this.getType()+ "\n";
+        result += "     \t" + "Hoeveelheid: \t" + this.getHoeveelheid() +"\n\n";
         return result;
     }
 

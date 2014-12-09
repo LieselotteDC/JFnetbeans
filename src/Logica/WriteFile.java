@@ -696,12 +696,12 @@ public class WriteFile extends Exception {
     public void pdfBesteldeProductenBijTakeaway(int orderID) {
         for (int menuID : d.getMenuIDsFromProductID(orderID)) {
             Order besteldOrder = d.getOrder(orderID);
-            Menu besteldeMenu=d.getMenu(menuID);
+            Menu besteldeMenu = d.getMenu(menuID);
             System.out.println("voor ophalen");
-            ArrayList<Orderverwerking> besteldeProductenVanMenu=d.getAlleProductenVanMenu(menuID);
+            ArrayList<Orderverwerking> besteldeProductenVanMenu = d.getAlleProductenVanMenu(menuID);
             System.out.println("na ophalen");
             System.out.println(besteldeProductenVanMenu.isEmpty());
-            
+
             //aanmaken van de documentsnaam
             DatumFinder date = new DatumFinder();
             String datum = date.getStringFromDate();
@@ -724,7 +724,7 @@ public class WriteFile extends Exception {
             System.out.println("na de for lus tekst");
             String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum() + "\n";
             gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";
-            gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + besteldeMenu.getMenuprijs() + " euro\n";
+            gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + besteldeMenu.getMenuprijs() + " euro\n\n";
             String aftiteling1 = "Het team van Just-Feed\n";
             String aftiteling2
                     = "        De Coster Lieselotte\n"
@@ -782,9 +782,6 @@ public class WriteFile extends Exception {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(besteldeMenu.getTakeawayNaam()+"dit zou takeaway bij writefile");
-            System.out.println(d.getTakeaway(besteldeMenu.getTakeawayNaam()));
-            
             mail.sendBesteldeProductenVanOrder(d.getTakeaway(besteldeMenu.getTakeawayNaam()), pdfVoorMail);
         }
     }

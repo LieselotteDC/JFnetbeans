@@ -93,14 +93,14 @@ public class Vestiging {
     public String toString() {
         Database d = new Database();
         String result;
-        result = "VestigingsID:\t" + this.getVestigingsID()+ "\n";
+        result = "VestigingsID: \t" + this.getVestigingsID()+ "\n";
         result += d.getCoordinaten(this.getPlaatsnummer()).toString();
-        result += "Straat:\t" + this.getStraat() + "\n";
-        result += "Huisnummer:\t" + this.getHuisnummer() + "\n";
-        result += "Leveringskosten:\t" + this.getLeveringskosten() + " euro\n";
-        result += "Leveringsgebied:\t\n";
+        result += "Straat: \t" + this.getStraat() + "\n";
+        result += "Huisnummer: \t" + this.getHuisnummer() + "\n";
+        result += "Leveringskosten: \t" + this.getLeveringskosten() + " euro\n";
+        result += "Leveringsgebied: \t\n";
         for (Gemeente gem : this.getLeveringsgebied()) {
-            result += "\t" + gem.toString();
+            result += "     \t" + gem.toString();
             result += "\n";
         }
         return result;

@@ -42,8 +42,8 @@ public class Korting {
     @Override
     public String toString() {
         String result = null;
-        result += "\tKortingscode:\t" + this.getKortingscode() + "\n";
-        result += "\tEigenaar code:\t" + this.getLogin() + "\n";
+        result += "     \tKortingscode: \t" + this.getKortingscode() + "\n";
+        result += "     \tEigenaar code: \t" + this.getLogin() + "\n";
         return result;
     }
 

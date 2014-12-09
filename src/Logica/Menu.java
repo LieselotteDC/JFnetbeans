@@ -47,9 +47,7 @@ public class Menu {
         Database d = new Database();
         if (!(besteldeProductenMenu.isEmpty())) {
             String takeaway1 = besteldeProductenMenu.get(0).getTakeawayNaam();
-            System.out.println(takeaway1 +"bij begin berekendemenuprijs");
             String vestiging1 = besteldeProductenMenu.get(0).getVestigingsID();
-            System.out.println(vestiging1+"bij begin berekendemenuprijs");
             this.setTakeawayNaam(takeaway1);
             this.setVestiging(vestiging1);
             double leveringskosten = d.getVestiging(takeaway1, vestiging1).getLeveringskosten();
@@ -57,9 +55,7 @@ public class Menu {
             for (Orderverwerking o : besteldeProductenMenu) {
                 menuprijs1 += o.getHoeveelheid() * o.getPrijs();
                 String takeaway2 = o.getTakeawayNaam();
-                System.out.println(takeaway2+"bij for lus berekende menus");
                 String vestiging2 = o.getVestigingsID();
-                System.out.println(vestiging2+"bij for lus berekende menus");
                 this.setTakeawayNaam(takeaway2);
                 this.setVestiging(vestiging2);
             }

@@ -94,14 +94,14 @@ public class Take_Away {
     public String toString ()
     {
         String result;
-        result = "Naam takeaway:\t" + this.getNaam() + "\n";
-        result += "Categorie:\t";
+        result = "Naam takeaway: \t" + this.getNaam() + "\n";
+        result += "Categorie: \t";
         for (String cat : this.getCategorie())
         {
             result += cat + ", ";
         }
         result += "\n";
-        result = "Email:\t" + this.getEmail() + "\n\n";
+        result = "Email: \t" + this.getEmail() + "\n\n";
         return result;
         
         

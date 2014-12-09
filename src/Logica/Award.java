@@ -41,8 +41,8 @@ public class Award {
     @Override
     public String toString() {
         String result;
-        result = "AwardID:\t" + this.getAwardID() + "\n";
-        result += "Maand:\t" + this.getMaand() + "\n";
+        result = "AwardID: \t" + this.getAwardID() + "\n";
+        result += "Maand: \t" + this.getMaand() + "\n";
         return result;
     }
 }

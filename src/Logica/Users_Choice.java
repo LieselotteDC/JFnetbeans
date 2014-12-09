@@ -59,8 +59,8 @@ public class Users_Choice extends Award implements Comparable {
         String result;
         result = "Users Choice Award\n";
         result += super.toString();
-        result += "Naam van de Takeaway:\t" + this.getTakeawayNaam() + "\n";
-        result += "Gemiddelde beoordeling:\t" + this.getBeoordeling() + "\n";
+        result += "Naam van de Takeaway: \t" + this.getTakeawayNaam() + "\n";
+        result += "Gemiddelde beoordeling: \t" + this.getBeoordeling() + "\n";
         result += "\n";
         return result;
 

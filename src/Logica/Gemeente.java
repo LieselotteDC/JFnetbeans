@@ -28,8 +28,8 @@ public class Gemeente {
 
     public String toString() {
         String result;
-        result = "Gemeente:\t" + this.getGemeente() + "\n";
-        result = "Postcode:\t" + this.getPostcode() + "\n";
+        result = "Gemeente: \t" + this.getGemeente() + "\n";
+        result = "Postcode: \t" + this.getPostcode() + "\n";
         return result;
     }
 

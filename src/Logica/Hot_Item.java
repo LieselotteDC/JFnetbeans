@@ -62,9 +62,9 @@ public class Hot_Item extends Award implements Comparable {
         String result;
         result = "Hot Item Award\n";
         result += super.toString();     
-        result += "Naam van de takeaway:\t" + d.getProduct(productID).getTakeawaynaam() + "\n";
-        result += "Naam van het product:\t" + d.getProduct(this.getProductID()).getNaam() + "\n";
-        result += "Aantal keer besteld:\t" + this.getAantalBesteld() + "\n\n";
+        result += "Naam van de takeaway: \t" + d.getProduct(productID).getTakeawaynaam() + "\n";
+        result += "Naam van het product: \t" + d.getProduct(this.getProductID()).getNaam() + "\n";
+        result += "Aantal keer besteld: \t" + this.getAantalBesteld() + "\n\n";
         return result;
 
     }

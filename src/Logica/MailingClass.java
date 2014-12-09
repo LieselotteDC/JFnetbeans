@@ -446,10 +446,8 @@ public class MailingClass {
 
     public void sendBesteldeProductenVanOrder(Take_Away takeaway, String bestandsnaam) {
         // Recipient's email ID needs to be mentioned.
-        //System.out.println(takeaway.getEmail());
-       // String to = takeaway.getEmail();
-        String to = "menno.hillewaere@gmail.com";
-        
+        String to = takeaway.getEmail();
+
         // Sender's email ID needs to be mentioned
         final String username = "justfeedgroep01@gmail.com";
         final String password = "JustFeed01";

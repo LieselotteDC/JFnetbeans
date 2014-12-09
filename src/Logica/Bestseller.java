@@ -56,8 +56,8 @@ public class Bestseller extends Award implements Comparable {
         String result;
         result = "Bestseller Award\n";
         result += super.toString();
-        result += "Naam van de take-away:\t" + this.getTakeawayNaam() + "\n";
-        result += "Aantal orders:\t" + this.getAantalMenus()+ "\n\n";
+        result += "Naam van de take-away: \t" + this.getTakeawayNaam() + "\n";
+        result += "Aantal orders: \t" + this.getAantalMenus()+ "\n\n";
         return result;
 
     }
