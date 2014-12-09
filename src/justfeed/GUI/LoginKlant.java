@@ -158,11 +158,13 @@ public class LoginKlant extends javax.swing.JFrame {
         txtLogin.requestFocus(); 
         }
         else{
-        Profielklant profiel =  Profielklant.getInstance(login);
-        profiel.pack();
+        k = null;
         k = d.getKlant(loginnaam);
+        System.out.println(k.getNaam());
         login.setActief(k);
         d.deleteReview(actief);
+        Profielklant profiel =  Profielklant.getInstance(login);
+        profiel.pack();
         login.hide();
         profiel.show();
         profiel.setLocationRelativeTo(null);

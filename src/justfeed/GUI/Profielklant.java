@@ -29,7 +29,6 @@ public class Profielklant extends javax.swing.JFrame {
     
     public Profielklant() {
         initComponents();
-        lblLogin.setText(d.getKlant(loginnaam).getVoornaam()+"!");
     }
 
     public static Profielklant getInstance(LoginKlant caller)
@@ -153,7 +152,7 @@ public class Profielklant extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Welkom op jouw profiel,");
+        jLabel1.setText("Welkom op jouw profiel!");
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -434,13 +433,19 @@ public class Profielklant extends javax.swing.JFrame {
 
     private void naarUitloggen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarUitloggen
           JOptionPane.showMessageDialog(null, "U bent nu uitgelogd.");
-          Start start = Start.getInstance(profiel);
+          /*Start start = Start.getInstance(profiel);
             start.pack();
             start.setSize(580, 520);
-            profiel.hide();
             start.show();
-            start.setLocationRelativeTo(null);
-            login.setActief(null);
+            start.setLocationRelativeTo(null);*/
+            profiel.hide();
+            Start f = new Start();
+            f.startProgramma();
+            /*login.setActief(null);
+            Klant klant = login.getActief();
+            if(klant == null){
+                System.out.println("0");
+            }*/
     }//GEN-LAST:event_naarUitloggen
 
     private void orderPlaatsen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderPlaatsen
