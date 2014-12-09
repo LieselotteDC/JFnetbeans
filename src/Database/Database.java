@@ -1541,15 +1541,23 @@ public class Database {
 
     private Boolean eersteReview(Klant kl, Review rev) {
         try {
-            String sql = "SELECT * FROM tbl_review WHERE (productID = " + rev.getProductId() + ") and (login='" + kl.getLogin() + "') and (status=FALSE);";
+            
+            int aantal=0;
+            boolean status=false;
+            String sql = "SELECT COUNT(*) AS aantal FROM tbl_review WHERE (productID = " + rev.getProductId() + ") and (login='" + kl.getLogin() + "') and (status=FALSE);";
             ResultSet srs = getData(sql);
             if (srs.next()) {
+                aantal = srs.getInt("aantal");
                 this.closeConnection();
-                return false;
-            } else {
-                this.closeConnection();
-                return true;
             }
+            if(aantal>0){
+                return status;
+            }
+            else{
+                status=true;
+                return status;
+            }
+
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
