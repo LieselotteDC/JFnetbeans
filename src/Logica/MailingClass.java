@@ -59,7 +59,7 @@ public class MailingClass {
 
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
-            String htmlText = "<font color='#FF9933' size='+2'>Welkom " + kl.getNaam() + " " + kl.getVoornaam() + ",</font>"
+            String htmlText = "<font color='#FF9933' size='+2'>Welkom " + kl.getVoornaam() + " " + kl.getNaam() + ",</font>"
                     + "<P>bedankt voor je registratie bij Just-Feed!<br> "
                     + "Bij deze kennen we jou ook meteen een registratie-korting toe van 2 euro als blijk van waardering. <br>"
                     + "In de bijlage vind je meer info over de werking van onze dienst. "
@@ -151,7 +151,7 @@ public class MailingClass {
             BodyPart messageBodyPart = new MimeBodyPart();
             String htmlText = "<font color='#FF9933' size='+2'>Beste klantendienst,</font>"
                     + "<P>zouden jullie eens kunnen kijken naar het probleem van:<br> "
-                    + "Naam klant: " + kl.getNaam() + " " + kl.getVoornaam() + "<br>"
+                    + "Naam klant: " + kl.getVoornaam() + " " + kl.getNaam() + "<br>"
                     + "E-mailadres: "
                     + "<a href=\"mailto:" + kl.getEmail() + "\">" + kl.getEmail() + "</a> <br><br> "
                     + "Probleemomschrijving:<br>" + probleem + "<br>"
@@ -581,8 +581,8 @@ public class MailingClass {
             String htmlText = "<font color='#FF9933' size='+2'>Beste " + ta.getNaam() + ",</font>"
                     + "<P>De commissie van " + maand + " " + jaar + " bedraagt: " + bedrag + " euro.<br> "
                     + "Gelieve dit te storten op BE53001496589253 voor het einde van de maand!"
-                    + "Indien u vragen heeft over deze berekeningen, aarzel dan niet om ons te contacteren<br>"
-                    + "op het onderstaande e-mailadres</P>"
+                    + "Indien u vragen heeft over deze berekeningen, <br>"
+                    + "aarzel dan niet om ons te contacteren op het onderstaande e-mailadres!</P>"
                     + "<br><img src=\"cid:image\"> <br>"
                     + "<i><b>Het team van Just-Feed</b><br>"
                     + "<font color='#FFFFFF'>.........</font>De Coster Lieselotte<br>"
