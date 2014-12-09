@@ -57,7 +57,6 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnCommissieberekening" min="-2" max="-2" attributes="0"/>
@@ -185,7 +184,7 @@
     <Component class="javax.swing.JComboBox" name="comboboxMaand">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="13">
+          <StringArray count="12">
             <StringItem index="0" value="januari"/>
             <StringItem index="1" value="februari"/>
             <StringItem index="2" value="maart"/>
@@ -198,7 +197,6 @@
             <StringItem index="9" value="oktober"/>
             <StringItem index="10" value="november"/>
             <StringItem index="11" value="december"/>
-            <StringItem index="12" value=""/>
           </StringArray>
         </Property>
       </Properties>

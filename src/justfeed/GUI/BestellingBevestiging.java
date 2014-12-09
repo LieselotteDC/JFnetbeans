@@ -119,11 +119,12 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     private void btnHerinneringReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHerinneringReviewActionPerformed
         mc.sendHerinneringReviewmail(actief);
         JOptionPane.showMessageDialog(null, "Vergeet niet dat u nu een review kan plaatsen over uw bestelde producten. \n Ga hiervoor naar uw profiel > reviews > voeg nieuwe review toe.");
-        Profielklant profiel = Profielklant.getInstance(bevestiging);
+        System.exit(0);
+        /*Profielklant profiel = Profielklant.getInstance(bevestiging);
         profiel.pack();
         bevestiging.hide();
         profiel.show();
-        profiel.setLocationRelativeTo(null);
+        profiel.setLocationRelativeTo(null);*/
     }//GEN-LAST:event_btnHerinneringReviewActionPerformed
 
     /**

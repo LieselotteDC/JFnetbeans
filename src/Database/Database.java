@@ -1541,20 +1541,19 @@ public class Database {
 
     private Boolean eersteReview(Klant kl, Review rev) {
         try {
-            
-            int aantal=0;
-            boolean status=false;
+
+            int aantal = 0;
+            boolean status = false;
             String sql = "SELECT COUNT(*) AS aantal FROM tbl_review WHERE (productID = " + rev.getProductId() + ") and (login='" + kl.getLogin() + "') and (status=FALSE);";
             ResultSet srs = getData(sql);
             if (srs.next()) {
                 aantal = srs.getInt("aantal");
                 this.closeConnection();
             }
-            if(aantal>0){
+            if (aantal > 0) {
                 return status;
-            }
-            else{
-                status=true;
+            } else {
+                status = true;
                 return status;
             }
 
@@ -2377,7 +2376,7 @@ public class Database {
             }
 
             String sql3 = "SELECT * FROM tbl_awardJustfeeder";
-            srs = stmt.executeQuery(sql2);
+            srs = stmt.executeQuery(sql3);
             if (srs.next()) {
                 justfeeder = srs.getString("naam");
             }
@@ -2389,7 +2388,11 @@ public class Database {
         }
         // berekening van de commissie
         totaleGeldwaarde = opgehaaldeMenusPrijs + opgehaaldeHulpkorting;
-        double berekendeCommissie = Math.max(0.07 * (totaleGeldwaarde), Math.min(0.1 * (totaleGeldwaarde), ((-1 / 5000) * (aantalOrders) + (11 / 100)) * (totaleGeldwaarde)));
+        double derdeBedrag = (-1.0 / 5000.0) * aantalOrders + (11.0 / 100.0) * totaleGeldwaarde;
+        double tweedeBedrag = 0.1 * (totaleGeldwaarde);
+        double minTweedeLid = Math.min(derdeBedrag, tweedeBedrag);
+        double eersteBedrag = 0.07 * (totaleGeldwaarde);
+        double berekendeCommissie = Math.max(eersteBedrag, minTweedeLid);
         if (justfeeder.equalsIgnoreCase(takeawayNaam)) {
             berekendeCommissie *= 0.99;
         }

@@ -131,7 +131,7 @@ public class Profielklant extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        menuItemBestelling = new javax.swing.JMenuItem();
         naarOverzichtTakeAwaysReedsBesteld = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -201,14 +201,14 @@ public class Profielklant extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shoppingbasket.png"))); // NOI18N
-        jMenuItem12.setText("Plaats een bestelling");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        menuItemBestelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shoppingbasket.png"))); // NOI18N
+        menuItemBestelling.setText("Plaats een bestelling");
+        menuItemBestelling.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 naarBestelling(evt);
             }
         });
-        jMenu1.add(jMenuItem12);
+        jMenu1.add(menuItemBestelling);
 
         naarOverzichtTakeAwaysReedsBesteld.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tables.png"))); // NOI18N
         naarOverzichtTakeAwaysReedsBesteld.setText("Overzicht takeaways waarbij u reeds besteld heeft");
@@ -506,15 +506,6 @@ public class Profielklant extends javax.swing.JFrame {
        zoekenTakeAway.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarZoekenTakeAway
 
-    private void naarBestelling(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarBestelling
-        Bestelling bestelling = Bestelling.getInstance(profiel);
-            bestelling.pack();
-            profiel.hide();
-            bestelling.show();
-            bestelling.setLocationRelativeTo(null);
-            login.setActief(null);
-    }//GEN-LAST:event_naarBestelling
-
     private void naarCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarCategorieActionPerformed
         Zoekencategorie zoekencategorie = Zoekencategorie.getInstance(profiel);
         zoekencategorie.pack();
@@ -540,6 +531,15 @@ public class Profielklant extends javax.swing.JFrame {
        ontvangenTakeAwaysReedsBesteld.show();
        ontvangenTakeAwaysReedsBesteld.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarOverzichtTakeAwaysReedsBesteldActionPerformed
+
+    private void naarBestelling(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarBestelling
+        Bestelling bestelling = Bestelling.getInstance(profiel);
+        bestelling.pack();
+        profiel.hide();
+        bestelling.show();
+        bestelling.setLocationRelativeTo(null);
+        login.setActief(null);
+    }//GEN-LAST:event_naarBestelling
 
     /**
      * @param args the command line arguments
@@ -589,7 +589,6 @@ public class Profielklant extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
@@ -600,6 +599,7 @@ public class Profielklant extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblKlant;
     private javax.swing.JLabel lblLogin;
+    private javax.swing.JMenuItem menuItemBestelling;
     private javax.swing.JMenuItem naarCategorie;
     private javax.swing.JMenu naarContact;
     private javax.swing.JMenuItem naarOverzichtTakeAwaysReedsBesteld;

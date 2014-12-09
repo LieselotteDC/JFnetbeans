@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Logica.*;
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author UGent
  */
 public class BestellingOverzicht extends javax.swing.JFrame {
-    
+
     public Klant actief = LoginKlant.getInstance().getActief();
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
 
@@ -32,13 +31,13 @@ public class BestellingOverzicht extends javax.swing.JFrame {
      */
     public BestellingOverzicht() {
         initComponents();
-        double bedragexcl=0.0;
-        for(Orderverwerking o:besteldeProducten){
-            bedragexcl+=o.getPrijs()*o.getHoeveelheid();
+        double bedragexcl = 0.0;
+        for (Orderverwerking o : besteldeProducten) {
+            bedragexcl += o.getPrijs() * o.getHoeveelheid();
         }
-        double leveringskosten=orderZonderKorting.getTotaalPrijs()-bedragexcl;
-        String leveringskosten1=String.valueOf(leveringskosten);
-        String bedragexcl1=String.valueOf(bedragexcl);
+        double leveringskosten = orderZonderKorting.getTotaalPrijs() - bedragexcl;
+        String leveringskosten1 = String.valueOf(leveringskosten);
+        String bedragexcl1 = String.valueOf(bedragexcl);
         String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
         txtTotaalbedragexcl.setText(bedragexcl1);
         txtLeveringskosten.setText(leveringskosten1);
@@ -47,18 +46,19 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         txtTotaalbedrag.setEnabled(false);
         txtTotaalbedragexcl.setEnabled(false);
         txtLeveringskosten.setEnabled(false);
+
     }
-    
-    public static BestellingOverzicht getInstance(Bestelling caller)
-    {
+
+    public static BestellingOverzicht getInstance(Bestelling caller) {
         myCaller = caller;
         return bestellingOverzicht;
     }
-        public static BestellingOverzicht getInstance()
-    {
-        
+
+    public static BestellingOverzicht getInstance() {
+
         return bestellingOverzicht;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,12 +186,12 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfleveradresToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfleveradresToevoegenActionPerformed
-       model.setRowCount(0);
-       BestellingAfleveradres adres = BestellingAfleveradres.getInstance(bestellingOverzicht);
-       adres.pack();
-       bestellingOverzicht.hide();
-       adres.show();
-       adres.setLocationRelativeTo(null);
+        model.setRowCount(0);
+        BestellingAfleveradres adres = BestellingAfleveradres.getInstance(bestellingOverzicht);
+        adres.pack();
+        bestellingOverzicht.hide();
+        adres.show();
+        adres.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAfleveradresToevoegenActionPerformed
 
     private void txtLeveringskostenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLeveringskostenActionPerformed
