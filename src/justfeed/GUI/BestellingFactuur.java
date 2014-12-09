@@ -171,6 +171,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
         //orderId ophalen en dan alle menus van dat id in plaats van berekende menus
         WriteFile pdf = new WriteFile();
         pdf.pdfBesteldeProductenBijTakeaway(d.getLastOrderKlant(actief));
+        pdf.pdfBestellingKlant(d.getLastOrderKlant(actief), actief);
 
         txtTotaalBedragIncl.setText("");
         BestellingBevestiging bevestiging = BestellingBevestiging.getInstance(factuur);

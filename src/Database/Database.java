@@ -2048,7 +2048,7 @@ public class Database {
     }
 
     //deze methode wordt gebruikt om alle menuID's van een orderID te vinden
-    public ArrayList<Integer> getMenuIDsFromProductID(int orderID) {
+    public ArrayList<Integer> getMenuIDsFromOrderID(int orderID) {
         try {
             ArrayList<Integer> alleMenuID = new ArrayList<>();
             String sql = "SELECT * FROM tbl_menu WHERE (orderID = " + orderID + ") ;";

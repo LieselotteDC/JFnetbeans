@@ -692,15 +692,12 @@ public class WriteFile extends Exception {
         mail.sendVerkopenmail(takeawayNaam, pdfVoorMail);
     }
 
-    //ORDER DOORGEVEN NAAR BETREFFENDE TAKEAWY
+    //ORDER DOORGEVEN NAAR BETREFFENDE TAKEAWAY
     public void pdfBesteldeProductenBijTakeaway(int orderID) {
-        for (int menuID : d.getMenuIDsFromProductID(orderID)) {
+        for (int menuID : d.getMenuIDsFromOrderID(orderID)) {
             Order besteldOrder = d.getOrder(orderID);
             Menu besteldeMenu = d.getMenu(menuID);
-            System.out.println("voor ophalen");
             ArrayList<Orderverwerking> besteldeProductenVanMenu = d.getAlleProductenVanMenu(menuID);
-            System.out.println("na ophalen");
-            System.out.println(besteldeProductenVanMenu.isEmpty());
 
             //aanmaken van de documentsnaam
             DatumFinder date = new DatumFinder();
@@ -715,13 +712,11 @@ public class WriteFile extends Exception {
 
             //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
             String titel = "Bestelbon " + besteldeMenu.getTakeawayNaam() + " - " + besteldeMenu.getVestiging() + "\n\n";
-            System.out.println("voor de for lus tekst");
             String tekst = "";
             for (Orderverwerking orderver : besteldeProductenVanMenu) {
                 tekst += orderver.toString();
                 System.out.println(tekst);
             }
-            System.out.println("na de for lus tekst");
             String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum() + "\n";
             gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";
             gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + besteldeMenu.getMenuprijs() + " euro\n\n";
@@ -784,5 +779,96 @@ public class WriteFile extends Exception {
             }
             mail.sendBesteldeProductenVanOrder(d.getTakeaway(besteldeMenu.getTakeawayNaam()), pdfVoorMail);
         }
+    }
+
+    public void pdfBestellingKlant(int orderID, Klant kl) {
+
+        //aanmaken van de documentsnaam
+        DatumFinder date = new DatumFinder();
+        String datum = date.getStringFromDate();
+
+        String path = System.getProperty("user.dir") + "\\rapporten\\";
+        String naam = "Bestelling_" + "OrderID" + orderID + "_Klant" + kl.getLogin();
+        String extensie = ".pdf";
+        String bestandsnaam = path + naam + "_" + datum + extensie;
+        String pdfVoorMail = naam + "_" + datum + extensie;
+        String imagepath = System.getProperty("user.dir") + "\\src\\rsz_logo.png";
+
+        //aanmaken van de tekst (hoofd en tekst hebben verschillende opmaak)
+        String titel = "Bestelbon van " + kl.getVoornaam() + " " + kl.getNaam() + "\n\n";
+        Order besteldOrder = d.getOrder(orderID);
+        String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum() + "\n";
+        gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";
+        gegevensVoorLevering += "Totaal bedrag van bestelling (incl. kortingen): " + besteldOrder.getTotaalPrijs() + " euro\n\n";
+        String aftiteling1 = "Het team van Just-Feed\n";
+        String aftiteling2
+                = "        De Coster Lieselotte\n"
+                + "        De Kerpel Laura\n"
+                + "        De Keyser Olivier\n"
+                + "        Hillewaere Menno\n"
+                + "        Pittoors Kimberley\n"
+                + "        Van der Poten Kelly\n";
+        String aftiteling3 = "Project Beleidsinformatica, Prof. dr. Geert Poels, Begeleider Jan Claes";
+
+        Anchor anchor = new Anchor("justfeedgroep01@gmail.com", FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY));
+        anchor.setReference("mailto: justfeedgroep01@gmail.com");
+
+        //aanmaken van de image (logo)
+        Image image = null;
+        try {
+            image = Image.getInstance(imagepath);
+        } catch (BadElementException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // aanmaken van heading in kader
+        PdfPTable table = new PdfPTable(1);
+        PdfPCell cell = new PdfPCell(new Paragraph(titel, FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 16, Font.BOLD, BaseColor.BLACK)));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_CENTER);
+        cell.setBackgroundColor(BaseColor.ORANGE);
+        table.addCell(cell);
+
+        //openen van documenten, toevoegen van tekst en sluiten van document
+        try {
+            Document doc = new Document();
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream(bestandsnaam));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.open();
+            try {
+                doc.add(table);
+                doc.add(new Paragraph(gegevensVoorLevering, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
+                for (int menuID : d.getMenuIDsFromOrderID(orderID)) {
+                    Menu besteldeMenu = d.getMenu(menuID);
+                    String menutekst = "";
+                    menutekst += besteldeMenu.toString();
+                    doc.add(new Paragraph(menutekst, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
+                    String producttekst = "";
+                    for (Orderverwerking o : d.getAlleProductenVanMenu(menuID)) {
+                        producttekst += o.toString();
+                    }
+                    doc.add(new Paragraph(producttekst, FontFactory.getFont(FontFactory.HELVETICA, 12)));
+                }
+
+                doc.newPage();
+                doc.add(image);
+                doc.add(new Paragraph(aftiteling1, FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 12, BaseColor.GRAY)));
+                doc.add(new Paragraph(aftiteling2, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
+                doc.add(anchor);
+                doc.add(new Paragraph(aftiteling3, FontFactory.getFont(FontFactory.TIMES_ITALIC, 12, BaseColor.GRAY)));
+            } catch (DocumentException ex) {
+                Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            doc.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WriteFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mail.sendBestellingNaarKlant(kl, pdfVoorMail);
+
     }
 }
