@@ -198,7 +198,6 @@ public class Bestelling extends javax.swing.JFrame {
         tblBestelling.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblBestelling);
 
-        tblSuggesties.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tblSuggesties.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -269,7 +268,6 @@ public class Bestelling extends javax.swing.JFrame {
             }
         });
 
-        tblHotItems.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tblHotItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -605,7 +603,7 @@ public class Bestelling extends javax.swing.JFrame {
                 int plaatsnummer = d.getPlaatsnummer(gemeente, postcode);
                 DefaultTableModel v = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID)) JOIN tbl_awardHotitem A ON (A.productID=P.productID) WHERE (L.leveringsgebied= " + plaatsnummer + ")");
                 tblHotItems.setModel(v);
-                DefaultTableModel u = d.naarTabel("SELECT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID))"
+                DefaultTableModel u = d.naarTabel("SELECT DISTINCT P.productID,P.naam,P.type,P.eenheidsprijs,P.takeawaynaam,V.vestigingsID FROM tbl_product P JOIN tbl_vestigingen V ON (P.takeawaynaam=V.naam) JOIN tbl_leveringsregio L ON ((V.naam=L.naam) and (V.vestigingsID=L.vestigingsID))"
                         + "JOIN tbl_review R ON (R.productID=P.productID) WHERE (L.leveringsgebied= " + plaatsnummer + ") "
                         + "AND ((SELECT DISTINCT R.productID FROM tbl_review R JOIN tbl_product P ON R.productID = P.productID WHERE (R.score>4))=P.productID)");
                 tblSuggesties.setModel(u);
