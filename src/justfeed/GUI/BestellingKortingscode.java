@@ -183,7 +183,14 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                     txtKortingsCode.requestFocus();
                 }
             }
-        } else if (uniekeKortingsCode.equals("Registratiekorting")) {
+        } 
+        else if(!(txtKortingsCode.getText().length()==10))
+        {
+            JOptionPane.showMessageDialog(null, "De ingevoerde kortingscode bestaat niet uit 10 cijfers. Probeer opnieuw. ");
+            txtKortingsCode.setText("");
+            txtKortingsCode.requestFocus();
+        }
+        else if (uniekeKortingsCode.equals("Registratiekorting")) {
             int code = Integer.parseInt(txtKortingsCode.getText());
             if (!d.kortingRegistratieBestaat(code, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");

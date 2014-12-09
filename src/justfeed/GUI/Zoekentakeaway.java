@@ -128,7 +128,7 @@ public class Zoekentakeaway extends javax.swing.JFrame {
         //String takeAwayNaam = txtNaamTakeAway.getText();
         String takeAwayNaam = comboboxTakeAway.getSelectedItem().toString();
         if(d.take_AwayBestaat(takeAwayNaam)){
-            DefaultTableModel t = d.naarTabel("SELECT T.naam, T.email, V.vestigingsID, V.leveringskosten FROM tbl_takeaway T, tbl_vestigingen V WHERE (T.naam = V.naam) AND (T.naam = '" + takeAwayNaam + "');");
+            DefaultTableModel t = d.naarTabel("SELECT T.naam, V.vestigingsID, V.leveringskosten FROM tbl_takeaway T, tbl_vestigingen V WHERE (T.naam = V.naam) AND (T.naam = '" + takeAwayNaam + "');");
             tblZoekenTakeaway.setModel(t);
         }
         else{
