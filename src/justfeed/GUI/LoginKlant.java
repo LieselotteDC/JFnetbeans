@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
@@ -28,18 +27,16 @@ public class LoginKlant extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static LoginKlant getInstance(){
+    public static LoginKlant getInstance() {
         return login;
     }
-            
-    public static LoginKlant getInstance(Particulier caller)
-    {
+
+    public static LoginKlant getInstance(Particulier caller) {
         myCaller = caller;
         return login;
     }
-   
-        public static LoginKlant getInstance(RegistratieKlant caller)
-    {
+
+    public static LoginKlant getInstance(RegistratieKlant caller) {
         myCaller = caller;
         return login;
     }
@@ -137,47 +134,41 @@ public class LoginKlant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        loginnaam = txtLogin.getText(); 
+        loginnaam = txtLogin.getText();
         String paswoord = txtPaswoord.getText();
-        if(!d.loginBestaat(loginnaam)){
-        JOptionPane.showMessageDialog(null, "Deze login bestaat niet. Probeer opnieuw.");
-        txtLogin.setText("");
-        txtPaswoord.setText("");
-        txtLogin.requestFocus();
+        if (!d.loginBestaat(loginnaam)) {
+            JOptionPane.showMessageDialog(null, "Deze login bestaat niet. Probeer opnieuw.");
+            txtLogin.setText("");
+            txtPaswoord.setText("");
+            txtLogin.requestFocus();
+        } //else 
+        else if ((paswoord.length() < 8) || (paswoord.contains(loginnaam))) {
+            JOptionPane.showMessageDialog(null, "Ongeldig paswoord. Probeer opnieuw.");
+            txtPaswoord.setText("");
+            txtPaswoord.requestFocus();
+        } else if (!paswoord.equals(d.ophalenPaswoord(loginnaam))) {
+            JOptionPane.showMessageDialog(null, "Uw login en paswoord stemmen niet overeen. Probeer opnieuw.");
+            txtLogin.setText("");
+            txtPaswoord.setText("");
+            txtLogin.requestFocus();
+        } else {
+            k = null;
+            k = d.getKlant(loginnaam);
+            login.setActief(k);
+            d.deleteReview(actief);
+            Profielklant profiel = Profielklant.getInstance(login);
+            profiel.pack();
+            login.hide();
+            profiel.show();
+            profiel.setLocationRelativeTo(null);
+            txtLogin.setText("");
+            txtPaswoord.setText("");
         }
-        //else 
-        else if ((paswoord.length() < 8) || (paswoord.contains(loginnaam))){
-        JOptionPane.showMessageDialog(null, "Ongeldig paswoord. Probeer opnieuw.");
-        txtPaswoord.setText("");
-        txtPaswoord.requestFocus();    
-        }
-        else if(!paswoord.equals(d.ophalenPaswoord(loginnaam))){
-         JOptionPane.showMessageDialog(null, "Uw login en paswoord stemmen niet overeen. Probeer opnieuw.");
-        txtLogin.setText("");
-        txtPaswoord.setText("");
-        txtLogin.requestFocus(); 
-        }
-        else{
-        k = null;
-        k = d.getKlant(loginnaam);
-        System.out.println(k.getNaam());
-        login.setActief(k);
-        d.deleteReview(actief);
-        Profielklant profiel =  Profielklant.getInstance(login);
-        profiel.pack();
-        login.hide();
-        profiel.show();
-        profiel.setLocationRelativeTo(null);
-        txtLogin.setText("");
-        txtPaswoord.setText("");
-        }   
     }//GEN-LAST:event_btnLoginActionPerformed
 
-  
     /*
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -221,9 +212,9 @@ public class LoginKlant extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPaswoord;
     // End of variables declaration//GEN-END:variables
 
-/** 
-    @return the actief
-        */
+    /**
+     * @return the actief
+     */
     public Klant getActief() {
         return actief;
     }
@@ -242,5 +233,5 @@ public class LoginKlant extends javax.swing.JFrame {
     public void setLoginnaam(String loginnaam) {
         this.loginnaam = loginnaam;
     }
-    
+
 }

@@ -172,6 +172,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
         d.addOrder(orderMetKorting, berekendeMenusInclKorting, besteldeProducten);
         d.aanmakenReview(voorlopigeReviews);
         d.addHulpKorting(hulpKorting);
+        d.verbruiktKortingen(reedsIngevoerdeKortingen);
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn
         //orderId ophalen en dan alle menus van dat id in plaats van berekende menus
         WriteFile pdf = new WriteFile();

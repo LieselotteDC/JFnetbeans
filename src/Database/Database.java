@@ -837,6 +837,15 @@ public class Database {
         }
     }
 
+    public void verbruiktKortingen(ArrayList<Korting> ingevoerdeKortingen) {
+        this.gebruiktKortingRegistratie(ingevoerdeKortingen);
+        this.gebruiktKortingReview(ingevoerdeKortingen);
+        this.gebruiktKortingTakeawayBoss(ingevoerdeKortingen);
+        this.gebruiktKortingJustfeedBoss(ingevoerdeKortingen);
+        this.gebruiktKortingEenmaligUniek(ingevoerdeKortingen);
+        this.gebruiktKortingEenmaligPeriodie(ingevoerdeKortingen);
+    }
+
     //registratiekorting
     public void addKortingRegistratie(Klant kl) {
         RegistratieKorting reg = new RegistratieKorting();
@@ -1347,7 +1356,7 @@ public class Database {
         }
     }
 
-    // unieke korting
+    // Periodieke korting
     public void addKortingEenmaligPeriode(UniekeActiePeriode periode) {
         try {
             dbConnection = getConnection();
@@ -1395,6 +1404,23 @@ public class Database {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
             return false;
+        }
+    }
+
+    public void gebruiktKortingEenmaligPeriodie(ArrayList<Korting> kortingen) {
+        try {
+            dbConnection = getConnection();
+            Statement stmt = dbConnection.createStatement();
+            for (Korting k : kortingen) {
+                if (k instanceof UniekeActiePeriode) {
+
+                    stmt.executeUpdate("UPDATE tbl_kortingPeriode SET status = FALSE WHERE kortingscode= " + k.getKortingscode() + ";");
+                }
+            }
+            this.closeConnection();
+        } catch (SQLException sqle) {
+            System.out.println("SQLException: " + sqle.getMessage());
+            this.closeConnection();
         }
     }
 

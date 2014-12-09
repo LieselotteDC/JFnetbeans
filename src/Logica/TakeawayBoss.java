@@ -2,7 +2,7 @@ package Logica;
 
 public class TakeawayBoss extends Korting {
 
-    private static final double PERCENTAGE = 20.0;
+    private static final double PERCENTAGE = 0.20;
     private double percentage;
     private boolean status;
     private String login;
