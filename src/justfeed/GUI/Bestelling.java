@@ -509,8 +509,6 @@ public class Bestelling extends javax.swing.JFrame {
         bestellingOverzicht.setLocationRelativeTo(null);
         DefaultTableModel model2 = (DefaultTableModel) tblKeuzes.getModel();
         model2.setRowCount(0);
-        DefaultTableModel model3 = (DefaultTableModel) tblBestelling.getModel();
-        model3.setRowCount(0);
     }//GEN-LAST:event_btnBestellingPlaatsenActionPerformed
 
     private void btnToevoegenAanBestellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenAanBestellingActionPerformed

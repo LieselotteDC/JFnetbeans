@@ -186,6 +186,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfleveradresToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfleveradresToevoegenActionPerformed
+       model.setRowCount(0);
        BestellingAfleveradres adres = BestellingAfleveradres.getInstance(bestellingOverzicht);
        adres.pack();
        bestellingOverzicht.hide();
