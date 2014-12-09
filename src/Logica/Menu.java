@@ -72,7 +72,10 @@ public class Menu {
     public double berekenOrderprijs(ArrayList<Menu> berekendeMenus) {
         double totaalprijs = 0.0;
         for (Menu m : berekendeMenus) {
+            System.out.println("methode berekenorderprijs voor" + totaalprijs);
+            System.out.println(m.getMenuprijs());
             totaalprijs += m.getMenuprijs();
+            System.out.println("methode berekenorderprijs na" + totaalprijs);
         }
         return totaalprijs;
     }
@@ -184,9 +187,9 @@ public class Menu {
         if (totaalGecumuleerdPercentage <= 0.50) {
             this.toepassenUniekeEenmailgeKortingen(kortingen, berekendeMenus, kl);
             this.toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl);
-            System.out.println(orderMetKorting.getTotaalPrijs());
-            orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
-            System.out.println(orderMetKorting.getTotaalPrijs());
+            System.out.println("regel 189"+orderMetKorting.getTotaalPrijs());
+            orderMetKorting.setTotaalPrijs(berekenOrderprijs(berekendeMenus));
+            System.out.println("regel 191"+orderMetKorting.getTotaalPrijs());
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
                 double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;

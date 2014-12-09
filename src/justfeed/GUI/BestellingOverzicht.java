@@ -53,6 +53,11 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         myCaller = caller;
         return bestellingOverzicht;
     }
+        public static BestellingOverzicht getInstance()
+    {
+        
+        return bestellingOverzicht;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -244,4 +249,13 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotaalbedrag;
     private javax.swing.JTextField txtTotaalbedragexcl;
     // End of variables declaration//GEN-END:variables
+
+    public Order getOrderZonderKorting() {
+        return orderZonderKorting;
+    }
+
+    public void setOrderZonderKorting(Order orderZonderKorting) {
+        this.orderZonderKorting = orderZonderKorting;
+    }
+
 }

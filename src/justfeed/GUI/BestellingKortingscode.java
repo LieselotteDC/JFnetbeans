@@ -24,8 +24,8 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     //doorgeven: leveringsdatum, reedsIngevoerdeKortingen, berekendeMenusInclKorting, orderMetKorting
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     public static JFrame myCaller;
-    public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
-    public Order orderMetKorting = Bestelling.getInstance().getOrderZonderKorting();
+    public Order orderZonderKorting = BestellingOverzicht.getInstance().getOrderZonderKorting();
+    public Order orderMetKorting = BestellingOverzicht.getInstance().getOrderZonderKorting();
     public Menu testMenu = new Menu();
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
@@ -165,6 +165,9 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
+        for(Menu m : berekendeMenus){
+            System.out.println(m);
+        }
         String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
         String kortingscode = txtKortingsCode.getText();
         if (uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()) {

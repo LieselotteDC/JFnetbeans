@@ -36,13 +36,16 @@ public class BestellingFactuur extends javax.swing.JFrame {
     public BestellingFactuur() {
         initComponents();
         String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        //System.out.print(totaalprijs2);
         txtTotaalBedragExcl.setText(totaalprijs2);
         txtTotaalBedragExcl.setEnabled(false);
         String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
+        //System.out.print(totaalprijs3);
         txtTotaalBedragIncl.setText(totaalprijs3);
         txtTotaalBedragIncl.setEnabled(false);
         double kortingsbedrag = (orderZonderKorting.getTotaalPrijs() - orderMetKorting.getTotaalPrijs());
         String kortingsbedrag2 = String.valueOf(kortingsbedrag);
+        //System.out.println(kortingsbedrag2);
         txtKortingsbedrag.setText(kortingsbedrag2);
         txtKortingsbedrag.setEnabled(false);
     }
