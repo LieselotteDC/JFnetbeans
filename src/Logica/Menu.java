@@ -201,7 +201,7 @@ public class Menu {
             this.toepassenUniekeEenmailgeKortingen(kortingen, berekendeMenus, kl);
             this.toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl);
             double aangepastGecumuleerdPercentageKortingOpOrderprijs = 0.50 - gecumuleerdPercentageKortingOpMenuprijs;
-            orderMetKorting.setTotaalPrijs(this.berekenOrderprijs(berekendeMenus));
+            orderMetKorting.setTotaalPrijs(berekenOrderprijs(berekendeMenus));
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
                 double hulpkorting = m.getMenuprijs() * aangepastGecumuleerdPercentageKortingOpOrderprijs;

@@ -22,13 +22,14 @@ public class BestellingFactuur extends javax.swing.JFrame {
      * Creates new form Betaling
      */
     private static final BestellingFactuur factuur = new BestellingFactuur();
-    public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+    public Order orderZonderKorting = BestellingKortingscode.getInstance().getOrderZonderKorting();
     public DefaultTableModel model = Bestelling.getInstance().getModel();
     public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
     public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
-    public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
+    public ArrayList<Menu> berekendeMenusInclKorting = BestellingKortingscode.getInstance().getBerekendeMenusInclKorting();
     public ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
     public ArrayList<HulpKorting> hulpKorting = BestellingKortingscode.getInstance().getHulpKorting();
+    public ArrayList<Korting> reedsIngevoerdeKortingen = BestellingKortingscode.getInstance().getReedsIngevoerdeKortingen();
     public Klant actief = LoginKlant.getInstance().getActief();
     public Database d = new Database();
     public static JFrame myCaller;
@@ -167,7 +168,8 @@ public class BestellingFactuur extends javax.swing.JFrame {
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
         java.sql.Date datumVanLevering = orderMetKorting.getDatum();
         orderMetKorting.setDatum(datumVanLevering);
-        d.addOrder(orderMetKorting, berekendeMenus, besteldeProducten);
+        System.out.println(orderMetKorting.getPlaatsnummer());
+        d.addOrder(orderMetKorting, berekendeMenusInclKorting, besteldeProducten);
         d.aanmakenReview(voorlopigeReviews);
         d.addHulpKorting(hulpKorting);
         //naar elke takeaway word een mail verstuurd met de producten die bij hen besteld zijn

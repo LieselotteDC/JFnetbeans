@@ -35,6 +35,7 @@ public class Bestelling extends javax.swing.JFrame {
     ArrayList<Review> voorlopigeReviews = new ArrayList<>(); //doorgeven 
     public ArrayList<Menu> berekendeMenus = new ArrayList<>(); // deze arraylist moet naar volgende scherm overgedragen worden
     public Order orderZonderKorting = new Order(); // ook meegegeven worden
+    public Order orderMetKorting=new Order();
 
     //String[] columNames = new String[5];
     //Object data [][] = null;
@@ -481,6 +482,7 @@ public class Bestelling extends javax.swing.JFrame {
 
         totaalprijs = hulp.berekenOrderprijs(berekendeMenus);
         orderZonderKorting.setTotaalPrijs(totaalprijs);
+        orderMetKorting.setTotaalPrijs(totaalprijs);
         leveringsdatum = new java.sql.Date(calendarLeveringsdatum.getDate().getTime());
         for (Orderverwerking orderver : this.besteldeProducten) {
             Review rev = new Review(actief.getLogin(), orderver.getProductID(), leveringsdatum);
@@ -529,6 +531,8 @@ public class Bestelling extends javax.swing.JFrame {
                 Orderverwerking p = new Orderverwerking(productID, productNaam, type, eenheidsprijs, hoeveelheid, takeAwayNaam, vestigingsID);
                 orderZonderKorting.setDatum(leveringsdatum);
                 orderZonderKorting.setLogin(actief.getLogin());
+                orderMetKorting.setDatum(leveringsdatum);
+                orderMetKorting.setLogin(actief.getLogin());
                 besteldeProducten.add(p);
 
             } else {
@@ -802,6 +806,14 @@ public class Bestelling extends javax.swing.JFrame {
 
     public void setBesteldeProducten(ArrayList<Orderverwerking> besteldeProducten) {
         this.besteldeProducten = besteldeProducten;
+    }
+
+    public Order getOrderMetKorting() {
+        return orderMetKorting;
+    }
+
+    public void setOrderMetKorting(Order orderMetKorting) {
+        this.orderMetKorting = orderMetKorting;
     }
 
 }

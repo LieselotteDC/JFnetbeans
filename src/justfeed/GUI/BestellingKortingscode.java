@@ -24,8 +24,8 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     //doorgeven: leveringsdatum, reedsIngevoerdeKortingen, berekendeMenusInclKorting, orderMetKorting
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     public static JFrame myCaller;
-    public Order orderZonderKorting = BestellingOverzicht.getInstance().getOrderZonderKorting();
-    public Order orderMetKorting = BestellingOverzicht.getInstance().getOrderZonderKorting();
+    public Order orderZonderKorting = BestellingAfleveradres.getInstance().getOrderZonderKorting();
+    public Order orderMetKorting = BestellingAfleveradres.getInstance().getOrderMetKorting();
     public Menu testMenu = new Menu();
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
@@ -165,7 +165,8 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
-        for(Menu m : berekendeMenus){
+        for(Menu m : berekendeMenusInclKorting){
+            System.out.println("ik zit in BestellingKortingscode lijn 169");
             System.out.println(m);
         }
         String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
@@ -251,7 +252,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
             }
         } else if (uniekeKortingsCode.equals("Unieke actie korting: eenmalig")) {
             int code = Integer.parseInt(txtKortingsCode.getText());
-            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenus, actief)) {
+            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenusInclKorting, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
             } else if (!d.kortingEenmaligUniekGeldig(code)) {
                 JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -265,7 +266,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
             }
         } else {
             int code = Integer.parseInt(txtKortingsCode.getText());
-            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenus, actief)) {
+            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenusInclKorting, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
             } else if (!d.kortingEenmaligPeriodeGeldig(code, leveringsdatum)) {
                 JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -350,7 +351,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
             }
         } else if (uniekeKortingsCode.equals("Unieke actie korting: eenmalig")) {
             int code = Integer.parseInt(txtKortingsCode.getText());
-            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenus, actief)) {
+            if (!d.kortingEenmaligBruikbaarBijMenu(code, berekendeMenusInclKorting, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
             } else if (!d.kortingEenmaligUniekGeldig(code)) {
                 JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -364,7 +365,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
             }
         } else {
             int code = Integer.parseInt(txtKortingsCode.getText());
-            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenus, actief)) {
+            if (!d.kortingPeriodeBruikbaarBijMenu(code, berekendeMenusInclKorting, actief)) {
                 JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
             } else if (!d.kortingEenmaligPeriodeGeldig(code, leveringsdatum)) {
                 JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -459,6 +460,22 @@ public class BestellingKortingscode extends javax.swing.JFrame {
 
     public void setHulpKorting(ArrayList<HulpKorting> hulpKorting) {
         this.hulpKorting = hulpKorting;
+    }
+
+    public Order getOrderZonderKorting() {
+        return orderZonderKorting;
+    }
+
+    public void setOrderZonderKorting(Order orderZonderKorting) {
+        this.orderZonderKorting = orderZonderKorting;
+    }
+
+    public ArrayList<Korting> getReedsIngevoerdeKortingen() {
+        return reedsIngevoerdeKortingen;
+    }
+
+    public void setReedsIngevoerdeKortingen(ArrayList<Korting> reedsIngevoerdeKortingen) {
+        this.reedsIngevoerdeKortingen = reedsIngevoerdeKortingen;
     }
 
 }

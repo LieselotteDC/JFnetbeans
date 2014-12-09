@@ -19,6 +19,7 @@ public class BestellingAfleveradres extends javax.swing.JFrame {
 private static final BestellingAfleveradres adres = new BestellingAfleveradres();
 public Klant actief = LoginKlant.getInstance().getActief();
 public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+public Order orderMetKorting=Bestelling.getInstance().getOrderMetKorting();
 public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
 String gemeente = Bestelling.getInstance().getGemeente();
 int postcode = Bestelling.getInstance().getPostcode();
@@ -39,6 +40,11 @@ public static JFrame myCaller;
         myCaller = bestellingOverzicht;
         return adres;
     }
+        public static BestellingAfleveradres getInstance()
+    {
+                return adres;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,8 +64,7 @@ public static JFrame myCaller;
         txtHuisnummer = new javax.swing.JTextField();
         txtPostcode = new javax.swing.JTextField();
         txtGemeente = new javax.swing.JTextField();
-        btnAfrekenen = new javax.swing.JButton();
-        btnKortingscodeToevoegen = new javax.swing.JButton();
+        btnVolgende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,23 +83,13 @@ public static JFrame myCaller;
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Gemeente:");
 
-        btnAfrekenen.setBackground(new java.awt.Color(0, 0, 0));
-        btnAfrekenen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAfrekenen.setForeground(new java.awt.Color(255, 255, 255));
-        btnAfrekenen.setText("Afrekenen");
-        btnAfrekenen.addActionListener(new java.awt.event.ActionListener() {
+        btnVolgende.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolgende.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnVolgende.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolgende.setText("Volgende");
+        btnVolgende.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAfrekenenActionPerformed(evt);
-            }
-        });
-
-        btnKortingscodeToevoegen.setBackground(new java.awt.Color(0, 0, 0));
-        btnKortingscodeToevoegen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnKortingscodeToevoegen.setForeground(new java.awt.Color(255, 255, 255));
-        btnKortingscodeToevoegen.setText("Kortingscode toevoegen");
-        btnKortingscodeToevoegen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKortingscodeToevoegenActionPerformed(evt);
+                btnVolgendeActionPerformed(evt);
             }
         });
 
@@ -118,15 +113,12 @@ public static JFrame myCaller;
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtGemeente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnVolgende, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtHuisnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btnKortingscodeToevoegen)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtHuisnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,22 +138,20 @@ public static JFrame myCaller;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtGemeente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAfrekenen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnKortingscodeToevoegen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addComponent(btnVolgende, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
-       String straat = txtStraat.getText();
+    private void btnVolgendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolgendeActionPerformed
+               String straat = txtStraat.getText();
        String gemeente = txtGemeente.getText();
        
        if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() 
@@ -194,21 +184,12 @@ public static JFrame myCaller;
                 orderZonderKorting.setHuisnummer(huisnummer);
                 orderZonderKorting.setPlaatsnummer(plaatsnummer);
                 orderZonderKorting.setStraat(straat);
+                orderMetKorting.setHuisnummer(huisnummer);
+                orderMetKorting.setPlaatsnummer(plaatsnummer);
+                orderMetKorting.setStraat(straat);
 
             }
        }
-       BestellingFactuur factuur = BestellingFactuur.getInstance(adres);
-       factuur.pack();
-       adres.hide();
-       factuur.show();
-       factuur.setLocationRelativeTo(null);
-       txtStraat.setText("");
-       txtGemeente.setText("");
-       txtHuisnummer.setText("");
-       txtPostcode.setText("");
-    }//GEN-LAST:event_btnAfrekenenActionPerformed
-
-    private void btnKortingscodeToevoegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKortingscodeToevoegenActionPerformed
         txtStraat.setText("");
         txtGemeente.setText("");
         txtHuisnummer.setText("");
@@ -218,7 +199,7 @@ public static JFrame myCaller;
         adres.hide();
         kortingscode.show();
         kortingscode.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnKortingscodeToevoegenActionPerformed
+    }//GEN-LAST:event_btnVolgendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,8 +238,7 @@ public static JFrame myCaller;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAfrekenen;
-    private javax.swing.JButton btnKortingscodeToevoegen;
+    private javax.swing.JButton btnVolgende;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -269,4 +249,22 @@ public static JFrame myCaller;
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtStraat;
     // End of variables declaration//GEN-END:variables
+
+    public Order getOrderZonderKorting() {
+        return orderZonderKorting;
+    }
+
+    public void setOrderZonderKorting(Order orderZonderKorting) {
+        this.orderZonderKorting = orderZonderKorting;
+    }
+
+    public Order getOrderMetKorting() {
+        return orderMetKorting;
+    }
+
+    public void setOrderMetKorting(Order orderMetKorting) {
+        this.orderMetKorting = orderMetKorting;
+    }
+
 }
+

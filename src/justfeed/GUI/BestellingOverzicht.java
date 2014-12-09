@@ -19,6 +19,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     
     public Klant actief = LoginKlant.getInstance().getActief();
     public Order orderZonderKorting = Bestelling.getInstance().getOrderZonderKorting();
+
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
     ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
