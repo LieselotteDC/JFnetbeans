@@ -1028,15 +1028,17 @@ public class Database {
     //just-feed boss korting
     public void addKortingJustfeedBoss(String maand, int jaar) {
         Klant kl = this.bigSpenderAlgemeen(maand, jaar);
-        JustFeedBoss jfb = new JustFeedBoss();
-        try {
-            dbConnection = getConnection();
-            Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_kortingJustfeed_boss VALUES (null," + jfb.getPercentage() + "," + jfb.isStatus() + ",'" + kl.getLogin() + "');");
-            this.closeConnection();
-        } catch (SQLException sqle) {
-            System.out.println("SQLException: " + sqle.getMessage());
-            this.closeConnection();
+        if (!(kl == null)) {
+            JustFeedBoss jfb = new JustFeedBoss();
+            try {
+                dbConnection = getConnection();
+                Statement stmt = dbConnection.createStatement();
+                stmt.executeUpdate("INSERT INTO tbl_kortingJustfeed_boss VALUES (null," + jfb.getPercentage() + "," + jfb.isStatus() + ",'" + kl.getLogin() + "');");
+                this.closeConnection();
+            } catch (SQLException sqle) {
+                System.out.println("SQLException: " + sqle.getMessage());
+                this.closeConnection();
+            }
         }
     }
 
@@ -1124,7 +1126,7 @@ public class Database {
 
                 String sql = "SELECT SUM(totaalprijs) AS gecumuleerdBedrag FROM tbl_order WHERE (login = '" + kl.getLogin() + "') and (datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
                 ResultSet srs = getData(sql);
-                if (srs.next()) {
+                while (srs.next()) {
                     String login = kl.getLogin();
                     double gecumuleerd = srs.getDouble("gecumuleerdBedrag");
                     uitgavenKlant.add(new SorteerKorting(login, gecumuleerd));
@@ -1132,8 +1134,13 @@ public class Database {
             }
             this.closeConnection();
             Collections.sort(uitgavenKlant);
-            Klant bigSpender = new Klant(uitgavenKlant.get(0).getLogin());
-            return bigSpender;
+            if (uitgavenKlant.get(0).getBedrag() == 0.0) {
+                return null;
+            } else {
+
+                Klant bigSpender = new Klant(uitgavenKlant.get(0).getLogin());
+                return bigSpender;
+            }
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
@@ -1148,14 +1155,16 @@ public class Database {
         TakeawayBoss tab = new TakeawayBoss();
         for (Take_Away ta : takeaways) {
             Klant kl = this.bigSpenderTakeaway(maand, jaar, ta.getNaam());
-            try {
-                dbConnection = getConnection();
-                Statement stmt = dbConnection.createStatement();
-                stmt.executeUpdate("INSERT INTO tbl_kortingTakeaway_boss VALUES (null," + tab.getPercentage() + "," + tab.isStatus() + ",'" + kl.getLogin() + "');");
-                this.closeConnection();
-            } catch (SQLException sqle) {
-                System.out.println("SQLException: " + sqle.getMessage());
-                this.closeConnection();
+            if (!(kl == null)) {
+                try {
+                    dbConnection = getConnection();
+                    Statement stmt = dbConnection.createStatement();
+                    stmt.executeUpdate("INSERT INTO tbl_kortingTakeaway_boss VALUES (null," + tab.getPercentage() + "," + tab.isStatus() + ",'" + kl.getLogin() + "');");
+                    this.closeConnection();
+                } catch (SQLException sqle) {
+                    System.out.println("SQLException: " + sqle.getMessage());
+                    this.closeConnection();
+                }
             }
         }
     }
@@ -1252,8 +1261,12 @@ public class Database {
             }
             this.closeConnection();
             Collections.sort(uitgavenKlant);
-            Klant bigSpender = new Klant(uitgavenKlant.get(0).getLogin());
-            return bigSpender;
+            if (uitgavenKlant.get(0).getBedrag() == 0.0) {
+                return null;
+            } else {
+                Klant bigSpender = new Klant(uitgavenKlant.get(0).getLogin());
+                return bigSpender;
+            }
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
             this.closeConnection();
