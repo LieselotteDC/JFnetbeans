@@ -194,11 +194,7 @@ public class ReviewNieuwToevoegen extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(112, 112, 112))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnToevoegenReview)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -221,7 +217,8 @@ public class ReviewNieuwToevoegen extends javax.swing.JFrame {
                                             .addComponent(txtProductNaam)
                                             .addComponent(txtType)
                                             .addComponent(txtEenheidsPrijs)
-                                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(txtTakeAwayNaam, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
@@ -362,6 +359,8 @@ public class ReviewNieuwToevoegen extends javax.swing.JFrame {
         txtReviewID.setEnabled(false);
         comboboxScore.setSelectedItem(d.bestelFormulier(sql3, "score"));
         txtBeoordeling.setText(d.bestelFormulier(sql3, "beoordeling"));
+        DefaultTableModel model2 = (DefaultTableModel) tblKeuzes.getModel();
+        model2.removeRow(row);
     }//GEN-LAST:event_tblKeuzesMouseClicked
 
     /**
