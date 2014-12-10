@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author UGent
@@ -23,13 +22,23 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     MailingClass mc = new MailingClass();
     private static final BestellingBevestiging bevestiging = new BestellingBevestiging();
     public Klant actief = LoginKlant.getInstance().getActief();
+
+    public Order orderZonderKorting = BestellingKortingscode.getInstance().getOrderZonderKorting();
+    public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
+    public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
+    public ArrayList<Menu> berekendeMenus=BestellingKortingscode.getInstance().getBerekendeMenus();
+    public ArrayList<Menu> berekendeMenusInclKorting = BestellingKortingscode.getInstance().getBerekendeMenusInclKorting();
+    public ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
+    public ArrayList<HulpKorting> hulpKorting = BestellingKortingscode.getInstance().getHulpKorting();
+    public ArrayList<Korting> reedsIngevoerdeKortingen = BestellingKortingscode.getInstance().getReedsIngevoerdeKortingen();
     
     public static JFrame myCaller;
+
     public BestellingBevestiging() {
         initComponents();
     }
-    public static BestellingBevestiging getInstance(BestellingFactuur caller)
-    {
+
+    public static BestellingBevestiging getInstance(BestellingFactuur caller) {
         myCaller = caller;
         return bevestiging;
     }
@@ -119,12 +128,21 @@ public class BestellingBevestiging extends javax.swing.JFrame {
     private void btnHerinneringReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHerinneringReviewActionPerformed
         mc.sendHerinneringReviewmail(actief);
         JOptionPane.showMessageDialog(null, "Vergeet niet dat u nu een review kan plaatsen over uw bestelde producten. \n Ga hiervoor naar uw profiel > reviews > voeg nieuwe review toe.");
-        System.exit(0);
-        /*Profielklant profiel = Profielklant.getInstance(bevestiging);
+        //System.exit(0);
+        orderZonderKorting = new Order();
+        orderMetKorting = new Order();
+        voorlopigeReviews.clear();
+        berekendeMenusInclKorting.clear();
+        besteldeProducten.clear();
+        hulpKorting.clear();
+        reedsIngevoerdeKortingen.clear();
+        berekendeMenus.clear();
+        
+        Profielklant profiel = Profielklant.getInstance(bevestiging);
         profiel.pack();
         bevestiging.hide();
         profiel.show();
-        profiel.setLocationRelativeTo(null);*/
+        profiel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHerinneringReviewActionPerformed
 
     /**

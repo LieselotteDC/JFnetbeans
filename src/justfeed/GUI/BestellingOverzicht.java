@@ -31,21 +31,7 @@ public class BestellingOverzicht extends javax.swing.JFrame {
      */
     public BestellingOverzicht() {
         initComponents();
-        double bedragexcl = 0.0;
-        for (Orderverwerking o : besteldeProducten) {
-            bedragexcl += o.getPrijs() * o.getHoeveelheid();
-        }
-        double leveringskosten = orderZonderKorting.getTotaalPrijs() - bedragexcl;
-        String leveringskosten1 = String.valueOf(leveringskosten);
-        String bedragexcl1 = String.valueOf(bedragexcl);
-        String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
-        txtTotaalbedragexcl.setText(bedragexcl1);
-        txtLeveringskosten.setText(leveringskosten1);
-        txtTotaalbedrag.setText(totaalprijs2);
-        tblOverzichtBestelling.setModel(model);
-        txtTotaalbedrag.setEnabled(false);
-        txtTotaalbedragexcl.setEnabled(false);
-        txtLeveringskosten.setEnabled(false);
+
 
     }
 
@@ -81,6 +67,11 @@ public class BestellingOverzicht extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Overzicht van uw bestelling");
@@ -201,6 +192,24 @@ public class BestellingOverzicht extends javax.swing.JFrame {
     private void txtTotaalbedragexclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotaalbedragexclActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotaalbedragexclActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+              double bedragexcl = 0.0;
+        for (Orderverwerking o : besteldeProducten) {
+            bedragexcl += o.getPrijs() * o.getHoeveelheid();
+        }
+        double leveringskosten = orderZonderKorting.getTotaalPrijs() - bedragexcl;
+        String leveringskosten1 = String.valueOf(leveringskosten);
+        String bedragexcl1 = String.valueOf(bedragexcl);
+        String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        txtTotaalbedragexcl.setText(bedragexcl1);
+        txtLeveringskosten.setText(leveringskosten1);
+        txtTotaalbedrag.setText(totaalprijs2);
+        tblOverzichtBestelling.setModel(model);
+        txtTotaalbedrag.setEnabled(false);
+        txtTotaalbedragexcl.setEnabled(false);
+        txtLeveringskosten.setEnabled(false);
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments

@@ -501,7 +501,6 @@ public class Bestelling extends javax.swing.JFrame {
             Review rev = new Review(actief.getLogin(), orderver.getProductID(), leveringsdatum);
             voorlopigeReviews.add(rev);
         }
-
         BestellingOverzicht bestellingOverzicht = BestellingOverzicht.getInstance(bestelling);
         bestellingOverzicht.pack();
         bestelling.hide();
@@ -509,6 +508,9 @@ public class Bestelling extends javax.swing.JFrame {
         bestellingOverzicht.setLocationRelativeTo(null);
         DefaultTableModel model2 = (DefaultTableModel) tblKeuzes.getModel();
         model2.setRowCount(0);
+        txtGemeente.setText("");
+        txtPostcode.setText("");
+        combobox.setSelectedItem(null);
     }//GEN-LAST:event_btnBestellingPlaatsenActionPerformed
 
     private void btnToevoegenAanBestellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenAanBestellingActionPerformed

@@ -25,6 +25,7 @@ String gemeente = Bestelling.getInstance().getGemeente();
 int postcode = Bestelling.getInstance().getPostcode();
 String postcode2 = Integer.toString(postcode);
 public static JFrame myCaller;
+
     
     public Database d = new Database();
     /**
@@ -67,6 +68,11 @@ public static JFrame myCaller;
         btnVolgende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Gelieve het gewenste afleveradres in te voeren");
@@ -151,7 +157,7 @@ public static JFrame myCaller;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolgendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolgendeActionPerformed
-               String straat = txtStraat.getText();
+       String straat = txtStraat.getText();
        String gemeente = txtGemeente.getText();
        
        if(straat.isEmpty() || txtHuisnummer.getText().isEmpty() || txtPostcode.getText().isEmpty() 
@@ -200,6 +206,11 @@ public static JFrame myCaller;
         kortingscode.show();
         kortingscode.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnVolgendeActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        txtGemeente.setText(gemeente);
+        txtPostcode.setText(postcode2);
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments

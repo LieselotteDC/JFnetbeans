@@ -27,6 +27,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
     public Order orderMetKorting = BestellingKortingscode.getInstance().getOrderMetKorting();
     public ArrayList<Review> voorlopigeReviews = Bestelling.getInstance().getVoorlopigeReviews();
     public ArrayList<Menu> berekendeMenusInclKorting = BestellingKortingscode.getInstance().getBerekendeMenusInclKorting();
+    public ArrayList<Menu> berekendeMenus=BestellingKortingscode.getInstance().getBerekendeMenus();
     public ArrayList<Orderverwerking> besteldeProducten = Bestelling.getInstance().getBesteldeProducten();
     public ArrayList<HulpKorting> hulpKorting = BestellingKortingscode.getInstance().getHulpKorting();
     public ArrayList<Korting> reedsIngevoerdeKortingen = BestellingKortingscode.getInstance().getReedsIngevoerdeKortingen();
@@ -36,19 +37,7 @@ public class BestellingFactuur extends javax.swing.JFrame {
 
     public BestellingFactuur() {
         initComponents();
-        String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
-        //System.out.print(totaalprijs2);
-        txtTotaalBedragExcl.setText(totaalprijs2);
-        txtTotaalBedragExcl.setEnabled(false);
-        String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
-        //System.out.print(totaalprijs3);
-        txtTotaalBedragIncl.setText(totaalprijs3);
-        txtTotaalBedragIncl.setEnabled(false);
-        double kortingsbedrag = (orderZonderKorting.getTotaalPrijs() - orderMetKorting.getTotaalPrijs());
-        String kortingsbedrag2 = String.valueOf(kortingsbedrag);
-        //System.out.println(kortingsbedrag2);
-        txtKortingsbedrag.setText(kortingsbedrag2);
-        txtKortingsbedrag.setEnabled(false);
+
     }
 
     public static BestellingFactuur getInstance(BestellingKortingscode caller) {
@@ -81,6 +70,11 @@ public class BestellingFactuur extends javax.swing.JFrame {
         txtKortingsbedrag = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Betaling");
@@ -188,6 +182,14 @@ public class BestellingFactuur extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGoedkeurenActionPerformed
 
     private void btnAfkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfkeurenActionPerformed
+        orderZonderKorting = new Order();
+        orderMetKorting = new Order();
+        voorlopigeReviews.clear();
+        berekendeMenusInclKorting.clear();
+        besteldeProducten.clear();
+        hulpKorting.clear();
+        reedsIngevoerdeKortingen.clear();
+        berekendeMenus.clear();
         txtTotaalBedragIncl.setText("");
         model.setRowCount(0);
         Profielklant profiel = Profielklant.getInstance(factuur);
@@ -196,6 +198,22 @@ public class BestellingFactuur extends javax.swing.JFrame {
         profiel.show();
         profiel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAfkeurenActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+            String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
+        //System.out.print(totaalprijs2);
+        txtTotaalBedragExcl.setText(totaalprijs2);
+        txtTotaalBedragExcl.setEnabled(false);
+        String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
+        //System.out.print(totaalprijs3);
+        txtTotaalBedragIncl.setText(totaalprijs3);
+        txtTotaalBedragIncl.setEnabled(false);
+        double kortingsbedrag = (orderZonderKorting.getTotaalPrijs() - orderMetKorting.getTotaalPrijs());
+        String kortingsbedrag2 = String.valueOf(kortingsbedrag);
+        //System.out.println(kortingsbedrag2);
+        txtKortingsbedrag.setText(kortingsbedrag2);
+        txtKortingsbedrag.setEnabled(false);
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments

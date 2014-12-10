@@ -47,7 +47,11 @@ public class WriteFile extends Exception {
         String titel = "Ovezicht van de uitgereikte Awards van " + maand + " " + jaar + "\n\n";
         String tekst = "";
         for (Award a : d.getAlleAwards()) {
-            tekst += a.toString();
+            if (a == null) {
+
+            } else {
+                tekst += a.toString();
+            }
         }
         String aftiteling1 = "Het team van Just-Feed\n";
         String aftiteling2

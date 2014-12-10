@@ -1652,11 +1652,11 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            if (!(oldBestseller == null)) { //om de eerste keer deze methode niet te laten draaien
+            if (!(oldBestseller == null)||!(oldBestseller.getTakeawayNaam().contains("*B*"))) { //om de eerste keer deze methode niet te laten draaien
                 String originalName1 = oldBestseller.getTakeawayNaam().substring(3);
                 stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName1 + "' WHERE naam = '" + oldBestseller.getTakeawayNaam() + "';");
             }
-            if (!(oldUsersChoice == null)) {
+            if (!(oldUsersChoice == null)||!(oldUsersChoice.getTakeawayNaam().contains("*UC*"))) {
                 String originalName2 = oldUsersChoice.getTakeawayNaam().substring(4);
                 stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName2 + "' WHERE naam = '" + oldUsersChoice.getTakeawayNaam() + "';");
             }
@@ -1690,8 +1690,12 @@ public class Database {
         try {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
+            if(!(newBestseller==null)){
             stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*B*" + newBestseller.getTakeawayNaam() + "' WHERE naam = '" + newBestseller.getTakeawayNaam() + "';");
+            }
+            if(!(newUsersChoice==null)){
             stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*UC*" + newUsersChoice.getTakeawayNaam() + "' WHERE naam = '" + newUsersChoice.getTakeawayNaam() + "'");
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1706,7 +1710,9 @@ public class Database {
             Bestseller newBs = this.findBestseller(maand, jaar); //berekenen van de nieuwe bestseller
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null,'" + newBs.getMaand() + "'," + newBs.getAantalMenus() + ",'" + newBs.getTakeawayNaam() + "');");
+            if (newBs.getAantalMenus() > 0) {
+                stmt.executeUpdate("INSERT INTO tbl_awardBestseller VALUES (null,'" + newBs.getMaand() + "'," + newBs.getAantalMenus() + ",'" + newBs.getTakeawayNaam() + "');");
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1771,7 +1777,9 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             for (Hot_Item hi : this.findHotItems(maand, jaar)) {
-                stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null,'" + hi.getMaand() + "'," + hi.getAantalBesteld() + "," + hi.getProductID() + ");");
+                if (hi.getAantalBesteld() > 0) {
+                    stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null,'" + hi.getMaand() + "'," + hi.getAantalBesteld() + "," + hi.getProductID() + ");");
+                }
             }
             this.closeConnection();
         } catch (SQLException sqle) {
@@ -1797,13 +1805,17 @@ public class Database {
                     }
                 }
                 Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
-                if (gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld() == gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld()) {
-                    Product product1 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID());
-                    Product product2 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID());
-                    if (product1.getEenheidsprijs() > product2.getEenheidsprijs()) {
-                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
+                if (gecumuleerdeHoeveelheidPerTakeaway.size() > 1) {
+                    if (gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld() == gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld()) {
+                        Product product1 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID());
+                        Product product2 = this.getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID());
+                        if (product1.getEenheidsprijs() > product2.getEenheidsprijs()) {
+                            hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
+                        } else {
+                            hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID()));
+                        }
                     } else {
-                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID()));
+                        hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
                     }
                 }
             }
@@ -1845,7 +1857,9 @@ public class Database {
             Just_Feeder jf = this.findJustfeeder(maand);
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
-            stmt.executeUpdate("INSERT INTO tbl_awardJustfeeder VALUES (null,'" + jf.getMaand() + "'," + jf.getCommissie() + ",'" + jf.getTakeawayNaam() + "');");
+            if (jf.getCommissie() > 0.0) {
+                stmt.executeUpdate("INSERT INTO tbl_awardJustfeeder VALUES (null,'" + jf.getMaand() + "'," + jf.getCommissie() + ",'" + jf.getTakeawayNaam() + "');");
+            }
             this.closeConnection();
         } catch (SQLException sqle) {
             System.out.println("SQLException: " + sqle.getMessage());
@@ -1907,6 +1921,7 @@ public class Database {
             Users_Choice newUc = this.findUsersChoice(maand); //berekenen van de nieuwe users choice
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
+            if(newUc.getBeoordeling()>0.0)
             stmt.executeUpdate("INSERT INTO tbl_awardUserschoice VALUES (null,'" + newUc.getMaand() + "','" + newUc.getBeoordeling() + "','" + newUc.getTakeawayNaam() + "');");
             this.closeConnection();
         } catch (SQLException sqle) {

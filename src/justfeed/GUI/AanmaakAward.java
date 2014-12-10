@@ -197,12 +197,19 @@ public class AanmaakAward extends javax.swing.JFrame {
                //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
                //visualisatie gebeurd dus pas na het toekennen van alle awards!
                int jaar = Integer.parseInt(txtJaar.getText());
+                System.out.println("voor undo 200");
                d.undoVisualisationAwards();
+               System.out.println("voor delete 200");
                d.deleteAllAwards();
+               System.out.println("voor bestseller 200");
                d.addAwardBestseller(maand, jaar);
+               System.out.println("voor hotitem 200");
                d.addAwardHotItem(maand, jaar);
+               System.out.println("voor userschoice 200");
                d.addAwardUsersChoice(maand);
+               System.out.println("voor justfeeder 200");
                d.addAwardJustFeeder(maand);
+               System.out.println("voor do 200");
                d.doVisualisationAwards();
                comboboxMaand.setSelectedItem(null);
                txtJaar.setText("");

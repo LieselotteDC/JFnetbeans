@@ -20,6 +20,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     public ArrayList<Menu> berekendeMenus = Bestelling.getInstance().getBerekendeMenus();
     public ArrayList<Menu> berekendeMenusInclKorting = berekendeMenus;
     public ArrayList<HulpKorting> hulpKorting = new ArrayList<>();
+    public ArrayList<Korting> reedsIngevoerdeKortingen = new ArrayList<>();
     private static final BestellingKortingscode bestellingKortingscode = new BestellingKortingscode();
     //doorgeven: leveringsdatum, reedsIngevoerdeKortingen, berekendeMenusInclKorting, orderMetKorting
     java.sql.Date leveringsdatum = Bestelling.getInstance().getLeveringsdatum();
@@ -30,7 +31,6 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     public Database d = new Database();
     public Klant actief = LoginKlant.getInstance().getActief();
     Korting testKorting = new Korting();
-    public ArrayList<Korting> reedsIngevoerdeKortingen = new ArrayList<>();
 
     public BestellingKortingscode() {
         initComponents();
@@ -505,6 +505,14 @@ public class BestellingKortingscode extends javax.swing.JFrame {
 
     public void setReedsIngevoerdeKortingen(ArrayList<Korting> reedsIngevoerdeKortingen) {
         this.reedsIngevoerdeKortingen = reedsIngevoerdeKortingen;
+    }
+
+    public ArrayList<Menu> getBerekendeMenus() {
+        return berekendeMenus;
+    }
+
+    public void setBerekendeMenus(ArrayList<Menu> berekendeMenus) {
+        this.berekendeMenus = berekendeMenus;
     }
 
 }
