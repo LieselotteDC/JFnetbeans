@@ -72,10 +72,7 @@ public class Menu {
     public double berekenOrderprijs(ArrayList<Menu> berekendeMenus) {
         double totaalprijs = 0.0;
         for (Menu m : berekendeMenus) {
-            System.out.println("methode berekenorderprijs voor" + totaalprijs);
-            System.out.println(m.getMenuprijs());
             totaalprijs += m.getMenuprijs();
-            System.out.println("methode berekenorderprijs na" + totaalprijs);
         }
         return totaalprijs;
     }
@@ -182,19 +179,15 @@ public class Menu {
     public void toepassenDefinitieveKortingen(ArrayList<Korting> kortingen, Order orderZonderKorting, Order orderMetKorting, Klant kl, ArrayList<Menu> berekendeMenus, ArrayList<HulpKorting> hulpKorting)// arraylist hulpkorting initialiseren en wij moeten die dan setten,LIESELOTTE MOET DEFAULT VAN ORDERMETKORTING AANMAKEN EN WIJ DAN SETTEN
     {
         double gecumuleerdPercentageKortingOpOrderprijs = this.gecumuleerdPercentageKortingOpOrderprijs(kortingen, orderZonderKorting);
-        System.out.println("regels 185 " +gecumuleerdPercentageKortingOpOrderprijs);
         double gecumuleerdPercentageKortingOpMenuprijs = this.gecumuleerdPercentageKortingOpMenuprijs(kortingen, orderZonderKorting, berekendeMenus);
-        System.out.println("regels 187 " +gecumuleerdPercentageKortingOpMenuprijs);
         double totaalGecumuleerdPercentage = gecumuleerdPercentageKortingOpMenuprijs + gecumuleerdPercentageKortingOpOrderprijs;
         if (totaalGecumuleerdPercentage <= 0.50) {
             toepassenUniekeEenmaligeKortingen(kortingen, berekendeMenus, kl);
             toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl);
-            System.out.println("regel 189"+orderMetKorting.getTotaalPrijs());
             orderMetKorting.setTotaalPrijs(berekenOrderprijs(berekendeMenus));
-            System.out.println("regel 191"+orderMetKorting.getTotaalPrijs());
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
             for (Menu m : berekendeMenus) {
-                double nieuweMenu=m.getMenuprijs()*(1-gecumuleerdPercentageKortingOpOrderprijs);
+                double nieuweMenu = m.getMenuprijs() * (1 - gecumuleerdPercentageKortingOpOrderprijs);
                 double hulpkorting = m.getMenuprijs() * gecumuleerdPercentageKortingOpOrderprijs;
                 m.setMenuprijs(nieuweMenu);
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
@@ -205,19 +198,13 @@ public class Menu {
             toepassenUniekeEenmaligeKortingen(kortingen, berekendeMenus, kl);
             toepassenUniekePeriodiekeKortingen(kortingen, berekendeMenus, kl);
             double aangepastGecumuleerdPercentageKortingOpOrderprijs = 0.50 - gecumuleerdPercentageKortingOpMenuprijs;
-            System.out.println("regel 208 "+aangepastGecumuleerdPercentageKortingOpOrderprijs);
-            System.out.println("regel 209 voor set "+orderMetKorting.getTotaalPrijs());
             orderMetKorting.setTotaalPrijs(berekenOrderprijs(berekendeMenus));
-            System.out.println("regel 208 "+orderMetKorting.getTotaalPrijs());
             double orderprijsMetKortingenOpOrderprijs = orderMetKorting.getTotaalPrijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
-            System.out.println(orderprijsMetKortingenOpOrderprijs +"regel 213");
             for (Menu m : berekendeMenus) {
-                double nieuweMenu=m.getMenuprijs()*(1-aangepastGecumuleerdPercentageKortingOpOrderprijs);
-                System.out.println(nieuweMenu +"regel 214");
+                double nieuweMenu = m.getMenuprijs() * (1 - aangepastGecumuleerdPercentageKortingOpOrderprijs);
                 double hulpkorting = m.getMenuprijs() * aangepastGecumuleerdPercentageKortingOpOrderprijs;
-                 System.out.println(hulpkorting+"regel216");
                 m.setMenuprijs(nieuweMenu);
-                
+
                 hulpKorting.add(new HulpKorting(m.getTakeawayNaam(), hulpkorting));
             }
             orderMetKorting.setTotaalPrijs(orderprijsMetKortingenOpOrderprijs);

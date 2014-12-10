@@ -120,6 +120,7 @@ public class OverzichtTakeAwaysReedsBesteld extends javax.swing.JFrame {
         ontvangenTakeAwaysReedsBesteld .hide();
         profiel.show();
         profiel.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_btnHomeknopProfielklantActionPerformed
 
     /**

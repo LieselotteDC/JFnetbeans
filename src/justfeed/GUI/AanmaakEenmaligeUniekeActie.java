@@ -357,7 +357,6 @@ public class AanmaakEenmaligeUniekeActie extends javax.swing.JFrame {
         //DefaultComboBoxModel f = d.initialiseerCombobox("SELECT vestigingsID FROM tbl_vestigingen;", "vestigingsID");
         String gekozenTakeAway;
         gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
-        //System.out.println(gekozenTakeAway);
         DefaultTableModel t = d.naarTabel("SELECT vestigingsID FROM tbl_vestigingen WHERE naam = '" + gekozenTakeAway + "';");
         tblVestigingen.setModel(t);
     }//GEN-LAST:event_rbtnVestigingMouseClicked

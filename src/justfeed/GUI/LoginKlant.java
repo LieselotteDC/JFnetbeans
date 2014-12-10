@@ -234,4 +234,12 @@ public class LoginKlant extends javax.swing.JFrame {
         this.loginnaam = loginnaam;
     }
 
+    public Klant getK() {
+        return k;
+    }
+
+    public void setK(Klant k) {
+        this.k = k;
+    }
+
 }

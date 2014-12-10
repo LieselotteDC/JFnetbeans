@@ -162,7 +162,6 @@ public class BestellingFactuur extends javax.swing.JFrame {
     private void btnGoedkeurenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoedkeurenActionPerformed
         java.sql.Date datumVanLevering = orderMetKorting.getDatum();
         orderMetKorting.setDatum(datumVanLevering);
-        System.out.println(orderMetKorting.getPlaatsnummer());
         d.addOrder(orderMetKorting, berekendeMenusInclKorting, besteldeProducten);
         d.aanmakenReview(voorlopigeReviews);
         d.addHulpKorting(hulpKorting);
@@ -201,16 +200,13 @@ public class BestellingFactuur extends javax.swing.JFrame {
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
             String totaalprijs2 = String.valueOf(orderZonderKorting.getTotaalPrijs());
-        //System.out.print(totaalprijs2);
         txtTotaalBedragExcl.setText(totaalprijs2);
         txtTotaalBedragExcl.setEnabled(false);
         String totaalprijs3 = String.valueOf(orderMetKorting.getTotaalPrijs());
-        //System.out.print(totaalprijs3);
         txtTotaalBedragIncl.setText(totaalprijs3);
         txtTotaalBedragIncl.setEnabled(false);
         double kortingsbedrag = (orderZonderKorting.getTotaalPrijs() - orderMetKorting.getTotaalPrijs());
         String kortingsbedrag2 = String.valueOf(kortingsbedrag);
-        //System.out.println(kortingsbedrag2);
         txtKortingsbedrag.setText(kortingsbedrag2);
         txtKortingsbedrag.setEnabled(false);
     }//GEN-LAST:event_formMouseMoved

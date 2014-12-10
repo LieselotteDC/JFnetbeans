@@ -19,7 +19,7 @@ public class AanmaakAward extends javax.swing.JFrame {
     private static final AanmaakAward aanmaakAward = new AanmaakAward();
     public Database d = new Database();
     public static JFrame myCaller;
-    WriteFile wf = new WriteFile ();
+    WriteFile wf = new WriteFile();
 
     public AanmaakAward() {
         initComponents();
@@ -57,7 +57,7 @@ public class AanmaakAward extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Aanmaak van een award:");
+        jLabel1.setText("Aanmaak van de maandelijkse awards:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Selecteer de gewenste maand:");
@@ -65,7 +65,7 @@ public class AanmaakAward extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Jaar:");
 
-        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december", "" }));
+        comboboxMaand.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december" }));
 
         txtJaar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,32 +116,28 @@ public class AanmaakAward extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAanmaakAward, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(33, 33, 33))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)))
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtJaar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboboxMaand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,34 +191,26 @@ public class AanmaakAward extends javax.swing.JFrame {
             int reply = JOptionPane.showConfirmDialog(null, "Heeft U de commissies reeds berekend?", "Commissieberekening", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                //bij de knop awards aanmaken: 1. undo, 2. delete, 3. calculate, 4. do
-               //visualisatie gebeurd dus pas na het toekennen van alle awards!
-               int jaar = Integer.parseInt(txtJaar.getText());
-                System.out.println("voor undo 200");
-               d.undoVisualisationAwards();
-               System.out.println("voor delete 200");
-               d.deleteAllAwards();
-               System.out.println("voor bestseller 200");
-               d.addAwardBestseller(maand, jaar);
-               System.out.println("voor hotitem 200");
-               d.addAwardHotItem(maand, jaar);
-               System.out.println("voor userschoice 200");
-               d.addAwardUsersChoice(maand);
-               System.out.println("voor justfeeder 200");
-               d.addAwardJustFeeder(maand);
-               System.out.println("voor do 200");
-               d.doVisualisationAwards();
-               comboboxMaand.setSelectedItem(null);
-               txtJaar.setText("");
-               JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
-               wf.pdfAwards(maand, jaar);
-               Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
-               //     amdministrator.setSize(300,300);
-               awardsoverzicht.pack();
-               aanmaakAward.hide();
-               awardsoverzicht.show();
-               awardsoverzicht.setLocationRelativeTo(null);   
-            }
-            else {
+                //visualisatie gebeurd dus pas na het toekennen van alle awards!
+                int jaar = Integer.parseInt(txtJaar.getText());
+                d.undoVisualisationAwards();
+                d.deleteAllAwards();
+                d.addAwardBestseller(maand, jaar);
+                d.addAwardHotItem(maand, jaar);
+                d.addAwardUsersChoice(maand);
+                d.addAwardJustFeeder(maand);
+                d.doVisualisationAwards();
+                comboboxMaand.setSelectedItem(null);
+                txtJaar.setText("");
+                JOptionPane.showMessageDialog(null, "De awards werden succesvol toegevoegd.");
+                wf.pdfAwards(maand, jaar);
+                Overzichtawardsadministrator awardsoverzicht = Overzichtawardsadministrator.getInstance(aanmaakAward);
+                //     amdministrator.setSize(300,300);
+                awardsoverzicht.pack();
+                aanmaakAward.hide();
+                awardsoverzicht.show();
+                awardsoverzicht.setLocationRelativeTo(null);
+            } else {
                 Commissieberekening commissie = Commissieberekening.getInstance(aanmaakAward);
                 commissie.pack();
                 aanmaakAward.hide();

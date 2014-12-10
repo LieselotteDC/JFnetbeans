@@ -112,7 +112,7 @@ public class WriteFile extends Exception {
 
         //verzenden van mail met bijlage naar de take-aways
         for (Take_Away ta : d.getAlleTakeaways()) {
-            mail.sendAwardemail(ta.getEmail(), pdfVoorMail);
+            mail.sendAwardemail(ta.getNaam(), pdfVoorMail);
         }
     }
 
@@ -719,7 +719,6 @@ public class WriteFile extends Exception {
             String tekst = "";
             for (Orderverwerking orderver : besteldeProductenVanMenu) {
                 tekst += orderver.toString();
-                System.out.println(tekst);
             }
             String gegevensVoorLevering = "Leverdatum: " + besteldOrder.getDatum() + "\n";
             gegevensVoorLevering += "Leveringsadres: " + besteldOrder.getStraat() + " " + besteldOrder.getHuisnummer() + ", " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getPostcode() + " " + d.getCoordinaten(besteldOrder.getPlaatsnummer()).getGemeente() + "\n";

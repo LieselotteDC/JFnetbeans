@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import Database.*;
 import Logica.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-
 
 /**
  *
@@ -23,98 +20,96 @@ public class Profielklant extends javax.swing.JFrame {
     public static JFrame myCaller;
     public Database d = new Database();
     private static final LoginKlant login = new LoginKlant();
-    public String loginnaam = LoginKlant.getInstance().getLoginnaam();
+    public String loginnaam = LoginKlant.getInstance().getLoginnaam(); // voor wat is deze? (oli)
+    public String naamKlant = LoginKlant.getInstance().actief.getVoornaam();//ik weet niet als deze klopt, ik heb hem bij mousemoved gebruikt
     public Klant actief = LoginKlant.getInstance().getActief();
-     
-    
+    public Klant k = LoginKlant.getInstance().getK();
+
     public Profielklant() {
         initComponents();
+        lblLogin.setText(actief.getVoornaam()+"!");
     }
 
-    public static Profielklant getInstance(LoginKlant caller)
-    {
+    public static Profielklant getInstance(LoginKlant caller) {
         myCaller = caller;
         return profiel;
     }
-    
-        public static Profielklant getInstance(Contact caller)
-    {
+
+    public static Profielklant getInstance(Contact caller) {
         myCaller = caller;
         return profiel;
     }
-    
-    public static Profielklant getInstance(RegistratieKlant caller)
-    {
+
+    public static Profielklant getInstance(RegistratieKlant caller) {
         myCaller = caller;
         return profiel;
     }
-    public static Profielklant getInstance(ZoekenReview zoekenReview)
-    {
+
+    public static Profielklant getInstance(ZoekenReview zoekenReview) {
         myCaller = zoekenReview;
         return profiel;
     }
-    public static Profielklant getInstance(Zoekencategorie zoekenCategorie)
-    {
+
+    public static Profielklant getInstance(Zoekencategorie zoekenCategorie) {
         myCaller = zoekenCategorie;
         return profiel;
     }
-    public static Profielklant getInstance(Zoekengemeente zoekenGemeente)
-    {
+
+    public static Profielklant getInstance(Zoekengemeente zoekenGemeente) {
         myCaller = zoekenGemeente;
         return profiel;
     }
-    public static Profielklant getInstance(Zoekentakeaway zoekenTakeaway)
-    {
+
+    public static Profielklant getInstance(Zoekentakeaway zoekenTakeaway) {
         myCaller = zoekenTakeaway;
         return profiel;
     }
-    public static Profielklant getInstance(Zoekenproduct zoekenProduct)
-    {
+
+    public static Profielklant getInstance(Zoekenproduct zoekenProduct) {
         myCaller = zoekenProduct;
         return profiel;
     }
-    
-    public static Profielklant getInstance(Overzichtkortingscodesklant codesklant)
-    {
+
+    public static Profielklant getInstance(Overzichtkortingscodesklant codesklant) {
         myCaller = codesklant;
         return profiel;
     }
-    public static Profielklant getInstance(Overzichtreviewsklant reviewsklant)
-    {
+
+    public static Profielklant getInstance(Overzichtreviewsklant reviewsklant) {
         myCaller = reviewsklant;
         return profiel;
     }
-        public static Profielklant getInstance(BestellingBevestiging bevestiging)
-    {
+
+    public static Profielklant getInstance(BestellingBevestiging bevestiging) {
         myCaller = bevestiging;
         return profiel;
     }
-        public static Profielklant getInstance(BestellingFactuur factuur)
-    {
+
+    public static Profielklant getInstance(BestellingFactuur factuur) {
         myCaller = factuur;
         return profiel;
     }
-        public static Profielklant getInstance(ReviewBestaandOvernemen schrijvenReview)
-    {
+
+    public static Profielklant getInstance(ReviewBestaandOvernemen schrijvenReview) {
         myCaller = schrijvenReview;
         return profiel;
     }
-        public static Profielklant getInstance(ReviewNieuwToevoegen toevoegenReview)
-    {
+
+    public static Profielklant getInstance(ReviewNieuwToevoegen toevoegenReview) {
         myCaller = toevoegenReview;
         return profiel;
     }
-        public static Profielklant getInstance(AanmaakNieuwProduct nieuwproduct)
-    {
+
+    public static Profielklant getInstance(AanmaakNieuwProduct nieuwproduct) {
         myCaller = nieuwproduct;
         return profiel;
     }
-         public static Profielklant getInstance(OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld)
-    {
+
+    public static Profielklant getInstance(OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld) {
         myCaller = ontvangenTakeAwaysReedsBesteld;
         return profiel;
     }
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,7 +147,7 @@ public class Profielklant extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Welkom op jouw profiel!");
+        jLabel1.setText("Welkom op jouw profiel,");
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -195,11 +190,6 @@ public class Profielklant extends javax.swing.JFrame {
 
         jMenu1.setBackground(new java.awt.Color(255, 153, 0));
         jMenu1.setText("Order");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                orderPlaatsen(evt);
-            }
-        });
 
         menuItemBestelling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shoppingbasket.png"))); // NOI18N
         menuItemBestelling.setText("Plaats een bestelling");
@@ -344,18 +334,17 @@ public class Profielklant extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(169, 169, 169)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblKlant, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,141 +358,142 @@ public class Profielklant extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void naarAanpassenklantgegevens(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarAanpassenklantgegevens
-       Aanpassenklantgegevens anderegegevensklant = Aanpassenklantgegevens.getInstance(profiel);
+        Aanpassenklantgegevens anderegegevensklant = Aanpassenklantgegevens.getInstance(profiel);
 //     anderegevensklant.setSize(300,300);
-       anderegegevensklant.pack();
-       profiel.hide();
-       anderegegevensklant.show();
-       anderegegevensklant.setLocationRelativeTo(null);
+        anderegegevensklant.pack();
+        profiel.hide();
+        anderegegevensklant.show();
+        anderegegevensklant.setLocationRelativeTo(null);
 
-       
+
     }//GEN-LAST:event_naarAanpassenklantgegevens
 
     private void naarAccountklantverwijderen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarAccountklantverwijderen
         int reply = JOptionPane.showConfirmDialog(null, "Bent u zeker dat U uw profiel wil verwijderen?", "Profiel verwijderen", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-          //Verwijder de actieve klant zijn gegevens
-          Klant actief = LoginKlant.getInstance().getActief();
-          d.deleteKlant(actief);
-          JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol verwijderd");
-          Start start = Start.getInstance(profiel);
+            //Verwijder de actieve klant zijn gegevens
+            Klant actief = LoginKlant.getInstance().getActief();
+            d.deleteKlant(actief);
+            JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol verwijderd");
+            Start start = Start.getInstance(profiel);
             start.pack();
             start.setSize(580, 520);
             profiel.hide();
             start.show();
             start.setLocationRelativeTo(null);
-        }
-        else {//do nothing
+        } else {//do nothing
         }
     }//GEN-LAST:event_naarAccountklantverwijderen
 
     private void naarOverzichtKortingscodesKlant(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_naarOverzichtKortingscodesKlant
-       Overzichtkortingscodesklant codesklant = Overzichtkortingscodesklant.getInstance(profiel);
+        Overzichtkortingscodesklant codesklant = Overzichtkortingscodesklant.getInstance(profiel);
 //     codesklant.setSize(300,300);
-       codesklant.pack();
-       profiel.hide();
-       codesklant.show();
-       codesklant.setLocationRelativeTo(null);
+        codesklant.pack();
+        profiel.hide();
+        codesklant.show();
+        codesklant.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarOverzichtKortingscodesKlant
 
     private void naarOverzichtReviewsKlant(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_naarOverzichtReviewsKlant
-       
+
     }//GEN-LAST:event_naarOverzichtReviewsKlant
 
     private void naarZoekenGemeente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenGemeente
-       Zoekengemeente zoekenGemeente = Zoekengemeente.getInstance(profiel);
+        Zoekengemeente zoekenGemeente = Zoekengemeente.getInstance(profiel);
         //     anderegevensklant.setSize(300,300);
-       zoekenGemeente.pack();
-       profiel.hide();
-       zoekenGemeente.show();
-       zoekenGemeente.setLocationRelativeTo(null);
-        
+        zoekenGemeente.pack();
+        profiel.hide();
+        zoekenGemeente.show();
+        zoekenGemeente.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_naarZoekenGemeente
 
     private void naarUitloggen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarUitloggen
-          JOptionPane.showMessageDialog(null, "U bent nu uitgelogd.");
-          /*Start start = Start.getInstance(profiel);
-            start.pack();
-            start.setSize(580, 520);
-            start.show();
-            start.setLocationRelativeTo(null);*/
-            profiel.hide();
-            Start f = new Start();
-            f.startProgramma();
-            /*login.setActief(null);
-            Klant klant = login.getActief();
-            if(klant == null){
-                System.out.println("0");
-            }*/
+        JOptionPane.showMessageDialog(null, "U bent nu uitgelogd.");
+        /*Start start = Start.getInstance(profiel);
+         start.pack();
+         start.setSize(580, 520);
+         start.show();
+         start.setLocationRelativeTo(null);*/
+        profiel.hide();
+        Start f = new Start();
+        f.startProgramma();
+        lblLogin.setText("");
+        login.setActief(new Klant());
+        actief = new Klant();
+        k = new Klant();
+        System.out.println(k + "bij uitloggen k");
+        System.out.println(actief + "bij uitloggen actief");
+        System.exit(0);
+        /*Klant klant = login.getActief();
+         if(klant == null){
+         System.out.println("0");
+         }*/
     }//GEN-LAST:event_naarUitloggen
-
-    private void orderPlaatsen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderPlaatsen
-         
-    }//GEN-LAST:event_orderPlaatsen
 
     private void naarZoekenProduct(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenProduct
         Zoekenproduct zoekenProduct = Zoekenproduct.getInstance(profiel);
         //     anderegevensklant.setSize(300,300);
-       zoekenProduct.pack();
-       profiel.hide();
-       zoekenProduct.show();
-       zoekenProduct.setLocationRelativeTo(null);
+        zoekenProduct.pack();
+        profiel.hide();
+        zoekenProduct.show();
+        zoekenProduct.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarZoekenProduct
 
     private void naarContact(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarContact
-       Contact contact = Contact.getInstance(profiel);
+        Contact contact = Contact.getInstance(profiel);
         //     anderegevensklant.setSize(300,300);
-       contact.pack();
-       profiel.hide();
-       contact.show();
-       contact.setLocationRelativeTo(null);
+        contact.pack();
+        profiel.hide();
+        contact.show();
+        contact.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarContact
 
     private void naarOverzichtReviews(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOverzichtReviews
         Overzichtreviewsklant reviewsklant = Overzichtreviewsklant.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       reviewsklant.pack();
-       profiel.hide();
-       reviewsklant.show();
-       reviewsklant.setLocationRelativeTo(null);
+        reviewsklant.pack();
+        profiel.hide();
+        reviewsklant.show();
+        reviewsklant.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarOverzichtReviews
 
     private void naarToevoegenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarToevoegenReview
-       ReviewNieuwToevoegen reviewToevoegen = ReviewNieuwToevoegen.getInstance(profiel);
+        ReviewNieuwToevoegen reviewToevoegen = ReviewNieuwToevoegen.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       reviewToevoegen.pack();
-       profiel.hide();
-       reviewToevoegen.show();
-       reviewToevoegen.setLocationRelativeTo(null);
+        reviewToevoegen.pack();
+        profiel.hide();
+        reviewToevoegen.show();
+        reviewToevoegen.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarToevoegenReview
 
     private void naarZoekenReview(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenReview
-       ZoekenReview zoekenReview = ZoekenReview.getInstance(profiel);
+        ZoekenReview zoekenReview = ZoekenReview.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       zoekenReview.pack();
-       profiel.hide();
-       zoekenReview.show();
-       zoekenReview.setLocationRelativeTo(null);
+        zoekenReview.pack();
+        profiel.hide();
+        zoekenReview.show();
+        zoekenReview.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarZoekenReview
 
     private void naarZoekenTakeAway(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenTakeAway
-       Zoekentakeaway zoekenTakeAway = Zoekentakeaway.getInstance(profiel);
+        Zoekentakeaway zoekenTakeAway = Zoekentakeaway.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       zoekenTakeAway.pack();
-       profiel.hide();
-       zoekenTakeAway.show();
-       zoekenTakeAway.setLocationRelativeTo(null);
+        zoekenTakeAway.pack();
+        profiel.hide();
+        zoekenTakeAway.show();
+        zoekenTakeAway.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarZoekenTakeAway
 
     private void naarCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarCategorieActionPerformed
@@ -517,19 +507,19 @@ public class Profielklant extends javax.swing.JFrame {
     private void naarReviewBestaandOvernemenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarReviewBestaandOvernemenActionPerformed
         ReviewBestaandOvernemen reviewOvernemen = ReviewBestaandOvernemen.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       reviewOvernemen.pack();
-       profiel.hide();
-       reviewOvernemen.show();
-       reviewOvernemen.setLocationRelativeTo(null);
+        reviewOvernemen.pack();
+        profiel.hide();
+        reviewOvernemen.show();
+        reviewOvernemen.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarReviewBestaandOvernemenActionPerformed
 
     private void naarOverzichtTakeAwaysReedsBesteldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarOverzichtTakeAwaysReedsBesteldActionPerformed
-         OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld = OverzichtTakeAwaysReedsBesteld.getInstance(profiel);
+        OverzichtTakeAwaysReedsBesteld ontvangenTakeAwaysReedsBesteld = OverzichtTakeAwaysReedsBesteld.getInstance(profiel);
 //     reviewsklant.setSize(300,300);
-       ontvangenTakeAwaysReedsBesteld.pack();
-       profiel.hide();
-       ontvangenTakeAwaysReedsBesteld.show();
-       ontvangenTakeAwaysReedsBesteld.setLocationRelativeTo(null);
+        ontvangenTakeAwaysReedsBesteld.pack();
+        profiel.hide();
+        ontvangenTakeAwaysReedsBesteld.show();
+        ontvangenTakeAwaysReedsBesteld.setLocationRelativeTo(null);
     }//GEN-LAST:event_naarOverzichtTakeAwaysReedsBesteldActionPerformed
 
     private void naarBestelling(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarBestelling
@@ -555,16 +545,21 @@ public class Profielklant extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Profielklant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profielklant.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Profielklant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profielklant.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Profielklant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profielklant.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Profielklant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Profielklant.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

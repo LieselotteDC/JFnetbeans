@@ -165,10 +165,7 @@ public class BestellingKortingscode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfrekenenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfrekenenActionPerformed
-        for (Menu m : berekendeMenusInclKorting) {
-            System.out.println("ik zit in BestellingKortingscode lijn 169");
-            System.out.println(m);
-        }
+
         String uniekeKortingsCode = comboboxType.getSelectedItem().toString();
         String kortingscode = txtKortingsCode.getText();
         if (uniekeKortingsCode.isEmpty() || txtKortingsCode.getText().isEmpty()) {
@@ -196,7 +193,6 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                 if (uniekeKortingsCode.equals("Registratiekorting")) {
                     int code = Integer.parseInt(txtKortingsCode.getText());
                     if (!d.kortingRegistratieBestaat(code, actief)) {
-                        System.out.println("regel 201");
                         JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
                     } else if (!d.kortingRegistratieGeldig(code)) {
                         JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -210,7 +206,6 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                     }
                 } else if (uniekeKortingsCode.equals("Reviewkorting")) {
                     int code = Integer.parseInt(txtKortingsCode.getText());
-                    System.out.println(d.kortingReviewBestaat(code, actief) + "lijn 213 bestelling kortingscode");
                     if (!(d.kortingReviewBestaat(code, actief))) {
                         JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
                     } else if (!d.kortingReviewGeldig(code)) {
@@ -322,7 +317,6 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                 if (uniekeKortingsCode.equals("Registratiekorting")) {
                     int code = Integer.parseInt(txtKortingsCode.getText());
                     if (!d.kortingRegistratieBestaat(code, actief)) {
-                        System.out.println("regel 201");
                         JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
                     } else if (!d.kortingRegistratieGeldig(code)) {
                         JOptionPane.showMessageDialog(null, "Deze kortingscode is niet meer geldig.");
@@ -336,7 +330,6 @@ public class BestellingKortingscode extends javax.swing.JFrame {
                     }
                 } else if (uniekeKortingsCode.equals("Reviewkorting")) {
                     int code = Integer.parseInt(txtKortingsCode.getText());
-                    System.out.println(d.kortingReviewBestaat(code, actief) + "lijn 213 bestelling kortingscode");
                     if (!(d.kortingReviewBestaat(code, actief))) {
                         JOptionPane.showMessageDialog(null, "Sorry, U heeft geen recht op deze kortingscode.");
                     } else if (!d.kortingReviewGeldig(code)) {
