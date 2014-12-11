@@ -392,6 +392,7 @@ public class Aanmaaknieuwevestiging extends javax.swing.JFrame {
                 txtHuisnummer.setText("");
                 txtGemeente.setText("");
                 txtPostcode.setText("");
+                txtLeveringskosten.setText("");
                 txtLeveringsgebied.setText("");
                 txtLeveringsgebied.setText("");
             }

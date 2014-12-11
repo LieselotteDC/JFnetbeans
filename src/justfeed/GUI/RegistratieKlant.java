@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package justfeed.GUI;
 
 import javax.swing.JFrame;
@@ -21,14 +20,14 @@ public class RegistratieKlant extends javax.swing.JFrame {
     Klant k = new Klant();
     public static JFrame myCaller;
     Database d = new Database();
-   
+
     public RegistratieKlant() {
         initComponents();
     }
-    
+
     public static RegistratieKlant getInstance(Particulier caller) {
         myCaller = caller;
-        return registratie ;
+        return registratie;
     }
 
     /**
@@ -257,28 +256,28 @@ public class RegistratieKlant extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void txtVoornaamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVoornaamActionPerformed
-                 
+
     }//GEN-LAST:event_txtVoornaamActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-              
+
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void txtNaamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNaamActionPerformed
-  
+
     }//GEN-LAST:event_txtNaamActionPerformed
 
     private void txtPaswoordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaswoordActionPerformed
     }//GEN-LAST:event_txtPaswoordActionPerformed
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
- 
+
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnToevoegenKlant(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToevoegenKlant
-        
+
         String voornaam = txtVoornaam.getText();
         String naam = txtNaam.getText();
         String email = txtEmail.getText();
@@ -286,63 +285,57 @@ public class RegistratieKlant extends javax.swing.JFrame {
         String paswoord = txtPaswoord.getText();
         EmailValidator checkemail = new EmailValidator();
 
-        if(naam.isEmpty() || voornaam.isEmpty() || login.isEmpty() || paswoord.isEmpty() || email.isEmpty())
-        {
-        JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
-        if (voornaam.isEmpty()){
-        txtVoornaam.requestFocus();
-        }
-        else if(naam.isEmpty()){
-        txtNaam.requestFocus();
-        }
-        else if(email.isEmpty()){
-        txtEmail.requestFocus();
-        }
-        else if (login.isEmpty()){
-        txtLogin.requestFocus();
-        }
-        else if(paswoord.isEmpty()){
-        txtPaswoord.requestFocus();
-        }
-        }
-        else if(!checkemail.validate(email)){
-        JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres heeft niet de vereiste syntax. Probeer opnieuw");
-        txtEmail.setText("");
-        txtPaswoord.setText("");
-        txtEmail.requestFocus();
-        }
-        else if(d.emailBestaat(email)){
-        JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres is reeds in gebruik. Probeer opnieuw");
-        txtEmail.setText("");
-        txtPaswoord.setText("");
-        txtEmail.requestFocus();
-        }       
-        else if(d.loginBestaat(login)){
-        JOptionPane.showMessageDialog(null, "Deze login is reeds in gebruik. Probeer opnieuw.");
-        txtLogin.setText("");
-        txtPaswoord.setText("");
-        txtLogin.requestFocus();
-        }    
-        else if((paswoord.length() < 8) || (paswoord.contains(login))){
-        JOptionPane.showMessageDialog(null, "Uw paswoord moet minstens 8 tekens bevatten en mag de login niet bevatten. Probeer opnieuw.");
-        txtPaswoord.setText("");
-        txtPaswoord.requestFocus();   
-        }  
-        //else if(paswoord en login komen overeen -> uw account bestaat al: login)
-        else
-        {
-        Klant k = new Klant(login, paswoord, email, naam, voornaam);
-        d.addKlant(k);
-        d.addKortingRegistratie(k);
-        MailingClass mail=new MailingClass();
-        mail.sendRegistratiemailKlant(k);
-        JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol aangemaakt");
-        LoginKlant loginscherm = LoginKlant.getInstance(registratie);
+        if (naam.isEmpty() || voornaam.isEmpty() || login.isEmpty() || paswoord.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Gelieve alle verplichte velden in te vullen.");
+            if (voornaam.isEmpty()) {
+                txtVoornaam.requestFocus();
+            } else if (naam.isEmpty()) {
+                txtNaam.requestFocus();
+            } else if (email.isEmpty()) {
+                txtEmail.requestFocus();
+            } else if (login.isEmpty()) {
+                txtLogin.requestFocus();
+            } else if (paswoord.isEmpty()) {
+                txtPaswoord.requestFocus();
+            }
+        } else if (!checkemail.validate(email)) {
+            JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres heeft niet de vereiste syntax. Probeer opnieuw");
+            txtEmail.setText("");
+            txtPaswoord.setText("");
+            txtEmail.requestFocus();
+        } else if (d.emailBestaat(email)) {
+            JOptionPane.showMessageDialog(null, "Het opgegeven e-mailadres is reeds in gebruik. Probeer opnieuw");
+            txtEmail.setText("");
+            txtPaswoord.setText("");
+            txtEmail.requestFocus();
+        } else if (d.loginBestaat(login)) {
+            JOptionPane.showMessageDialog(null, "Deze login is reeds in gebruik. Probeer opnieuw.");
+            txtLogin.setText("");
+            txtPaswoord.setText("");
+            txtLogin.requestFocus();
+        } else if ((paswoord.length() < 8) || (paswoord.contains(login))) {
+            JOptionPane.showMessageDialog(null, "Uw paswoord moet minstens 8 tekens bevatten en mag de login niet bevatten. Probeer opnieuw.");
+            txtPaswoord.setText("");
+            txtPaswoord.requestFocus();
+        } //else if(paswoord en login komen overeen -> uw account bestaat al: login)
+        else {
+            Klant k = new Klant(login, paswoord, email, naam, voornaam);
+            d.addKlant(k);
+            d.addKortingRegistratie(k);
+            MailingClass mail = new MailingClass();
+            mail.sendRegistratiemailKlant(k);
+            JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol aangemaakt");
+            LoginKlant loginscherm = LoginKlant.getInstance(registratie);
 //      profiel.setSize(300,300);
-        loginscherm.pack();
-        registratie.hide();
-        loginscherm.show();
-        loginscherm.setLocationRelativeTo(null);
+            txtEmail.setText("");
+            txtPaswoord.setText("");
+            txtLogin.setText("");
+            txtVoornaam.setText("");
+            txtNaam.setText("");
+            loginscherm.pack();
+            registratie.hide();
+            loginscherm.show();
+            loginscherm.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_btnToevoegenKlant
 

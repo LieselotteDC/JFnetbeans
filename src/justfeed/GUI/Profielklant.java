@@ -386,12 +386,7 @@ public class Profielklant extends javax.swing.JFrame {
             Klant actief = LoginKlant.getInstance().getActief();
             d.deleteKlant(actief);
             JOptionPane.showMessageDialog(null, "Uw profiel werd succesvol verwijderd");
-            Start start = Start.getInstance(profiel);
-            start.pack();
-            start.setSize(580, 520);
-            profiel.hide();
-            start.show();
-            start.setLocationRelativeTo(null);
+            System.exit(0);
         } else {//do nothing
         }
     }//GEN-LAST:event_naarAccountklantverwijderen
@@ -421,25 +416,8 @@ public class Profielklant extends javax.swing.JFrame {
 
     private void naarUitloggen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarUitloggen
         JOptionPane.showMessageDialog(null, "U bent nu uitgelogd.");
-        /*Start start = Start.getInstance(profiel);
-         start.pack();
-         start.setSize(580, 520);
-         start.show();
-         start.setLocationRelativeTo(null);*/
-        profiel.hide();
-        Start f = new Start();
-        f.startProgramma();
-        lblLogin.setText("");
-        login.setActief(new Klant());
-        actief = new Klant();
-        k = new Klant();
-        System.out.println(k + "bij uitloggen k");
-        System.out.println(actief + "bij uitloggen actief");
         System.exit(0);
-        /*Klant klant = login.getActief();
-         if(klant == null){
-         System.out.println("0");
-         }*/
+ 
     }//GEN-LAST:event_naarUitloggen
 
     private void naarZoekenProduct(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naarZoekenProduct

@@ -504,12 +504,7 @@ public class Administrator extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(null, "U bent nu uitgelogd.");
-          Start start = Start.getInstance(admini);
-            start.pack();
-            start.setSize(580, 520);
-           admini.hide();
-            start.show();
-            start.setLocationRelativeTo(null);
+          System.exit(0);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
