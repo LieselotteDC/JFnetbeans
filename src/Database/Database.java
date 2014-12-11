@@ -1652,14 +1652,14 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             if (oldBestseller == null) {
             } else {
-                if (oldBestseller.getTakeawayNaam().contains("*B*")) {
+                if (oldBestseller.getTakeawayNaam().contains("_B_")) {
                     String originalName1 = oldBestseller.getTakeawayNaam().substring(3);
                     stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName1 + "' WHERE naam = '" + oldBestseller.getTakeawayNaam() + "';");
                 }
             }
             if (oldUsersChoice == null) {
             } else {
-                if (oldUsersChoice.getTakeawayNaam().contains("*B*")) {
+                if (oldUsersChoice.getTakeawayNaam().contains("_UC_")) {
                     String originalName2 = oldUsersChoice.getTakeawayNaam().substring(4);
                     stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + originalName2 + "' WHERE naam = '" + oldUsersChoice.getTakeawayNaam() + "';");
                 }
@@ -1704,10 +1704,10 @@ public class Database {
             dbConnection = getConnection();
             Statement stmt = dbConnection.createStatement();
             if (!(newBestseller == null)) {
-                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*B*" + newBestseller.getTakeawayNaam() + "' WHERE naam = '" + newBestseller.getTakeawayNaam() + "';");
+                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "_B_" + newBestseller.getTakeawayNaam() + "' WHERE naam = '" + newBestseller.getTakeawayNaam() + "';");
             }
             if (!(newUsersChoice == null)) {
-                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "*UC*" + newUsersChoice.getTakeawayNaam() + "' WHERE naam = '" + newUsersChoice.getTakeawayNaam() + "'");
+                stmt.executeUpdate("UPDATE tbl_takeaway SET naam = '" + "_UC_" + newUsersChoice.getTakeawayNaam() + "' WHERE naam = '" + newUsersChoice.getTakeawayNaam() + "'");
             }
             this.closeConnection();
         } catch (SQLException sqle) {

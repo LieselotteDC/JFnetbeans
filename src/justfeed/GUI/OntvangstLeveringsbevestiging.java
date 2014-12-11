@@ -131,8 +131,13 @@ public class OntvangstLeveringsbevestiging extends javax.swing.JFrame {
         int orderID = Integer.parseInt(txtOrderID.getText());
         if(d.orderIdBestaat(orderID))
         {
-            //e-mail versturen naar klant met herinnering voor termijn van 7d voor review
+            
             d.ontvangstbevestigingOrder(orderID);
+            JOptionPane.showMessageDialog(null, "De ontvangst werd met succes genoteerd.");
+            txtOrderID.setText("");
+            ontvangstleveringsbevestiging.hide();
+            myCaller.show();
+
         }
         else{
             JOptionPane.showMessageDialog(null, "Er bestaat geen order met dit orderID. Probeer opnieuw.");
