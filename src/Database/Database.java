@@ -1792,7 +1792,6 @@ public class Database {
             for (Hot_Item hi : this.findHotItems(maand, jaar)) {
                 if (hi.getAantalBesteld() > 0) {
 
-                    System.out.println("ad to db");
                     stmt.executeUpdate("INSERT INTO tbl_awardHotitem VALUES (null,'" + hi.getMaand() + "'," + hi.getAantalBesteld() + "," + hi.getProductID() + ");");
                 }
             }
@@ -1810,7 +1809,6 @@ public class Database {
         String eind = DatumFinder.getLaatsteDag(maand, jaar);
         try {
             for (Take_Away ta : this.getAlleTakeaways()) {
-                System.out.println(ta.getNaam());
                 gecumuleerdeHoeveelheidPerTakeaway.clear();
                 for (Product p : this.getProductsOfTakeaway(ta.getNaam())) {
                     String sql = "SELECT SUM(B.hoeveelheid) AS gecumuleerd FROM tbl_behoortTot B JOIN tbl_menu M ON (B.menuID=M.menuID) JOIN tbl_order O ON (M.orderID=O.orderID) WHERE (B.productID = " + p.getProductID() + ") AND (O.datum BETWEEN STR_TO_DATE('" + start + "','%m,%d,%Y') AND STR_TO_DATE('" + eind + "','%m,%d,%Y'));";
@@ -1819,23 +1817,18 @@ public class Database {
                         int productID = p.getProductID();
                         int gecumuleerd = srs.getInt("gecumuleerd");
                         gecumuleerdeHoeveelheidPerTakeaway.add(new Hot_Item(gecumuleerd, productID));
-                        System.out.println(productID + "met hoev" + gecumuleerd + " bij regel 1818");
                     }
                 }
 
                 Collections.sort(gecumuleerdeHoeveelheidPerTakeaway);
                 if (gecumuleerdeHoeveelheidPerTakeaway.size() > 1) {
-                    System.out.println("size groter dan 1");
-                    System.out.println(gecumuleerdeHoeveelheidPerTakeaway.get(0));
-                    System.out.println(gecumuleerdeHoeveelheidPerTakeaway.get(1));
                     if (gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld() == gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld()) {
                         Product product1 = getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID());
                         Product product2 = getProduct(gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID());
                         if (product1.getEenheidsprijs() > product2.getEenheidsprijs()) {
-                            System.out.println("add hot item per ta 1831");
                             hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
                         } else {
-                            System.out.println("add hot item per ta 1834");
+
                             hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(1).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(1).getProductID()));
                         }
                     } else {
@@ -1843,12 +1836,10 @@ public class Database {
                     }
                 }
                 if (gecumuleerdeHoeveelheidPerTakeaway.size() == 1) {
-                    System.out.println("size gelijk aan 1");
-                    System.out.println(gecumuleerdeHoeveelheidPerTakeaway.get(0));
-                    System.out.println("add hot item per ta 1841");
+
                     hotItemPerTakeaway.add(new Hot_Item(maand, gecumuleerdeHoeveelheidPerTakeaway.get(0).getAantalBesteld(), gecumuleerdeHoeveelheidPerTakeaway.get(0).getProductID()));
                 } else {
-                    System.out.println("do nothing");
+
 //do nothing
                 }
             }

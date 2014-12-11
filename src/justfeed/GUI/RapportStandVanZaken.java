@@ -229,7 +229,6 @@ public class RapportStandVanZaken extends javax.swing.JFrame {
             gekozenTakeAway = comboboxTakeAway.getSelectedItem().toString();
             txtVestiging.setText("");
             txtVestiging.setEnabled(true);
-            //System.out.println(gekozenTakeAway);
     }//GEN-LAST:event_rbtnVestigingMouseClicked
 
     private void btnRapportMakenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRapportMakenActionPerformed
