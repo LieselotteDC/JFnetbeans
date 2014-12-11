@@ -34,7 +34,9 @@ public static JFrame myCaller;
     public BestellingAfleveradres() {
         initComponents();
         txtGemeente.setText(gemeente);
+        txtGemeente.setEnabled(false);
         txtPostcode.setText(postcode2);
+        txtPostcode.setEnabled(false);
     }
     public static BestellingAfleveradres getInstance(BestellingOverzicht bestellingOverzicht)
     {
